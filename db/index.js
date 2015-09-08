@@ -68,7 +68,7 @@ exports.setAssociations = function() {
 exports.define();
 exports.setAssociations();
 
-exports.init = new Promise(function(resolve) {
+exports.init = function(resolve) {
   var syncModelsArray = modelNames.map(function(modelName) {
     return models[modelName].sync({
       force: true
@@ -78,4 +78,4 @@ exports.init = new Promise(function(resolve) {
   Promise.all(syncModelsArray).then(function() {
     resolve();
   });
-});
+};

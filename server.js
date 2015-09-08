@@ -9,11 +9,13 @@ var session = require('koa-session');
 var bodyparser = require('koa-bodyparser');
 var onerror = require('koa-onerror');
 var https = require('https');
+var parameter = require('koa-parameter');
 var http = require('http');
 var path = require('path');
 var config = require('./config');
 var router = require('./router');
-var utils = require('./utils');
+var debug = require('debug')('server');
+var middlewares = require('./middlewares');
 
 var app = koa();
 
@@ -42,11 +44,18 @@ app.use(session(app));
 //解析http
 app.use(bodyparser());
 
+//参数验证
+app.use(parameter(app));
+
+//如无错误发生，添加200状态码
+app.use(middlewares.addStatusCode());
+
 //路由
-app.use(router);
+app.use(router.serverRouter);
+require('./controllers/index.js');
 
 //抓取错误
 onerror(app);
 
 http.createServer(app.callback()).listen(config.port);
-utils.log('HTTPS server is listening %s.', config.port);
+debug('HTTPS server is listening %s.', config.port);

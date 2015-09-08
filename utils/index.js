@@ -2,13 +2,8 @@
 
 var config = require('../config');
 
-var logStore = function(args) {
-  //TODO: 记录运行log
-};
+exports.phoneRegExp = /(^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$/;
 
-var errorStore = function(args) {
-  //TODO: 记录运行error
+exports.cloneJson = function (obj) {
+  return JSON.parse(JSON.stringify(obj));
 };
-
-exports.log = config.debug ? console.log : logStore;
-exports.error = config.debug ? console.error : errorStore;

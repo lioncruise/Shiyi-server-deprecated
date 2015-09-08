@@ -5,17 +5,16 @@ var os = require('os');
 var config = require('./config');
 var path = require('path');
 var util = require('util');
-var utils = require('./utils');
 
 cfork({
     exec: path.join(__dirname, './server.js'),
     count: config.debug ? 1 : os.cpus().length
   })
   .on('fork', function(worker) {
-    utils.log('[%s] [worker:%d] new worker start', Date(), worker.process.pid);
+    console.log('[%s] [worker:%d] new worker start', Date(), worker.process.pid);
   })
   .on('disconnect', function(worker) {
-    utils.error('[%s] [master:%s] wroker:%s disconnect, suicide: %s, state: %s.',
+    console.error('[%s] [master:%s] wroker:%s disconnect, suicide: %s, state: %s.',
       Date(), process.pid, worker.process.pid, worker.suicide, worker.state);
   })
   .on('exit', function(worker, code, signal) {
@@ -23,5 +22,5 @@ cfork({
     var err = new Error(util.format('worker %s died (code: %s, signal: %s, suicide: %s, state: %s)',
       worker.process.pid, exitCode, signal, worker.suicide, worker.state));
     err.name = 'WorkerDiedError';
-    utils.error('[%s] [master:%s] wroker exit: %s', Date(), process.pid, err.stack);
+    console.error('[%s] [master:%s] wroker exit: %s', Date(), process.pid, err.stack);
   });

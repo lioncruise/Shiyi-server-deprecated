@@ -1,5 +1,7 @@
 'use strict';
 
+var utils = require('../../utils');
+
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
     phone: {
@@ -7,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: true,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        is: utils.phoneRegExp
       }
     },
     nickname: {

@@ -10,4 +10,5 @@ var users = new Resource('users', usersController);
 
 var middlewaresArray = [router.routes(), users.middleware()];
 
-module.exports = compose(middlewaresArray);
+exports.router = router;
+exports.serverRouter = compose(middlewaresArray);

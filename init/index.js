@@ -1,7 +1,8 @@
 'use strict';
 
 var db = require('../db');
+var debug = require('debug')('init/index');
 
-db.init.then(function () {
-  console.log('Database init finish.');
+new Promise(db.init).then(function () {
+  debug('Database init finish.');
 });
