@@ -18,6 +18,10 @@ config.db = {
     storage: path.join(__dirname, '../shiyi.sqlite')
 };
 
+config.keys = ['shiyi-server', 'sadfag'];
+config.debug = true;
+config.port = 8080;
+
 var customConfig = {};
 try {
   customConfig = require(path.join(__dirname, 'config.js'));

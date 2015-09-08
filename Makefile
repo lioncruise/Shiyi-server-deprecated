@@ -1,11 +1,14 @@
 TESTS = $(shell ls -S `find test -type f -name "*.test.js" -print`)
-REGISTRY = http://registry.npm.taobao.net
+REGISTRY = http://registry.npm.taobao.org
 REPORTER = spec
 TIMEOUT = 3000
 MOCHA_OPTS =
 
 start:
-	@node --harmony ./index.js
+	@node --harmony ./start.js
+
+dev:
+	./node_modules/.bin/node-dev --harmony ./start.js
 
 init:
 	@node --harmony ./init/index.js
@@ -55,4 +58,4 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start init fake install jshint test test-all test-cov cov clean autod
+.PHONY: start dev init fake install jshint test test-all test-cov cov clean autod
