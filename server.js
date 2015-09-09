@@ -6,10 +6,10 @@ var staticCache = require('koa-static-cache');
 var rt = require('koa-rt');
 var logger = require('koa-logger');
 var session = require('koa-session');
-var bodyparser = require('koa-bodyparser');
 var onerror = require('koa-onerror');
 var https = require('https');
 var parameter = require('koa-parameter');
+var formidable = require('koa-formidable');
 var http = require('http');
 var path = require('path');
 var config = require('./config');
@@ -41,8 +41,8 @@ if (config.debug) {
 //使用cookie、session
 app.use(session(app));
 
-//解析http
-app.use(bodyparser());
+//解析http头
+app.use(formidable());
 
 //参数验证
 app.use(parameter(app));

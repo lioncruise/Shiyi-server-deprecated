@@ -21,6 +21,10 @@ router.post('/test', function*() {
   console.log(this.params);
   console.log('--------------this.request.body-----------------');
   console.log(this.request.body);
+  console.log('--------------this.request.files-----------------');
+  console.log(this.request.files);
+
+  this.body = '成功';
 });
 
 exports.router = router;
