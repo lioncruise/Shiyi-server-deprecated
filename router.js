@@ -13,5 +13,15 @@ var users = new Resource('users', middlewares.auth(), usersController, {
 
 var middlewaresArray = [router.routes(), users.middleware()];
 
+//TODO: 删除测试路由
+router.post('/test', function*() {
+  console.log('-----------------this.query--------------------');
+  console.log(this.query);
+  console.log('-----------------this.params--------------------');
+  console.log(this.params);
+  console.log('--------------this.request.body-----------------');
+  console.log(this.request.body);
+});
+
 exports.router = router;
 exports.serverRouter = compose(middlewaresArray);
