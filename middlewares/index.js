@@ -7,8 +7,7 @@ var debug = require('debug')('middlewares/index');
 exports.addStatusCode = function() {
   return function*(next) {
     yield next;
-
-    if (!!this.body && !this.body.statusCode) {
+    if (!!this.body && isJSON(this.body, true) && !this.body.statusCode) {
       this.body.statusCode = 200;
     }
   };
