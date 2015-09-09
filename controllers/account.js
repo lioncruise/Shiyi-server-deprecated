@@ -71,10 +71,46 @@ router.post('/register', function*() {
     }).save();
 
     this.body = utils.cloneJson(user);
-  } catch(e) {
+  } catch (e) {
     this.body = {
       statusCode: 409,
       message: '用户已存在'
     };
   }
+});
+
+router.post('/login', function*() {
+  this.verifyParams({
+    phone: utils.phoneRegExp,
+    password: {
+      type: 'password',
+      required: true,
+      allowEmpty: false,
+      min: 6
+    }
+  });
+
+  var user = yield models.User.find({
+    where: {
+      phone: this.request.body.phone,
+      password: this.request.body.password
+    }
+  });
+  if (!user) {
+    return this.body = {
+      statusCode: 404,
+      message: '用户名或密码错误'
+    };
+  }
+
+  this.session = {
+    user: utils.cloneJson(user)
+  };
+
+  this.body = utils.cloneJson(user);
+});
+
+router.post('/logout', function*() {
+  this.session = null;
+  this.body = {};
 });
