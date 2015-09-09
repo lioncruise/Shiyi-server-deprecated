@@ -7,7 +7,7 @@ exports.addStatusCode = function() {
   return function*(next) {
     yield next;
 
-    if (!this.body.statusCode) {
+    if (!!this.body && !this.body.statusCode) {
       this.body.statusCode = 200;
     }
   };

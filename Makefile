@@ -5,16 +5,16 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 start:
-	@node --harmony ./start.js
+	@DEBUG=* node --harmony ./start.js
 
 dev:
-	./node_modules/.bin/node-dev --harmony ./start.js
+	@DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js
 
 init:
-	@node --harmony ./init/index.js
+	@DEBUG=* node --harmony ./init/index.js
 
 fake:
-	@node --harmony ./fake/index.js
+	@DEBUG=* node --harmony ./fake/index.js
 
 install:
 	@npm install \
