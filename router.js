@@ -6,12 +6,16 @@ var router = require('koa-router')();
 var middlewares = require('./middlewares');
 
 var usersController = require('./controllers/restful/users');
-
 var users = new Resource('users', middlewares.auth(), usersController, {
   id: 'id'
 });
 
-var middlewaresArray = [router.routes(), users.middleware()];
+var albumsController = require('./controllers/restful/albums');
+var albums = new Resource('albums', middlewares.auth(), albumsController, {
+  id: 'id'
+});
+
+var middlewaresArray = [router.routes(), users.middleware(), albums.middleware()];
 
 //TODO: 删除测试路由
 router.post('/test', function*() {
