@@ -7,7 +7,7 @@ var path = require('path');
 var util = require('util');
 
 cfork({
-    exec: path.join(__dirname, './server.js'),
+    exec: path.join(__dirname, './worker.js'),
     count: config.debug ? 1 : os.cpus().length
   })
   .on('fork', function(worker) {

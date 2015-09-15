@@ -57,5 +57,4 @@ require('./controllers/index.js');
 //抓取错误
 onerror(app);
 
-http.createServer(app.callback()).listen(config.port);
-debug('HTTPS server is listening %s.', config.port);
+module.exports = http.createServer(app.callback());

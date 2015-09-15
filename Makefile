@@ -5,6 +5,8 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 start:
+	@DEBUG=* $(MAKE) install
+	@DEBUG=* $(MAKE) fake
 	@DEBUG=* node --harmony ./start.js
 
 dev:
@@ -23,7 +25,7 @@ install:
 jshint:
 	@./node_modules/.bin/jshint .
 
-test:
+test: fake
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 	  --harmony \
 	  --bail \
@@ -34,7 +36,7 @@ test:
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
-test-cov cov:
+test-cov cov: fake
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover --preserve-comments \
 		./node_modules/.bin/_mocha \
