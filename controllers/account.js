@@ -16,6 +16,7 @@ var sendMessage = function*(phone, code) {
   debug('Security code [%s] has sent to phone [%s].', code, phone);
 };
 
+//发送验证码
 router.post('/getSeccode', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp
@@ -43,6 +44,7 @@ router.post('/getSeccode', function*() {
   };
 });
 
+//注册
 router.post('/register', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp,
@@ -79,6 +81,7 @@ router.post('/register', function*() {
   }
 });
 
+//登录
 router.post('/login', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp,
@@ -110,7 +113,45 @@ router.post('/login', function*() {
   this.body = utils.cloneJson(user);
 });
 
+//登出
 router.post('/logout', function*() {
   this.session = null;
   this.body = {};
+});
+
+//更新个人信息
+router.put('/update', function*() {
+  var user = yield models.User.find({
+    where: {
+      id: this.session.user.id
+    }
+  });
+
+  if (!user) {
+    return this.body = {
+      statusCode: 404,
+      message: '用户不存在'
+    };
+  }
+
+  if(this.request && this.request.body) {
+    if(this.request.body.nickname) {
+      user.nickname = String(this.request.body.nickname);
+    }
+    if(this.request.body.motto) {
+      user.motto = String(this.request.body.motto);
+    }
+    if(this.request.body.birthday) {
+      user.birthday = String(this.request.body.birthday);
+    }
+    if(this.request.body.gender) {
+      user.gender = String(this.request.body.gender);
+    }
+    if(this.request.body.hometown) {
+      user.hometown = String(this.request.body.hometown);
+    }
+  }
+  yield user.save();
+
+  this.body = utils.cloneJson(user);
 });
