@@ -6,7 +6,8 @@ var utils = require('../../utils');
 exports.show = function*() {
   var user = yield models.User.find({
     where: {
-      id: this.params.id
+      id: this.params.id,
+      isBlocked: false
     }
   });
 

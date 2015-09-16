@@ -15,7 +15,7 @@ dev:
 init:
 	@DEBUG=* node --harmony ./init/index.js
 
-fake:
+fake: init
 	@DEBUG=* node --harmony ./fake/index.js
 
 install:

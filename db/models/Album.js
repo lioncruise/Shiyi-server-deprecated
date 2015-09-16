@@ -23,6 +23,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
+    isShowRawInfo: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     allowLike: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

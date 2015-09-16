@@ -1,7 +1,12 @@
 'use strict';
 
-//初始化数据库
-var init = require('../init');
+var co = require('co');
 
 //插入各个Models的fake数据
-require('./users');
+var users = require('./users');
+var albums = require('./albums');
+
+co(function*() {
+  yield users;
+  yield albums;
+});

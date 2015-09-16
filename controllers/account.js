@@ -96,7 +96,8 @@ router.post('/login', function*() {
   var user = yield models.User.find({
     where: {
       phone: this.request.body.phone,
-      password: this.request.body.password
+      password: this.request.body.password,
+      isBlocked: false
     }
   });
   if (!user) {
@@ -123,7 +124,8 @@ router.post('/logout', function*() {
 router.put('/update', function*() {
   var user = yield models.User.find({
     where: {
-      id: this.session.user.id
+      id: this.session.user.id,
+      isBlocked: false
     }
   });
 

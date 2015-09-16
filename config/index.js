@@ -14,7 +14,7 @@ config.db = {
         min: 0,
         idle: 10000
     },
-    log: false,
+    logging: false,
     storage: path.join(__dirname, '../shiyi.sqlite')
 };
 

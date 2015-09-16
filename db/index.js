@@ -11,6 +11,7 @@ var models = {};
 exports.models = models;
 
 var modelNames = ['User', 'Album', 'Tag', 'Action', 'Picture', 'Like', 'Message', 'Comment', 'Report', 'Feedback'];
+modelNames.push('AlbumTag', 'AlbumUser');
 
 exports.define = function() {
   modelNames.forEach(function(modelName) {
@@ -68,14 +69,12 @@ exports.setAssociations = function() {
 exports.define();
 exports.setAssociations();
 
-exports.init = function(resolve) {
+exports.init = function*() {
   var syncModelsArray = modelNames.map(function(modelName) {
     return models[modelName].sync({
       force: true
     });
   });
 
-  Promise.all(syncModelsArray).then(function() {
-    resolve();
-  });
+  yield syncModelsArray;
 };

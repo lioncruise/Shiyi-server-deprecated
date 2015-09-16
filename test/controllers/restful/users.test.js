@@ -12,7 +12,7 @@ describe('test/controllers/restful/users.test.js', function () {
   afterEach(mm.restore);
 
   describe('GET /users/:id', function () {
-    it('should get user info', function (done) {
+    it('should get user info OK', function (done) {
       request(server)
       .get('/users/1')
       .expect('Content-type', 'application/json; charset=utf-8')
