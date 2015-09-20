@@ -3,7 +3,7 @@
 var router = require('../router').router;
 var models = require('../db').models;
 var chance = require('chance').Chance();
-var debug = require('debug')('controllers/login');
+var debug = require('debug')('controllers/account');
 var utils = require('../utils');
 
 var chanceOption = {

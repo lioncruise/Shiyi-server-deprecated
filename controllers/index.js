@@ -3,3 +3,4 @@
 //初始化非restful的路由
 
 require('./account');
+require('./version');

@@ -11,7 +11,7 @@ var models = {};
 exports.models = models;
 
 var modelNames = ['User', 'Album', 'Tag', 'Action', 'Picture', 'Like', 'Message', 'Comment', 'Report', 'Feedback'];
-modelNames.push('AlbumTag', 'AlbumUser');
+modelNames.push('AlbumTag', 'AlbumUser', 'Keyvalue');
 
 exports.define = function() {
   modelNames.forEach(function(modelName) {
