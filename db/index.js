@@ -10,8 +10,7 @@ var sequelize = new Sequelize(config.db.database, null, null, config.db);
 var models = {};
 exports.models = models;
 
-var modelNames = ['User', 'Album', 'Tag', 'Action', 'Picture', 'Like', 'Message', 'Comment', 'Report', 'Feedback'];
-modelNames.push('AlbumTag', 'AlbumUser', 'Keyvalue');
+var modelNames = ['User', 'Album', 'Tag', 'Action', 'Picture', 'Like', 'Message', 'Comment', 'Report', 'Feedback', 'AlbumTag', 'AlbumUser', 'Keyvalue', 'Admin'];
 
 exports.define = function() {
   modelNames.forEach(function(modelName) {
