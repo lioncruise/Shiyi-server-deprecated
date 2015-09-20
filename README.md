@@ -3,7 +3,7 @@ shiyi-server
 
 开发细节文档在doc文件夹下，常用命令如下：
 
-* make start
+* make start (windows下运行 npm run start)
 
 	（只运行这一条就对了）
 
