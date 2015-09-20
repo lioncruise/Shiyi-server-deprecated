@@ -8,7 +8,14 @@ exports.show = function*() {
     where: {
       id: this.params.id,
       isBlocked: false
-    }
+    },
+    include: [{
+      model: models.Picture
+    },
+    {
+      model: models.User,
+      as: 'Creator'
+    }]
   });
 
   if (!album) {

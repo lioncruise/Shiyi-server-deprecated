@@ -25,7 +25,7 @@ exports.setAssociations = function() {
 
   models.Album.belongsTo(models.User, {
     as: 'Creator',
-    foreignKey: 'CreatorId'
+    foreignKey: 'UserId'
   });
   models.Album.belongsToMany(models.Tag, {through: 'AlbumTag'});
   models.Album.hasMany(models.Picture);
