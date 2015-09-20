@@ -25,7 +25,9 @@ exports.show = function*() {
     };
   }
 
-  this.body = utils.cloneJson(album);
+  this.body = album.toJSON();
+  this.body.Tags = yield album.getTagsString();
+  this.body.Users = yield album.getUsers();
 };
 
 exports.create = function*() {

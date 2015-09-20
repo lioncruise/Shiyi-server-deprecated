@@ -40,5 +40,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     }
+  }, {
+    instanceMethods: {
+      getTagsString: function* () {
+        return (yield this.getTags()).map(function (Tag) {
+          return Tag.name;
+        }).join(',');
+      }
+    }
   });
 };
