@@ -18,6 +18,12 @@ config.db = {
     storage: path.join(__dirname, '../shiyi.sqlite')
 };
 
+config.sms = {
+    url: 'https://web.sms.mob.com/sms/verify',
+    appkey: 'a8abe6eaf81e',
+    zone: '86'
+};
+
 config.keys = ['shiyi-server', 'sadfag'];
 config.debug = true;
 config.port = 8080;

@@ -11,11 +11,6 @@ var chanceOption = {
   pool: '0123456789'
 };
 
-var sendMessage = function*(phone, code) {
-  //TODO: 发送短信验证码
-  debug('Security code [%s] has sent to phone [%s].', code, phone);
-};
-
 //发送验证码
 router.post('/getSeccode', function*() {
   this.verifyParams({
@@ -36,7 +31,7 @@ router.post('/getSeccode', function*() {
 
   var seccode = chance.string(chanceOption);
 
-  yield sendMessage(this.request.body.phone, seccode);
+  yield utils.sendMessage(this.request.body.phone, seccode);
 
   this.body = {
     phone: this.request.body.phone,
