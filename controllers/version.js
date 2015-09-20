@@ -7,7 +7,7 @@ var debug = require('debug')('controllers/version');
 var utils = require('../utils');
 
 //查询android、ios应用版本
-router.get('/version', function*() {
+router.get('/getVersion', function*() {
   if (this.query.type && (this.query.type === 'android' || this.query.type === 'ios')) {
     var version = yield models.Keyvalue.find({
       where: {
