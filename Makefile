@@ -11,6 +11,9 @@ start: install
 dev:
 	@DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js
 
+authdev:
+	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js
+
 init:
 	@DEBUG=* node --harmony ./init/index.js
 
@@ -59,4 +62,4 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start dev init fake install jshint test test-all test-cov cov clean autod
+.PHONY: start dev authdev init fake install jshint test test-all test-cov cov clean autod
