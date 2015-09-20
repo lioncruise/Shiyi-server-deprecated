@@ -18,5 +18,5 @@ exports.show = function*() {
     };
   }
 
-  this.body = utils.cloneJson(user);
+  this.body = user.toJSON();
 };

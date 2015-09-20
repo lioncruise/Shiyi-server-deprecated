@@ -103,10 +103,10 @@ router.post('/login', function*() {
   }
 
   this.session = {
-    user: utils.cloneJson(user)
+    user: user.toJSON()
   };
 
-  this.body = utils.cloneJson(user);
+  this.body = user.toJSON();
 });
 
 //登出
@@ -150,5 +150,5 @@ router.put('/update', function*() {
   }
   yield user.save();
 
-  this.body = utils.cloneJson(user);
+  this.body = user.toJSON();
 });

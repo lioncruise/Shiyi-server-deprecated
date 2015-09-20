@@ -25,3 +25,36 @@ exports.sendMessage = function*(phone, code) {
 
   debug('Security code [%s] has sent to phone [%s].', code, phone);
 };
+
+exports.getUpdateData = function(body, fields) {
+  var data = {};
+  fields.forEach(function(field) {
+    var name = field[0];
+    var type = field[1];
+    if (body[name] !== null && body[name] !== undefined) {
+      var value = body[name];
+      switch (type) {
+        case 'bool':
+          data[name] = (body[name] !== 'false' && body[name] !== '0');
+          break;
+        case 'boolean':
+          data[name] = (body[name] !== 'false' && body[name] !== '0');
+          break;
+        case 'string':
+          data[name] = String(body[name]);
+          break;
+        case 'int':
+          data[name] = parseInt(body[name]);
+          break;
+        case 'integer':
+          data[name] = parseInt(body[name]);
+          break;
+        case 'float':
+          data[name] = parseFloat(body[name]);
+          break;
+      }
+    }
+  });
+
+  return data;
+};

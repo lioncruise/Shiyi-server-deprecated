@@ -55,6 +55,11 @@ app.use(router.serverRouter);
 require('./controllers/index.js');
 
 //抓取错误
-onerror(app);
+if(!config.debug) {
+  onerror(app);
+}
+app.on('error', function(err){
+  console.error('server error', err);
+});
 
 module.exports = http.createServer(app.callback());

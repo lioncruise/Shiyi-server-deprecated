@@ -31,6 +31,8 @@ exports.setAssociations = function() {
   models.Album.hasMany(models.Picture);
   models.Album.belongsToMany(models.User, {through: 'AlbumUser'});
 
+  models.Tag.belongsToMany(models.Album, {through: 'AlbumTag'});
+
   models.Action.belongsTo(models.User);
   models.Action.belongsTo(models.Album);
   models.Action.hasMany(models.Picture);

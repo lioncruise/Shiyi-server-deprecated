@@ -2,6 +2,7 @@
 
 var models = require('../../db').models;
 var utils = require('../../utils');
+var copy = require('copy-to');
 
 exports.show = function*() {
   var album = yield models.Album.find({
@@ -11,8 +12,7 @@ exports.show = function*() {
     },
     include: [{
       model: models.Picture
-    },
-    {
+    }, {
       model: models.User,
       as: 'Creator'
     }]
@@ -36,7 +36,7 @@ exports.create = function*() {
       required: true,
       allowEmpty: true
     },
-    tag: {
+    tags: {
       type: 'string',
       required: true,
       allowEmpty: true
@@ -55,24 +55,110 @@ exports.create = function*() {
 
   var tags = [];
   try {
-    tags = this.request.body.split(',');
-  } catch(e) {
+    tags = this.request.body.tags.split(',');
+  } catch (e) {
     tags = [];
   }
 
   var _tArray = [];
-  for(var i = 0; i < tags.length; i++) {
+  for (var i = 0; i < tags.length; i++) {
     var _t = yield models.Tag.findOrCreate({
       where: {
         name: tags[i]
       }
     });
-    _tArray.push(_t);
+    _tArray.push(_t[0]);
   }
-  tags = _tArray;
 
-  album.setTags(tags);
-  yield album.save();
+  yield album.setTags(_tArray);
 
-  this.body = utils.cloneJson(album);
+  this.body = album.toJSON();
+};
+
+exports.update = function*() {
+  this.verifyParams({
+    title: {
+      type: 'string',
+      required: false
+    },
+    description: {
+      type: 'string',
+      required: false,
+      allowEmpty: true
+    },
+    tags: {
+      type: 'string',
+      required: false,
+      allowEmpty: true
+    },
+    isShare: {
+      type: 'bool',
+      required: false
+    },
+    isPublic: {
+      type: 'bool',
+      required: false
+    },
+    isShowRawInfo: {
+      type: 'bool',
+      required: false
+    },
+    allowLike: {
+      type: 'bool',
+      required: false
+    },
+    allowComment: {
+      type: 'bool',
+      required: false
+    }
+  });
+
+  var album = yield models.Album.find({
+    where: {
+      id: this.params.id,
+      isBlocked: false
+    }
+  });
+
+  if (!album) {
+    return this.body = {
+      statusCode: 404,
+      message: '相册不存在'
+    };
+  }
+
+  var data = utils.getUpdateData(this.request.body, [
+    ['title', 'string'],
+    ['description', 'string'],
+    ['isShare', 'bool'],
+    ['isPublic', 'bool'],
+    ['isShowRawInfo', 'bool'],
+    ['allowLike', 'bool'],
+    ['allowComment', 'bool'],
+  ]);
+
+  if (this.request.body.tags) {
+    var tags = [];
+    try {
+      tags = this.request.body.tags.split(',');
+    } catch (e) {
+      tags = [];
+    }
+
+    var _tArray = [];
+    for (var i = 0; i < tags.length; i++) {
+      var _t = yield models.Tag.findOrCreate({
+        where: {
+          name: tags[i]
+        }
+      });
+      _tArray.push(_t[0]);
+    }
+
+    yield album.setTags(_tArray);
+  }
+
+  yield album.updateAttributes(data);
+
+  this.body = album.toJSON();
 };

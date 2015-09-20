@@ -26,7 +26,7 @@ describe('test/controllers/restful/albums.test.js', function() {
       var album = {
         title: '哈工大二公寓',
         description: '人间第二地狱',
-        tag: '哈工大,破,公寓,男生',
+        tags: '哈工大,破,公寓,男生',
         isShare: true,
         isPublic: true,
         isShowRawInfo: true,
@@ -37,6 +37,30 @@ describe('test/controllers/restful/albums.test.js', function() {
 
       request(server)
         .post('/albums')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          done();
+        });
+    });
+  });
+
+  describe('PUT /albums', function() {
+    it('should update album OK', function(done) {
+      var album = {
+        title: '哈工大三公寓',
+        description: '人间第三地狱',
+        tags: '哈工大,破,公寓,女生',
+        isShare: false
+      };
+
+      request(server)
+        .put('/albums/1')
         .send(album)
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)

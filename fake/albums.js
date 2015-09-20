@@ -10,7 +10,7 @@ var albums = [];
 albums.push({
   title: '爱情故事',
   description: '他与她的爱情',
-  tag: '爱情,恋人',
+  tags: '爱情,恋人',
   isShare: true,
   isPublic: true,
   isShowRawInfo: true,
@@ -23,7 +23,7 @@ tags.push('爱情', '恋人');
 albums.push({
   title: '猫咪的一天',
   description: '可爱的猫咪如何度过他的一天',
-  tag: '猫,动物,萌',
+  tags: '猫,动物,萌',
   isShare: true,
   isPublic: true,
   isShowRawInfo: true,
@@ -45,14 +45,12 @@ var insertAlbumsArray = albums.map(function (album) {
     var _t = yield db.models.Tag.findAll({
       where: {
         name: {
-          in: album.tag.split(',')
+          in: album.tags.split(',')
         }
       }
     });
 
-    _a.setTags(_t);
-
-    yield _a.save();
+    yield _a.setTags(_t);
   };
 });
 
