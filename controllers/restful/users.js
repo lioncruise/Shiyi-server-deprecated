@@ -4,6 +4,9 @@ var models = require('../../db').models;
 var utils = require('../../utils');
 
 exports.show = function*() {
+  this.verifyParams({
+    id: 'id'
+  });
   var user = yield models.User.find({
     where: {
       id: this.params.id,

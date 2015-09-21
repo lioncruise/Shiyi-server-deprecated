@@ -5,6 +5,9 @@ var utils = require('../../utils');
 var copy = require('copy-to');
 
 exports.show = function*() {
+  this.verifyParams({
+    id: 'id'
+  });
   var album = yield models.Album.find({
     where: {
       id: this.params.id,
@@ -79,6 +82,7 @@ exports.create = function*() {
 
 exports.update = function*() {
   this.verifyParams({
+    id: 'id',
     title: {
       type: 'string',
       required: false

@@ -1,13 +1,14 @@
 'use strict';
 
 var isJSON = require('is-json');
+var validate = require('parameter');
 var debug = require('debug')('middlewares/index');
 
 //如无错误发生，添加200状态码
 exports.addStatusCode = function() {
   return function*(next) {
     yield next;
-    debug('It is addStatusCode.');
+    debug('It is addStatusCode middleware');
 
     if(!!this.body && this.body.message && this.body.message === 'Validation Failed') {
       this.status = 200;
@@ -22,7 +23,7 @@ exports.addStatusCode = function() {
 
 exports.auth = function() {
   return function*(next) {
-    debug('auth middleware');
+    debug('It is auth middleware');
     if(process.env.NODE_ENV !== 'test') {
       if(!this.session || !this.session.user) {
         debug('auth middleware: Not login.');

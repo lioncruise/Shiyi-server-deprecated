@@ -22,8 +22,16 @@ var app = koa();
 //cookie加密
 app.keys = config.keys;
 
+//抓取错误
+if(!config.debug) {
+  onerror(app);
+}
+
 //响应计时
 app.use(rt());
+
+//如无错误发生，添加200状态码
+app.use(middlewares.addStatusCode());
 
 //静态资源缓存
 app.use(staticCache({
@@ -44,9 +52,6 @@ app.use(session(app));
 //解析http头
 app.use(formidable());
 
-//如无错误发生，添加200状态码
-app.use(middlewares.addStatusCode());
-
 //参数验证
 app.use(parameter(app));
 
@@ -54,10 +59,6 @@ app.use(parameter(app));
 app.use(router.serverRouter);
 require('./controllers/index.js');
 
-//抓取错误
-if(!config.debug) {
-  onerror(app);
-}
 app.on('error', function(err){
   console.error('server error', err);
 });
