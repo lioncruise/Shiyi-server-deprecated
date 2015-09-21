@@ -7,8 +7,15 @@ var debug = require('debug')('middlewares/index');
 exports.addStatusCode = function() {
   return function*(next) {
     yield next;
+    debug('It is addStatusCode.');
+
+    if(!!this.body && this.body.message && this.body.message === 'Validation Failed') {
+      this.status = 200;
+      return this.body.statusCode = 422;
+    }
+
     if (!!this.body && isJSON(this.body, true) && !this.body.statusCode) {
-      this.body.statusCode = 200;
+      return this.body.statusCode = 200;
     }
   };
 };

@@ -44,11 +44,11 @@ app.use(session(app));
 //解析http头
 app.use(formidable());
 
-//参数验证
-app.use(parameter(app));
-
 //如无错误发生，添加200状态码
 app.use(middlewares.addStatusCode());
+
+//参数验证
+app.use(parameter(app));
 
 //路由
 app.use(router.serverRouter);
