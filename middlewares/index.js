@@ -1,7 +1,6 @@
 'use strict';
 
 var isJSON = require('is-json');
-var validate = require('parameter');
 var debug = require('debug')('middlewares/index');
 
 //如无错误发生，添加200状态码
