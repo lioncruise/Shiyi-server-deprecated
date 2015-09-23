@@ -8,10 +8,10 @@
   },
   "scripts": {
     "start": "npm install && npm run fake && npm run server",
-    "server": "DEBUG=* node --harmony start.js",
-    "dev": "DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js",
-    "init": "DEBUG=* node --harmony ./init/index.js",
-    "fake": "npm run init && DEBUG=* node --harmony ./fake/index.js",
+    "server": "node --harmony start.js",
+    "dev": "./node_modules/.bin/node-dev --harmony ./start.js",
+    "init": "node --harmony ./init/index.js",
+    "fake": "npm run init && node --harmony ./fake/index.js",
     "jshint": "./node_modules/.bin/jshint ."
   },
   "repository": {
