@@ -11,7 +11,8 @@ exports.show = function*() {
   var album = yield models.Album.find({
     where: {
       id: this.params.id,
-      isBlocked: false
+      isBlocked: false,
+      isDeleted: false
     },
     include: [{
       model: models.Picture
@@ -122,7 +123,9 @@ exports.update = function*() {
   var album = yield models.Album.find({
     where: {
       id: this.params.id,
-      isBlocked: false
+      isBlocked: false,
+      UserId: this.session.user.id,
+      isDeleted: false
     }
   });
 
@@ -165,6 +168,34 @@ exports.update = function*() {
   }
 
   yield album.updateAttributes(data);
+
+  this.body = album.toJSON();
+};
+
+exports.destroy = function*() {
+  this.verifyParams({
+    id: 'id'
+  });
+
+  var album = yield models.Album.find({
+    where: {
+      id: this.params.id,
+      isBlocked: false,
+      UserId: this.session.user.id,
+      isDeleted: false
+    }
+  });
+
+  if (!album) {
+    return this.body = {
+      statusCode: 404,
+      message: '相册不存在'
+    };
+  }
+
+  yield album.updateAttributes({
+    isDeleted: true
+  });
 
   this.body = album.toJSON();
 };
