@@ -10,7 +10,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     coverUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: true
+      }
     },
     description: {
       type: DataTypes.STRING

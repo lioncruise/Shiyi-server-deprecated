@@ -7,7 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0
     },
     pictureUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: true
+      }
     },
     shareNum: {
       type: DataTypes.INTEGER,

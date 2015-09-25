@@ -44,7 +44,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     avatarUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        isUrl: true
+      }
     },
     wechatToken: {
       type: DataTypes.STRING

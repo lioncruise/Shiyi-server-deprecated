@@ -47,13 +47,15 @@ router.post('/register', function*() {
       type: 'password',
       required: true,
       allowEmpty: false,
-      min: 6
+      min: 6,
+      max: 16
     },
     gender: ['M', 'F'],
     motto: {
       type: 'string',
       required: true,
-      allowEmpty: true
+      allowEmpty: true,
+      max: 50
     }
   });
 
@@ -117,6 +119,36 @@ router.post('/logout', function*() {
 
 //更新个人信息
 router.put('/update', function*() {
+  this.verifyParams({
+    nickname: {
+      type: 'string',
+      required: false,
+      allowEmpty: false,
+      min: 2,
+      max: 10
+    },
+    motto: {
+      type: 'string',
+      required: true,
+      allowEmpty: true,
+      max: 50
+    },
+    gender: {
+      type: 'enum',
+      values: ['M', 'F'],
+      required: false,
+      allowEmpty: false
+    },
+    birthday: {
+      type: 'string',
+      required: false
+    },
+    hometown: {
+      type: 'string',
+      required: false
+    }
+  });
+
   var user = yield models.User.find({
     where: {
       id: this.session.user.id,
