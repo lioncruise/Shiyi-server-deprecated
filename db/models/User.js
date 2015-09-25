@@ -14,13 +14,17 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     nickname: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        len: [2,10]
+      }
     },
     password: { //前后端密码强度验证
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        len: [6,16]
       }
     },
     gender: {
@@ -34,7 +38,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     motto: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        len: [0,50]
+      }
     },
     avatarUrl: {
       type: DataTypes.STRING
