@@ -26,7 +26,7 @@ app.keys = config.keys;
 if (!config.debug) {
   onerror(app);
   app.on('error', function(err) {
-    console.error('server error', err);
+    console.error(err.stack);
   });
 }
 

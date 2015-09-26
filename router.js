@@ -25,7 +25,12 @@ var actions = new Resource('actions', middlewares.auth, actionsController, {
   id: 'id'
 });
 
-var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware()];
+var messagesController = require('./controllers/restful/messages');
+var messages = new Resource('messages', middlewares.auth, messagesController, {
+  id: 'id'
+});
+
+var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware(), messages.middleware()];
 
 //TODO: 删除测试路由
 router.post('/test', function*() {
