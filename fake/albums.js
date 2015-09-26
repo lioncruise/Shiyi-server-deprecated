@@ -36,6 +36,7 @@ tags.push('猫', '动物', '萌');
 albums.push({
   title: '即将被删除的相册',
   description: '生的伟大',
+  tags: '',
   isShare: true,
   isPublic: true,
   isShowRawInfo: true,
@@ -67,4 +68,4 @@ module.exports = function*() {
   debug('albums data fake finish.');
 };
 
-exports.fakeAlbums = albums;
+module.exports.fakeAlbums = albums;

@@ -3,4 +3,8 @@
 var co = require('co');
 var fake = require('./fake');
 
-co(fake);
+co(fake).catch(onerror);
+
+function onerror(err) {
+  console.error(err.stack);
+}

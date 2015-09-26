@@ -60,17 +60,18 @@ exports.create = function*() {
 
   album = yield album.save();
 
-  var tags = this.request.body.tags.split(',');
   var _tArray = [];
-  for (var i = 0; i < tags.length; i++) {
-    var _t = yield models.Tag.findOrCreate({
-      where: {
-        name: tags[i]
-      }
-    });
-    _tArray.push(_t[0]);
+  if(this.request.body.tags !== '') {
+    var tags = this.request.body.tags.split(',');
+    for (var i = 0; i < tags.length; i++) {
+      var _t = yield models.Tag.findOrCreate({
+        where: {
+          name: tags[i]
+        }
+      });
+      _tArray.push(_t[0]);
+    }
   }
-
   yield album.setTags(_tArray);
 
   this.body = album.toJSON();
@@ -141,9 +142,9 @@ exports.update = function*() {
     ['allowComment', 'bool'],
   ]);
 
-  if (this.request.body.tags) {
+  var _tArray = [];
+  if (this.request.body.tags && this.request.body.tags !== '') {
     var tags = this.request.body.tags.split(',');
-    var _tArray = [];
     for (var i = 0; i < tags.length; i++) {
       var _t = yield models.Tag.findOrCreate({
         where: {
@@ -153,8 +154,8 @@ exports.update = function*() {
       _tArray.push(_t[0]);
     }
 
-    yield album.setTags(_tArray);
   }
+  yield album.setTags(_tArray);
 
   yield album.updateAttributes(data);
 

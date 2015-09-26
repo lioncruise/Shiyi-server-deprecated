@@ -64,6 +64,22 @@ describe('test/controllers/restful/albums.test.js', function() {
         });
     });
 
+    it('should create new album OK without tags', function(done) {
+      album.tags = '';
+      request(server)
+        .post('/albums')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          done();
+        });
+    });
+
     it('should get status 422', function(done) {
       album.isShare = 123;
       request(server)

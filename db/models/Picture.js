@@ -2,10 +2,6 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
-    likeNum: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
     pictureUrl: {
       type: DataTypes.STRING,
       validate: {

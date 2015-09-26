@@ -3,10 +3,14 @@
 //插入各个Models的fake数据
 var users = require('./users');
 var albums = require('./albums');
-var keyvalue = require('./keyvalue');
+var keyvalues = require('./keyvalues');
+var actions = require('./actions');
+var pictures = require('./pictures');
 
 module.exports = function*() {
-  yield keyvalue;
+  yield keyvalues;
   yield users;
   yield albums;
+  yield actions;
+  yield pictures;
 };

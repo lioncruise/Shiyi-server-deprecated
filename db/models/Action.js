@@ -5,15 +5,21 @@ module.exports = function(sequelize, DataTypes) {
     content: {
       type: DataTypes.STRING
     },
-    likeNum: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
-    },
     gps: {
       type: DataTypes.STRING
     },
     position: {
       type: DataTypes.STRING
+    },
+    isBlocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   });
 };

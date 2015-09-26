@@ -15,12 +15,17 @@ var albums = new Resource('albums', middlewares.auth, albumsController, {
   id: 'id'
 });
 
-var albumUsersController = require('./controllers/restful/albumUser');
+var albumUsersController = require('./controllers/restful/albumUsers');
 var albumUsers = new Resource('albumUsers', middlewares.auth, albumUsersController, {
   id: 'id'
 });
 
-var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware()];
+var actionsController = require('./controllers/restful/actions');
+var actions = new Resource('actions', middlewares.auth, actionsController, {
+  id: 'id'
+});
+
+var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware()];
 
 //TODO: 删除测试路由
 router.post('/test', function*() {

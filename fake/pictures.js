@@ -1,0 +1,37 @@
+'use strict';
+
+var db = require('../db');
+var debug = require('debug')('fake/pictures');
+
+var pictures = [];
+
+pictures.push({
+  pictureUrl: 'http://test.com/1',
+  AlbumId: 1,
+  ActionId: 1,
+  UserId: 1
+});
+
+pictures.push({
+  pictureUrl: 'http://test.com/2',
+  AlbumId: 1,
+  ActionId: 1,
+  UserId: 1
+});
+
+pictures.push({
+  pictureUrl: 'http://test.com/3',
+  AlbumId: 1,
+  ActionId: 1,
+  UserId: 1
+});
+
+
+module.exports = function*() {
+  yield pictures.map(function(picture) {
+    return db.models.Picture.create(picture);
+  });
+  debug('pictures data fake finish.');
+};
+
+module.exports.fakePictures = pictures;
