@@ -19,11 +19,11 @@ users.push({
   motto: 'I love books.'
 });
 
-var insertsArray = users.map(function (user) {
-  return db.models.User.create(user);
-});
-
 module.exports = function*() {
-  yield insertsArray;
+  yield users.map(function(user) {
+    return db.models.User.create(user);
+  });
   debug('users data fake finish.');
 };
+
+module.exports.fakeUsers = users;

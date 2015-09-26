@@ -33,30 +33,27 @@ albums.push({
 });
 tags.push('猫', '动物', '萌');
 
-var insertTagsArray = tags.map(function (tag) {
-  return db.models.Tag.create({
-    name: tag
-  });
-});
-
-var insertAlbumsArray = albums.map(function (album) {
-  return function*() {
-    var _a = yield db.models.Album.create(album);
-    var _t = yield db.models.Tag.findAll({
-      where: {
-        name: {
-          in: album.tags.split(',')
-        }
-      }
-    });
-
-    yield _a.setTags(_t);
-  };
-});
-
 module.exports = function*() {
-  yield insertTagsArray;
+  yield tags.map(function(tag) {
+    return db.models.Tag.create({
+      name: tag
+    });
+  });
   debug('tags data fake finish.');
-  yield insertAlbumsArray;
+  yield albums.map(function(album) {
+    return function*() {
+      var _a = yield db.models.Album.create(album);
+      var _t = yield db.models.Tag.findAll({
+        where: {
+          name: { in : album.tags.split(',')
+          }
+        }
+      });
+
+      yield _a.setTags(_t);
+    };
+  });
   debug('albums data fake finish.');
 };
+
+exports.fakeAlbums = albums;

@@ -23,8 +23,11 @@ var app = koa();
 app.keys = config.keys;
 
 //抓取错误
-if(!config.debug) {
+if (!config.debug) {
   onerror(app);
+  app.on('error', function(err) {
+    console.error('server error', err);
+  });
 }
 
 //响应计时
@@ -58,9 +61,5 @@ app.use(parameter(app));
 //路由
 app.use(router.serverRouter);
 require('./controllers/index.js');
-
-app.on('error', function(err){
-  console.error('server error', err);
-});
 
 module.exports = http.createServer(app.callback());

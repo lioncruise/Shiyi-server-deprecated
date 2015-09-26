@@ -6,17 +6,17 @@ var router = require('koa-router')();
 var middlewares = require('./middlewares');
 
 var usersController = require('./controllers/restful/users');
-var users = new Resource('users', middlewares.auth(), usersController, {
+var users = new Resource('users', middlewares.auth, usersController, {
   id: 'id'
 });
 
 var albumsController = require('./controllers/restful/albums');
-var albums = new Resource('albums', middlewares.auth(), albumsController, {
+var albums = new Resource('albums', middlewares.auth, albumsController, {
   id: 'id'
 });
 
 var albumUsersController = require('./controllers/restful/albumUser');
-var albumUsers = new Resource('albumUsers', middlewares.auth(), albumUsersController, {
+var albumUsers = new Resource('albumUsers', middlewares.auth, albumUsersController, {
   id: 'id'
 });
 

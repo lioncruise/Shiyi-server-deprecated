@@ -5,6 +5,7 @@ var models = require('../db').models;
 var chance = require('chance').Chance();
 var debug = require('debug')('controllers/account');
 var utils = require('../utils');
+var middlewares = require('../middlewares');
 
 var chanceOption = {
   length: 4,
@@ -62,19 +63,23 @@ router.post('/register', function*() {
   //TODO: 头像处理
 
   try {
-    var user = yield models.User.build({
+    var user = yield models.User.create({
       phone: this.request.body.phone,
       password: this.request.body.password,
       gender: this.request.body.gender,
       motto: this.request.body.motto
-    }).save();
+    });
 
     this.body = utils.cloneJson(user);
+    this.session = {
+      user: user.toJSON()
+    };
   } catch (e) {
     this.body = {
       statusCode: 409,
       message: '用户已存在'
     };
+    this.session = null;
   }
 });
 
@@ -112,13 +117,13 @@ router.post('/login', function*() {
 });
 
 //登出
-router.post('/logout', function*() {
+router.get('/logout', function*() {
   this.session = null;
   this.body = {};
 });
 
 //更新个人信息
-router.put('/update', function*() {
+router.put('/update', middlewares.auth, function*() {
   this.verifyParams({
     nickname: {
       type: 'string',
@@ -129,7 +134,7 @@ router.put('/update', function*() {
     },
     motto: {
       type: 'string',
-      required: true,
+      required: false,
       allowEmpty: true,
       max: 50
     },
@@ -163,24 +168,24 @@ router.put('/update', function*() {
     };
   }
 
-  if(this.request && this.request.body) {
-    if(this.request.body.nickname) {
+  if (this.request && this.request.body) {
+    if (this.request.body.nickname) {
       user.nickname = String(this.request.body.nickname);
     }
-    if(this.request.body.motto) {
+    if (this.request.body.motto) {
       user.motto = String(this.request.body.motto);
     }
-    if(this.request.body.birthday) {
+    if (this.request.body.birthday) {
       user.birthday = String(this.request.body.birthday);
     }
-    if(this.request.body.gender) {
+    if (this.request.body.gender) {
       user.gender = String(this.request.body.gender);
     }
-    if(this.request.body.hometown) {
+    if (this.request.body.hometown) {
       user.hometown = String(this.request.body.hometown);
     }
+    yield user.save();
   }
-  yield user.save();
 
   this.body = user.toJSON();
 });
