@@ -5,5 +5,22 @@ module.exports = function(sequelize, DataTypes) {
     type: {
       type: DataTypes.STRING
     }
+  }, {
+    classMethods: {
+      getLikeCountByActionId: function*(actionId) {
+        return yield this.count({
+          where: {
+            ActionId: actionId
+          }
+        });
+      },
+      getLikeCountByPictureId: function*(pictureId) {
+        return yield this.count({
+          where: {
+            PictureId: pictureId
+          }
+        });
+      }
+    }
   });
 };

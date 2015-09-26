@@ -13,6 +13,14 @@ actions.push({
   AlbumId: 1
 });
 
+actions.push({
+  content: '这是一条即将被删除的动态。',
+  gps: 'gps',
+  position: 'position',
+  UserId: 1,
+  AlbumId: 2
+});
+
 module.exports = function*() {
   yield actions.map(function(action) {
     return db.models.Action.create(action);

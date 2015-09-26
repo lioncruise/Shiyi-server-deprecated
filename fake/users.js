@@ -14,10 +14,31 @@ users.push({
 });
 
 users.push({
-  phone: '15000000000',
+  phone: '13000000001',
   password: utility.md5('123456'),
   gender: 'F',
-  motto: 'I love books.'
+  motto: 'I love book 1.'
+});
+
+users.push({
+  phone: '13000000002',
+  password: utility.md5('123456'),
+  gender: 'F',
+  motto: 'I love book 2.'
+});
+
+users.push({
+  phone: '13000000003',
+  password: utility.md5('123456'),
+  gender: 'F',
+  motto: 'I love book 3.'
+});
+
+users.push({
+  phone: '13000000004',
+  password: utility.md5('123456'),
+  gender: 'F',
+  motto: 'I love book 4.'
 });
 
 module.exports = function*() {

@@ -33,6 +33,10 @@ exports.show = function*() {
   this.body.Tags = yield album.getTagsString();
   this.body.Users = yield album.getUsers();
   this.body.pictureCount = yield models.Picture.getPictureCountByAlbumId(album.id);
+
+  for(var i = 0; i < this.body.Pictures.length; i++) {
+    this.body.Pictures[i].likeCount = yield models.Like.getLikeCountByPictureId(this.body.Pictures[i].id);
+  }
 };
 
 exports.create = function*() {
@@ -183,7 +187,7 @@ exports.destroy = function*() {
     };
   }
 
-  yield album.updateAttributes({
+  album = yield album.updateAttributes({
     isDeleted: true
   });
 

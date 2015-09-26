@@ -6,6 +6,7 @@ var albums = require('./albums');
 var keyvalues = require('./keyvalues');
 var actions = require('./actions');
 var pictures = require('./pictures');
+var likes = require('./likes');
 
 module.exports = function*() {
   yield keyvalues;
@@ -13,4 +14,5 @@ module.exports = function*() {
   yield albums;
   yield actions;
   yield pictures;
+  yield likes;
 };

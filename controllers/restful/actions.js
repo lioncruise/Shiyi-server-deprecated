@@ -21,7 +21,10 @@ exports.show = function*() {
     }, {
       model: models.User
     }, {
-      model: models.Like
+      model: models.Like,
+      include: [{
+        model: models.User
+      }]
     }]
   });
 
@@ -34,6 +37,7 @@ exports.show = function*() {
 
   this.body = album.toJSON();
   this.body.Album.pictureCount = yield models.Picture.getPictureCountByAlbumId(this.body.Album.id);
+  this.body.likeCount = yield models.Like.getLikeCountByActionId(this.body.id);
 };
 
 exports.create = function*() {
@@ -84,7 +88,7 @@ exports.destroy = function*() {
     };
   }
 
-  yield action.updateAttributes({
+  action = yield action.updateAttributes({
     isDeleted: true
   });
 
