@@ -33,7 +33,7 @@ router.post('/getSeccode', function*() {
 
   var seccode = chance.string(chanceOption);
 
-  yield utils.sendMessage(this.request.body.phone, seccode);
+  yield utils.sendSMS(this.request.body.phone, seccode);
 
   this.body = {
     phone: this.request.body.phone,

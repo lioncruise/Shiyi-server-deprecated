@@ -12,7 +12,7 @@ exports.cloneJson = function(obj) {
 };
 
 //发送短信
-exports.sendMessage = function*(phone, code) {
+exports.sendSMS = function*(phone, code) {
   var res = yield urllib.request(config.sms.url, {
     method: 'POST',
     data: {
@@ -26,6 +26,7 @@ exports.sendMessage = function*(phone, code) {
   debug('Security code [%s] has sent to phone [%s].', code, phone);
 };
 
+//获取更新instance时的obj
 exports.getUpdateData = function(body, fields) {
   var data = {};
   fields.forEach(function(field) {

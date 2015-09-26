@@ -27,11 +27,17 @@ exports.setAssociations = function() {
     as: 'Creator',
     foreignKey: 'UserId'
   });
-  models.Album.belongsToMany(models.Tag, {through: 'AlbumTag'});
+  models.Album.belongsToMany(models.Tag, {
+    through: 'AlbumTag'
+  });
   models.Album.hasMany(models.Picture);
-  models.Album.belongsToMany(models.User, {through: 'AlbumUser'});
+  models.Album.belongsToMany(models.User, {
+    through: 'AlbumUser'
+  });
 
-  models.Tag.belongsToMany(models.Album, {through: 'AlbumTag'});
+  models.Tag.belongsToMany(models.Album, {
+    through: 'AlbumTag'
+  });
 
   models.Action.belongsTo(models.User);
   models.Action.belongsTo(models.Album);
@@ -42,18 +48,26 @@ exports.setAssociations = function() {
   models.Picture.belongsTo(models.Album);
   models.Picture.belongsTo(models.Action);
   models.Picture.hasMany(models.Like);
+  models.Picture.hasMany(models.Comment);
 
   models.Like.belongsTo(models.User);
   models.Like.belongsTo(models.Picture);
   models.Like.belongsTo(models.Action);
 
+  models.Comment.belongsTo(models.User);
+  models.Comment.belongsTo(models.Picture);
+  models.Comment.hasOne(models.Comment, {
+    as: 'OrignalComment',
+    foreignKey: 'OrignalCommentId'
+  });
+
   models.Message.belongsTo(models.User);
+  models.Message.hasOne(models.User, {
+    as: 'TargetUser',
+    foreignKey: 'TargetUserId'
+  });
   models.Message.belongsTo(models.Like);
   models.Message.belongsTo(models.Comment);
-  models.Message.belongsTo(models.Message, {
-    as: 'OrignalMessage',
-    foreignKey: 'OrignalMessageId'
-  });
 
   models.Report.belongsTo(models.User, {
     as: 'Reporter',
@@ -78,4 +92,25 @@ exports.init = function*() {
   });
 
   yield syncModelsArray;
+};
+
+//添加新的消息
+exports.addNewMessage = function*(UserId, TargetUserId, type, CommentId, LikeId, content) {
+  var data = {
+    type: type,
+    TargetUserId: TargetUserId
+  };
+  switch (type) {
+    case 'C':
+      data.CommentId = CommentId;
+      break;
+    case 'L':
+      data.LikeId = LikeId;
+      break;
+    case 'B':
+      data.content = content;
+      break;
+  }
+  var message = yield models.Message.create(data);
+  return message;
 };
