@@ -7,7 +7,7 @@ shiyi-server
 
 	（只运行这一条就对了）
 
-	安装依赖 + 初始化项目 + 初始化数据库 + 填充数据 + 运行
+	安装依赖 + 生成文档 + 初始化项目 + 初始化数据库 + 填充数据 + 运行
 
 * make dev
 
@@ -24,6 +24,10 @@ shiyi-server
 * make fake
 
 	数据库中填充demo数据
+
+* make doc
+
+	生成前后端交互文档
 
 * make install
 
