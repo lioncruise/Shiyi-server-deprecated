@@ -26,5 +26,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     }
+  }, {
+    classMethods: {
+      getPictureCountByAlbumId: function*(albumId) {
+        return yield this.count({
+          where: {
+            AlbumId: albumId,
+            isDeleted: false
+          }
+        });
+      }
+    }
   });
 };

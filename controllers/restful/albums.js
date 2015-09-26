@@ -32,6 +32,7 @@ exports.show = function*() {
   this.body = album.toJSON();
   this.body.Tags = yield album.getTagsString();
   this.body.Users = yield album.getUsers();
+  this.body.pictureCount = yield models.Picture.getPictureCountByAlbumId(album.id);
 };
 
 exports.create = function*() {

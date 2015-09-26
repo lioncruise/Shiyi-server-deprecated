@@ -56,13 +56,13 @@ exports.setAssociations = function() {
 
   models.Comment.belongsTo(models.User);
   models.Comment.belongsTo(models.Picture);
-  models.Comment.hasOne(models.Comment, {
+  models.Comment.belongsTo(models.Comment, {
     as: 'OrignalComment',
     foreignKey: 'OrignalCommentId'
   });
 
   models.Message.belongsTo(models.User);
-  models.Message.hasOne(models.User, {
+  models.Message.belongsTo(models.User, {
     as: 'TargetUser',
     foreignKey: 'TargetUserId'
   });
