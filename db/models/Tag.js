@@ -5,5 +5,11 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING
     }
+  }, {
+    indexes: [{
+      fields: ['name', 'id']
+    }, {
+      fields: ['id']
+    }]
   });
 };

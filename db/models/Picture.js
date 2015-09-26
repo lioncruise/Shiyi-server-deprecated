@@ -23,6 +23,17 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
+    indexes: [{
+      fields: ['AlbumId', 'UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+    }, {
+      fields: ['ActionId', 'UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+    }, {
+      fields: ['UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+    }, {
+      fields: ['shareNum', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+    }, {
+      fields: ['id']
+    }],
     classMethods: {
       getPictureCountByAlbumId: function*(albumId) {
         return yield this.count({

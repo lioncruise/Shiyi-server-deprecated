@@ -5,5 +5,17 @@ module.exports = function(sequelize, DataTypes) {
     content: {
       type: DataTypes.STRING
     }
+  }, {
+    indexes: [{
+      fields: ['ActionId', 'createdAt', 'OrignalCommentId', 'id']
+    }, {
+      fields: ['PictureId', 'createdAt', 'OrignalCommentId', 'id']
+    }, {
+      fields: ['UserId', 'createdAt', 'id']
+    }, {
+      fields: ['OrignalCommentId', 'createdAt', 'id']
+    }, {
+      fields: ['id']
+    }]
   });
 };

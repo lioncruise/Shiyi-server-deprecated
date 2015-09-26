@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     nickname: {
       type: DataTypes.STRING,
       validate: {
-        len: [2,10]
+        len: [2, 10]
       }
     },
     password: { //前后端密码强度验证
@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     motto: {
       type: DataTypes.STRING,
       validate: {
-        len: [0,50]
+        len: [0, 50]
       }
     },
     avatarUrl: {
@@ -61,6 +61,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
+  }, {
+    indexes: [{
+      fields: ['phone', 'isBlocked', 'isDeleted', 'password']
+    }, {
+      fields: ['hometown', 'phone', 'isBlocked', 'isDeleted', 'gender', 'password']
+    }, {
+      fields: ['birthday', 'phone', 'isBlocked', 'isDeleted', 'gender', 'password']
+    }, {
+      fields: ['nickname', 'isBlocked', 'isDeleted', 'password']
+    }, {
+      fields: ['wechatToken', 'isBlocked', 'isDeleted']
+    }, {
+      fields: ['weiboToken', 'isBlocked', 'isDeleted']
+    }, {
+      fields: ['qqToken', 'isBlocked', 'isDeleted']
+    }, {
+      fields: ['id']
+    }]
   });
 };

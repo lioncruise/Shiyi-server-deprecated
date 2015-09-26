@@ -8,5 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     TagId: {
       type: DataTypes.INTEGER
     }
+  }, {
+    indexes: [{
+      fields: ['AlbumId', 'TagId']
+    }, {
+      fields: ['TagId', 'AlbumId']
+    }]
   });
 };

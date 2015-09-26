@@ -31,5 +31,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: "user"
     }
+  }, {
+    indexes: [{
+      fields: ['username', 'id']
+    }, {
+      fields: ['type', 'username', 'id']
+    }, {
+      fields: ['id']
+    }]
   });
 };

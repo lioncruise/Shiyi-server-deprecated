@@ -49,9 +49,16 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
+    indexes: [{
+      fields: ['UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+    }, {
+      fields: ['isBlocked', 'isDeleted', 'createdAt']
+    }, {
+      fields: ['id']
+    }],
     instanceMethods: {
-      getTagsString: function* () {
-        return (yield this.getTags()).map(function (Tag) {
+      getTagsString: function*() {
+        return (yield this.getTags()).map(function(Tag) {
           return Tag.name;
         }).join(',');
       }

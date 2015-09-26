@@ -56,6 +56,7 @@ exports.setAssociations = function() {
 
   models.Comment.belongsTo(models.User);
   models.Comment.belongsTo(models.Picture);
+  models.Comment.belongsTo(models.Action);
   models.Comment.belongsTo(models.Comment, {
     as: 'OrignalComment',
     foreignKey: 'OrignalCommentId'
@@ -73,6 +74,7 @@ exports.setAssociations = function() {
     as: 'Reporter',
     foreignKey: 'ReporterId'
   });
+  models.Report.belongsTo(models.Action);
   models.Report.belongsTo(models.Picture);
   models.Report.belongsTo(models.Album);
   models.Report.belongsTo(models.User);

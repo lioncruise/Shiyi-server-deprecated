@@ -8,5 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     content: {
       type: DataTypes.STRING
     }
+  }, {
+    indexes: [{
+      fields: ['TargetUserId', 'createdAt', 'id']
+    }, {
+      fields: ['id']
+    }]
   });
 };

@@ -6,6 +6,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     }
   }, {
+    indexes: [{
+      fields: ['ActionId', 'createdAt', 'id']
+    }, {
+      fields: ['PictureId', 'createdAt', 'id']
+    }, {
+      fields: ['id']
+    }],
     classMethods: {
       getLikeCountByActionId: function*(actionId) {
         return yield this.count({
