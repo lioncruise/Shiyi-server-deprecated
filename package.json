@@ -7,7 +7,8 @@
     "node": "^0.12.*"
   },
   "scripts": {
-    "start": "npm install && npm run fake && npm run server",
+    "start": "npm install && npm run doc && npm run fake && npm run server",
+    "doc": "node --harmony ./doc/index.js",
     "server": "node --harmony start.js",
     "dev": "./node_modules/.bin/node-dev --harmony ./start.js",
     "init": "node --harmony ./init/index.js",
