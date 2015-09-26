@@ -2,19 +2,20 @@
 
 var db = require('../db');
 var debug = require('debug')('fake/users');
+var utility = require('utility');
 
 var users = [];
 
 users.push({
   phone: '13000000000',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'M',
   motto: 'Just do it.'
 });
 
 users.push({
   phone: '15000000000',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'F',
   motto: 'I love books.'
 });

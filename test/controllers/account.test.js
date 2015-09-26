@@ -59,7 +59,7 @@ describe('test/controllers/account.test.js', function() {
   describe('POST /register', function() {
     it('should register ok', function(done) {
       var data = {
-        phone: '13000000001',
+        phone: '13000000111',
         password: '123456',
         gender: 'M',
         motto: 'Just do it.'

@@ -6,6 +6,7 @@ var chance = require('chance').Chance();
 var debug = require('debug')('controllers/account');
 var utils = require('../utils');
 var middlewares = require('../middlewares');
+var utility = require('utility');
 
 var chanceOption = {
   length: 4,
@@ -65,7 +66,7 @@ router.post('/register', function*() {
   try {
     var user = yield models.User.create({
       phone: this.request.body.phone,
-      password: this.request.body.password,
+      password: utility.md5(this.request.body.password),
       gender: this.request.body.gender,
       motto: this.request.body.motto
     });
@@ -98,7 +99,7 @@ router.post('/login', function*() {
   var user = yield models.User.find({
     where: {
       phone: this.request.body.phone,
-      password: this.request.body.password,
+      password: utility.md5(this.request.body.password),
       isBlocked: false
     }
   });
@@ -131,6 +132,12 @@ router.put('/update', middlewares.auth, function*() {
       allowEmpty: false,
       min: 2,
       max: 10
+    },
+    password: {
+      type: 'password',
+      required: false,
+      allowEmpty: false,
+      min: 6
     },
     motto: {
       type: 'string',
@@ -171,6 +178,9 @@ router.put('/update', middlewares.auth, function*() {
   if (this.request && this.request.body) {
     if (this.request.body.nickname) {
       user.nickname = String(this.request.body.nickname);
+    }
+    if (this.request.body.password) {
+      user.password = utility.md5(String(this.request.body.password));
     }
     if (this.request.body.motto) {
       user.motto = String(this.request.body.motto);
