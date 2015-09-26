@@ -43,8 +43,18 @@ module.exports = [{
   url: '/getVersion?type=ios',
   method: 'get'
 }, {
-  url: '/users/1',
+  url: '/actions/1',
   method: 'get'
+}, {
+  url: '/actions',
+  method: 'post',
+  input: {
+    content: '这是一条动态呦~',
+    gps: 'gps',
+    position: 'position',
+    UserId: 1,
+    AlbumId: 1
+  }
 }, {
   url: '/albums/1',
   method: 'get'
@@ -84,4 +94,10 @@ module.exports = [{
     AlbumId: '1',
     UserIds: '1,2,3'
   }]
+}, {
+  url: '/messages/1',
+  method: 'get'
+}, {
+  url: '/users/1',
+  method: 'get'
 }];

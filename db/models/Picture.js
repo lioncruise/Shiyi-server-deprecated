@@ -28,7 +28,8 @@ module.exports = function(sequelize, DataTypes) {
         return yield this.count({
           where: {
             AlbumId: albumId,
-            isDeleted: false
+            isDeleted: false,
+            isBlocked: false
           }
         });
       }

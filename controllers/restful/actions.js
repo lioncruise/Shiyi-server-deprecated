@@ -88,6 +88,14 @@ exports.destroy = function*() {
     };
   }
 
+  //删除动态的同时，删除一同上传的照片
+  var pictures = yield action.getPictures();
+  yield pictures.map(function (pic) {
+    return pic.updateAttributes({
+      isDeleted: true
+    });
+  });
+
   action = yield action.updateAttributes({
     isDeleted: true
   });
