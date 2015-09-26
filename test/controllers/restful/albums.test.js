@@ -98,7 +98,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     });
   });
 
-  describe('PUT /albums', function() {
+  describe('PUT /albums/:id', function() {
     it('should update album OK', function(done) {
       var album = {
         title: '哈工大三公寓',
@@ -165,7 +165,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     });
   });
 
-  describe('DELETE /albums', function() {
+  describe('DELETE /albums/:id', function() {
     it('should delete album OK', function(done) {
       request(server)
         .delete('/albums/3')

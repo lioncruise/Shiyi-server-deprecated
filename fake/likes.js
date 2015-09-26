@@ -25,12 +25,6 @@ likes.push({
 
 likes.push({
   type: '1',
-  PictureId: 1,
-  UserId: 1
-});
-
-likes.push({
-  type: '1',
   PictureId: 2,
   UserId: 1
 });

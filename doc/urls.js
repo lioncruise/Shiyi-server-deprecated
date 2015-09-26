@@ -95,9 +95,43 @@ module.exports = [{
     UserIds: '1,2,3'
   }]
 }, {
-  url: '/messages/1',
+  url: '/users/1',
   method: 'get'
 }, {
-  url: '/users/1',
+  url: '/comments/1',
+  method: 'get'
+}, {
+  url: '/comments',
+  method: 'post',
+  input: [{
+    content: '一条评论',
+    PictureId: '4',
+    ActionId: '1'
+  }, {
+    content: '二条评论',
+    ActionId: '2',
+    OrignalCommentId: '1'
+  }]
+}, {
+  url: '/comments/1',
+  method: 'delete'
+}, {
+  url: '/likes/1',
+  method: 'get'
+}, {
+  url: '/likes',
+  method: 'post',
+  input: [{
+    type: 'LL',
+    PictureId: '4'
+  }, {
+    type: 'DD',
+    ActionId: '2'
+  }]
+}, {
+  url: '/likes/1',
+  method: 'delete'
+}, {
+  url: '/messages/1',
   method: 'get'
 }];

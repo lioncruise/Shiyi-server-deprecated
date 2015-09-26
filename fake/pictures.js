@@ -26,6 +26,26 @@ pictures.push({
   UserId: 1
 });
 
+pictures.push({
+  pictureUrl: 'http://test.com/4',
+  AlbumId: 1,
+  ActionId: 2,
+  UserId: 1
+});
+
+pictures.push({
+  pictureUrl: 'http://test.com/5',
+  AlbumId: 1,
+  ActionId: 2,
+  UserId: 1
+});
+
+pictures.push({
+  pictureUrl: 'http://test.com/6',
+  AlbumId: 1,
+  ActionId: 2,
+  UserId: 1
+});
 
 exports.fake = function*() {
   yield pictures.map(function(picture) {

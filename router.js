@@ -30,7 +30,22 @@ var messages = new Resource('messages', middlewares.auth, messagesController, {
   id: 'id'
 });
 
-var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware(), messages.middleware()];
+var picturesController = require('./controllers/restful/pictures');
+var pictures = new Resource('pictures', middlewares.auth, picturesController, {
+  id: 'id'
+});
+
+var commentsController = require('./controllers/restful/comments');
+var comments = new Resource('comments', middlewares.auth, commentsController, {
+  id: 'id'
+});
+
+var likesController = require('./controllers/restful/likes');
+var likes = new Resource('likes', middlewares.auth, likesController, {
+  id: 'id'
+});
+
+var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware(), messages.middleware(), pictures.middleware(), comments.middleware(), likes.middleware()];
 
 //TODO: 删除测试路由
 router.post('/test', function*() {

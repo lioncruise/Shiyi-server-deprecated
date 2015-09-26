@@ -8,62 +8,60 @@ exports.show = function*() {
   this.verifyParams({
     id: 'id'
   });
-  var album = yield models.Action.find({
+  var comment = yield models.Comment.find({
     where: {
-      id: this.params.id,
-      isBlocked: false,
-      isDeleted: false
+      id: this.params.id
     },
     include: [{
-      model: models.Picture
-    }, {
-      model: models.Album
-    }, {
       model: models.User
     }, {
-      model: models.Like,
+      model: models.Picture
+    }, {
+      model: models.Action
+    }, {
+      model: models.Comment,
+      as: 'OrignalComment',
       include: [{
         model: models.User
       }]
     }]
   });
 
-  if (!album) {
+  if (!comment) {
     return this.body = {
       statusCode: 404,
-      message: '动态不存在'
+      message: '评论不存在'
     };
   }
 
-  this.body = album.toJSON();
-  this.body.Album.pictureCount = yield models.Picture.getPictureCountByAlbumId(this.body.Album.id);
-  this.body.likeCount = yield models.Like.getLikeCountByActionId(this.body.id);
+  this.body = comment.toJSON();
 };
 
 exports.create = function*() {
   this.verifyParams({
-    content: {
-      type: 'string',
-      required: true,
-      allowEmpty: true
+    content: 'string',
+    PictureId: {
+      type: 'id',
+      required: false,
+      allowEmpty: false
     },
-    gps: {
-      type: 'string',
-      required: true,
-      allowEmpty: true
+    ActionId: {
+      type: 'id',
+      required: false,
+      allowEmpty: false
     },
-    position: {
-      type: 'string',
-      required: true,
-      allowEmpty: true
+    OrignalCommentId: {
+      type: 'id',
+      required: false,
+      allowEmpty: false
     }
   });
 
-  var action = models.Action.build(this.request.body);
-  action.UserId = this.session.user.id;
-  action = yield action.save();
+  var comment = models.Comment.build(this.request.body);
+  comment.UserId = this.session.user.id;
+  comment = yield comment.save();
 
-  this.body = action.toJSON();
+  this.body = comment.toJSON();
 };
 
 exports.destroy = function*() {
@@ -89,7 +87,7 @@ exports.destroy = function*() {
 
   //删除动态的同时，删除一同上传的照片
   var pictures = yield action.getPictures();
-  yield pictures.map(function (pic) {
+  yield pictures.map(function(pic) {
     return pic.updateAttributes({
       isDeleted: true
     });
