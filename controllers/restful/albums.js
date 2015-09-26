@@ -59,13 +59,7 @@ exports.create = function*() {
 
   album = yield album.save();
 
-  var tags = [];
-  try {
-    tags = this.request.body.tags.split(',');
-  } catch (e) {
-    tags = [];
-  }
-
+  var tags = this.request.body.tags.split(',');
   var _tArray = [];
   for (var i = 0; i < tags.length; i++) {
     var _t = yield models.Tag.findOrCreate({
@@ -147,13 +141,7 @@ exports.update = function*() {
   ]);
 
   if (this.request.body.tags) {
-    var tags = [];
-    try {
-      tags = this.request.body.tags.split(',');
-    } catch (e) {
-      tags = [];
-    }
-
+    var tags = this.request.body.tags.split(',');
     var _tArray = [];
     for (var i = 0; i < tags.length; i++) {
       var _t = yield models.Tag.findOrCreate({

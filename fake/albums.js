@@ -33,6 +33,17 @@ albums.push({
 });
 tags.push('猫', '动物', '萌');
 
+albums.push({
+  title: '即将被删除的相册',
+  description: '生的伟大',
+  isShare: true,
+  isPublic: true,
+  isShowRawInfo: true,
+  allowLike: true,
+  allowComment: true,
+  UserId: 1
+});
+
 module.exports = function*() {
   yield tags.map(function(tag) {
     return db.models.Tag.create({
