@@ -18,5 +18,20 @@ describe('test/controllers/restful/users.test.js', function () {
       .expect('Content-type', 'application/json; charset=utf-8')
       .expect(200, done);
     });
+
+    it('should get status 404', function(done) {
+      request(server)
+        .get('/users/111111')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.equal(404);
+          res.body.should.have.properties(['statusCode', 'message']);
+          done();
+        });
+    });
   });
 });
