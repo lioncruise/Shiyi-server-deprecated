@@ -25,11 +25,11 @@ keyvalues.push({
   value: 'http://test.com'
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield keyvalues.map(function(kv) {
     return db.models.Keyvalue.create(kv);
   });
   debug('keyvalues data fake finish.');
 };
 
-module.exports.fakeKeyvalues = keyvalues;
+exports.fakeData = keyvalues;

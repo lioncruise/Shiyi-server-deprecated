@@ -11,12 +11,12 @@ var comments = require('./comments');
 var messages = require('./messages');
 
 module.exports = function*() {
-  yield keyvalues;
-  yield users;
-  yield albums;
-  yield actions;
-  yield pictures;
-  yield likes;
-  yield comments;
-  yield messages;
+  yield keyvalues.fake;
+  yield users.fake;
+  yield albums.fake;
+  yield actions.fake;
+  yield pictures.fake;
+  yield likes.fake;
+  yield comments.fake;
+  yield messages.fake;
 };

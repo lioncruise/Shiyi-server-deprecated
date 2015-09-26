@@ -21,8 +21,8 @@ router.get('/getVersion', function*() {
     });
     if (version && downloadUrl) {
       return this.body = {
-        version: version,
-        downloadUrl: downloadUrl
+        version: version.value,
+        downloadUrl: downloadUrl.value
       };
     }
   }

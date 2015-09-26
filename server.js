@@ -25,10 +25,10 @@ app.keys = config.keys;
 //抓取错误
 if (!config.debug) {
   onerror(app);
-  app.on('error', function(err) {
-    console.error(err.stack);
-  });
 }
+app.on('error', function(err) {
+  console.error(err.stack);
+});
 
 //响应计时
 app.use(rt());

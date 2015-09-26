@@ -146,6 +146,11 @@ exports.update = function*() {
     ['allowComment', 'bool'],
   ]);
 
+  //如果为非共享，则一定为非公开
+  if(!data.isShare) {
+    data.isPublic = false;
+  }
+
   var _tArray = [];
   if (this.request.body.tags && this.request.body.tags !== '') {
     var tags = this.request.body.tags.split(',');

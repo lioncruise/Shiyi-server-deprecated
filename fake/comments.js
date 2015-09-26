@@ -25,11 +25,11 @@ comments.push({
   OrignalCommentId: 2
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield comments.map(function(comment) {
     return db.models.Comment.create(comment);
   });
   debug('comments data fake finish.');
 };
 
-module.exports.fakeComments = comments;
+exports.fakeData = comments;

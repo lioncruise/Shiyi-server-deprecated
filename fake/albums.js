@@ -45,7 +45,7 @@ albums.push({
   UserId: 1
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield tags.map(function(tag) {
     return db.models.Tag.create({
       name: tag
@@ -68,4 +68,4 @@ module.exports = function*() {
   debug('albums data fake finish.');
 };
 
-module.exports.fakeAlbums = albums;
+exports.fakeData = albums;

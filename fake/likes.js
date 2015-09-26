@@ -41,11 +41,11 @@ likes.push({
   UserId: 1
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield likes.map(function(like) {
     return db.models.Like.create(like);
   });
   debug('likes data fake finish.');
 };
 
-module.exports.fakeLikes = likes;
+exports.fakeData = likes;

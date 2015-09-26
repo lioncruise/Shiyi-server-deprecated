@@ -41,11 +41,11 @@ users.push({
   motto: 'I love book 4.'
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield users.map(function(user) {
     return db.models.User.create(user);
   });
   debug('users data fake finish.');
 };
 
-module.exports.fakeUsers = users;
+exports.fakeData = users;

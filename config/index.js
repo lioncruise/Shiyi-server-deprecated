@@ -10,7 +10,7 @@ config.db = {
     database: 'shiyi',
     dialect: 'sqlite',
     pool: {
-        max: 5,
+        max: 10,
         min: 0,
         idle: 10000
     },
@@ -27,6 +27,7 @@ config.sms = {
 config.keys = ['shiyi-server', 'sadfag'];
 config.debug = true;
 config.port = 8080;
+config.host = 'http://127.0.0.1:8080';
 
 var customConfig = {};
 try {

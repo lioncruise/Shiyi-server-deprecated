@@ -34,11 +34,11 @@ messages.push({
   content: '这是一条广告。'
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield messages.map(function(message) {
     return db.models.Message.create(message);
   });
   debug('messages data fake finish.');
 };
 
-module.exports.fakeMessages = messages;
+exports.fakeData = messages;

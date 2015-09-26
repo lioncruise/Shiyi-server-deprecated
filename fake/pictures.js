@@ -27,11 +27,11 @@ pictures.push({
 });
 
 
-module.exports = function*() {
+exports.fake = function*() {
   yield pictures.map(function(picture) {
     return db.models.Picture.create(picture);
   });
   debug('pictures data fake finish.');
 };
 
-module.exports.fakePictures = pictures;
+exports.fakeData = pictures;

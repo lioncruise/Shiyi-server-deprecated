@@ -21,11 +21,11 @@ actions.push({
   AlbumId: 2
 });
 
-module.exports = function*() {
+exports.fake = function*() {
   yield actions.map(function(action) {
     return db.models.Action.create(action);
   });
   debug('actions data fake finish.');
 };
 
-module.exports.fakeActions = actions;
+exports.fakeData = actions;

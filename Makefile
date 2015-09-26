@@ -5,17 +5,21 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 start: install
+	@NODE_ENV=test DEBUG=* node --harmony ./doc/index.js
 	@DEBUG=* $(MAKE) fake
-	@DEBUG=* node --harmony ./start.js
+	@DEBUG=* node --harmony ./worker.js
 
 dev:
-	@DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js
+	@DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
 authdev:
-	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./start.js
+	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
 init:
 	@DEBUG=* node --harmony ./init/index.js
+
+doc: fake
+	@NODE_ENV=test DEBUG=* node --harmony ./doc/index.js
 
 fake: init
 	@DEBUG=* node --harmony ./fake/index.js
@@ -50,7 +54,7 @@ test-cov cov: fake
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
-test-all: install jshint test cov
+test-all: install jshint test cov doc
 
 clean:
 	@rm -rf node_modules
@@ -62,4 +66,4 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start dev authdev init fake install jshint test test-all test-cov cov clean autod
+.PHONY: start dev authdev init fake install jshint test test-all test-cov cov clean autod doc

@@ -6,7 +6,6 @@ var request = require('supertest');
 var mm = require('mm');
 var should = require('should');
 
-
 describe('test/controllers/restful/actions.test.js', function() {
   before(server.listen.bind(server, 0));
   after(server.close.bind(server));
