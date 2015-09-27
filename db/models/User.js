@@ -66,9 +66,16 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    type: {
+      type: DataTypes.ENUM('user', 'crowdfunding', 'member'),
+      allowNull: false,
+      defaultValue: 'user'
     }
   }, {
     indexes: [{
+      fields: ['type', 'isBlocked', 'isDeleted', 'phone', 'password']
+    }, {
       fields: ['phone', 'isBlocked', 'isDeleted', 'password']
     }, {
       fields: ['hometown', 'phone', 'isBlocked', 'isDeleted', 'gender', 'password']
