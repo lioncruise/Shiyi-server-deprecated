@@ -56,14 +56,12 @@ router.post('/changePassword', function*() {
     password: {
       type: 'password',
       required: true,
-      allowEmpty: false,
-      min: 6,
-      max: 16
+      allowEmpty: false
     }
   });
 
   var result = yield models.User.update({
-    password: utility.md5(this.request.body.password)
+    password: this.request.body.password
   }, {
     where: {
       phone: this.request.body.phone
@@ -89,9 +87,7 @@ router.post('/register', function*() {
     password: {
       type: 'password',
       required: true,
-      allowEmpty: false,
-      min: 6,
-      max: 16
+      allowEmpty: false
     },
     gender: ['M', 'F'],
     motto: {
@@ -107,7 +103,7 @@ router.post('/register', function*() {
   try {
     var user = yield models.User.create({
       phone: this.request.body.phone,
-      password: utility.md5(this.request.body.password),
+      password: this.request.body.password,
       gender: this.request.body.gender,
       motto: this.request.body.motto
     });
@@ -132,15 +128,14 @@ router.post('/login', function*() {
     password: {
       type: 'password',
       required: true,
-      allowEmpty: false,
-      min: 6
+      allowEmpty: false
     }
   });
 
   var user = yield models.User.find({
     where: {
       phone: this.request.body.phone,
-      password: utility.md5(this.request.body.password),
+      password: this.request.body.password,
       isBlocked: false
     }
   });
@@ -177,8 +172,7 @@ router.put('/update', middlewares.auth, function*() {
     password: {
       type: 'password',
       required: false,
-      allowEmpty: false,
-      min: 6
+      allowEmpty: false
     },
     motto: {
       type: 'string',
@@ -221,7 +215,7 @@ router.put('/update', middlewares.auth, function*() {
       user.nickname = String(this.request.body.nickname);
     }
     if (this.request.body.password) {
-      user.password = utility.md5(String(this.request.body.password));
+      user.password = String(this.request.body.password);
     }
     if (this.request.body.motto) {
       user.motto = String(this.request.body.motto);
