@@ -3,8 +3,19 @@
 module.exports = [{
   url: '/getSeccode',
   method: 'post',
+  input: [{
+    phone: '13009865000',
+    type: 'register'
+  }, {
+    phone: '13000000003',
+    type: 'changePassword'
+  }]
+}, {
+  url: '/changePassword',
+  method: 'post',
   input: {
-    phone: '13660000000'
+    phone: '13000000004',
+    password: '123123'
   }
 }, {
   url: '/register',

@@ -16,7 +16,8 @@ var chanceOption = {
 //发送验证码
 router.post('/getSeccode', function*() {
   this.verifyParams({
-    phone: utils.phoneRegExp
+    phone: utils.phoneRegExp,
+    type: ['register', 'changePassword']
   });
 
   var existUser = yield models.User.find({
@@ -24,10 +25,17 @@ router.post('/getSeccode', function*() {
       phone: this.request.body.phone
     }
   });
-  if (existUser) {
+
+  if (this.request.body.type === 'register' && existUser) {
     return this.body = {
       statusCode: 409,
       message: '用户已存在'
+    };
+  }
+  if (this.request.body.type === 'changePassword' && !existUser) {
+    return this.body = {
+      statusCode: 409,
+      message: '用户不存在'
     };
   }
 
@@ -38,6 +46,39 @@ router.post('/getSeccode', function*() {
   this.body = {
     phone: this.request.body.phone,
     seccode: seccode
+  };
+});
+
+//忘记密码
+router.post('/changePassword', function*() {
+  this.verifyParams({
+    phone: utils.phoneRegExp,
+    password: {
+      type: 'password',
+      required: true,
+      allowEmpty: false,
+      min: 6,
+      max: 16
+    }
+  });
+
+  var result = yield models.User.update({
+    password: utility.md5(this.request.body.password)
+  }, {
+    where: {
+      phone: this.request.body.phone
+    }
+  });
+
+  if (result[0] === 0) {
+    return this.body = {
+      statusCode: 404,
+      message: '无密码修改'
+    };
+  }
+
+  this.body = {
+    statusCode: 200
   };
 });
 

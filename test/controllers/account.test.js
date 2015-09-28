@@ -14,12 +14,13 @@ describe('test/controllers/account.test.js', function() {
   afterEach(mm.restore);
 
   describe('POST /getSeccode', function() {
-    it('should get seccode ok', function(done) {
+    it('should get seccode for register ok', function(done) {
       mm.data(utils, 'sendMessage', null);
       request(server)
         .post('/getSeccode')
         .send({
-          phone: '13009865000'
+          phone: '13009865000',
+          type: 'register'
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -33,15 +34,32 @@ describe('test/controllers/account.test.js', function() {
         });
     });
 
-    it('should get 409 statusCode', function(done) {
-      mm.data(models.User, 'find', {
-        id: 1,
-        phone: '13009865000'
-      });
+    it('should get seccode for changePassword ok', function(done) {
+      mm.data(utils, 'sendMessage', null);
       request(server)
         .post('/getSeccode')
         .send({
-          phone: '13009865000'
+          phone: '13000000003',
+          type: 'changePassword'
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(200);
+          res.body.should.have.properties(['phone', 'seccode']);
+          done();
+        });
+    });
+
+    it('should get 409 statusCode for register', function(done) {
+      request(server)
+        .post('/getSeccode')
+        .send({
+          phone: '13000000003',
+          type: 'register'
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -51,6 +69,65 @@ describe('test/controllers/account.test.js', function() {
           }
           res.body.statusCode.should.be.equal(409);
           res.body.should.have.properties(['statusCode', 'message']);
+          done();
+        });
+    });
+
+    it('should get 409 statusCode for changePassword', function(done) {
+      request(server)
+        .post('/getSeccode')
+        .send({
+          phone: '13111111111',
+          type: 'changePassword'
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(409);
+          res.body.should.have.properties(['statusCode', 'message']);
+          done();
+        });
+    });
+  });
+
+  describe('POST /changePassword', function () {
+    it('should changePassword ok', function (done) {
+      var data = {
+        phone: '13000000004',
+        password: '123123'
+      };
+      request(server)
+        .post('/changePassword')
+        .send(data)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should changePassword get statusCode 404', function (done) {
+      var data = {
+        phone: '13000777004',
+        password: '123123'
+      };
+      request(server)
+        .post('/changePassword')
+        .send(data)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(404);
           done();
         });
     });
