@@ -7,6 +7,7 @@ var mm = require('mm');
 var should = require('should');
 var models = require('../../db').models;
 var utils = require('../../utils');
+var utility = require('utility');
 
 describe('test/controllers/account.test.js', function() {
   before(server.listen.bind(server, 0));
@@ -97,7 +98,7 @@ describe('test/controllers/account.test.js', function() {
     it('should changePassword ok', function (done) {
       var data = {
         phone: '13000000004',
-        password: '123123'
+        password: utility.md5('123123')
       };
       request(server)
         .post('/changePassword')
@@ -116,7 +117,7 @@ describe('test/controllers/account.test.js', function() {
     it('should changePassword get statusCode 404', function (done) {
       var data = {
         phone: '13000777004',
-        password: '123123'
+        password: utility.md5('123123')
       };
       request(server)
         .post('/changePassword')
@@ -137,7 +138,7 @@ describe('test/controllers/account.test.js', function() {
     it('should register ok', function(done) {
       var data = {
         phone: '13000000111',
-        password: '123456',
+        password: utility.md5('123456'),
         gender: 'M',
         motto: 'Just do it.'
       };
@@ -159,7 +160,7 @@ describe('test/controllers/account.test.js', function() {
     it('should get statusCode 409', function(done) {
       var data = {
         phone: '13000000000',
-        password: '123456',
+        password: utility.md5('123456'),
         gender: 'M',
         motto: 'Just do it.'
       };
@@ -183,7 +184,7 @@ describe('test/controllers/account.test.js', function() {
     it('should login ok', function(done) {
       var data = {
         phone: '13000000000',
-        password: '123456'
+        password: utility.md5('123456')
       };
       request(server)
         .post('/login')
@@ -203,7 +204,7 @@ describe('test/controllers/account.test.js', function() {
     it('should get statusCode 404', function(done) {
       var data = {
         phone: '13333000000',
-        password: '123456'
+        password: utility.md5('123456')
       };
       request(server)
         .post('/login')

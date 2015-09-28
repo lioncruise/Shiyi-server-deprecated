@@ -8,35 +8,35 @@ var users = [];
 
 users.push({
   phone: '13000000000',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'M',
   motto: 'Just do it.'
 });
 
 users.push({
   phone: '13000000001',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'F',
   motto: 'I love book 1.'
 });
 
 users.push({
   phone: '13000000002',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'F',
   motto: 'I love book 2.'
 });
 
 users.push({
   phone: '13000000003',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'F',
   motto: 'I love book 3.'
 });
 
 users.push({
   phone: '13000000004',
-  password: '123456',
+  password: utility.md5('123456'),
   gender: 'F',
   motto: 'I love book 4.'
 });
