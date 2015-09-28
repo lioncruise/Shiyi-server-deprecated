@@ -9,6 +9,7 @@ var pictures = require('./pictures');
 var likes = require('./likes');
 var comments = require('./comments');
 var messages = require('./messages');
+var tokens = require('./tokens');
 
 module.exports = function*() {
   yield keyvalues.fake;
@@ -19,4 +20,5 @@ module.exports = function*() {
   yield likes.fake;
   yield comments.fake;
   yield messages.fake;
+  yield tokens.fake;
 };

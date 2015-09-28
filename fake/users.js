@@ -41,6 +41,13 @@ users.push({
   motto: 'I love book 4.'
 });
 
+users.push({
+  phone: '15555555551',
+  password: utility.md5('asdljgoaejg'),
+  gender: 'F',
+  motto: 'I love book 5.'
+});
+
 exports.fake = function*() {
   yield users.map(function(user) {
     return db.models.User.create(user);

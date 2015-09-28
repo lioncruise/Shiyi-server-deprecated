@@ -1,4 +1,5 @@
 'use strict';
+var utility = require('utility');
 
 module.exports = [{
   url: '/getSeccode',
@@ -14,17 +15,19 @@ module.exports = [{
   url: '/changePassword',
   method: 'post',
   input: {
-    phone: '13000000004',
-    password: '123123'
+    phone: '15555555551',
+    password: '123123',
+    token: utility.md5('eeeee')
   }
 }, {
   url: '/register',
   method: 'post',
   input: {
-    phone: '13700000000',
+    phone: '15555555550',
     password: '123456789',
     gender: 'M',
-    motto: "Let's go!"
+    motto: "Let's go!",
+    token: utility.md5('eeeee')
   }
 }, {
   url: '/login',

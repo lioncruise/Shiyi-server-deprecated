@@ -7,6 +7,7 @@ var debug = require('debug')('controllers/account');
 var utils = require('../utils');
 var middlewares = require('../middlewares');
 var utility = require('utility');
+var moment = require('moment');
 
 var chanceOption = {
   length: 4,
@@ -43,9 +44,16 @@ router.post('/getSeccode', function*() {
 
   yield utils.sendSMS(this.request.body.phone, seccode);
 
+  var token = yield models.Token.create({
+    phone: this.request.body.phone,
+    token: utility.md5(moment().format()),
+    type: this.request.body.type
+  });
+
   this.body = {
     phone: this.request.body.phone,
-    seccode: seccode
+    seccode: seccode,
+    token: token.token
   };
 });
 
@@ -53,12 +61,30 @@ router.post('/getSeccode', function*() {
 router.post('/changePassword', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp,
+    token: 'string',
     password: {
       type: 'password',
       required: true,
       allowEmpty: false
     }
   });
+
+  var token = yield models.Token.find({
+    where: {
+      phone: this.request.body.phone,
+      token: this.request.body.token,
+      type: 'changePassword'
+    }
+  });
+
+  if (!token) {
+    return this.body = {
+      statusCode: 422,
+      message: 'Token错误'
+    };
+  }
+
+  yield token.destroy();
 
   var result = yield models.User.update({
     password: this.request.body.password
@@ -84,6 +110,7 @@ router.post('/changePassword', function*() {
 router.post('/register', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp,
+    token: 'string',
     password: {
       type: 'password',
       required: true,
@@ -99,6 +126,23 @@ router.post('/register', function*() {
   });
 
   //TODO: 头像处理
+
+  var token = yield models.Token.find({
+    where: {
+      phone: this.request.body.phone,
+      token: this.request.body.token,
+      type: 'register'
+    }
+  });
+
+  if (!token) {
+    return this.body = {
+      statusCode: 422,
+      message: 'Token错误'
+    };
+  }
+
+  yield token.destroy();
 
   try {
     var user = yield models.User.create({

@@ -30,7 +30,7 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'seccode']);
+          res.body.should.have.properties(['phone', 'seccode', 'token']);
           done();
         });
     });
@@ -50,12 +50,12 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'seccode']);
+          res.body.should.have.properties(['phone', 'seccode', 'token']);
           done();
         });
     });
 
-    it('should get 409 statusCode for register', function(done) {
+    it('should get seccode 409 statusCode for register', function(done) {
       request(server)
         .post('/getSeccode')
         .send({
@@ -74,7 +74,7 @@ describe('test/controllers/account.test.js', function() {
         });
     });
 
-    it('should get 409 statusCode for changePassword', function(done) {
+    it('should get seccode 409 statusCode for changePassword', function(done) {
       request(server)
         .post('/getSeccode')
         .send({
@@ -94,34 +94,48 @@ describe('test/controllers/account.test.js', function() {
     });
   });
 
-  describe('POST /changePassword', function () {
-    it('should changePassword ok', function (done) {
-      var data = {
-        phone: '13000000004',
-        password: utility.md5('123123')
-      };
+  describe('POST /changePassword', function() {
+    it('should changePassword ok', function(done) {
+      var phone = '13000000004';
+      var password = utility.md5('123123');
       request(server)
-        .post('/changePassword')
-        .send(data)
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
+        .post('/getSeccode')
+        .send({
+          phone: phone,
+          type: 'changePassword'
+        })
         .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-          res.body.statusCode.should.be.equal(200);
-          done();
+          var token = res.body.token;
+          request(server)
+            .post('/changePassword')
+            .expect('Content-type', 'application/json; charset=utf-8')
+            .expect(200)
+            .send({
+              phone: phone,
+              password: password,
+              token: token
+            })
+            .end(function(err, res) {
+              if (err) {
+                return done(err);
+              }
+              res.body.statusCode.should.be.equal(200);
+              done();
+            });
         });
     });
 
-    it('should changePassword get statusCode 404', function (done) {
-      var data = {
-        phone: '13000777004',
-        password: utility.md5('123123')
-      };
+    it('should changePassword get statusCode 404', function(done) {
+      var phone = '13000777004';
+      var password = utility.md5('123123');
+      var token = utility.md5('eeeee');
       request(server)
         .post('/changePassword')
-        .send(data)
+        .send({
+          phone: phone,
+          password: password,
+          token: token
+        })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
@@ -132,49 +146,102 @@ describe('test/controllers/account.test.js', function() {
           done();
         });
     });
+
+    it('should changePassword get statusCode 422', function(done) {
+      var phone = '13000777004';
+      var password = utility.md5('123123');
+      request(server)
+        .post('/changePassword')
+        .send({
+          phone: phone,
+          password: password,
+          token: 'wrong'
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(422);
+          done();
+        });
+    });
   });
 
   describe('POST /register', function() {
     it('should register ok', function(done) {
       var data = {
-        phone: '13000000111',
+        phone: '13009865999',
         password: utility.md5('123456'),
         gender: 'M',
         motto: 'Just do it.'
       };
       request(server)
-        .post('/register')
-        .send(data)
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
+        .post('/getSeccode')
+        .send({
+          phone: '13009865999',
+          type: 'register'
+        })
         .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-          res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
-          done();
+          var token = res.body.token;
+          data.token = token;
+          request(server)
+            .post('/register')
+            .expect('Content-type', 'application/json; charset=utf-8')
+            .expect(200)
+            .send(data)
+            .end(function(err, res) {
+              if (err) {
+                return done(err);
+              }
+              res.body.statusCode.should.be.equal(200);
+              res.body.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+              done();
+            });
         });
     });
 
-    it('should get statusCode 409', function(done) {
+    it('should register get statusCode 409 ok', function(done) {
       var data = {
-        phone: '13000000000',
-        password: utility.md5('123456'),
+        phone: '13000000001',
+        token: utility.md5('eeeee'),
         gender: 'M',
-        motto: 'Just do it.'
+        motto: 'Just do it.',
+        password: utility.md5('123456')
       };
       request(server)
         .post('/register')
-        .send(data)
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
+        .send(data)
         .end(function(err, res) {
           if (err) {
             return done(err);
           }
           res.body.statusCode.should.be.equal(409);
-          res.body.should.have.properties(['statusCode', 'message']);
+          done();
+        });
+    });
+
+    it('should register get statusCode 422 ok', function(done) {
+      var data = {
+        phone: '13000000001',
+        token: 'wrong',
+        gender: 'M',
+        motto: 'Just do it.',
+        password: utility.md5('123456')
+      };
+      request(server)
+        .post('/register')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .send(data)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.be.equal(422);
           done();
         });
     });
