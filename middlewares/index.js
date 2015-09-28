@@ -20,6 +20,20 @@ exports.addStatusCode = function() {
   };
 };
 
+exports.showBody = function() {
+  return function*(next) {
+    console.log('-----------------this.query--------------------');
+    console.log(this.query);
+    console.log('-----------------this.params--------------------');
+    console.log(this.params);
+    console.log('--------------this.request.body-----------------');
+    console.log(this.request.body);
+
+    yield next;
+  };
+};
+
+//用户登录验证
 exports.auth = function*(next) {
   debug('It is auth middleware');
   if (process.env.NODE_ENV !== 'test') {

@@ -7,3 +7,4 @@ var debug = require('debug')('worker');
 
 server.listen(config.port);
 debug('HTTP server is listening %s.', config.port);
+console.log('HTTP server is listening %s.', config.port);

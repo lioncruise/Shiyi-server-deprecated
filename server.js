@@ -55,6 +55,11 @@ app.use(session(app));
 //解析http头
 app.use(formidable());
 
+//显示参数
+if (config.debug && process.env.NODE_ENV !== 'test') {
+  app.use(middlewares.showBody());
+}
+
 //参数验证
 app.use(parameter(app));
 
