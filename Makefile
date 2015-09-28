@@ -4,9 +4,7 @@ REPORTER = spec
 TIMEOUT = 3000
 MOCHA_OPTS =
 
-start: install
-	@NODE_ENV=test DEBUG=* node --harmony ./doc/index.js
-	@DEBUG=* $(MAKE) fake
+start: install doc fake
 	@DEBUG=* node --harmony ./worker.js
 
 dev:

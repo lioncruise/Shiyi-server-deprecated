@@ -9,8 +9,8 @@
   "scripts": {
     "start": "npm install && npm run doc && npm run fake && npm run server",
     "doc": "node --harmony ./doc/index.js",
-    "server": "node --harmony start.js",
-    "dev": "./node_modules/.bin/node-dev --harmony ./start.js",
+    "server": "node --harmony worker.js",
+    "dev": "./node_modules/.bin/node-dev --harmony ./worker.js",
     "init": "node --harmony ./init/index.js",
     "fake": "npm run init && node --harmony ./fake/index.js",
     "jshint": "./node_modules/.bin/jshint ."
