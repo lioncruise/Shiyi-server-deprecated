@@ -7,13 +7,13 @@
     "node": "^0.12.*"
   },
   "scripts": {
-    "start": "npm install && npm run doc && npm run fake && npm run server",
-    "doc": "node --harmony ./doc/index.js",
-    "server": "node --harmony worker.js",
-    "dev": "./node_modules/.bin/node-dev --harmony ./worker.js",
-    "init": "node --harmony ./init/index.js",
-    "fake": "npm run init && node --harmony ./fake/index.js",
-    "jshint": "./node_modules/.bin/jshint ."
+    "start": "set DEBUG=*,-not_this;npm install && npm run doc && npm run fake && npm run server",
+    "doc": "set DEBUG=*,-not_this;node --harmony ./doc/index.js",
+    "server": "set DEBUG=*,-not_this;node --harmony worker.js",
+    "dev": "set DEBUG=*,-not_this;./node_modules/.bin/node-dev --harmony ./worker.js",
+    "init": "set DEBUG=*,-not_this;node --harmony ./init/index.js",
+    "fake": "set DEBUG=*,-not_this;npm run init && node --harmony ./fake/index.js",
+    "jshint": "set DEBUG=*,-not_this;./node_modules/.bin/jshint ."
   },
   "repository": {
     "type": "git",

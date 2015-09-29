@@ -71,7 +71,7 @@ var processes = function*() {
       fileString += (yield agent(url.url, url.method, url.input)) ;
     }
 
-    var filePath = path.join(__dirname, 'examples', url.method + '  ' + url.url.replace(/\//g, '|') + '.txt');
+    var filePath = path.join(__dirname, 'examples', url.method + '  ' + url.url.substring(1).replace(/\//g, '-').replace(/\?/g, '-').replace(/=/g, '-') + '.txt');
     yield fs.outputFile(filePath, fileString);
 
     debug(url.method + ' ' + url.url + ' doc build finish.');
