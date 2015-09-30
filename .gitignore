@@ -33,3 +33,5 @@ shiyi.sqlite
 .idea
 
 doc/examples
+
+config/config.js
