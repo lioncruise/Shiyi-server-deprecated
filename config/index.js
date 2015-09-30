@@ -3,7 +3,7 @@
 var path = require('path');
 var copy = require('copy-to');
 
-var config = module.exports = {};
+var config = {};
 
 config.db = {
     host: 'localhost',
@@ -31,9 +31,11 @@ config.host = 'http://127.0.0.1:8080';
 
 var customConfig = {};
 try {
-  customConfig = require(path.join(__dirname, 'config.js'));
-} catch(err) {
-  // ignore error
+    customConfig = require(path.join(__dirname, 'config.js'));
+} catch (err) {
+    // ignore error
 }
 
 copy(customConfig).override(config);
+
+module.exports = config;
