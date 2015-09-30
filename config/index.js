@@ -31,7 +31,7 @@ config.host = 'http://127.0.0.1:8080';
 
 var customConfig = {};
 try {
-    customConfig = require(path.join(__dirname, 'config.js'));
+    customConfig = require(path.join(__dirname, './config.js'));
 } catch (err) {
     // ignore error
 }
