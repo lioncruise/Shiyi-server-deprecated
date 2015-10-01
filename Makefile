@@ -5,10 +5,10 @@ TIMEOUT = 3000
 MOCHA_OPTS =
 
 start: install doc fake
-	@DEBUG=* node --harmony ./worker.js
+	@NODE_ENV=dev DEBUG=* node --harmony ./worker.js
 
 dev:
-	@DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
+	@NODE_ENV=dev DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
 authdev:
 	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js

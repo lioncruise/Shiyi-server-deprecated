@@ -4,50 +4,25 @@ var compose = require('koa-compose');
 var Resource = require('koa-resource-router');
 var router = require('koa-router')();
 var middlewares = require('./middlewares');
+var path = require('path');
 
-var usersController = require('./controllers/restful/users');
-var users = new Resource('users', middlewares.auth, usersController, {
-  id: 'id'
-});
+//路由中间件数组
+var middlewaresArray = [router.routes()];
 
-var albumsController = require('./controllers/restful/albums');
-var albums = new Resource('albums', middlewares.auth, albumsController, {
-  id: 'id'
-});
-
-var albumUsersController = require('./controllers/restful/albumUsers');
-var albumUsers = new Resource('albumUsers', middlewares.auth, albumUsersController, {
-  id: 'id'
-});
-
-var actionsController = require('./controllers/restful/actions');
-var actions = new Resource('actions', middlewares.auth, actionsController, {
-  id: 'id'
-});
-
-var messagesController = require('./controllers/restful/messages');
-var messages = new Resource('messages', middlewares.auth, messagesController, {
-  id: 'id'
-});
-
-var picturesController = require('./controllers/restful/pictures');
-var pictures = new Resource('pictures', middlewares.auth, picturesController, {
-  id: 'id'
-});
-
-var commentsController = require('./controllers/restful/comments');
-var comments = new Resource('comments', middlewares.auth, commentsController, {
-  id: 'id'
-});
-
-var likesController = require('./controllers/restful/likes');
-var likes = new Resource('likes', middlewares.auth, likesController, {
-  id: 'id'
-});
-
-var middlewaresArray = [router.routes(), users.middleware(), albums.middleware(), albumUsers.middleware(), actions.middleware(), messages.middleware(), pictures.middleware(), comments.middleware(), likes.middleware()];
+//各restful路由
+var controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes'];
+for (var i = 0; i < controllerNames.length; i++) {
+  var name = controllerNames[i];
+  var controller = require(path.join(__dirname, 'controllers/restful', name));
+  middlewaresArray.push((new Resource(name, middlewares.auth, controller, {
+    id: 'id'
+  })).middleware());
+}
 
 //TODO: 删除测试路由
+router.get('/', function*() {
+  this.body = 'Everything looks good.';
+});
 router.post('/test', function*() {
   console.log('-----------------this.query--------------------');
   console.log(this.query);
