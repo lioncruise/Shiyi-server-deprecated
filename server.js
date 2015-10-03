@@ -5,7 +5,9 @@ var ms = require('ms');
 var staticCache = require('koa-static-cache');
 var rt = require('koa-rt');
 var logger = require('koa-logger');
-var session = require('koa-session');
+var session = require('koa-generic-session');
+var sessionWithoutRedis = require('koa-session');
+var redisStore = require('koa-redis');
 var onerror = require('koa-onerror');
 var https = require('https');
 var parameter = require('koa-parameter');
@@ -18,6 +20,7 @@ var debug = require('debug')('server');
 var middlewares = require('./middlewares');
 
 var app = koa();
+app.name = 'shiyi-server';
 
 //cookie加密
 app.keys = config.keys;
@@ -50,7 +53,13 @@ if (config.debug) {
 }
 
 //使用cookie、session
-app.use(session(app));
+if (config.debug) {
+  app.use(sessionWithoutRedis(app));
+} else {
+  app.use(session({
+    store: redisStore()
+  }));
+}
 
 //解析http头
 app.use(formidable());
