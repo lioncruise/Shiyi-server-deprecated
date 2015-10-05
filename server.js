@@ -53,7 +53,7 @@ if (config.debug) {
 }
 
 //使用cookie、session
-if (config.debug) {
+if (config.debug || !config.isUseRedis) {
   app.use(sessionWithoutRedis(app));
 } else {
   app.use(session({
