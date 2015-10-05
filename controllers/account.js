@@ -204,7 +204,7 @@ router.get('/logout', function*() {
 });
 
 //更新个人信息
-router.put('/update', middlewares.auth, function*() {
+router.put('/update', function*() {
   this.verifyParams({
     nickname: {
       type: 'string',

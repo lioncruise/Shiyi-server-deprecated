@@ -19,9 +19,15 @@ exports.define = function() {
 };
 
 exports.setAssociations = function() {
-  models.User.hasMany(models.Album);
+  models.User.hasMany(models.Album, {
+    as: 'ownAlbums'
+  });
   models.User.hasMany(models.Action);
   models.User.hasMany(models.Message);
+  models.User.belongsToMany(models.Album, {
+    through: 'AlbumUser',
+    as: 'relatedAlbums'
+  });
 
   models.Album.belongsTo(models.User, {
     as: 'Creator',

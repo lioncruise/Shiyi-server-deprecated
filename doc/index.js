@@ -14,7 +14,7 @@ var process = require('process');
 
 server.listen(config.port);
 
-var agent = function(url, method, input) {
+var agent = function(url, method, note, input) {
   return function(callback) {
     if (method === 'delete') {
       method = 'del';
@@ -27,7 +27,7 @@ var agent = function(url, method, input) {
           if (err) {
             return callback(err);
           }
-          callback(null, getFileString(url, method, input, res.body));
+          callback(null, getFileString(url, method, note, input, res.body));
         });
     } else {
       superagent[method](config.host + url)
@@ -35,15 +35,20 @@ var agent = function(url, method, input) {
           if (err) {
             return callback(err);
           }
-          callback(null, getFileString(url, method, null, res.body));
+          callback(null, getFileString(url, method, note, null, res.body));
         });
     }
   };
 };
 
-var getFileString = function(url, method, input, output) {
+var getFileString = function(url, method, note, input, output) {
   var fileString = util.format("url: '%s'\n\n", url);
   fileString += util.format("method: '%s'\n\n", method);
+
+  if (note) {
+    fileString += '备注: \n';
+    fileString += JSON.stringify(note, null, '\t');
+  }
 
   if (input) {
     fileString += 'input: \n';
@@ -65,10 +70,10 @@ var processes = function*() {
 
     if (url.input && url.input.length) {
       for (var j = 0; j < url.input.length; j++) {
-        fileString += ((yield agent(url.url, url.method, url.input[j])) + '\n\n');
+        fileString += ((yield agent(url.url, url.method, url.note, url.input[j])) + '\n\n');
       }
     } else {
-      fileString += (yield agent(url.url, url.method, url.input)) ;
+      fileString += (yield agent(url.url, url.method, url.note, url.input)) ;
     }
 
     var filePath = path.join(__dirname, 'examples', url.method + '  ' + url.url.substring(1).replace(/\//g, '-').replace(/\?/g, '-').replace(/=/g, '-') + '.txt');

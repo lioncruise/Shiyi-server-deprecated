@@ -1,7 +1,7 @@
 'use strict';
 var utility = require('utility');
 
-module.exports = [{
+var urls = [{
   url: '/getSeccode',
   method: 'post',
   input: [{
@@ -149,3 +149,23 @@ module.exports = [{
   url: '/messages/1',
   method: 'get'
 }];
+
+urls.unshift({
+  url: '/getOwnAlbums',
+  note: '后面可以加参数，如/getOwnAlbums?userId=2,不加参数默认是查自己的建立相册，具体可以看加参数请求的doc',
+  method: 'get'
+}, {
+  url: '/getOwnAlbums?userId=2',
+  method: 'get'
+});
+
+urls.unshift({
+  url: '/getRelatedAlbums',
+  note: '后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册，具体可以看加参数请求的doc',
+  method: 'get'
+}, {
+  url: '/getRelatedAlbums?userId=2',
+  method: 'get'
+});
+
+module.exports = urls;

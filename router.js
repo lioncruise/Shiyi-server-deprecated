@@ -7,14 +7,14 @@ var middlewares = require('./middlewares');
 var path = require('path');
 
 //路由中间件数组
-var middlewaresArray = [router.routes()];
+var middlewaresArray = [middlewares.auth, router.routes()];
 
 //各restful路由
 var controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes'];
 for (var i = 0; i < controllerNames.length; i++) {
   var name = controllerNames[i];
   var controller = require(path.join(__dirname, 'controllers/restful', name));
-  middlewaresArray.push((new Resource(name, middlewares.auth, controller, {
+  middlewaresArray.push((new Resource(name, controller, {
     id: 'id'
   })).middleware());
 }

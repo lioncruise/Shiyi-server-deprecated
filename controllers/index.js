@@ -4,3 +4,4 @@
 
 require('./account');
 require('./version');
+require('./albums');

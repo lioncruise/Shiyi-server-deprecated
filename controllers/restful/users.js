@@ -11,10 +11,7 @@ exports.show = function*() {
     where: {
       id: this.params.id,
       isBlocked: false
-    },
-    include: [{
-      model: models.Album
-    }]
+    }
   });
 
   if (!user) {
@@ -25,8 +22,9 @@ exports.show = function*() {
   }
 
   this.body = user.toJSON();
+  this.body.ownAlbums = yield user.getOwnAlbums();
 
-  for(var i = 0; i < this.body.Albums.length; i++) {
-    this.body.Albums[i].pictureCount = yield models.Picture.getPictureCountByAlbumId(this.body.Albums[i].id);
+  for(var i = 0; i < this.body.ownAlbums.length; i++) {
+    this.body.ownAlbums[i].pictureCount = yield models.Picture.getPictureCountByAlbumId(this.body.ownAlbums[i].id);
   }
 };

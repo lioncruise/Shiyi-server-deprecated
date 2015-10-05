@@ -29,12 +29,10 @@ exports.show = function*() {
     };
   }
 
-  this.body = album.toJSON();
-  this.body.Tags = yield album.getTagsString();
+  this.body = (yield album.getRelatedInfo()).toJSONwithAttributes();
   this.body.Users = yield album.getUsers();
-  this.body.pictureCount = yield models.Picture.getPictureCountByAlbumId(album.id);
 
-  for(var i = 0; i < this.body.Pictures.length; i++) {
+  for (var i = 0; i < this.body.Pictures.length; i++) {
     this.body.Pictures[i].likeCount = yield models.Like.getLikeCountByPictureId(this.body.Pictures[i].id);
   }
 };
@@ -65,7 +63,7 @@ exports.create = function*() {
   album = yield album.save();
 
   var _tArray = [];
-  if(this.request.body.tags !== '') {
+  if (this.request.body.tags !== '') {
     var tags = this.request.body.tags.split(',');
     for (var i = 0; i < tags.length; i++) {
       var _t = yield models.Tag.findOrCreate({
@@ -147,7 +145,7 @@ exports.update = function*() {
   ]);
 
   //如果为非共享，则一定为非公开
-  if(!data.isShare) {
+  if (!data.isShare) {
     data.isPublic = false;
   }
 

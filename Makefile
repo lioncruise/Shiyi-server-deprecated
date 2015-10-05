@@ -17,7 +17,7 @@ init:
 	@DEBUG=* node --harmony ./init/index.js
 
 doc: fake
-	@NODE_ENV=test DEBUG=* node --harmony ./doc/index.js
+	@NODE_ENV=test node --harmony ./doc/index.js
 
 fake: init
 	@DEBUG=* node --harmony ./fake/index.js
