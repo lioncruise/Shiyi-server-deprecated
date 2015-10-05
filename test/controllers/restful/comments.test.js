@@ -52,7 +52,7 @@ describe('test/controllers/restful/comments.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['content']);
+          res.body.data.should.have.properties(['content']);
           done();
         });
     });

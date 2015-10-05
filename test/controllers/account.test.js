@@ -30,7 +30,7 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'seccode', 'token']);
+          res.body.data.should.have.properties(['phone', 'seccode', 'token']);
           done();
         });
     });
@@ -50,7 +50,7 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'seccode', 'token']);
+          res.body.data.should.have.properties(['phone', 'seccode', 'token']);
           done();
         });
     });
@@ -105,7 +105,7 @@ describe('test/controllers/account.test.js', function() {
           type: 'changePassword'
         })
         .end(function(err, res) {
-          var token = res.body.token;
+          var token = res.body.data.token;
           request(server)
             .post('/changePassword')
             .expect('Content-type', 'application/json; charset=utf-8')
@@ -184,7 +184,7 @@ describe('test/controllers/account.test.js', function() {
           type: 'register'
         })
         .end(function(err, res) {
-          var token = res.body.token;
+          var token = res.body.data.token;
           data.token = token;
           request(server)
             .post('/register')
@@ -196,7 +196,7 @@ describe('test/controllers/account.test.js', function() {
                 return done(err);
               }
               res.body.statusCode.should.be.equal(200);
-              res.body.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+              res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
               done();
             });
         });
@@ -263,7 +263,7 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+          res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
           done();
         });
     });
@@ -324,7 +324,7 @@ describe('test/controllers/account.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+          res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
           done();
         });
     });

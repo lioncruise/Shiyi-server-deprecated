@@ -52,7 +52,7 @@ describe('test/controllers/restful/likes.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['type']);
+          res.body.data.should.have.properties(['type']);
           done();
         });
     });

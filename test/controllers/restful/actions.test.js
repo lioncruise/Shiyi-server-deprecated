@@ -21,8 +21,8 @@ describe('test/controllers/restful/actions.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.Album.pictureCount.should.be.a.Number();
-          res.body.likeCount.should.be.a.Number();
+          res.body.data.Album.pictureCount.should.be.a.Number();
+          res.body.data.likeCount.should.be.a.Number();
           done();
         });
     });
@@ -61,7 +61,7 @@ describe('test/controllers/restful/actions.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['content', 'gps', 'position']);
+          res.body.data.should.have.properties(['content', 'gps', 'position']);
           done();
         });
     });
@@ -77,8 +77,8 @@ describe('test/controllers/restful/actions.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.isDeleted.should.be.true();
-          res.body.should.have.properties(['content', 'gps', 'position']);
+          res.body.data.isDeleted.should.be.true();
+          res.body.data.should.have.properties(['content', 'gps', 'position']);
           done();
         });
     });

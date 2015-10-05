@@ -11,13 +11,16 @@ exports.addStatusCode = function() {
     yield next;
     debug('It is addStatusCode middleware');
 
-    if (!!this.body && this.body.message && this.body.message === 'Validation Failed') {
+    if (this.body && this.body.message && this.body.message === 'Validation Failed') {
       this.status = 200;
       return this.body.statusCode = 422;
     }
 
-    if (!!this.body && isJSON(this.body, true) && !this.body.statusCode) {
-      return this.body.statusCode = 200;
+    if (this.body && !this.body.statusCode) {
+      return this.body = {
+        statusCode: 200,
+        data: this.body
+      };
     }
   };
 };

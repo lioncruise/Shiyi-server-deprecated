@@ -22,7 +22,7 @@ describe('test/controllers/version.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['version', 'downloadUrl']);
+          res.body.data.should.have.properties(['version', 'downloadUrl']);
           done();
         });
     });
@@ -37,7 +37,7 @@ describe('test/controllers/version.test.js', function() {
             return done(err);
           }
           res.body.statusCode.should.be.equal(200);
-          res.body.should.have.properties(['version', 'downloadUrl']);
+          res.body.data.should.have.properties(['version', 'downloadUrl']);
           done();
         });
     });

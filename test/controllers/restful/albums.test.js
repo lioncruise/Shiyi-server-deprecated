@@ -59,7 +59,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
           done();
         });
     });
@@ -75,7 +75,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
           done();
         });
     });
@@ -116,7 +116,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
           done();
         });
     });
@@ -136,7 +136,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
           done();
         });
     });
@@ -175,8 +175,8 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.isDeleted.should.be.true();
-          res.body.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.data.isDeleted.should.be.true();
+          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
           done();
         });
     });

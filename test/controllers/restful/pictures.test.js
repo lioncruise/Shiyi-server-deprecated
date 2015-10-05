@@ -53,7 +53,7 @@ describe('test/controllers/restful/pictures.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.should.have.properties(['pictureUrl']);
+          res.body.data.should.have.properties(['pictureUrl']);
           done();
         });
     });
@@ -69,8 +69,8 @@ describe('test/controllers/restful/pictures.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.isDeleted.should.be.true();
-          res.body.should.have.properties(['pictureUrl']);
+          res.body.data.isDeleted.should.be.true();
+          res.body.data.should.have.properties(['pictureUrl']);
           done();
         });
     });

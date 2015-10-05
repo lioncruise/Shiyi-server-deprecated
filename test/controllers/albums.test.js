@@ -25,7 +25,7 @@ describe('test/controllers/albums.test.js', function() {
             return done(err);
           }
           var albums = res.body;
-          res.body.forEach(function(album) {
+          res.body.data.forEach(function(album) {
             album.UserId.should.be.equal(1);
           });
           done();
@@ -42,7 +42,7 @@ describe('test/controllers/albums.test.js', function() {
             return done(err);
           }
           var albums = res.body;
-          res.body.forEach(function(album) {
+          res.body.data.forEach(function(album) {
             album.UserId.should.be.equal(2);
           });
           done();
@@ -75,7 +75,7 @@ describe('test/controllers/albums.test.js', function() {
             return done(err);
           }
           var albums = res.body;
-          res.body.forEach(function(album) {
+          res.body.data.forEach(function(album) {
             album.UserId.should.not.be.equal(1);
           });
           done();
@@ -92,7 +92,7 @@ describe('test/controllers/albums.test.js', function() {
             return done(err);
           }
           var albums = res.body;
-          res.body.forEach(function(album) {
+          res.body.data.forEach(function(album) {
             album.UserId.should.not.be.equal(2);
           });
           done();
