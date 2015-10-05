@@ -34,7 +34,7 @@ module.exports = [{
   method: 'post',
   input: {
     phone: '13000000000',
-    password: '123456'
+    password: utility.md5('123456')
   }
 }, {
   url: '/logout',
