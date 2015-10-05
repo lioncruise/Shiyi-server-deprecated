@@ -27,6 +27,8 @@ exports.addStatusCode = function() {
 
 exports.showBody = function() {
   return function*(next) {
+    console.log('-----------------this.path--------------------');
+    console.log(this.path);
     console.log('-----------------this.query--------------------');
     console.log(this.query);
     console.log('-----------------this.params--------------------');
@@ -42,7 +44,7 @@ exports.showBody = function() {
 exports.auth = function*(next) {
   debug('It is auth middleware');
 
-  if (this.path.indexOf(urlsWithoutSession) === -1) {
+  if (urlsWithoutSession.indexOf(this.path) === -1) {
     if (process.env.NODE_ENV !== 'test') {
       if (!this.session || !this.session.user) {
         debug('auth middleware: Not login.');
