@@ -175,7 +175,8 @@ describe('test/controllers/account.test.js', function() {
         phone: '13009865999',
         password: utility.md5('123456'),
         gender: 'M',
-        motto: 'Just do it.'
+        motto: 'Just do it.',
+        nickname: '一个昵称'
       };
       request(server)
         .post('/getSeccode')
@@ -208,7 +209,8 @@ describe('test/controllers/account.test.js', function() {
         token: utility.md5('eeeee'),
         gender: 'M',
         motto: 'Just do it.',
-        password: utility.md5('123456')
+        password: utility.md5('123456'),
+        nickname: '简直66'
       };
       request(server)
         .post('/register')
@@ -230,7 +232,8 @@ describe('test/controllers/account.test.js', function() {
         token: 'wrong',
         gender: 'M',
         motto: 'Just do it.',
-        password: utility.md5('123456')
+        password: utility.md5('123456'),
+        nickname: '简直233'
       };
       request(server)
         .post('/register')

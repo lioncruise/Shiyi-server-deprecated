@@ -24,6 +24,7 @@ var urls = [{
   method: 'post',
   input: {
     phone: '15555555550',
+    nickname: '一个很好的昵称',
     password: '123456789',
     gender: 'M',
     motto: "Let's go!",

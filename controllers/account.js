@@ -110,6 +110,7 @@ router.post('/changePassword', function*() {
 router.post('/register', function*() {
   this.verifyParams({
     phone: utils.phoneRegExp,
+    nickname: 'string',
     token: 'string',
     password: {
       type: 'password',
@@ -149,7 +150,8 @@ router.post('/register', function*() {
       phone: this.request.body.phone,
       password: this.request.body.password,
       gender: this.request.body.gender,
-      motto: this.request.body.motto
+      motto: this.request.body.motto,
+      nickname: this.request.body.nickname
     });
 
     this.body = utils.cloneJson(user);
