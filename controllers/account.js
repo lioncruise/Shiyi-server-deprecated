@@ -130,6 +130,8 @@ router.post('/register', function*() {
     }
   });
 
+  debug('register_body: ' + this.request.body);
+
   //TODO: 头像处理
 
   var token = yield models.Token.find({
