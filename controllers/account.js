@@ -27,17 +27,17 @@ router.post('/getSeccode', function*() {
     }
   });
 
-  debug(existUser);
+  debug('existUser: ' + existUser);
 
   if (this.request.body.type === 'register' && existUser) {
-    debug('注册：用户已存在');
+    debug('register: 用户已存在');
     return this.body = {
       statusCode: 409,
       message: '用户已存在'
     };
   }
   if (this.request.body.type === 'changePassword' && !existUser) {
-    debug('修改密码：用户不存在');
+    debug('changePassword: 用户不存在');
     return this.body = {
       statusCode: 409,
       message: '用户不存在'
@@ -59,7 +59,6 @@ router.post('/getSeccode', function*() {
     seccode: seccode,
     token: token.token
   };
-  debug(this.body);
 });
 
 //忘记密码
@@ -164,6 +163,7 @@ router.post('/register', function*() {
       user: user.toJSON()
     };
   } catch (e) {
+    debug('register_error: ' + e);
     this.body = {
       statusCode: 409,
       message: '用户已存在'
