@@ -10,6 +10,9 @@ start: install doc fake
 dev:
 	@NODE_ENV=dev DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
+production_dev:
+	@NODE_ENV=production DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
+
 authdev:
 	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
@@ -64,4 +67,4 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start dev authdev init fake install jshint test test-all test-cov cov clean autod doc
+.PHONY: start dev production_dev authdev init fake install jshint test test-all test-cov cov clean autod doc
