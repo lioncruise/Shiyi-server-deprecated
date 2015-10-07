@@ -54,7 +54,9 @@ if (config.debug) {
 
 //使用cookie、session
 if (config.debug || !config.isUseRedis) {
-  app.use(sessionWithoutRedis(app));
+  app.use(sessionWithoutRedis({
+    maxAge: ms('365 days')
+  }, app));
 } else {
   app.use(session({
     store: redisStore()
