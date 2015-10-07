@@ -14,6 +14,8 @@ var process = require('process');
 
 server.listen(config.port);
 
+var host = "http://localhost:" + config.port;
+
 var agent = function(url, method, note, input) {
   return function(callback) {
     if (method === 'delete') {
@@ -21,7 +23,7 @@ var agent = function(url, method, note, input) {
     }
 
     if (input) {
-      superagent[method](config.host + url)
+      superagent[method](host + url)
         .send(input)
         .end(function(err, res) {
           if (err) {
@@ -30,7 +32,7 @@ var agent = function(url, method, note, input) {
           callback(null, getFileString(url, method, note, input, res.body));
         });
     } else {
-      superagent[method](config.host + url)
+      superagent[method](host + url)
         .end(function(err, res) {
           if (err) {
             return callback(err);

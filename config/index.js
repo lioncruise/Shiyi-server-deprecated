@@ -31,7 +31,6 @@ config.sms = {
 config.keys = ['shiyi-server', 'sadfag666'];
 config.debug = true;
 config.port = 8080;
-config.host = 'http://127.0.0.1:8080';
 
 if (process.env.NODE_ENV === 'production') {
   var customConfig = {};
