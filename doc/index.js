@@ -53,7 +53,7 @@ var getFileString = function(url, method, note, input, output) {
   }
 
   if (input) {
-    fileString += 'input: \n';
+    fileString += '\n\ninput: \n';
     fileString += JSON.stringify(input, null, '\t');
   }
   fileString += '\n\noutput: \n';

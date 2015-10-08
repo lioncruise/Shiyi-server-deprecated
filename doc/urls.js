@@ -43,6 +43,7 @@ var urls = [{
 }, {
   url: '/update',
   method: 'put',
+  note: '传上来的input中可以任意包含一下的input，一个或者任意多个，改啥传啥，不需要全部都包含',
   input: {
     nickname: '我是666',
     password: '222222222',
