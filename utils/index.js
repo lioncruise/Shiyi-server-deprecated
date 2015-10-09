@@ -23,6 +23,8 @@ exports.sendSMS = function*(phone, code) {
     }
   });
 
+  debug('sendSMS Server response: ' + res.data.toString());
+
   debug('Security code [%s] has sent to phone [%s].', code, phone);
 };
 

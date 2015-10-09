@@ -23,7 +23,7 @@ exports.workerNum = 1;
 exports.isUseRedis = false;
 
 config.sms = {
-  url: 'https://web.sms.mob.com/sms/verify',
+  url: 'https://api.sms.mob.com/sms/verify',
   appkey: 'a8abe6eaf81e',
   zone: '86'
 };

@@ -43,6 +43,17 @@ test: fake
 		$(MOCHA_OPTS) \
 		$(TESTS)
 
+testwithoutfake:
+	@NODE_ENV=test ./node_modules/.bin/mocha \
+	  --harmony \
+	  --bail \
+		--reporter $(REPORTER) \
+		--timeout $(TIMEOUT) \
+		--require should \
+		--require co-mocha \
+		$(MOCHA_OPTS) \
+		$(TESTS)
+
 test-cov cov: fake
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover --preserve-comments \
@@ -67,4 +78,4 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start dev production_dev authdev init fake install jshint test test-all test-cov cov clean autod doc
+.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc
