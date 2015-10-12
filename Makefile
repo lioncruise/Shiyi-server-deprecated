@@ -34,8 +34,8 @@ jshint:
 
 test: fake
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-	  --harmony \
-	  --bail \
+		--harmony \
+		--bail \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--require should \
@@ -45,8 +45,8 @@ test: fake
 
 testwithoutfake:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
-	  --harmony \
-	  --bail \
+		--harmony \
+		--bail \
 		--reporter $(REPORTER) \
 		--timeout $(TIMEOUT) \
 		--require should \
