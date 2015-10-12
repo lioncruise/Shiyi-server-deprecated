@@ -22,10 +22,9 @@ exports.workerNum = 1;
 
 exports.isUseRedis = false;
 
-config.sms = {
-  url: 'https://api.sms.mob.com/sms/verify',
-  appkey: 'a8abe6eaf81e',
-  zone: '86'
+config.qiniu = {
+  ACCESS_KEY: 'yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC',
+  SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2'
 };
 
 config.keys = ['shiyi-server', 'sadfag666'];

@@ -6,3 +6,4 @@ require('./account');
 require('./version');
 require('./albums');
 require('./messages');
+require('./qiniu');

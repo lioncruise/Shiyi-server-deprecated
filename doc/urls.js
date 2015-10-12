@@ -175,4 +175,9 @@ urls.push({
   method: 'get'
 });
 
+urls.push({
+  url: '/getQiniuUptoken',
+  method: 'get'
+});
+
 module.exports = urls;

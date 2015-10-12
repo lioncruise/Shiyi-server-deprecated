@@ -13,17 +13,7 @@ exports.cloneJson = function(obj) {
 
 //发送短信
 exports.sendSMS = function*(phone, code) {
-  var res = yield urllib.request(config.sms.url, {
-    method: 'POST',
-    data: {
-      appkey: config.sms.appkey,
-      phone: phone,
-      zone: config.sms.zone,
-      code: code
-    }
-  });
-
-  debug('sendSMS Server response: ' + res.data.toString());
+  //TODO: 完成验证码发送
 
   debug('Security code [%s] has sent to phone [%s].', code, phone);
 };
