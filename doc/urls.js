@@ -170,4 +170,9 @@ urls.unshift({
   method: 'get'
 });
 
+urls.push({
+  url: '/getAllUnreadMessages',
+  method: 'get'
+});
+
 module.exports = urls;
