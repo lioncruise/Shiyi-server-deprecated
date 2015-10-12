@@ -8,7 +8,7 @@ exports.show = function*() {
   this.verifyParams({
     id: 'id'
   });
-  var album = yield models.Action.find({
+  var action = yield models.Action.find({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -28,14 +28,14 @@ exports.show = function*() {
     }]
   });
 
-  if (!album) {
+  if (!action) {
     return this.body = {
       statusCode: 404,
       message: '动态不存在'
     };
   }
 
-  this.body = album.toJSON();
+  this.body = action.toJSON();
   this.body.Album.pictureCount = yield models.Picture.getPictureCountByAlbumId(this.body.Album.id);
   this.body.likeCount = yield models.Like.getLikeCountByActionId(this.body.id);
 };

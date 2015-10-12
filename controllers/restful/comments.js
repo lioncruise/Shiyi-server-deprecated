@@ -3,6 +3,7 @@
 var models = require('../../db').models;
 var utils = require('../../utils');
 var copy = require('copy-to');
+var messageController = require('./messages');
 
 exports.show = function*() {
   this.verifyParams({
@@ -57,9 +58,39 @@ exports.create = function*() {
     }
   });
 
+  var requestBody = this.request.body;
+  var types = [{
+    model: 'Picture',
+    id: 'PictureId'
+  }, {
+    model: 'Action',
+    id: 'ActionId'
+  }, {
+    model: 'Comment',
+    id: 'OrignalCommentId'
+  }];
+  var typeId = requestBody.PictureId ? 0 : (requestBody.ActionId ? 1 : 2);
+  var currentType = types[typeId];
+
+  var target = yield models[currentType.model].find({
+    where: {
+      id: this.request.body[currentType.id]
+    }
+  });
+
+  if (!target) {
+    return this.body = {
+      statusCode: 404,
+      message: '评论对象不存在'
+    };
+  }
+
   var comment = models.Comment.build(this.request.body);
   comment.UserId = this.session.user.id;
   comment = yield comment.save();
+
+  //添加新的Message
+  yield messageController.createMessage(null, 'C', this.session.user.id, target.UserId, null, comment.id);
 
   this.body = comment.toJSON();
 };
@@ -69,7 +100,7 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var action = yield models.Action.find({
+  var comment = yield models.Comment.find({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -78,24 +109,16 @@ exports.destroy = function*() {
     }
   });
 
-  if (!action) {
+  if (!comment) {
     return this.body = {
       statusCode: 404,
-      message: '动态不存在'
+      message: '评论不存在'
     };
   }
 
-  //删除动态的同时，删除一同上传的照片
-  var pictures = yield action.getPictures();
-  yield pictures.map(function(pic) {
-    return pic.updateAttributes({
-      isDeleted: true
-    });
-  });
-
-  action = yield action.updateAttributes({
+  comment = yield comment.updateAttributes({
     isDeleted: true
   });
 
-  this.body = action.toJSON();
+  this.body = comment.toJSON();
 };

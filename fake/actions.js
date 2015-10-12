@@ -21,6 +21,38 @@ actions.push({
   AlbumId: 2
 });
 
+actions.push({
+  content: '这是一条搞笑动态。',
+  gps: 'gps',
+  position: 'position',
+  UserId: 1,
+  AlbumId: 2
+});
+
+actions.push({
+  content: '这是一条搞笑动态。',
+  gps: 'gps',
+  position: 'position',
+  UserId: 1,
+  AlbumId: 2
+});
+
+actions.push({
+  content: '这是一条搞笑动态。',
+  gps: 'gps',
+  position: 'position',
+  UserId: 1,
+  AlbumId: 2
+});
+
+actions.push({
+  content: '这是一条搞笑动态。',
+  gps: 'gps',
+  position: 'position',
+  UserId: 1,
+  AlbumId: 2
+});
+
 exports.fake = function*() {
   yield actions.map(function(action) {
     return db.models.Action.create(action);

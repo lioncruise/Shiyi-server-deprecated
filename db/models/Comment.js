@@ -4,6 +4,16 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Comment', {
     content: {
       type: DataTypes.STRING
+    },
+    isBlocked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   }, {
     indexes: [{

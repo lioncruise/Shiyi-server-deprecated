@@ -3,6 +3,7 @@
 var models = require('../../db').models;
 var utils = require('../../utils');
 var copy = require('copy-to');
+var messageController = require('./messages');
 
 exports.show = function*() {
   this.verifyParams({
@@ -49,9 +50,36 @@ exports.create = function*() {
     }
   });
 
+  var requestBody = this.request.body;
+  var types = [{
+    model: 'Picture',
+    id: 'PictureId'
+  }, {
+    model: 'Action',
+    id: 'ActionId'
+  }];
+  var typeId = requestBody.PictureId ? 0 : 1;
+  var currentType = types[typeId];
+
+  var target = yield models[currentType.model].find({
+    where: {
+      id: this.request.body[currentType.id]
+    }
+  });
+
+  if (!target) {
+    return this.body = {
+      statusCode: 404,
+      message: '点赞对象不存在'
+    };
+  }
+
   var like = models.Like.build(this.request.body);
   like.UserId = this.session.user.id;
   like = yield like.save();
+
+  //添加新的Message
+  yield messageController.createMessage(null, 'L', this.session.user.id, target.UserId, like.id, null);
 
   this.body = like.toJSON();
 };

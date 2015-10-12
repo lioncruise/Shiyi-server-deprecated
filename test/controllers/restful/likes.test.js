@@ -37,12 +37,11 @@ describe('test/controllers/restful/likes.test.js', function() {
   });
 
   describe('POST /likes', function() {
-    var like = {
-      type: 'LL',
-      PictureId: '1'
-    };
-
-    it('should create new like OK', function(done) {
+    it('should create new like to a picture OK', function(done) {
+      var like = {
+        type: 'LL',
+        PictureId: '1'
+      };
       request(server)
         .post('/likes')
         .send(like)
@@ -53,6 +52,44 @@ describe('test/controllers/restful/likes.test.js', function() {
             return done(err);
           }
           res.body.data.should.have.properties(['type']);
+          done();
+        });
+    });
+
+    it('should create new like to an action OK', function(done) {
+      var like = {
+        type: 'LL',
+        ActionId: '2'
+      };
+      request(server)
+        .post('/likes')
+        .send(like)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.data.should.have.properties(['type']);
+          done();
+        });
+    });
+
+    it('should create new like to a picture with statusCode 404', function(done) {
+      var like = {
+        type: 'LL',
+        PictureId: '10000'
+      };
+      request(server)
+        .post('/likes')
+        .send(like)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.equal(404);
           done();
         });
     });

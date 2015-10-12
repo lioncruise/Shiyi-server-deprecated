@@ -25,6 +25,27 @@ comments.push({
   OrignalCommentId: 2
 });
 
+comments.push({
+  PictureId: 1,
+  UserId: 1,
+  content: '这是用户1对用户2的回复。',
+  OrignalCommentId: 2
+});
+
+comments.push({
+  PictureId: 1,
+  UserId: 1,
+  content: '这是用户1对用户2的回复。',
+  OrignalCommentId: 2
+});
+
+comments.push({
+  PictureId: 1,
+  UserId: 1,
+  content: '这是用户1对用户2的回复。',
+  OrignalCommentId: 2
+});
+
 exports.fake = function*() {
   yield comments.map(function(comment) {
     return db.models.Comment.create(comment);
