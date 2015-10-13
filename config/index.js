@@ -27,6 +27,12 @@ config.qiniu = {
   SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2'
 };
 
+config.apns = {
+  keyFile: null,
+  certFile: null,
+  debug: true
+};
+
 config.keys = ['shiyi-server', 'sadfag666'];
 config.debug = true;
 config.port = 8080;
