@@ -27,10 +27,16 @@ config.qiniu = {
   SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2'
 };
 
-config.apns = {
+config.IOSNotification = {
   keyFile: null,
   certFile: null,
   debug: true
+};
+
+config.AndroidNotification = {
+  appId: null,
+  appKey: null,
+  logo: null
 };
 
 config.keys = ['shiyi-server', 'sadfag666'];
