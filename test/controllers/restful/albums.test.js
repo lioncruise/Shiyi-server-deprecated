@@ -20,6 +20,50 @@ describe('test/controllers/restful/albums.test.js', function() {
         .expect(200, done);
     });
 
+    it('should get album info with limit and offset OK', function(done) {
+      request(server)
+        .get('/albums/1?limit=1&offset=1')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.data.Pictures.length.should.equal(1);
+          res.body.data.should.not.have.properties('Users');
+          done();
+        });
+    });
+
+    it('should get album info without Pictures OK', function(done) {
+      request(server)
+        .get('/albums/1?limit=0')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.data.should.not.have.properties(['Users', 'Pictures']);
+          done();
+        });
+    });
+
+    it('should get album info without limit and offset but with Users OK', function(done) {
+      request(server)
+        .get('/albums/1?isShowUsers=true')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.data.Pictures.length.should.above(1);
+          res.body.data.Users.length.should.above(1);
+          done();
+        });
+    });
+
     it('should get status 404', function(done) {
       request(server)
         .get('/albums/10000')

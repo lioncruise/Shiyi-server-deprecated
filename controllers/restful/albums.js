@@ -6,7 +6,22 @@ var copy = require('copy-to');
 
 exports.show = function*() {
   this.verifyParams({
-    id: 'id'
+    id: 'id',
+    offset: {
+      type: 'int',
+      required: false,
+      allowEmpty: false
+    },
+    limit: {
+      type: 'int',
+      required: false,
+      allowEmpty: false
+    },
+    isShowUsers: {
+      type: 'bool',
+      required: false,
+      allowEmpty: false
+    }
   });
   var album = yield models.Album.find({
     where: {
@@ -30,7 +45,30 @@ exports.show = function*() {
   }
 
   this.body = (yield album.getRelatedInfo()).toJSONwithAttributes();
-  this.body.Users = yield album.getUsers();
+
+  //根据isShowUsers加入Users
+  if (this.query.isShowUsers === 'true') {
+    this.body.Users = yield album.getUsers();
+  }
+
+  //如果limit为0，直接跳过下面的过程
+  if(this.query.limit && this.query.limit === '0') {
+    return;
+  }
+
+  //根据limit和offset查找picture
+  var Pictures = yield models.Picture.findAll({
+    where: {
+      AlbumId: this.params.id,
+      isBlocked: false,
+      isDeleted: false
+    },
+    offset: this.query.offset || 0,
+    limit: (this.query.limit && parseInt(this.query.limit) < 50) ? this.query.limit : 50
+  });
+  this.body.Pictures = Pictures.map(function(picture) {
+    return picture.toJSON();
+  });
 
   for (var i = 0; i < this.body.Pictures.length; i++) {
     this.body.Pictures[i].likeCount = yield models.Like.getLikeCountByPictureId(this.body.Pictures[i].id);

@@ -72,8 +72,9 @@ var urls = [{
     AlbumId: 1
   }
 }, {
-  url: '/albums/1',
-  method: 'get'
+  url: '/albums/1?offset=0&limit=10&isShowUsers=true',
+  method: 'get',
+  note: 'offset和limit参数用于控制返回数据中Pictures的数量和偏移，offset不设置默认为0，limit不设置为50，limit最大值为50。 如果想返回中不带Pictures，直接设置limit=0即可，此时offset有无随意。 isShowUsers用于控制返回数据中是否包含Users，因为Users有很多，所以不需要的时候不要包含。 isShowUsers默认为“false”，修改为“true”则返回Users。'
 }, {
   url: '/albums',
   method: 'post',

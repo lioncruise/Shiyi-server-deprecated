@@ -4,7 +4,7 @@ var config = require('../config');
 var urllib = require('urllib');
 var debug = require('debug')('utils/notification');
 var apns = require('apns');
-var AnroideNotificationTemplate = require('./getui/template/NotificationTemplate');
+// var AnroideNotificationTemplate = require('./getui/template/NotificationTemplate');
 
 exports.sendNotification = function*(UserId, content) {
   debug('send notification "' + content + '" to user ' + UserId);
@@ -28,14 +28,14 @@ exports.sendIOSNotification = function*(iphone_token, content) {
 
 exports.sendAndroidNotification = function*(android_token, title, content) {
   //TODO
-  var notification = new AnroideNotificationTemplate({
-    appId: config.AndroidNotification.appId,
-    appKey: config.AndroidNotification.appKey,
-    title: title,
-    text: content,
-    logo: config.AndroidNotification.logo,
-    isRing: true,
-    isVibrate: true,
-    isClearable: true
-  });
+  // var notification = new AnroideNotificationTemplate({
+  //   appId: config.AndroidNotification.appId,
+  //   appKey: config.AndroidNotification.appKey,
+  //   title: title,
+  //   text: content,
+  //   logo: config.AndroidNotification.logo,
+  //   isRing: true,
+  //   isVibrate: true,
+  //   isClearable: true
+  // });
 };
