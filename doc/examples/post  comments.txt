@@ -1,0 +1,58 @@
+url: '/comments'
+
+method: 'post'
+
+
+
+input: 
+{
+	"content": "一条评论",
+	"PictureId": "4",
+	"ActionId": "1"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"isBlocked": false,
+		"isDeleted": false,
+		"id": 7,
+		"content": "一条评论",
+		"PictureId": "4",
+		"ActionId": "1",
+		"UserId": 1,
+		"updatedAt": "2015-10-18T14:36:13.184Z",
+		"createdAt": "2015-10-18T14:36:13.184Z"
+	}
+}
+
+url: '/comments'
+
+method: 'post'
+
+
+
+input: 
+{
+	"content": "二条评论",
+	"ActionId": "2",
+	"OrignalCommentId": "1"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"isBlocked": false,
+		"isDeleted": false,
+		"id": 8,
+		"content": "二条评论",
+		"ActionId": "2",
+		"OrignalCommentId": "1",
+		"UserId": 1,
+		"updatedAt": "2015-10-18T14:36:13.199Z",
+		"createdAt": "2015-10-18T14:36:13.199Z"
+	}
+}
+

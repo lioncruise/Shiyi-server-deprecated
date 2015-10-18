@@ -1,0 +1,73 @@
+url: '/messages/1'
+
+method: 'get'
+
+
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"type": "C",
+		"content": null,
+		"createdAt": "2015-10-18T14:36:11.698Z",
+		"updatedAt": "2015-10-18T14:36:11.698Z",
+		"UserId": 2,
+		"TargetUserId": 1,
+		"LikeId": null,
+		"CommentId": 2,
+		"Comment": {
+			"id": 2,
+			"content": "这是用户2对图片1的评论。",
+			"isBlocked": false,
+			"isDeleted": false,
+			"createdAt": "2015-10-18 14:36:11.684 +00:00",
+			"updatedAt": "2015-10-18 14:36:11.684 +00:00",
+			"PictureId": 1,
+			"UserId": 2,
+			"ActionId": null,
+			"OrignalCommentId": null,
+			"OrignalComment": null
+		},
+		"Like": null,
+		"TargetUser": {
+			"id": 1,
+			"phone": "13000000000",
+			"nickname": "我是666",
+			"password": "222222222",
+			"gender": "F",
+			"birthday": "1999-09-09",
+			"hometown": "黑龙江 哈尔滨",
+			"motto": "就是666.",
+			"avatarUrl": null,
+			"wechatToken": null,
+			"weiboToken": null,
+			"qqToken": null,
+			"isBlocked": false,
+			"isDeleted": false,
+			"type": "user",
+			"createdAt": "2015-10-18 14:36:11.541 +00:00",
+			"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+		},
+		"User": {
+			"id": 2,
+			"phone": "13000000001",
+			"nickname": null,
+			"password": "e10adc3949ba59abbe56e057f20f883e",
+			"gender": "F",
+			"birthday": null,
+			"hometown": null,
+			"motto": "I love book 1.",
+			"avatarUrl": null,
+			"wechatToken": null,
+			"weiboToken": null,
+			"qqToken": null,
+			"isBlocked": false,
+			"isDeleted": false,
+			"type": "user",
+			"createdAt": "2015-10-18 14:36:11.543 +00:00",
+			"updatedAt": "2015-10-18 14:36:11.543 +00:00"
+		}
+	}
+}

@@ -1,0 +1,31 @@
+url: '/getOwnAlbums?userId=2'
+
+method: 'get'
+
+
+
+output: 
+{
+	"statusCode": 200,
+	"data": [
+		{
+			"id": 2,
+			"title": "猫咪的一天",
+			"coverUrl": null,
+			"description": "可爱的猫咪如何度过他的一天",
+			"isShare": true,
+			"isPublic": true,
+			"isShowRawInfo": true,
+			"allowLike": true,
+			"allowComment": true,
+			"isBlocked": false,
+			"isDeleted": false,
+			"createdAt": "2015-10-18T14:36:11.580Z",
+			"updatedAt": "2015-10-18T14:36:11.580Z",
+			"UserId": 2,
+			"Tags": "猫,动物,萌",
+			"pictureCount": 0,
+			"lastCreatedPicture": null
+		}
+	]
+}

@@ -1,0 +1,33 @@
+url: '/register'
+
+method: 'post'
+
+
+
+input: 
+{
+	"phone": "15555555550",
+	"nickname": "一个很好的昵称",
+	"password": "123456789",
+	"gender": "M",
+	"motto": "Let's go!",
+	"token": "86871b9b1ab33b0834d455c540d82e89"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"isBlocked": false,
+		"isDeleted": false,
+		"type": "user",
+		"id": 7,
+		"phone": "15555555550",
+		"password": "123456789",
+		"gender": "M",
+		"motto": "Let's go!",
+		"nickname": "一个很好的昵称",
+		"updatedAt": "2015-10-18T14:36:12.815Z",
+		"createdAt": "2015-10-18T14:36:12.815Z"
+	}
+}

@@ -1,0 +1,10 @@
+url: '/likes/1'
+
+method: 'del'
+
+
+
+output: 
+{
+	"statusCode": 200
+}
