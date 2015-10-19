@@ -10,7 +10,7 @@ var path = require('path');
 var middlewaresArray = [middlewares.auth, router.routes()];
 
 //各restful路由
-var controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes'];
+var controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes', 'reports'];
 for (var i = 0; i < controllerNames.length; i++) {
   var name = controllerNames[i];
   var controller = require(path.join(__dirname, 'controllers/restful', name));

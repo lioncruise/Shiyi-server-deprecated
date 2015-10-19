@@ -3,7 +3,8 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Report', {
     status: {
-      type: DataTypes.STRING
+      type: DataTypes.ENUM,
+      values: ['pending', 'pass', 'deny']
     }
   }, {
     indexes: [{

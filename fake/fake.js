@@ -11,6 +11,7 @@ var comments = require('./comments');
 var messages = require('./messages');
 var tokens = require('./tokens');
 var albumUsers = require('./albumUsers');
+var reports = require('./reports');
 
 module.exports = function*() {
   yield keyvalues.fake;
@@ -23,4 +24,5 @@ module.exports = function*() {
   yield messages.fake;
   yield tokens.fake;
   yield albumUsers.fake;
+  yield reports.fake;
 };
