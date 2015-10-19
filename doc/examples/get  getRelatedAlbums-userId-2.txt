@@ -20,14 +20,14 @@ output:
 			"allowComment": true,
 			"isBlocked": false,
 			"isDeleted": false,
-			"createdAt": "2015-10-18T14:36:11.579Z",
-			"updatedAt": "2015-10-18T14:36:11.579Z",
+			"createdAt": "2015-10-19T13:43:25.918Z",
+			"updatedAt": "2015-10-19T13:43:25.918Z",
 			"UserId": 1,
 			"AlbumUser": {
 				"AlbumId": 1,
 				"UserId": 2,
-				"createdAt": "2015-10-18 14:36:11.725 +00:00",
-				"updatedAt": "2015-10-18 14:36:11.725 +00:00"
+				"createdAt": "2015-10-19 13:43:26.057 +00:00",
+				"updatedAt": "2015-10-19 13:43:26.057 +00:00"
 			},
 			"Tags": "爱情,恋人",
 			"pictureCount": 6,
@@ -37,8 +37,8 @@ output:
 				"shareNum": 0,
 				"isBlocked": false,
 				"isDeleted": false,
-				"createdAt": "2015-10-18T14:36:11.657Z",
-				"updatedAt": "2015-10-18T14:36:11.657Z",
+				"createdAt": "2015-10-19T13:43:25.991Z",
+				"updatedAt": "2015-10-19T13:43:25.991Z",
 				"AlbumId": 1,
 				"ActionId": 2,
 				"UserId": 1,
@@ -58,8 +58,8 @@ output:
 					"isBlocked": false,
 					"isDeleted": false,
 					"type": "user",
-					"createdAt": "2015-10-18 14:36:11.541 +00:00",
-					"updatedAt": "2015-10-18 14:36:11.541 +00:00"
+					"createdAt": "2015-10-19 13:43:25.881 +00:00",
+					"updatedAt": "2015-10-19 13:43:25.881 +00:00"
 				}
 			}
 		}

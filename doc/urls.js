@@ -181,4 +181,24 @@ urls.push({
   method: 'get'
 });
 
+urls.push({
+  url: '/reports/1',
+  method: 'get'
+});
+
+urls.push({
+  url: '/reports',
+  method: 'post',
+  input: [{
+    ActionId: '2'
+  }, {
+    PictureId: '3'
+  }, {
+    AlbumId: '2'
+  }, {
+    UserId: '2'
+  }],
+  note: '可以对Action, Picture, Album, User进行举报'
+});
+
 module.exports = urls;

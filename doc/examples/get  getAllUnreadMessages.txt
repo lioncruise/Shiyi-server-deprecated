@@ -12,8 +12,8 @@ output:
 			"id": 5,
 			"type": "C",
 			"content": null,
-			"createdAt": "2015-10-18T14:36:13.187Z",
-			"updatedAt": "2015-10-18T14:36:13.187Z",
+			"createdAt": "2015-10-19T13:43:27.429Z",
+			"updatedAt": "2015-10-19T13:43:27.429Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": null,
@@ -23,8 +23,8 @@ output:
 				"content": "一条评论",
 				"isBlocked": false,
 				"isDeleted": false,
-				"createdAt": "2015-10-18 14:36:13.184 +00:00",
-				"updatedAt": "2015-10-18 14:36:13.184 +00:00",
+				"createdAt": "2015-10-19 13:43:27.424 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.424 +00:00",
 				"PictureId": 4,
 				"UserId": 1,
 				"ActionId": 1,
@@ -48,16 +48,16 @@ output:
 				"isBlocked": false,
 				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-18 14:36:11.541 +00:00",
-				"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+				"createdAt": "2015-10-19 13:43:25.881 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.120 +00:00"
 			}
 		},
 		{
 			"id": 6,
 			"type": "C",
 			"content": null,
-			"createdAt": "2015-10-18T14:36:13.204Z",
-			"updatedAt": "2015-10-18T14:36:13.204Z",
+			"createdAt": "2015-10-19T13:43:27.464Z",
+			"updatedAt": "2015-10-19T13:43:27.464Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": null,
@@ -67,8 +67,8 @@ output:
 				"content": "二条评论",
 				"isBlocked": false,
 				"isDeleted": false,
-				"createdAt": "2015-10-18 14:36:13.199 +00:00",
-				"updatedAt": "2015-10-18 14:36:13.199 +00:00",
+				"createdAt": "2015-10-19 13:43:27.459 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.459 +00:00",
 				"PictureId": null,
 				"UserId": 1,
 				"ActionId": 2,
@@ -78,8 +78,8 @@ output:
 					"content": "这是用户1对图片1的评论。",
 					"isBlocked": false,
 					"isDeleted": true,
-					"createdAt": "2015-10-18 14:36:11.683 +00:00",
-					"updatedAt": "2015-10-18 14:36:13.230 +00:00",
+					"createdAt": "2015-10-19 13:43:26.018 +00:00",
+					"updatedAt": "2015-10-19 13:43:27.483 +00:00",
 					"PictureId": 1,
 					"UserId": 1,
 					"ActionId": null,
@@ -103,16 +103,16 @@ output:
 				"isBlocked": false,
 				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-18 14:36:11.541 +00:00",
-				"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+				"createdAt": "2015-10-19 13:43:25.881 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.120 +00:00"
 			}
 		},
 		{
 			"id": 7,
 			"type": "L",
 			"content": null,
-			"createdAt": "2015-10-18T14:36:13.273Z",
-			"updatedAt": "2015-10-18T14:36:13.273Z",
+			"createdAt": "2015-10-19T13:43:27.531Z",
+			"updatedAt": "2015-10-19T13:43:27.531Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": 6,
@@ -121,8 +121,8 @@ output:
 			"Like": {
 				"id": 6,
 				"type": "LL",
-				"createdAt": "2015-10-18 14:36:13.268 +00:00",
-				"updatedAt": "2015-10-18 14:36:13.268 +00:00",
+				"createdAt": "2015-10-19 13:43:27.525 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.525 +00:00",
 				"ActionId": null,
 				"PictureId": 4,
 				"UserId": 1
@@ -143,16 +143,16 @@ output:
 				"isBlocked": false,
 				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-18 14:36:11.541 +00:00",
-				"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+				"createdAt": "2015-10-19 13:43:25.881 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.120 +00:00"
 			}
 		},
 		{
 			"id": 8,
 			"type": "L",
 			"content": null,
-			"createdAt": "2015-10-18T14:36:13.301Z",
-			"updatedAt": "2015-10-18T14:36:13.301Z",
+			"createdAt": "2015-10-19T13:43:27.555Z",
+			"updatedAt": "2015-10-19T13:43:27.555Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": 7,
@@ -161,8 +161,8 @@ output:
 			"Like": {
 				"id": 7,
 				"type": "DD",
-				"createdAt": "2015-10-18 14:36:13.295 +00:00",
-				"updatedAt": "2015-10-18 14:36:13.295 +00:00",
+				"createdAt": "2015-10-19 13:43:27.550 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.550 +00:00",
 				"ActionId": 2,
 				"PictureId": null,
 				"UserId": 1
@@ -183,8 +183,8 @@ output:
 				"isBlocked": false,
 				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-18 14:36:11.541 +00:00",
-				"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+				"createdAt": "2015-10-19 13:43:25.881 +00:00",
+				"updatedAt": "2015-10-19 13:43:27.120 +00:00"
 			}
 		}
 	]

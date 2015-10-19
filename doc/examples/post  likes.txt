@@ -18,8 +18,8 @@ output:
 		"type": "LL",
 		"PictureId": "4",
 		"UserId": 1,
-		"updatedAt": "2015-10-18T14:36:13.268Z",
-		"createdAt": "2015-10-18T14:36:13.268Z"
+		"updatedAt": "2015-10-19T13:43:27.525Z",
+		"createdAt": "2015-10-19T13:43:27.525Z"
 	}
 }
 
@@ -43,8 +43,8 @@ output:
 		"type": "DD",
 		"ActionId": "2",
 		"UserId": 1,
-		"updatedAt": "2015-10-18T14:36:13.295Z",
-		"createdAt": "2015-10-18T14:36:13.295Z"
+		"updatedAt": "2015-10-19T13:43:27.550Z",
+		"createdAt": "2015-10-19T13:43:27.550Z"
 	}
 }
 

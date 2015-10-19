@@ -12,8 +12,8 @@ output:
 		"content": "这是用户1对图片1的评论。",
 		"isBlocked": false,
 		"isDeleted": false,
-		"createdAt": "2015-10-18T14:36:11.683Z",
-		"updatedAt": "2015-10-18T14:36:11.683Z",
+		"createdAt": "2015-10-19T13:43:26.018Z",
+		"updatedAt": "2015-10-19T13:43:26.018Z",
 		"PictureId": 1,
 		"UserId": 1,
 		"ActionId": null,
@@ -34,8 +34,8 @@ output:
 			"isBlocked": false,
 			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-18 14:36:11.541 +00:00",
-			"updatedAt": "2015-10-18 14:36:12.848 +00:00"
+			"createdAt": "2015-10-19 13:43:25.881 +00:00",
+			"updatedAt": "2015-10-19 13:43:27.120 +00:00"
 		},
 		"Picture": {
 			"id": 1,
@@ -43,8 +43,8 @@ output:
 			"shareNum": 0,
 			"isBlocked": false,
 			"isDeleted": false,
-			"createdAt": "2015-10-18 14:36:11.651 +00:00",
-			"updatedAt": "2015-10-18 14:36:11.651 +00:00",
+			"createdAt": "2015-10-19 13:43:25.986 +00:00",
+			"updatedAt": "2015-10-19 13:43:25.986 +00:00",
 			"AlbumId": 1,
 			"ActionId": 1,
 			"UserId": 1

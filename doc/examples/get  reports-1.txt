@@ -1,0 +1,62 @@
+url: '/reports/1'
+
+method: 'get'
+
+
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"status": "pending",
+		"createdAt": "2015-10-19T13:43:26.071Z",
+		"updatedAt": "2015-10-19T13:43:26.071Z",
+		"ReporterId": 2,
+		"ActionId": null,
+		"PictureId": null,
+		"AlbumId": null,
+		"UserId": 3,
+		"Action": null,
+		"Picture": null,
+		"Album": null,
+		"Reporter": {
+			"id": 2,
+			"phone": "13000000001",
+			"nickname": null,
+			"password": "e10adc3949ba59abbe56e057f20f883e",
+			"gender": "F",
+			"birthday": null,
+			"hometown": null,
+			"motto": "I love book 1.",
+			"avatarUrl": null,
+			"wechatToken": null,
+			"weiboToken": null,
+			"qqToken": null,
+			"isBlocked": false,
+			"isDeleted": false,
+			"type": "user",
+			"createdAt": "2015-10-19 13:43:25.883 +00:00",
+			"updatedAt": "2015-10-19 13:43:25.883 +00:00"
+		},
+		"User": {
+			"id": 3,
+			"phone": "13000000002",
+			"nickname": null,
+			"password": "e10adc3949ba59abbe56e057f20f883e",
+			"gender": "F",
+			"birthday": null,
+			"hometown": null,
+			"motto": "I love book 2.",
+			"avatarUrl": null,
+			"wechatToken": null,
+			"weiboToken": null,
+			"qqToken": null,
+			"isBlocked": false,
+			"isDeleted": false,
+			"type": "user",
+			"createdAt": "2015-10-19 13:43:25.883 +00:00",
+			"updatedAt": "2015-10-19 13:43:25.883 +00:00"
+		}
+	}
+}

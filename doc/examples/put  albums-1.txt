@@ -28,8 +28,8 @@ output:
 		"allowComment": true,
 		"isBlocked": false,
 		"isDeleted": false,
-		"createdAt": "2015-10-18T14:36:11.579Z",
-		"updatedAt": "2015-10-18T14:36:13.083Z",
+		"createdAt": "2015-10-19T13:43:25.918Z",
+		"updatedAt": "2015-10-19T13:43:27.326Z",
 		"UserId": 1
 	}
 }
