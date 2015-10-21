@@ -57,18 +57,24 @@ exports.show = function*() {
   }
 
   //根据limit和offset查找picture
+  var offset = parseInt(this.query.offset) || 0;
+  var limit = (this.query.limit && parseInt(this.query.limit) < 50) ? parseInt(this.query.limit) : 50;
+
   var Pictures = yield models.Picture.findAll({
     paranoid: true,
     where: {
       AlbumId: this.params.id,
       isBlocked: false
     },
-    offset: this.query.offset || 0,
-    limit: (this.query.limit && parseInt(this.query.limit) < 50) ? this.query.limit : 50
+    offset: offset,
+    limit: limit
   });
   this.body.Pictures = Pictures.map(function(picture) {
     return picture.toJSON();
   });
+
+  this.body.offset = offset;
+  this.body.limit = limit;
 
   for (var i = 0; i < this.body.Pictures.length; i++) {
     this.body.Pictures[i].likeCount = yield models.Like.getLikeCountByPictureId(this.body.Pictures[i].id);

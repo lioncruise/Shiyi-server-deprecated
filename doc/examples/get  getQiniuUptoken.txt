@@ -7,5 +7,5 @@ method: 'get'
 output: 
 {
 	"statusCode": 200,
-	"data": "yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC:ciIFTZfSZVP5MgF1gsZn3iA1XxQ=:eyJzY29wZSI6InNoaXlpIiwiZGVhZGxpbmUiOjE0NDU0MjE0NjZ9"
+	"data": "yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC:LHBvDrie38QcH-dkOVvIPLNh1xg=:eyJzY29wZSI6InNoaXlpIiwiZGVhZGxpbmUiOjE0NDU0MjE3OTB9"
 }
