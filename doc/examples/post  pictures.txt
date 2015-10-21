@@ -1,0 +1,29 @@
+url: '/pictures'
+
+method: 'post'
+
+
+
+input: 
+{
+	"pictureUrl": "http://test.com/10086",
+	"AlbumId": "1",
+	"ActionId": "1"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"shareNum": 0,
+		"isBlocked": false,
+		"isDeleted": false,
+		"id": 7,
+		"pictureUrl": "http://test.com/10086",
+		"AlbumId": "1",
+		"ActionId": "1",
+		"UserId": 1,
+		"updatedAt": "2015-10-21T07:16:47.571Z",
+		"createdAt": "2015-10-21T07:16:47.571Z"
+	}
+}

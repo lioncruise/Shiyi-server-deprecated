@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"type": "1",
-		"createdAt": "2015-10-19T13:43:26.002Z",
-		"updatedAt": "2015-10-19T13:43:26.002Z",
+		"createdAt": "2015-10-21T07:16:45.789Z",
+		"updatedAt": "2015-10-21T07:16:45.789Z",
 		"ActionId": 1,
 		"PictureId": null,
 		"UserId": 1,
@@ -31,8 +31,8 @@ output:
 			"isBlocked": false,
 			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-19 13:43:25.881 +00:00",
-			"updatedAt": "2015-10-19 13:43:27.120 +00:00"
+			"createdAt": "2015-10-21 07:16:45.659 +00:00",
+			"updatedAt": "2015-10-21 07:16:46.907 +00:00"
 		},
 		"Picture": null,
 		"Action": {
@@ -42,8 +42,8 @@ output:
 			"position": "position",
 			"isBlocked": false,
 			"isDeleted": false,
-			"createdAt": "2015-10-19 13:43:25.956 +00:00",
-			"updatedAt": "2015-10-19 13:43:25.956 +00:00",
+			"createdAt": "2015-10-21 07:16:45.735 +00:00",
+			"updatedAt": "2015-10-21 07:16:45.735 +00:00",
 			"UserId": 1,
 			"AlbumId": 1
 		}

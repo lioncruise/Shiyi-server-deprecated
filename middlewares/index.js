@@ -22,6 +22,12 @@ exports.addStatusCode = function() {
         data: this.body
       };
     }
+
+    if (!this.body) {
+      return this.body = {
+        statusCode: 200
+      };
+    }
   };
 };
 

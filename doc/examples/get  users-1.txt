@@ -23,8 +23,8 @@ output:
 		"isBlocked": false,
 		"isDeleted": false,
 		"type": "user",
-		"createdAt": "2015-10-19T13:43:25.881Z",
-		"updatedAt": "2015-10-19T13:43:27.120Z",
+		"createdAt": "2015-10-21T07:16:45.659Z",
+		"updatedAt": "2015-10-21T07:16:46.907Z",
 		"ownAlbums": [
 			{
 				"id": 3,
@@ -38,8 +38,8 @@ output:
 				"allowComment": true,
 				"isBlocked": false,
 				"isDeleted": false,
-				"createdAt": "2015-10-19T13:43:25.921Z",
-				"updatedAt": "2015-10-19T13:43:25.921Z",
+				"createdAt": "2015-10-21T07:16:45.700Z",
+				"updatedAt": "2015-10-21T07:16:45.700Z",
 				"UserId": 1
 			},
 			{
@@ -54,8 +54,8 @@ output:
 				"allowComment": true,
 				"isBlocked": false,
 				"isDeleted": false,
-				"createdAt": "2015-10-19T13:43:27.254Z",
-				"updatedAt": "2015-10-19T13:43:27.254Z",
+				"createdAt": "2015-10-21T07:16:47.055Z",
+				"updatedAt": "2015-10-21T07:16:47.055Z",
 				"UserId": 1
 			},
 			{
@@ -70,8 +70,8 @@ output:
 				"allowComment": true,
 				"isBlocked": false,
 				"isDeleted": true,
-				"createdAt": "2015-10-19T13:43:25.918Z",
-				"updatedAt": "2015-10-19T13:43:27.337Z",
+				"createdAt": "2015-10-21T07:16:45.697Z",
+				"updatedAt": "2015-10-21T07:16:47.162Z",
 				"UserId": 1
 			}
 		]

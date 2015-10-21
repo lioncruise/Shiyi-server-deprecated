@@ -4,6 +4,7 @@ var utility = require('utility');
 var urls = [{
   url: '/getSeccode',
   method: 'post',
+  note: '获取手机验证码，验证码是4位数字，前后端均验证手机号合法性，用这个正则`(^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$`，用户验证码是否输入正确在前端进行判断，后端没有存储验证码。',
   input: [{
     phone: '13009865000',
     type: 'register'
@@ -112,6 +113,16 @@ var urls = [{
     UserIds: '1,2,3'
   }]
 }, {
+  url: '/albumUsers',
+  method: 'delete',
+  input: [{
+    AlbumId: '1',
+    UserId: '1'
+  }, {
+    AlbumId: '1',
+    UserIds: '2,3'
+  }]
+}, {
   url: '/users/1',
   method: 'get'
 }, {
@@ -199,6 +210,22 @@ urls.push({
     UserId: '2'
   }],
   note: '可以对Action, Picture, Album, User进行举报'
+});
+
+urls.push({
+  url: '/pictures/1',
+  method: 'get'
+}, {
+  url: '/pictures',
+  method: 'post',
+  input: {
+    pictureUrl: 'http://test.com/10086',
+    AlbumId: '1',
+    ActionId: '1'
+  }
+}, {
+  url: '/pictures/2',
+  method: 'delete'
 });
 
 module.exports = urls;

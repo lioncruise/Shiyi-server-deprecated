@@ -7,3 +7,4 @@ require('./version');
 require('./albums');
 require('./messages');
 require('./qiniu');
+require('./albumUsers');
