@@ -21,8 +21,8 @@ output:
 		"PictureId": "4",
 		"ActionId": "1",
 		"UserId": 1,
-		"updatedAt": "2015-10-21T08:21:21.280Z",
-		"createdAt": "2015-10-21T08:21:21.280Z"
+		"updatedAt": "2015-10-21T08:57:46.523Z",
+		"createdAt": "2015-10-21T08:57:46.523Z"
 	}
 }
 
@@ -49,8 +49,8 @@ output:
 		"ActionId": "2",
 		"OrignalCommentId": "1",
 		"UserId": 1,
-		"updatedAt": "2015-10-21T08:21:21.295Z",
-		"createdAt": "2015-10-21T08:21:21.295Z"
+		"updatedAt": "2015-10-21T08:57:46.541Z",
+		"createdAt": "2015-10-21T08:57:46.541Z"
 	}
 }
 

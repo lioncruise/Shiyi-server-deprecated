@@ -26,7 +26,7 @@ output:
 		"gender": "M",
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
-		"updatedAt": "2015-10-21T08:21:20.829Z",
-		"createdAt": "2015-10-21T08:21:20.829Z"
+		"updatedAt": "2015-10-21T08:57:45.907Z",
+		"createdAt": "2015-10-21T08:57:45.907Z"
 	}
 }

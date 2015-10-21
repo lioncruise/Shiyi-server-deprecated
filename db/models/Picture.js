@@ -34,12 +34,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       getPictureCountByAlbumId: function*(albumId) {
         return yield this.count({
+          // paranoid: true, //count函数不需要添加paranoid参数
           where: {
             AlbumId: albumId,
-            isBlocked: false,
-            deletedAt: {
-              lt: moment().toISOString()
-            }
+            isBlocked: false
           }
         });
       }
