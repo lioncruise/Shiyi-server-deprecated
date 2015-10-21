@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"status": "pending",
-		"createdAt": "2015-10-21T07:16:45.851Z",
-		"updatedAt": "2015-10-21T07:16:45.851Z",
+		"createdAt": "2015-10-21T08:21:19.804Z",
+		"updatedAt": "2015-10-21T08:21:19.804Z",
 		"ReporterId": 2,
 		"ActionId": null,
 		"PictureId": null,
@@ -34,10 +34,10 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.661 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.661 +00:00"
+			"createdAt": "2015-10-21 08:21:19.617 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.617 +00:00",
+			"deletedAt": null
 		},
 		"User": {
 			"id": 3,
@@ -53,10 +53,10 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.661 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.661 +00:00"
+			"createdAt": "2015-10-21 08:21:19.617 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.617 +00:00",
+			"deletedAt": null
 		}
 	}
 }

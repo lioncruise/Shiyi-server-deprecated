@@ -71,8 +71,7 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var action = yield models.Action.find({
-    paranoid: true,
+  var _result = yield models.Action.destroy({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -80,7 +79,7 @@ exports.destroy = function*() {
     }
   });
 
-  if (!action) {
+  if(_result === 0) {
     return this.body = {
       statusCode: 404,
       message: '动态不存在'
@@ -88,12 +87,11 @@ exports.destroy = function*() {
   }
 
   //删除动态的同时，删除一同上传的照片
-  var pictures = yield action.getPictures();
-  yield pictures.map(function (pic) {
-    return pic.destroy();
+  yield models.Picture.destroy({
+    where: {
+      ActionId: this.params.id,
+      isBlocked: false,
+      UserId: this.session.user.id
+    }
   });
-
-  action = yield action.destroy();
-
-  this.body = action.toJSON();
 };

@@ -32,7 +32,9 @@ router.get('/getAllUnreadMessages', function*() {
   });
 
   //消息被提取之后删除
-  yield messages.map(function(message) {
-    return message.destroy();
+  yield models.Message.destroy({
+    where: {
+      TargetUserId: this.session.user.id
+    }
   });
 });

@@ -21,7 +21,6 @@ output:
 	"statusCode": 200,
 	"data": {
 		"isBlocked": false,
-		"isDeleted": false,
 		"id": 4,
 		"title": "这是一个新建的相册",
 		"description": "今天天气不错",
@@ -31,7 +30,7 @@ output:
 		"allowLike": true,
 		"allowComment": true,
 		"UserId": 1,
-		"updatedAt": "2015-10-21T07:16:47.055Z",
-		"createdAt": "2015-10-21T07:16:47.055Z"
+		"updatedAt": "2015-10-21T08:21:21.006Z",
+		"createdAt": "2015-10-21T08:21:21.006Z"
 	}
 }

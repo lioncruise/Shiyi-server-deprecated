@@ -77,8 +77,7 @@ describe('test/controllers/restful/actions.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.data.deletedAt.should.not.be.exactly(null);
-          res.body.data.should.have.properties(['content', 'gps', 'position']);
+          res.body.should.not.have.property('data');
           done();
         });
     });

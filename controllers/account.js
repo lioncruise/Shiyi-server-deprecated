@@ -73,7 +73,7 @@ router.post('/changePassword', function*() {
     }
   });
 
-  var token = yield models.Token.find({
+  var _result = yield models.Token.destroy({
     where: {
       phone: this.request.body.phone,
       token: this.request.body.token,
@@ -81,16 +81,14 @@ router.post('/changePassword', function*() {
     }
   });
 
-  if (!token) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 422,
       message: 'Token错误'
     };
   }
 
-  yield token.destroy();
-
-  var result = yield models.User.update({
+  _result = yield models.User.update({
     password: this.request.body.password
   }, {
     where: {
@@ -98,7 +96,7 @@ router.post('/changePassword', function*() {
     }
   });
 
-  if (result[0] === 0) {
+  if (_result[0] === 0) {
     return this.body = {
       statusCode: 404,
       message: '无密码修改'
@@ -130,9 +128,7 @@ router.post('/register', function*() {
     }
   });
 
-  //TODO: 头像处理
-
-  var token = yield models.Token.find({
+  var _result = yield models.Token.destroy({
     where: {
       phone: this.request.body.phone,
       token: this.request.body.token,
@@ -140,14 +136,12 @@ router.post('/register', function*() {
     }
   });
 
-  if (!token) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 422,
       message: 'Token错误'
     };
   }
-
-  yield token.destroy();
 
   try {
     var user = yield models.User.create({

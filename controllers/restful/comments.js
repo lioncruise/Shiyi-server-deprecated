@@ -102,8 +102,7 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var comment = yield models.Comment.find({
-    paranoid: true,
+  var _result = yield models.Comment.destroy({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -111,14 +110,10 @@ exports.destroy = function*() {
     }
   });
 
-  if (!comment) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 404,
       message: '评论不存在'
     };
   }
-
-  comment = yield comment.destroy();
-
-  this.body = comment.toJSON();
 };

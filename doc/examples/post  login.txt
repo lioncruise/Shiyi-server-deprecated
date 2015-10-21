@@ -27,9 +27,9 @@ output:
 		"weiboToken": null,
 		"qqToken": null,
 		"isBlocked": false,
-		"isDeleted": false,
 		"type": "user",
-		"createdAt": "2015-10-21T07:16:45.659Z",
-		"updatedAt": "2015-10-21T07:16:45.659Z"
+		"createdAt": "2015-10-21T08:21:19.615Z",
+		"updatedAt": "2015-10-21T08:21:19.615Z",
+		"deletedAt": null
 	}
 }

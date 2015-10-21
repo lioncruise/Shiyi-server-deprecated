@@ -19,7 +19,6 @@ output:
 	"statusCode": 200,
 	"data": {
 		"isBlocked": false,
-		"isDeleted": false,
 		"type": "user",
 		"id": 7,
 		"phone": "15555555550",
@@ -27,7 +26,7 @@ output:
 		"gender": "M",
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
-		"updatedAt": "2015-10-21T07:16:46.878Z",
-		"createdAt": "2015-10-21T07:16:46.878Z"
+		"updatedAt": "2015-10-21T08:21:20.829Z",
+		"createdAt": "2015-10-21T08:21:20.829Z"
 	}
 }

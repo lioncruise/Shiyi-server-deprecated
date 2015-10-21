@@ -89,23 +89,17 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var like = yield models.Like.find({
+  var _result = yield models.Like.destroy({
     where: {
       id: this.params.id,
       UserId: this.session.user.id
     }
   });
 
-  if (!like) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 404,
       message: '点赞不存在'
     };
   }
-
-  yield like.destroy();
-
-  this.body = {
-    statusCode: 200
-  };
 };

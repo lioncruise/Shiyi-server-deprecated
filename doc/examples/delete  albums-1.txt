@@ -6,21 +6,5 @@ method: 'del'
 
 output: 
 {
-	"statusCode": 200,
-	"data": {
-		"id": 1,
-		"title": "标题改改",
-		"coverUrl": null,
-		"description": "描述改改",
-		"isShare": true,
-		"isPublic": true,
-		"isShowRawInfo": true,
-		"allowLike": true,
-		"allowComment": true,
-		"isBlocked": false,
-		"isDeleted": true,
-		"createdAt": "2015-10-21T07:16:45.697Z",
-		"updatedAt": "2015-10-21T07:16:47.162Z",
-		"UserId": 1
-	}
+	"statusCode": 200
 }

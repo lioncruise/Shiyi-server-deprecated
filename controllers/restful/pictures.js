@@ -58,8 +58,7 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var picture = yield models.Picture.find({
-    paranoid: true,
+  var _result = yield models.Picture.destroy({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -67,14 +66,10 @@ exports.destroy = function*() {
     }
   });
 
-  if (!picture) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 404,
       message: '图片不存在'
     };
   }
-
-  picture = yield picture.destroy();
-
-  this.body = picture.toJSON();
 };

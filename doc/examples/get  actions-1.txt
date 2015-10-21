@@ -13,9 +13,9 @@ output:
 		"gps": "gps",
 		"position": "position",
 		"isBlocked": false,
-		"isDeleted": false,
-		"createdAt": "2015-10-21T07:16:45.735Z",
-		"updatedAt": "2015-10-21T07:16:45.735Z",
+		"createdAt": "2015-10-21T08:21:19.685Z",
+		"updatedAt": "2015-10-21T08:21:19.685Z",
+		"deletedAt": null,
 		"UserId": 1,
 		"AlbumId": 1,
 		"Pictures": [
@@ -24,9 +24,9 @@ output:
 				"pictureUrl": "http://test.com/1",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.766Z",
-				"updatedAt": "2015-10-21T07:16:45.766Z",
+				"createdAt": "2015-10-21T08:21:19.718Z",
+				"updatedAt": "2015-10-21T08:21:19.718Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1
@@ -36,9 +36,9 @@ output:
 				"pictureUrl": "http://test.com/2",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.771Z",
-				"updatedAt": "2015-10-21T07:16:45.771Z",
+				"createdAt": "2015-10-21T08:21:19.719Z",
+				"updatedAt": "2015-10-21T08:21:19.719Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1
@@ -48,9 +48,9 @@ output:
 				"pictureUrl": "http://test.com/3",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.772Z",
-				"updatedAt": "2015-10-21T07:16:45.772Z",
+				"createdAt": "2015-10-21T08:21:19.720Z",
+				"updatedAt": "2015-10-21T08:21:19.720Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1
@@ -67,11 +67,11 @@ output:
 			"allowLike": true,
 			"allowComment": true,
 			"isBlocked": false,
-			"isDeleted": false,
-			"createdAt": "2015-10-21 07:16:45.697 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.697 +00:00",
+			"createdAt": "2015-10-21 08:21:19.650 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.650 +00:00",
+			"deletedAt": null,
 			"UserId": 1,
-			"pictureCount": 6
+			"pictureCount": 0
 		},
 		"User": {
 			"id": 1,
@@ -87,17 +87,17 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.659 +00:00",
-			"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+			"createdAt": "2015-10-21 08:21:19.615 +00:00",
+			"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+			"deletedAt": null
 		},
 		"Likes": [
 			{
 				"id": 1,
 				"type": "1",
-				"createdAt": "2015-10-21T07:16:45.789Z",
-				"updatedAt": "2015-10-21T07:16:45.789Z",
+				"createdAt": "2015-10-21T08:21:19.734Z",
+				"updatedAt": "2015-10-21T08:21:19.734Z",
 				"ActionId": 1,
 				"PictureId": null,
 				"UserId": 1,
@@ -115,17 +115,17 @@ output:
 					"weiboToken": null,
 					"qqToken": null,
 					"isBlocked": false,
-					"isDeleted": false,
 					"type": "user",
-					"createdAt": "2015-10-21 07:16:45.659 +00:00",
-					"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+					"createdAt": "2015-10-21 08:21:19.615 +00:00",
+					"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+					"deletedAt": null
 				}
 			},
 			{
 				"id": 2,
 				"type": "1",
-				"createdAt": "2015-10-21T07:16:45.790Z",
-				"updatedAt": "2015-10-21T07:16:45.790Z",
+				"createdAt": "2015-10-21T08:21:19.735Z",
+				"updatedAt": "2015-10-21T08:21:19.735Z",
 				"ActionId": 1,
 				"PictureId": null,
 				"UserId": 2,
@@ -143,17 +143,17 @@ output:
 					"weiboToken": null,
 					"qqToken": null,
 					"isBlocked": false,
-					"isDeleted": false,
 					"type": "user",
-					"createdAt": "2015-10-21 07:16:45.661 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.661 +00:00"
+					"createdAt": "2015-10-21 08:21:19.617 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.617 +00:00",
+					"deletedAt": null
 				}
 			},
 			{
 				"id": 3,
 				"type": "1",
-				"createdAt": "2015-10-21T07:16:45.791Z",
-				"updatedAt": "2015-10-21T07:16:45.791Z",
+				"createdAt": "2015-10-21T08:21:19.735Z",
+				"updatedAt": "2015-10-21T08:21:19.735Z",
 				"ActionId": 1,
 				"PictureId": null,
 				"UserId": 3,
@@ -171,10 +171,10 @@ output:
 					"weiboToken": null,
 					"qqToken": null,
 					"isBlocked": false,
-					"isDeleted": false,
 					"type": "user",
-					"createdAt": "2015-10-21 07:16:45.661 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.661 +00:00"
+					"createdAt": "2015-10-21 08:21:19.617 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.617 +00:00",
+					"deletedAt": null
 				}
 			}
 		],

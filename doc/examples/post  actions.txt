@@ -18,14 +18,13 @@ output:
 	"statusCode": 200,
 	"data": {
 		"isBlocked": false,
-		"isDeleted": false,
 		"id": 7,
 		"content": "这是一条动态呦~",
 		"gps": "gps",
 		"position": "position",
 		"UserId": 1,
 		"AlbumId": 1,
-		"updatedAt": "2015-10-21T07:16:46.980Z",
-		"createdAt": "2015-10-21T07:16:46.980Z"
+		"updatedAt": "2015-10-21T08:21:20.920Z",
+		"createdAt": "2015-10-21T08:21:20.920Z"
 	}
 }

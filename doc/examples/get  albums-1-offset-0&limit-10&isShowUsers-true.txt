@@ -19,9 +19,9 @@ output:
 		"allowLike": true,
 		"allowComment": true,
 		"isBlocked": false,
-		"isDeleted": false,
-		"createdAt": "2015-10-21T07:16:45.697Z",
-		"updatedAt": "2015-10-21T07:16:45.697Z",
+		"createdAt": "2015-10-21T08:21:19.650Z",
+		"updatedAt": "2015-10-21T08:21:19.650Z",
+		"deletedAt": null,
 		"UserId": 1,
 		"Pictures": [
 			{
@@ -29,9 +29,9 @@ output:
 				"pictureUrl": "http://test.com/1",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.766Z",
-				"updatedAt": "2015-10-21T07:16:45.766Z",
+				"createdAt": "2015-10-21T08:21:19.718Z",
+				"updatedAt": "2015-10-21T08:21:19.718Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1,
@@ -42,9 +42,9 @@ output:
 				"pictureUrl": "http://test.com/2",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.771Z",
-				"updatedAt": "2015-10-21T07:16:45.771Z",
+				"createdAt": "2015-10-21T08:21:19.719Z",
+				"updatedAt": "2015-10-21T08:21:19.719Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1,
@@ -55,9 +55,9 @@ output:
 				"pictureUrl": "http://test.com/3",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.772Z",
-				"updatedAt": "2015-10-21T07:16:45.772Z",
+				"createdAt": "2015-10-21T08:21:19.720Z",
+				"updatedAt": "2015-10-21T08:21:19.720Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 1,
 				"UserId": 1,
@@ -68,9 +68,9 @@ output:
 				"pictureUrl": "http://test.com/4",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.772Z",
-				"updatedAt": "2015-10-21T07:16:45.772Z",
+				"createdAt": "2015-10-21T08:21:19.720Z",
+				"updatedAt": "2015-10-21T08:21:19.720Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 2,
 				"UserId": 1,
@@ -81,9 +81,9 @@ output:
 				"pictureUrl": "http://test.com/5",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.776Z",
-				"updatedAt": "2015-10-21T07:16:45.776Z",
+				"createdAt": "2015-10-21T08:21:19.721Z",
+				"updatedAt": "2015-10-21T08:21:19.721Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 2,
 				"UserId": 1,
@@ -94,9 +94,9 @@ output:
 				"pictureUrl": "http://test.com/6",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.778Z",
-				"updatedAt": "2015-10-21T07:16:45.778Z",
+				"createdAt": "2015-10-21T08:21:19.723Z",
+				"updatedAt": "2015-10-21T08:21:19.723Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 2,
 				"UserId": 1,
@@ -117,21 +117,21 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.659 +00:00",
-			"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+			"createdAt": "2015-10-21 08:21:19.615 +00:00",
+			"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+			"deletedAt": null
 		},
 		"Tags": "爱情,恋人",
-		"pictureCount": 6,
+		"pictureCount": 0,
 		"lastCreatedPicture": {
 			"id": 6,
 			"pictureUrl": "http://test.com/6",
 			"shareNum": 0,
 			"isBlocked": false,
-			"isDeleted": false,
-			"createdAt": "2015-10-21T07:16:45.778Z",
-			"updatedAt": "2015-10-21T07:16:45.778Z",
+			"createdAt": "2015-10-21T08:21:19.723Z",
+			"updatedAt": "2015-10-21T08:21:19.723Z",
+			"deletedAt": null,
 			"AlbumId": 1,
 			"ActionId": 2,
 			"UserId": 1,
@@ -149,10 +149,10 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21 07:16:45.659 +00:00",
-				"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+				"createdAt": "2015-10-21 08:21:19.615 +00:00",
+				"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+				"deletedAt": null
 			}
 		},
 		"Users": [
@@ -170,15 +170,15 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21T07:16:45.661Z",
-				"updatedAt": "2015-10-21T07:16:45.661Z",
+				"createdAt": "2015-10-21T08:21:19.617Z",
+				"updatedAt": "2015-10-21T08:21:19.617Z",
+				"deletedAt": null,
 				"AlbumUser": {
 					"AlbumId": 1,
 					"UserId": 2,
-					"createdAt": "2015-10-21 07:16:45.837 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.837 +00:00"
+					"createdAt": "2015-10-21 08:21:19.788 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.788 +00:00"
 				}
 			},
 			{
@@ -195,15 +195,15 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21T07:16:45.661Z",
-				"updatedAt": "2015-10-21T07:16:45.661Z",
+				"createdAt": "2015-10-21T08:21:19.617Z",
+				"updatedAt": "2015-10-21T08:21:19.617Z",
+				"deletedAt": null,
 				"AlbumUser": {
 					"AlbumId": 1,
 					"UserId": 3,
-					"createdAt": "2015-10-21 07:16:45.838 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.838 +00:00"
+					"createdAt": "2015-10-21 08:21:19.789 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.789 +00:00"
 				}
 			},
 			{
@@ -220,15 +220,15 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21T07:16:45.662Z",
-				"updatedAt": "2015-10-21T07:16:45.662Z",
+				"createdAt": "2015-10-21T08:21:19.618Z",
+				"updatedAt": "2015-10-21T08:21:19.618Z",
+				"deletedAt": null,
 				"AlbumUser": {
 					"AlbumId": 1,
 					"UserId": 4,
-					"createdAt": "2015-10-21 07:16:45.838 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.838 +00:00"
+					"createdAt": "2015-10-21 08:21:19.790 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.790 +00:00"
 				}
 			},
 			{
@@ -245,15 +245,15 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21T07:16:45.662Z",
-				"updatedAt": "2015-10-21T07:16:45.662Z",
+				"createdAt": "2015-10-21T08:21:19.619Z",
+				"updatedAt": "2015-10-21T08:21:19.619Z",
+				"deletedAt": null,
 				"AlbumUser": {
 					"AlbumId": 1,
 					"UserId": 5,
-					"createdAt": "2015-10-21 07:16:45.839 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.839 +00:00"
+					"createdAt": "2015-10-21 08:21:19.790 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.790 +00:00"
 				}
 			},
 			{
@@ -270,15 +270,15 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21T07:16:45.663Z",
-				"updatedAt": "2015-10-21T07:16:46.856Z",
+				"createdAt": "2015-10-21T08:21:19.619Z",
+				"updatedAt": "2015-10-21T08:21:20.810Z",
+				"deletedAt": null,
 				"AlbumUser": {
 					"AlbumId": 1,
 					"UserId": 6,
-					"createdAt": "2015-10-21 07:16:45.839 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.839 +00:00"
+					"createdAt": "2015-10-21 08:21:19.791 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.791 +00:00"
 				}
 			}
 		]

@@ -52,7 +52,7 @@ exports.show = function*() {
   }
 
   //如果limit为0，直接跳过下面的过程
-  if(this.query.limit && this.query.limit === '0') {
+  if (this.query.limit && this.query.limit === '0') {
     return;
   }
 
@@ -212,8 +212,7 @@ exports.destroy = function*() {
     id: 'id'
   });
 
-  var album = yield models.Album.find({
-    paranoid: true,
+  var _result = yield models.Album.destroy({
     where: {
       id: this.params.id,
       isBlocked: false,
@@ -221,14 +220,10 @@ exports.destroy = function*() {
     }
   });
 
-  if (!album) {
+  if (_result === 0) {
     return this.body = {
       statusCode: 404,
       message: '相册不存在'
     };
   }
-
-  album = yield album.destroy();
-
-  this.body = album.toJSON();
 };

@@ -21,10 +21,10 @@ output:
 		"weiboToken": null,
 		"qqToken": null,
 		"isBlocked": false,
-		"isDeleted": false,
 		"type": "user",
-		"createdAt": "2015-10-21T07:16:45.659Z",
-		"updatedAt": "2015-10-21T07:16:46.907Z",
+		"createdAt": "2015-10-21T08:21:19.615Z",
+		"updatedAt": "2015-10-21T08:21:20.857Z",
+		"deletedAt": null,
 		"ownAlbums": [
 			{
 				"id": 3,
@@ -37,9 +37,9 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.700Z",
-				"updatedAt": "2015-10-21T07:16:45.700Z",
+				"createdAt": "2015-10-21T08:21:19.654Z",
+				"updatedAt": "2015-10-21T08:21:19.654Z",
+				"deletedAt": null,
 				"UserId": 1
 			},
 			{
@@ -53,25 +53,9 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:47.055Z",
-				"updatedAt": "2015-10-21T07:16:47.055Z",
-				"UserId": 1
-			},
-			{
-				"id": 1,
-				"title": "标题改改",
-				"coverUrl": null,
-				"description": "描述改改",
-				"isShare": true,
-				"isPublic": true,
-				"isShowRawInfo": true,
-				"allowLike": true,
-				"allowComment": true,
-				"isBlocked": false,
-				"isDeleted": true,
-				"createdAt": "2015-10-21T07:16:45.697Z",
-				"updatedAt": "2015-10-21T07:16:47.162Z",
+				"createdAt": "2015-10-21T08:21:21.006Z",
+				"updatedAt": "2015-10-21T08:21:21.006Z",
+				"deletedAt": null,
 				"UserId": 1
 			}
 		]

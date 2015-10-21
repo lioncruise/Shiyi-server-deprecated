@@ -12,8 +12,8 @@ output:
 			"id": 5,
 			"type": "C",
 			"content": null,
-			"createdAt": "2015-10-21T07:16:47.342Z",
-			"updatedAt": "2015-10-21T07:16:47.342Z",
+			"createdAt": "2015-10-21T08:21:21.285Z",
+			"updatedAt": "2015-10-21T08:21:21.285Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": null,
@@ -22,9 +22,9 @@ output:
 				"id": 7,
 				"content": "一条评论",
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21 07:16:47.337 +00:00",
-				"updatedAt": "2015-10-21 07:16:47.337 +00:00",
+				"createdAt": "2015-10-21 08:21:21.280 +00:00",
+				"updatedAt": "2015-10-21 08:21:21.280 +00:00",
+				"deletedAt": null,
 				"PictureId": 4,
 				"UserId": 1,
 				"ActionId": 1,
@@ -46,18 +46,18 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21 07:16:45.659 +00:00",
-				"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+				"createdAt": "2015-10-21 08:21:19.615 +00:00",
+				"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+				"deletedAt": null
 			}
 		},
 		{
 			"id": 6,
 			"type": "C",
 			"content": null,
-			"createdAt": "2015-10-21T07:16:47.354Z",
-			"updatedAt": "2015-10-21T07:16:47.354Z",
+			"createdAt": "2015-10-21T08:21:21.298Z",
+			"updatedAt": "2015-10-21T08:21:21.298Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": null,
@@ -66,25 +66,14 @@ output:
 				"id": 8,
 				"content": "二条评论",
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21 07:16:47.351 +00:00",
-				"updatedAt": "2015-10-21 07:16:47.351 +00:00",
+				"createdAt": "2015-10-21 08:21:21.295 +00:00",
+				"updatedAt": "2015-10-21 08:21:21.295 +00:00",
+				"deletedAt": null,
 				"PictureId": null,
 				"UserId": 1,
 				"ActionId": 2,
 				"OrignalCommentId": 1,
-				"OrignalComment": {
-					"id": 1,
-					"content": "这是用户1对图片1的评论。",
-					"isBlocked": false,
-					"isDeleted": true,
-					"createdAt": "2015-10-21 07:16:45.800 +00:00",
-					"updatedAt": "2015-10-21 07:16:47.365 +00:00",
-					"PictureId": 1,
-					"UserId": 1,
-					"ActionId": null,
-					"OrignalCommentId": null
-				}
+				"OrignalComment": null
 			},
 			"Like": null,
 			"User": {
@@ -101,18 +90,18 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21 07:16:45.659 +00:00",
-				"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+				"createdAt": "2015-10-21 08:21:19.615 +00:00",
+				"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+				"deletedAt": null
 			}
 		},
 		{
 			"id": 7,
 			"type": "L",
 			"content": null,
-			"createdAt": "2015-10-21T07:16:47.398Z",
-			"updatedAt": "2015-10-21T07:16:47.398Z",
+			"createdAt": "2015-10-21T08:21:21.333Z",
+			"updatedAt": "2015-10-21T08:21:21.333Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": 6,
@@ -121,8 +110,8 @@ output:
 			"Like": {
 				"id": 6,
 				"type": "LL",
-				"createdAt": "2015-10-21 07:16:47.394 +00:00",
-				"updatedAt": "2015-10-21 07:16:47.394 +00:00",
+				"createdAt": "2015-10-21 08:21:21.330 +00:00",
+				"updatedAt": "2015-10-21 08:21:21.330 +00:00",
 				"ActionId": null,
 				"PictureId": 4,
 				"UserId": 1
@@ -141,18 +130,18 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21 07:16:45.659 +00:00",
-				"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+				"createdAt": "2015-10-21 08:21:19.615 +00:00",
+				"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+				"deletedAt": null
 			}
 		},
 		{
 			"id": 8,
 			"type": "L",
 			"content": null,
-			"createdAt": "2015-10-21T07:16:47.409Z",
-			"updatedAt": "2015-10-21T07:16:47.409Z",
+			"createdAt": "2015-10-21T08:21:21.350Z",
+			"updatedAt": "2015-10-21T08:21:21.350Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": 7,
@@ -161,8 +150,8 @@ output:
 			"Like": {
 				"id": 7,
 				"type": "DD",
-				"createdAt": "2015-10-21 07:16:47.405 +00:00",
-				"updatedAt": "2015-10-21 07:16:47.405 +00:00",
+				"createdAt": "2015-10-21 08:21:21.346 +00:00",
+				"updatedAt": "2015-10-21 08:21:21.346 +00:00",
 				"ActionId": 2,
 				"PictureId": null,
 				"UserId": 1
@@ -181,10 +170,10 @@ output:
 				"weiboToken": null,
 				"qqToken": null,
 				"isBlocked": false,
-				"isDeleted": false,
 				"type": "user",
-				"createdAt": "2015-10-21 07:16:45.659 +00:00",
-				"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+				"createdAt": "2015-10-21 08:21:19.615 +00:00",
+				"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+				"deletedAt": null
 			}
 		}
 	]

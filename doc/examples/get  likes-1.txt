@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"type": "1",
-		"createdAt": "2015-10-21T07:16:45.789Z",
-		"updatedAt": "2015-10-21T07:16:45.789Z",
+		"createdAt": "2015-10-21T08:21:19.734Z",
+		"updatedAt": "2015-10-21T08:21:19.734Z",
 		"ActionId": 1,
 		"PictureId": null,
 		"UserId": 1,
@@ -29,10 +29,10 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.659 +00:00",
-			"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+			"createdAt": "2015-10-21 08:21:19.615 +00:00",
+			"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+			"deletedAt": null
 		},
 		"Picture": null,
 		"Action": {
@@ -41,9 +41,9 @@ output:
 			"gps": "gps",
 			"position": "position",
 			"isBlocked": false,
-			"isDeleted": false,
-			"createdAt": "2015-10-21 07:16:45.735 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.735 +00:00",
+			"createdAt": "2015-10-21 08:21:19.685 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.685 +00:00",
+			"deletedAt": null,
 			"UserId": 1,
 			"AlbumId": 1
 		}

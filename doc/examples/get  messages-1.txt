@@ -11,8 +11,8 @@ output:
 		"id": 1,
 		"type": "C",
 		"content": null,
-		"createdAt": "2015-10-21T07:16:45.813Z",
-		"updatedAt": "2015-10-21T07:16:45.813Z",
+		"createdAt": "2015-10-21T08:21:19.762Z",
+		"updatedAt": "2015-10-21T08:21:19.762Z",
 		"UserId": 2,
 		"TargetUserId": 1,
 		"LikeId": null,
@@ -21,9 +21,9 @@ output:
 			"id": 2,
 			"content": "这是用户2对图片1的评论。",
 			"isBlocked": false,
-			"isDeleted": false,
-			"createdAt": "2015-10-21 07:16:45.801 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.801 +00:00",
+			"createdAt": "2015-10-21 08:21:19.751 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.751 +00:00",
+			"deletedAt": null,
 			"PictureId": 1,
 			"UserId": 2,
 			"ActionId": null,
@@ -45,10 +45,10 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.659 +00:00",
-			"updatedAt": "2015-10-21 07:16:46.907 +00:00"
+			"createdAt": "2015-10-21 08:21:19.615 +00:00",
+			"updatedAt": "2015-10-21 08:21:20.857 +00:00",
+			"deletedAt": null
 		},
 		"User": {
 			"id": 2,
@@ -64,10 +64,10 @@ output:
 			"weiboToken": null,
 			"qqToken": null,
 			"isBlocked": false,
-			"isDeleted": false,
 			"type": "user",
-			"createdAt": "2015-10-21 07:16:45.661 +00:00",
-			"updatedAt": "2015-10-21 07:16:45.661 +00:00"
+			"createdAt": "2015-10-21 08:21:19.617 +00:00",
+			"updatedAt": "2015-10-21 08:21:19.617 +00:00",
+			"deletedAt": null
 		}
 	}
 }

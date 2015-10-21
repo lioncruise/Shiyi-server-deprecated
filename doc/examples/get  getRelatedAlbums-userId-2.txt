@@ -19,26 +19,26 @@ output:
 			"allowLike": true,
 			"allowComment": true,
 			"isBlocked": false,
-			"isDeleted": false,
-			"createdAt": "2015-10-21T07:16:45.697Z",
-			"updatedAt": "2015-10-21T07:16:45.697Z",
+			"createdAt": "2015-10-21T08:21:19.650Z",
+			"updatedAt": "2015-10-21T08:21:19.650Z",
+			"deletedAt": null,
 			"UserId": 1,
 			"AlbumUser": {
 				"AlbumId": 1,
 				"UserId": 2,
-				"createdAt": "2015-10-21 07:16:45.837 +00:00",
-				"updatedAt": "2015-10-21 07:16:45.837 +00:00"
+				"createdAt": "2015-10-21 08:21:19.788 +00:00",
+				"updatedAt": "2015-10-21 08:21:19.788 +00:00"
 			},
 			"Tags": "爱情,恋人",
-			"pictureCount": 6,
+			"pictureCount": 0,
 			"lastCreatedPicture": {
 				"id": 6,
 				"pictureUrl": "http://test.com/6",
 				"shareNum": 0,
 				"isBlocked": false,
-				"isDeleted": false,
-				"createdAt": "2015-10-21T07:16:45.778Z",
-				"updatedAt": "2015-10-21T07:16:45.778Z",
+				"createdAt": "2015-10-21T08:21:19.723Z",
+				"updatedAt": "2015-10-21T08:21:19.723Z",
+				"deletedAt": null,
 				"AlbumId": 1,
 				"ActionId": 2,
 				"UserId": 1,
@@ -56,10 +56,10 @@ output:
 					"weiboToken": null,
 					"qqToken": null,
 					"isBlocked": false,
-					"isDeleted": false,
 					"type": "user",
-					"createdAt": "2015-10-21 07:16:45.659 +00:00",
-					"updatedAt": "2015-10-21 07:16:45.659 +00:00"
+					"createdAt": "2015-10-21 08:21:19.615 +00:00",
+					"updatedAt": "2015-10-21 08:21:19.615 +00:00",
+					"deletedAt": null
 				}
 			}
 		}

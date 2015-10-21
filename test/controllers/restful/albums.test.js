@@ -219,8 +219,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.data.deletedAt.should.not.be.exactly(null);
-          res.body.data.should.have.properties(['title', 'description', 'isShare', 'isPublic']);
+          res.body.should.not.have.property('data');
           done();
         });
     });
