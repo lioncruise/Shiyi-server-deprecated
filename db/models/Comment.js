@@ -9,13 +9,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
     }
   }, {
+    paranoid: true,
     indexes: [{
       fields: ['ActionId', 'createdAt', 'OrignalCommentId', 'id']
     }, {

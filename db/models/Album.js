@@ -42,17 +42,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
     }
   }, {
+    paranoid: true,
     indexes: [{
-      fields: ['UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+      fields: ['UserId', 'isBlocked', 'createdAt', 'id']
     }, {
-      fields: ['isBlocked', 'isDeleted', 'createdAt']
+      fields: ['isBlocked', 'createdAt']
     }, {
       fields: ['id']
     }],
@@ -80,9 +76,9 @@ module.exports = function(sequelize, DataTypes) {
           that.Tags = yield that.getTagsString();
           that.pictureCount = yield sequelize.model('Picture').getPictureCountByAlbumId(that.id);
           that.lastCreatedPicture = yield sequelize.model('Picture').find({
+            paranoid: true,
             where: {
               isBlocked: false,
-              isDeleted: false,
               AlbumId: that.id
             },
             order: [

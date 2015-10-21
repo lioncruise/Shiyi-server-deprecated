@@ -10,8 +10,10 @@ exports.show = function*() {
     id: 'id'
   });
   var comment = yield models.Comment.find({
+    paranoid: true,
     where: {
-      id: this.params.id
+      id: this.params.id,
+      isBlocked: false
     },
     include: [{
       model: models.User
@@ -101,11 +103,11 @@ exports.destroy = function*() {
   });
 
   var comment = yield models.Comment.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false,
-      UserId: this.session.user.id,
-      isDeleted: false
+      UserId: this.session.user.id
     }
   });
 
@@ -116,9 +118,7 @@ exports.destroy = function*() {
     };
   }
 
-  comment = yield comment.updateAttributes({
-    isDeleted: true
-  });
+  comment = yield comment.destroy();
 
   this.body = comment.toJSON();
 };

@@ -24,10 +24,10 @@ exports.show = function*() {
     }
   });
   var album = yield models.Album.find({
+    paranoid: true,
     where: {
       id: this.params.id,
-      isBlocked: false,
-      isDeleted: false
+      isBlocked: false
     },
     include: [{
       model: models.Picture
@@ -58,10 +58,10 @@ exports.show = function*() {
 
   //根据limit和offset查找picture
   var Pictures = yield models.Picture.findAll({
+    paranoid: true,
     where: {
       AlbumId: this.params.id,
-      isBlocked: false,
-      isDeleted: false
+      isBlocked: false
     },
     offset: this.query.offset || 0,
     limit: (this.query.limit && parseInt(this.query.limit) < 50) ? this.query.limit : 50
@@ -157,11 +157,11 @@ exports.update = function*() {
   });
 
   var album = yield models.Album.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false,
-      UserId: this.session.user.id,
-      isDeleted: false
+      UserId: this.session.user.id
     }
   });
 
@@ -213,11 +213,11 @@ exports.destroy = function*() {
   });
 
   var album = yield models.Album.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false,
-      UserId: this.session.user.id,
-      isDeleted: false
+      UserId: this.session.user.id
     }
   });
 
@@ -228,9 +228,7 @@ exports.destroy = function*() {
     };
   }
 
-  album = yield album.updateAttributes({
-    isDeleted: true
-  });
+  album = yield album.destroy();
 
   this.body = album.toJSON();
 };

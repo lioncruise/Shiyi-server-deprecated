@@ -184,6 +184,7 @@ router.post('/login', function*() {
   });
 
   var user = yield models.User.find({
+    paranoid: true,
     where: {
       phone: this.request.body.phone,
       password: this.request.body.password,
@@ -248,6 +249,7 @@ router.put('/update', function*() {
   });
 
   var user = yield models.User.find({
+    paranoid: true,
     where: {
       id: this.session.user.id,
       isBlocked: false

@@ -13,8 +13,10 @@ var moment = require('moment');
 router.get('/getOwnAlbums', function*() {
   var userId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
   var user = yield models.User.find({
+    paranoid: true,
     where: {
-      id: userId
+      id: userId,
+      isBlocked: false
     }
   });
 
@@ -40,8 +42,10 @@ router.get('/getOwnAlbums', function*() {
 router.get('/getRelatedAlbums', function*() {
   var userId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
   var user = yield models.User.find({
+    paranoid: true,
     where: {
-      id: userId
+      id: userId,
+      isBlocked: false
     }
   });
 

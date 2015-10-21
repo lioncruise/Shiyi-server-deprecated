@@ -9,10 +9,10 @@ exports.show = function*() {
     id: 'id'
   });
   var action = yield models.Action.find({
+    paranoid: true,
     where: {
       id: this.params.id,
-      isBlocked: false,
-      isDeleted: false
+      isBlocked: false
     },
     include: [{
       model: models.Picture
@@ -72,11 +72,11 @@ exports.destroy = function*() {
   });
 
   var action = yield models.Action.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false,
-      UserId: this.session.user.id,
-      isDeleted: false
+      UserId: this.session.user.id
     }
   });
 
@@ -90,14 +90,10 @@ exports.destroy = function*() {
   //删除动态的同时，删除一同上传的照片
   var pictures = yield action.getPictures();
   yield pictures.map(function (pic) {
-    return pic.updateAttributes({
-      isDeleted: true
-    });
+    return pic.destroy();
   });
 
-  action = yield action.updateAttributes({
-    isDeleted: true
-  });
+  action = yield action.destroy();
 
   this.body = action.toJSON();
 };

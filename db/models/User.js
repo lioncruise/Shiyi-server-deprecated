@@ -62,33 +62,29 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: false
     },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
     type: {
       type: DataTypes.ENUM('user', 'crowdfunding', 'member'),
       allowNull: false,
       defaultValue: 'user'
     }
   }, {
+    paranoid: true,
     indexes: [{
-      fields: ['type', 'isBlocked', 'isDeleted', 'phone', 'password']
+      fields: ['type', 'isBlocked', 'phone', 'password']
     }, {
-      fields: ['phone', 'isBlocked', 'isDeleted', 'password']
+      fields: ['phone', 'isBlocked', 'password']
     }, {
-      fields: ['hometown', 'phone', 'isBlocked', 'isDeleted', 'gender', 'password']
+      fields: ['hometown', 'phone', 'isBlocked', 'gender', 'password']
     }, {
-      fields: ['birthday', 'phone', 'isBlocked', 'isDeleted', 'gender', 'password']
+      fields: ['birthday', 'phone', 'isBlocked', 'gender', 'password']
     }, {
-      fields: ['nickname', 'isBlocked', 'isDeleted', 'password']
+      fields: ['nickname', 'isBlocked', 'password']
     }, {
-      fields: ['wechatToken', 'isBlocked', 'isDeleted']
+      fields: ['wechatToken', 'isBlocked']
     }, {
-      fields: ['weiboToken', 'isBlocked', 'isDeleted']
+      fields: ['weiboToken', 'isBlocked']
     }, {
-      fields: ['qqToken', 'isBlocked', 'isDeleted']
+      fields: ['qqToken', 'isBlocked']
     }, {
       fields: ['id']
     }]

@@ -69,7 +69,7 @@ describe('test/controllers/restful/pictures.test.js', function() {
           if (err) {
             return done(err);
           }
-          res.body.data.isDeleted.should.be.true();
+          res.body.data.deletedAt.should.not.be.exactly(null);
           res.body.data.should.have.properties(['pictureUrl']);
           done();
         });

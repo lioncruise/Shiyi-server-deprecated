@@ -9,10 +9,10 @@ exports.show = function*() {
     id: 'id'
   });
   var picture = yield models.Picture.find({
+    paranoid: true,
     where: {
       id: this.params.id,
-      isBlocked: false,
-      isDeleted: false
+      isBlocked: false
     },
     include: [{
       model: models.User
@@ -59,11 +59,11 @@ exports.destroy = function*() {
   });
 
   var picture = yield models.Picture.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false,
-      UserId: this.session.user.id,
-      isDeleted: false
+      UserId: this.session.user.id
     }
   });
 
@@ -74,9 +74,7 @@ exports.destroy = function*() {
     };
   }
 
-  picture = yield picture.updateAttributes({
-    isDeleted: true
-  });
+  picture = yield picture.destroy();
 
   this.body = picture.toJSON();
 };

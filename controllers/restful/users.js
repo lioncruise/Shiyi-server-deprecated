@@ -8,6 +8,7 @@ exports.show = function*() {
     id: 'id'
   });
   var user = yield models.User.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       isBlocked: false

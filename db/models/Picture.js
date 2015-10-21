@@ -1,4 +1,5 @@
 'use strict';
+var moment = require('moment');
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
@@ -16,21 +17,17 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
     }
   }, {
+    paranoid: true,
     indexes: [{
-      fields: ['AlbumId', 'UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+      fields: ['AlbumId', 'UserId', 'isBlocked', 'createdAt', 'id']
     }, {
-      fields: ['ActionId', 'UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+      fields: ['ActionId', 'UserId', 'isBlocked', 'createdAt', 'id']
     }, {
-      fields: ['UserId', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+      fields: ['UserId', 'isBlocked', 'createdAt', 'id']
     }, {
-      fields: ['shareNum', 'isBlocked', 'isDeleted', 'createdAt', 'id']
+      fields: ['shareNum', 'isBlocked', 'createdAt', 'id']
     }, {
       fields: ['id']
     }],
@@ -39,8 +36,10 @@ module.exports = function(sequelize, DataTypes) {
         return yield this.count({
           where: {
             AlbumId: albumId,
-            isDeleted: false,
-            isBlocked: false
+            isBlocked: false,
+            deletedAt: {
+              lt: moment().toISOString()
+            }
           }
         });
       }
