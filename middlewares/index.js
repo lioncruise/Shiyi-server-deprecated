@@ -35,7 +35,7 @@ exports.addStatusCode = function() {
 exports.iOSJsonFormat = function() {
   return function*(next) {
     if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body)) {
-      var _str = JSON.stringify(this.request.body).replace('"@true"', 'true').replace('"@false"', 'false');
+      var _str = JSON.stringify(this.request.body).replace('"@true"', 'true').replace("'@true'", 'true').replace('"@false"', 'false').replace("'@false'", 'false');
       this.request.body = JSON.parse(_str);
     }
 
