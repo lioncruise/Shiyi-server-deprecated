@@ -34,8 +34,8 @@ exports.addStatusCode = function() {
 //针对IOS的json请求修改true,false
 exports.iOSJsonFormat = function() {
   return function*(next) {
-    if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body)) {
-      var _str = JSON.stringify(this.request.body).replace('"@true"', 'true').replace("'@true'", 'true').replace('"@false"', 'false').replace("'@false'", 'false');
+    if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body, true)) {
+      var _str = JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/'@true'/g, 'true').replace(/"@false"/g, 'false').replace(/'@false'/g, 'false');
       this.request.body = JSON.parse(_str);
     }
 
