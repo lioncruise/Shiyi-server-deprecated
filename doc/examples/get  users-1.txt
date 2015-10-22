@@ -22,8 +22,8 @@ output:
 		"qqToken": null,
 		"isBlocked": false,
 		"type": "user",
-		"createdAt": "2015-10-21T09:03:08.469Z",
-		"updatedAt": "2015-10-21T09:03:09.711Z",
+		"createdAt": "2015-10-22T05:07:52.665Z",
+		"updatedAt": "2015-10-22T05:07:54.104Z",
 		"deletedAt": null,
 		"ownAlbums": [
 			{
@@ -37,13 +37,29 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-21T09:03:08.506Z",
-				"updatedAt": "2015-10-21T09:03:08.506Z",
+				"createdAt": "2015-10-22T05:07:52.707Z",
+				"updatedAt": "2015-10-22T05:07:52.707Z",
 				"deletedAt": null,
 				"UserId": 1
 			},
 			{
 				"id": 4,
+				"title": "默认相册",
+				"coverUrl": null,
+				"description": "默认相册",
+				"isShare": false,
+				"isPublic": false,
+				"isShowRawInfo": true,
+				"allowLike": true,
+				"allowComment": true,
+				"isBlocked": false,
+				"createdAt": "2015-10-22T05:07:54.075Z",
+				"updatedAt": "2015-10-22T05:07:54.075Z",
+				"deletedAt": null,
+				"UserId": 1
+			},
+			{
+				"id": 5,
 				"title": "这是一个新建的相册",
 				"coverUrl": null,
 				"description": "今天天气不错",
@@ -53,8 +69,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-21T09:03:09.837Z",
-				"updatedAt": "2015-10-21T09:03:09.837Z",
+				"createdAt": "2015-10-22T05:07:54.261Z",
+				"updatedAt": "2015-10-22T05:07:54.261Z",
 				"deletedAt": null,
 				"UserId": 1
 			}

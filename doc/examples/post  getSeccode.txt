@@ -16,8 +16,8 @@ output:
 	"statusCode": 200,
 	"data": {
 		"phone": "13009865000",
-		"seccode": "4589",
-		"token": "4ac5b5e9f9e8f9fba7cf745120e67967"
+		"seccode": "7771",
+		"token": "26191b8edf17a30a8b51ca0ca8176492"
 	}
 }
 
@@ -39,8 +39,8 @@ output:
 	"statusCode": 200,
 	"data": {
 		"phone": "13000000003",
-		"seccode": "2941",
-		"token": "4ac5b5e9f9e8f9fba7cf745120e67967"
+		"seccode": "7003",
+		"token": "796de63fc0bd21c5a4a367f8896b2de9"
 	}
 }
 
