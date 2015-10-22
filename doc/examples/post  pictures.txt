@@ -22,7 +22,7 @@ output:
 		"AlbumId": "1",
 		"ActionId": "1",
 		"UserId": 1,
-		"updatedAt": "2015-10-22T05:07:54.777Z",
-		"createdAt": "2015-10-22T05:07:54.777Z"
+		"updatedAt": "2015-10-22T05:14:02.203Z",
+		"createdAt": "2015-10-22T05:14:02.203Z"
 	}
 }

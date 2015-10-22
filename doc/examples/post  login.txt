@@ -28,58 +28,8 @@ output:
 		"qqToken": null,
 		"isBlocked": false,
 		"type": "user",
-		"createdAt": "2015-10-22T05:07:52.665Z",
-		"updatedAt": "2015-10-22T05:07:52.665Z",
-		"deletedAt": null,
-		"ownAlbums": [
-			{
-				"id": 1,
-				"title": "爱情故事",
-				"coverUrl": null,
-				"description": "他与她的爱情",
-				"isShare": true,
-				"isPublic": true,
-				"isShowRawInfo": true,
-				"allowLike": true,
-				"allowComment": true,
-				"isBlocked": false,
-				"createdAt": "2015-10-22T05:07:52.704Z",
-				"updatedAt": "2015-10-22T05:07:52.704Z",
-				"deletedAt": null,
-				"UserId": 1
-			},
-			{
-				"id": 3,
-				"title": "即将被删除的相册",
-				"coverUrl": null,
-				"description": "生的伟大",
-				"isShare": true,
-				"isPublic": true,
-				"isShowRawInfo": true,
-				"allowLike": true,
-				"allowComment": true,
-				"isBlocked": false,
-				"createdAt": "2015-10-22T05:07:52.707Z",
-				"updatedAt": "2015-10-22T05:07:52.707Z",
-				"deletedAt": null,
-				"UserId": 1
-			},
-			{
-				"id": 4,
-				"title": "默认相册",
-				"coverUrl": null,
-				"description": "默认相册",
-				"isShare": false,
-				"isPublic": false,
-				"isShowRawInfo": true,
-				"allowLike": true,
-				"allowComment": true,
-				"isBlocked": false,
-				"createdAt": "2015-10-22T05:07:54.075Z",
-				"updatedAt": "2015-10-22T05:07:54.075Z",
-				"deletedAt": null,
-				"UserId": 1
-			}
-		]
+		"createdAt": "2015-10-22T05:13:59.837Z",
+		"updatedAt": "2015-10-22T05:13:59.837Z",
+		"deletedAt": null
 	}
 }

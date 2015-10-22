@@ -26,7 +26,25 @@ output:
 		"gender": "M",
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
-		"updatedAt": "2015-10-22T05:07:54.057Z",
-		"createdAt": "2015-10-22T05:07:54.057Z"
+		"updatedAt": "2015-10-22T05:14:01.307Z",
+		"createdAt": "2015-10-22T05:14:01.307Z",
+		"ownAlbums": [
+			{
+				"id": 4,
+				"title": "默认相册",
+				"coverUrl": null,
+				"description": "默认相册",
+				"isShare": false,
+				"isPublic": false,
+				"isShowRawInfo": true,
+				"allowLike": true,
+				"allowComment": true,
+				"isBlocked": false,
+				"createdAt": "2015-10-22T05:14:01.312Z",
+				"updatedAt": "2015-10-22T05:14:01.312Z",
+				"deletedAt": null,
+				"UserId": 7
+			}
+		]
 	}
 }
