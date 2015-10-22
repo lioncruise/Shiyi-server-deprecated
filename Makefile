@@ -78,4 +78,7 @@ autod: install
 		-f "~"
 	@$(MAKE) install
 
-.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc
+cloc:
+	@cloc --exclude-dir=node_modules,coverage .
+
+.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc cloc
