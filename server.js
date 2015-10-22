@@ -66,6 +66,9 @@ if (config.debug || !config.isUseRedis) {
 //解析http头
 app.use(formidable());
 
+//针对IOS的json请求修改true,false
+app.use(middlewares.iOSJsonFormat());
+
 //显示参数
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   app.use(middlewares.showBody());

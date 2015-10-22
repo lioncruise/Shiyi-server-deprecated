@@ -28,8 +28,9 @@ config.qiniu = {
 };
 
 config.IOSNotification = {
-  keyFile: null,
-  certFile: null,
+  keyFile: path.join(__dirname, '../crts', 'for apns', 'key.pem'),
+  certFile: path.join(__dirname, '../crts', 'for apns', 'cert.pem'),
+  passphrase: '123456',
   debug: true
 };
 

@@ -31,6 +31,18 @@ exports.addStatusCode = function() {
   };
 };
 
+//针对IOS的json请求修改true,false
+exports.iOSJsonFormat = function() {
+  return function*(next) {
+    if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body)) {
+      var _str = JSON.stringify(this.request.body).replace('"@true"', 'true').replace('"@false"', 'false');
+      this.request.body = JSON.parse(_str);
+    }
+
+    yield next;
+  };
+};
+
 exports.showBody = function() {
   return function*(next) {
     console.log('-----------------this.path--------------------');
