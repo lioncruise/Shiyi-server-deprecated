@@ -197,6 +197,24 @@ router.post('/login', function*() {
   };
 
   this.body = user.toJSON();
+
+  //新建用户后建立用户默认相册
+  yield models.Album.create({
+    UserId: user.id,
+    title: '默认相册',
+    description: '默认相册',
+    isShare: false,
+    isPublic: false,
+    isShowRawInfo: true,
+    allowLike: true,
+    allowComment: true
+  });
+
+  this.body.ownAlbums = yield user.getOwnAlbums();
+
+  for (var i = 0; i < this.body.ownAlbums.length; i++) {
+    this.body.ownAlbums[i].pictureCount = 0;
+  }
 });
 
 //登出
