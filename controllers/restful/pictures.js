@@ -41,7 +41,7 @@ exports.show = function*() {
 
 exports.create = function*() {
   this.verifyParams({
-    pictureUrl: 'url',
+    pictureUrl: 'string',
     AlbumId: 'id',
     ActionId: 'id'
   });
@@ -51,6 +51,16 @@ exports.create = function*() {
   picture = yield picture.save();
 
   this.body = picture.toJSON();
+
+  //如果相册中无coverUrl
+  yield models.Album.update({
+    coverUrl: this.request.body.pictureUrl
+  }, {
+    where: {
+      id: this.request.body.AlbumId,
+      coverUrl: null
+    }
+  });
 };
 
 exports.destroy = function*() {
