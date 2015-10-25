@@ -55,6 +55,9 @@ exports.showBody = function() {
     console.log(this.request.body);
 
     yield next;
+
+    console.log('--------------this.body-----------------');
+    console.log(this.body);
   };
 };
 

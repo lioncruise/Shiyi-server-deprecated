@@ -11,8 +11,8 @@ output:
 		"id": 1,
 		"type": "C",
 		"content": null,
-		"createdAt": "2015-10-22T05:13:59.985Z",
-		"updatedAt": "2015-10-22T05:13:59.985Z",
+		"createdAt": "2015-10-25T12:32:49.493Z",
+		"updatedAt": "2015-10-25T12:32:49.493Z",
 		"UserId": 2,
 		"TargetUserId": 1,
 		"LikeId": null,
@@ -21,8 +21,8 @@ output:
 			"id": 2,
 			"content": "这是用户2对图片1的评论。",
 			"isBlocked": false,
-			"createdAt": "2015-10-22 05:13:59.973 +00:00",
-			"updatedAt": "2015-10-22 05:13:59.973 +00:00",
+			"createdAt": "2015-10-25 12:32:49.480 +00:00",
+			"updatedAt": "2015-10-25 12:32:49.480 +00:00",
 			"deletedAt": null,
 			"PictureId": 1,
 			"UserId": 2,
@@ -46,8 +46,8 @@ output:
 			"qqToken": null,
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-22 05:13:59.837 +00:00",
-			"updatedAt": "2015-10-22 05:14:01.347 +00:00",
+			"createdAt": "2015-10-25 12:32:49.352 +00:00",
+			"updatedAt": "2015-10-25 12:32:50.734 +00:00",
 			"deletedAt": null
 		},
 		"User": {
@@ -65,8 +65,8 @@ output:
 			"qqToken": null,
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-22 05:13:59.839 +00:00",
-			"updatedAt": "2015-10-22 05:13:59.839 +00:00",
+			"createdAt": "2015-10-25 12:32:49.353 +00:00",
+			"updatedAt": "2015-10-25 12:32:49.353 +00:00",
 			"deletedAt": null
 		}
 	}

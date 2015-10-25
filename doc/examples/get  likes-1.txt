@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"type": "1",
-		"createdAt": "2015-10-22T05:13:59.957Z",
-		"updatedAt": "2015-10-22T05:13:59.957Z",
+		"createdAt": "2015-10-25T12:32:49.464Z",
+		"updatedAt": "2015-10-25T12:32:49.464Z",
 		"ActionId": 1,
 		"PictureId": null,
 		"UserId": 1,
@@ -30,8 +30,8 @@ output:
 			"qqToken": null,
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-22 05:13:59.837 +00:00",
-			"updatedAt": "2015-10-22 05:14:01.347 +00:00",
+			"createdAt": "2015-10-25 12:32:49.352 +00:00",
+			"updatedAt": "2015-10-25 12:32:50.734 +00:00",
 			"deletedAt": null
 		},
 		"Picture": null,
@@ -41,8 +41,8 @@ output:
 			"gps": "gps",
 			"position": "position",
 			"isBlocked": false,
-			"createdAt": "2015-10-22 05:13:59.910 +00:00",
-			"updatedAt": "2015-10-22 05:13:59.910 +00:00",
+			"createdAt": "2015-10-25 12:32:49.419 +00:00",
+			"updatedAt": "2015-10-25 12:32:49.419 +00:00",
 			"deletedAt": null,
 			"UserId": 1,
 			"AlbumId": 1

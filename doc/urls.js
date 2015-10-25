@@ -69,7 +69,6 @@ var urls = [{
     content: '这是一条动态呦~',
     gps: 'gps',
     position: 'position',
-    UserId: 1,
     AlbumId: 1
   }
 }, {

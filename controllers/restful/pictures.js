@@ -52,7 +52,7 @@ exports.create = function*() {
 
   this.body = picture.toJSON();
 
-  //如果相册中无coverUrl
+  //如果相册中无coverUrl，则把第一张图作为封面
   yield models.Album.update({
     coverUrl: this.request.body.pictureUrl
   }, {

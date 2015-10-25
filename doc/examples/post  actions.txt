@@ -9,7 +9,6 @@ input:
 	"content": "这是一条动态呦~",
 	"gps": "gps",
 	"position": "position",
-	"UserId": 1,
 	"AlbumId": 1
 }
 
@@ -22,9 +21,9 @@ output:
 		"content": "这是一条动态呦~",
 		"gps": "gps",
 		"position": "position",
-		"UserId": 1,
 		"AlbumId": 1,
-		"updatedAt": "2015-10-22T05:14:01.429Z",
-		"createdAt": "2015-10-22T05:14:01.429Z"
+		"UserId": 1,
+		"updatedAt": "2015-10-25T12:32:50.802Z",
+		"createdAt": "2015-10-25T12:32:50.802Z"
 	}
 }
