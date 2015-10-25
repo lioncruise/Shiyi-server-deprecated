@@ -30,7 +30,7 @@ output:
 		"allowLike": true,
 		"allowComment": true,
 		"UserId": 1,
-		"updatedAt": "2015-10-25T12:32:50.910Z",
-		"createdAt": "2015-10-25T12:32:50.910Z"
+		"updatedAt": "2015-10-25T13:50:18.640Z",
+		"createdAt": "2015-10-25T13:50:18.640Z"
 	}
 }

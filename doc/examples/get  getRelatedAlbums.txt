@@ -3,7 +3,7 @@ url: '/getRelatedAlbums'
 method: 'get'
 
 备注: 
-"后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册，具体可以看加参数请求的doc"
+"后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册"
 
 output: 
 {

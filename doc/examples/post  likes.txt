@@ -12,15 +12,8 @@ input:
 
 output: 
 {
-	"statusCode": 200,
-	"data": {
-		"id": 6,
-		"type": "LL",
-		"PictureId": "4",
-		"UserId": 1,
-		"updatedAt": "2015-10-25T12:32:51.356Z",
-		"createdAt": "2015-10-25T12:32:51.356Z"
-	}
+	"statusCode": 404,
+	"message": "点赞对象不存在"
 }
 
 url: '/likes'
@@ -39,12 +32,12 @@ output:
 {
 	"statusCode": 200,
 	"data": {
-		"id": 7,
+		"id": 6,
 		"type": "DD",
 		"ActionId": "2",
 		"UserId": 1,
-		"updatedAt": "2015-10-25T12:32:51.370Z",
-		"createdAt": "2015-10-25T12:32:51.370Z"
+		"updatedAt": "2015-10-25T13:50:18.866Z",
+		"createdAt": "2015-10-25T13:50:18.866Z"
 	}
 }
 

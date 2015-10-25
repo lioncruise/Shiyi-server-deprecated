@@ -85,13 +85,4 @@ exports.destroy = function*() {
       message: '动态不存在'
     };
   }
-
-  //删除动态的同时，删除一同上传的照片
-  yield models.Picture.destroy({
-    where: {
-      ActionId: this.params.id,
-      isBlocked: false,
-      UserId: this.session.user.id
-    }
-  });
 };

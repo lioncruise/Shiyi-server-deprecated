@@ -165,7 +165,7 @@ var urls = [{
 
 urls.unshift({
   url: '/getOwnAlbums',
-  note: '后面可以加参数，如/getOwnAlbums?userId=2,不加参数默认是查自己的建立相册，具体可以看加参数请求的doc',
+  note: '后面可以加参数，如/getOwnAlbums?userId=2,不加参数默认是查自己的建立相册',
   method: 'get'
 }, {
   url: '/getOwnAlbums?userId=2',
@@ -174,10 +174,19 @@ urls.unshift({
 
 urls.unshift({
   url: '/getRelatedAlbums',
-  note: '后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册，具体可以看加参数请求的doc',
+  note: '后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册',
   method: 'get'
 }, {
   url: '/getRelatedAlbums?userId=2',
+  method: 'get'
+});
+
+urls.unshift({
+  url: '/getActions',
+  note: '后面可以加参数，如/getActions?userId=2,不加参数默认是查自己的全部动态',
+  method: 'get'
+}, {
+  url: '/getActions?userId=2',
   method: 'get'
 });
 

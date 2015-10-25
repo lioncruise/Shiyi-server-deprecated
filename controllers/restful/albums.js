@@ -232,4 +232,16 @@ exports.destroy = function*() {
       message: '相册不存在'
     };
   }
+
+  //删除相册的同时，删除相册中的照片和动态
+  yield models.Action.destroy({
+    where: {
+      AlbumId: this.params.id
+    }
+  });
+  yield models.Picture.destroy({
+    where: {
+      AlbumId: this.params.id
+    }
+  });
 };

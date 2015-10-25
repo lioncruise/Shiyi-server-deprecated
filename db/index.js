@@ -37,6 +37,7 @@ exports.setAssociations = function() {
     through: 'AlbumTag'
   });
   models.Album.hasMany(models.Picture);
+  models.Album.hasMany(models.Action);
   models.Album.belongsToMany(models.User, {
     through: 'AlbumUser'
   });

@@ -8,3 +8,4 @@ require('./albums');
 require('./messages');
 require('./qiniu');
 require('./albumUsers');
+require('./actions');

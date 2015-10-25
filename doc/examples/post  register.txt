@@ -26,8 +26,8 @@ output:
 		"gender": "M",
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
-		"updatedAt": "2015-10-25T12:32:50.692Z",
-		"createdAt": "2015-10-25T12:32:50.692Z",
+		"updatedAt": "2015-10-25T13:50:18.427Z",
+		"createdAt": "2015-10-25T13:50:18.427Z",
 		"ownAlbums": [
 			{
 				"id": 4,
@@ -40,8 +40,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-25T12:32:50.696Z",
-				"updatedAt": "2015-10-25T12:32:50.696Z",
+				"createdAt": "2015-10-25T13:50:18.436Z",
+				"updatedAt": "2015-10-25T13:50:18.436Z",
 				"deletedAt": null,
 				"UserId": 7
 			}

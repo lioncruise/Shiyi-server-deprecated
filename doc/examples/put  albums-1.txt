@@ -27,8 +27,8 @@ output:
 		"allowLike": true,
 		"allowComment": true,
 		"isBlocked": false,
-		"createdAt": "2015-10-25T12:32:49.384Z",
-		"updatedAt": "2015-10-25T12:32:51.013Z",
+		"createdAt": "2015-10-25T13:50:17.090Z",
+		"updatedAt": "2015-10-25T13:50:18.699Z",
 		"deletedAt": null,
 		"UserId": 1
 	}

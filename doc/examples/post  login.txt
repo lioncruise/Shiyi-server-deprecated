@@ -28,8 +28,8 @@ output:
 		"qqToken": null,
 		"isBlocked": false,
 		"type": "user",
-		"createdAt": "2015-10-25T12:32:49.352Z",
-		"updatedAt": "2015-10-25T12:32:49.352Z",
+		"createdAt": "2015-10-25T13:50:17.052Z",
+		"updatedAt": "2015-10-25T13:50:17.052Z",
 		"deletedAt": null
 	}
 }
