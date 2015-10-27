@@ -18,9 +18,11 @@ config.db = {
   storage: path.join(__dirname, '../shiyi.sqlite')
 };
 
-exports.workerNum = 1;
+config.workerNum = 1;
 
-exports.isUseRedis = false;
+config.defaultPictureUrl = "https://dn-itimepost.qbox.me/default.jpg";
+
+config.isUseRedis = false;
 
 config.qiniu = {
   ACCESS_KEY: 'yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC',

@@ -5,6 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
     pictureUrl: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isUrl: true
       }

@@ -1,0 +1,10 @@
+url: '/pictures/2?system=ios'
+
+method: 'del'
+
+
+
+output: 
+{
+	"statusCode": 200
+}

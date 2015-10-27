@@ -1,0 +1,62 @@
+url: '/reports/1?system=ios'
+
+method: 'get'
+
+
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"status": "pending",
+		"createdAt": "2015-10-27T13:12:16.423Z",
+		"updatedAt": "2015-10-27T13:12:16.423Z",
+		"ReporterId": 2,
+		"ActionId": "",
+		"PictureId": "",
+		"AlbumId": "",
+		"UserId": 3,
+		"Action": "",
+		"Picture": "",
+		"Album": "",
+		"Reporter": {
+			"id": 2,
+			"phone": "13000000001",
+			"nickname": "",
+			"password": "e10adc3949ba59abbe56e057f20f883e",
+			"gender": "F",
+			"birthday": "",
+			"hometown": "",
+			"motto": "I love book 1.",
+			"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
+			"wechatToken": "",
+			"weiboToken": "",
+			"qqToken": "",
+			"isBlocked": false,
+			"type": "user",
+			"createdAt": "2015-10-27 13:12:16.245 +00:00",
+			"updatedAt": "2015-10-27 13:12:16.245 +00:00",
+			"deletedAt": ""
+		},
+		"User": {
+			"id": 3,
+			"phone": "13000000002",
+			"nickname": "",
+			"password": "e10adc3949ba59abbe56e057f20f883e",
+			"gender": "F",
+			"birthday": "",
+			"hometown": "",
+			"motto": "I love book 2.",
+			"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
+			"wechatToken": "",
+			"weiboToken": "",
+			"qqToken": "",
+			"isBlocked": false,
+			"type": "user",
+			"createdAt": "2015-10-27 13:12:16.245 +00:00",
+			"updatedAt": "2015-10-27 13:12:16.245 +00:00",
+			"deletedAt": ""
+		}
+	}
+}

@@ -19,8 +19,19 @@ authdev:
 init:
 	@DEBUG=* node --harmony ./init/index.js
 
-doc: fake
-	@NODE_ENV=test node --harmony ./doc/index.js
+doc:
+	@DEBUG=* node --harmony ./init/index.js
+	@DEBUG=* node --harmony ./fake/index.js
+	@NODE_ENV=test node --harmony ./doc/doc_android.js
+	@DEBUG=* node --harmony ./init/index.js
+	@DEBUG=* node --harmony ./fake/index.js
+	@NODE_ENV=test node --harmony ./doc/doc_ios.js
+
+doc_android: fake
+	@NODE_ENV=test node --harmony ./doc/doc_android.js
+
+doc_ios: fake
+	@NODE_ENV=test node --harmony ./doc/doc_ios.js
 
 fake: init
 	@DEBUG=* node --harmony ./fake/index.js
@@ -81,4 +92,4 @@ autod: install
 cloc:
 	@cloc --exclude-dir=node_modules,coverage .
 
-.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc cloc
+.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc cloc doc_android doc_ios

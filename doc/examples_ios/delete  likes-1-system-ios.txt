@@ -1,0 +1,10 @@
+url: '/likes/1?system=ios'
+
+method: 'del'
+
+
+
+output: 
+{
+	"statusCode": 200
+}

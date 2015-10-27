@@ -1,0 +1,35 @@
+url: '/albums/1'
+
+method: 'put'
+
+
+
+input: 
+{
+	"title": "标题改改",
+	"description": "描述改改",
+	"tags": "改",
+	"isShare": false,
+	"isPublic": false
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"title": "标题改改",
+		"coverUrl": "https://dn-itimepost.qbox.me/default.jpg",
+		"description": "描述改改",
+		"isShare": true,
+		"isPublic": true,
+		"isShowRawInfo": true,
+		"allowLike": true,
+		"allowComment": true,
+		"isBlocked": false,
+		"createdAt": "2015-10-27T13:12:13.230Z",
+		"updatedAt": "2015-10-27T13:12:14.680Z",
+		"deletedAt": null,
+		"UserId": 1
+	}
+}

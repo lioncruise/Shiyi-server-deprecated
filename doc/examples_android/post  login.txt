@@ -1,0 +1,35 @@
+url: '/login'
+
+method: 'post'
+
+
+
+input: 
+{
+	"phone": "13000000000",
+	"password": "e10adc3949ba59abbe56e057f20f883e"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"phone": "13000000000",
+		"nickname": null,
+		"password": "e10adc3949ba59abbe56e057f20f883e",
+		"gender": "M",
+		"birthday": null,
+		"hometown": null,
+		"motto": "Just do it.",
+		"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
+		"wechatToken": null,
+		"weiboToken": null,
+		"qqToken": null,
+		"isBlocked": false,
+		"type": "user",
+		"createdAt": "2015-10-27T13:12:13.187Z",
+		"updatedAt": "2015-10-27T13:12:13.187Z",
+		"deletedAt": null
+	}
+}

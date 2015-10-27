@@ -1,0 +1,60 @@
+url: '/albumUsers?system=ios'
+
+method: 'post'
+
+
+
+input: 
+{
+	"AlbumId": "1",
+	"UserId": "1"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"AlbumId": "1",
+		"UserId": "1",
+		"updatedAt": "2015-10-27T13:12:17.813Z",
+		"createdAt": "2015-10-27T13:12:17.813Z"
+	}
+}
+
+url: '/albumUsers?system=ios'
+
+method: 'post'
+
+
+
+input: 
+{
+	"AlbumId": "1",
+	"UserIds": "1,2,3"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": [
+		{
+			"AlbumId": 1,
+			"UserId": 1,
+			"createdAt": "2015-10-27T13:12:17.813Z",
+			"updatedAt": "2015-10-27T13:12:17.813Z"
+		},
+		{
+			"AlbumId": 1,
+			"UserId": 2,
+			"createdAt": "2015-10-27T13:12:16.411Z",
+			"updatedAt": "2015-10-27T13:12:16.411Z"
+		},
+		{
+			"AlbumId": 1,
+			"UserId": 3,
+			"createdAt": "2015-10-27T13:12:16.412Z",
+			"updatedAt": "2015-10-27T13:12:16.412Z"
+		}
+	]
+}
+

@@ -1,0 +1,34 @@
+url: '/albumUsers?system=ios'
+
+method: 'del'
+
+
+
+input: 
+{
+	"AlbumId": "1",
+	"UserId": "1"
+}
+
+output: 
+{
+	"statusCode": 200
+}
+
+url: '/albumUsers?system=ios'
+
+method: 'del'
+
+
+
+input: 
+{
+	"AlbumId": "1",
+	"UserIds": "2,3"
+}
+
+output: 
+{
+	"statusCode": 200
+}
+

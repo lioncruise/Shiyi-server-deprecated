@@ -1,0 +1,43 @@
+url: '/likes?system=ios'
+
+method: 'post'
+
+
+
+input: 
+{
+	"type": "LL",
+	"PictureId": "4"
+}
+
+output: 
+{
+	"statusCode": 404,
+	"message": "点赞对象不存在"
+}
+
+url: '/likes?system=ios'
+
+method: 'post'
+
+
+
+input: 
+{
+	"type": "DD",
+	"ActionId": "2"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 6,
+		"type": "DD",
+		"ActionId": "2",
+		"UserId": 1,
+		"updatedAt": "2015-10-27T13:12:17.928Z",
+		"createdAt": "2015-10-27T13:12:17.928Z"
+	}
+}
+

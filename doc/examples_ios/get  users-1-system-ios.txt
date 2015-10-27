@@ -1,0 +1,63 @@
+url: '/users/1?system=ios'
+
+method: 'get'
+
+
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 1,
+		"phone": "13000000000",
+		"nickname": "我是666",
+		"password": "222222222",
+		"gender": "F",
+		"birthday": "1999-09-09",
+		"hometown": "黑龙江 哈尔滨",
+		"motto": "就是666.",
+		"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
+		"wechatToken": "",
+		"weiboToken": "",
+		"qqToken": "",
+		"isBlocked": false,
+		"type": "user",
+		"createdAt": "2015-10-27T13:12:16.243Z",
+		"updatedAt": "2015-10-27T13:12:17.573Z",
+		"deletedAt": "",
+		"ownAlbums": [
+			{
+				"id": 3,
+				"title": "即将被删除的相册",
+				"coverUrl": "https://dn-itimepost.qbox.me/default.jpg",
+				"description": "生的伟大",
+				"isShare": true,
+				"isPublic": true,
+				"isShowRawInfo": true,
+				"allowLike": true,
+				"allowComment": true,
+				"isBlocked": false,
+				"createdAt": "2015-10-27T13:12:16.287Z",
+				"updatedAt": "2015-10-27T13:12:16.287Z",
+				"deletedAt": "",
+				"UserId": 1
+			},
+			{
+				"id": 5,
+				"title": "这是一个新建的相册",
+				"coverUrl": "https://dn-itimepost.qbox.me/default.jpg",
+				"description": "今天天气不错",
+				"isShare": true,
+				"isPublic": true,
+				"isShowRawInfo": true,
+				"allowLike": true,
+				"allowComment": true,
+				"isBlocked": false,
+				"createdAt": "2015-10-27T13:12:17.732Z",
+				"updatedAt": "2015-10-27T13:12:17.732Z",
+				"deletedAt": "",
+				"UserId": 1
+			}
+		]
+	}
+}

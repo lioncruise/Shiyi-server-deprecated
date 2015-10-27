@@ -1,6 +1,7 @@
 'use strict';
 
 var utils = require('../../utils');
+var config = require('../../config');
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
@@ -44,6 +45,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     avatarUrl: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: config.defaultPictureUrl,
       validate: {
         isUrl: true
       }

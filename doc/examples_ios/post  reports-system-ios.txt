@@ -1,0 +1,96 @@
+url: '/reports?system=ios'
+
+method: 'post'
+
+备注: 
+"可以对Action, Picture, Album, User进行举报"
+
+input: 
+{
+	"ActionId": "2"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 5,
+		"ActionId": "2",
+		"ReporterId": 1,
+		"updatedAt": "2015-10-27T13:12:17.994Z",
+		"createdAt": "2015-10-27T13:12:17.994Z"
+	}
+}
+
+url: '/reports?system=ios'
+
+method: 'post'
+
+备注: 
+"可以对Action, Picture, Album, User进行举报"
+
+input: 
+{
+	"PictureId": "3"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 6,
+		"PictureId": "3",
+		"ReporterId": 1,
+		"updatedAt": "2015-10-27T13:12:18.000Z",
+		"createdAt": "2015-10-27T13:12:18.000Z"
+	}
+}
+
+url: '/reports?system=ios'
+
+method: 'post'
+
+备注: 
+"可以对Action, Picture, Album, User进行举报"
+
+input: 
+{
+	"AlbumId": "2"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 7,
+		"AlbumId": "2",
+		"ReporterId": 1,
+		"updatedAt": "2015-10-27T13:12:18.006Z",
+		"createdAt": "2015-10-27T13:12:18.006Z"
+	}
+}
+
+url: '/reports?system=ios'
+
+method: 'post'
+
+备注: 
+"可以对Action, Picture, Album, User进行举报"
+
+input: 
+{
+	"UserId": "2"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"id": 8,
+		"UserId": "2",
+		"ReporterId": 1,
+		"updatedAt": "2015-10-27T13:12:18.012Z",
+		"createdAt": "2015-10-27T13:12:18.012Z"
+	}
+}
+

@@ -35,11 +35,16 @@ exports.addStatusCode = function() {
 exports.iOSJsonFormat = function() {
   return function*(next) {
     if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body, true)) {
-      var _str = JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/'@true'/g, 'true').replace(/"@false"/g, 'false').replace(/'@false'/g, 'false');
-      this.request.body = JSON.parse(_str);
+      var _str1 = JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/'@true'/g, 'true').replace(/"@false"/g, 'false').replace(/'@false'/g, 'false');
+      this.request.body = JSON.parse(_str1);
     }
 
     yield next;
+
+    if(this.query &&  this.query.system === 'ios' && this.body && isJSON(this.body, true)) {
+      var _str2 = JSON.stringify(this.body).replace(/null/g, '""');
+      this.body = JSON.parse(_str2);
+    }
   };
 };
 

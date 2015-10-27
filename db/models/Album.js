@@ -1,5 +1,7 @@
 'use strict';
 
+var config = require('../../config');
+
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Album', {
     title: {
@@ -11,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     coverUrl: {
       type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: config.defaultPictureUrl,
       validate: {
         isUrl: true
       }

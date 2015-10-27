@@ -1,0 +1,37 @@
+url: '/albums?system=ios'
+
+method: 'post'
+
+
+
+input: 
+{
+	"title": "这是一个新建的相册",
+	"description": "今天天气不错",
+	"tags": "天气,哈工大,风景",
+	"isShare": "@true",
+	"isPublic": "@true",
+	"isShowRawInfo": "@true",
+	"allowLike": "@true",
+	"allowComment": "@true"
+}
+
+output: 
+{
+	"statusCode": 200,
+	"data": {
+		"coverUrl": "https://dn-itimepost.qbox.me/default.jpg",
+		"isBlocked": false,
+		"id": 5,
+		"title": "这是一个新建的相册",
+		"description": "今天天气不错",
+		"isShare": true,
+		"isPublic": true,
+		"isShowRawInfo": true,
+		"allowLike": true,
+		"allowComment": true,
+		"UserId": 1,
+		"updatedAt": "2015-10-27T13:12:17.732Z",
+		"createdAt": "2015-10-27T13:12:17.732Z"
+	}
+}
