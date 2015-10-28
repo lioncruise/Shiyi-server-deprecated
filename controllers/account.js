@@ -125,6 +125,10 @@ router.post('/register', function*() {
       required: true,
       allowEmpty: true,
       max: 50
+    },
+    avatarUrl: {
+      required: false,
+      type: 'url'
     }
   });
 
@@ -144,14 +148,7 @@ router.post('/register', function*() {
   }
 
   try {
-    var user = yield models.User.create({
-      phone: this.request.body.phone,
-      password: this.request.body.password,
-      gender: this.request.body.gender,
-      motto: this.request.body.motto,
-      nickname: this.request.body.nickname,
-      avatarUrl: (this.request.body.avatarUrl)?this.request.body.avatarUrl:"https://dn-itimepost.qbox.me/default.jpg"
-    });
+    var user = yield models.User.create(this.request.body);
 
     this.body = utils.cloneJson(user);
     this.session = {
