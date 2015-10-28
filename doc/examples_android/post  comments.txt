@@ -40,8 +40,8 @@ output:
 		"ActionId": "2",
 		"OrignalCommentId": "1",
 		"UserId": 1,
-		"updatedAt": "2015-10-28T11:10:48.306Z",
-		"createdAt": "2015-10-28T11:10:48.306Z"
+		"updatedAt": "2015-10-28T11:36:51.235Z",
+		"createdAt": "2015-10-28T11:36:51.235Z"
 	}
 }
 

@@ -16,8 +16,8 @@ output:
 	"data": {
 		"AlbumId": "1",
 		"UserId": "1",
-		"updatedAt": "2015-10-28T11:10:57.233Z",
-		"createdAt": "2015-10-28T11:10:57.233Z"
+		"updatedAt": "2015-10-28T11:36:57.913Z",
+		"createdAt": "2015-10-28T11:36:57.913Z"
 	}
 }
 
@@ -40,20 +40,20 @@ output:
 		{
 			"AlbumId": 1,
 			"UserId": 1,
-			"createdAt": "2015-10-28T11:10:57.233Z",
-			"updatedAt": "2015-10-28T11:10:57.233Z"
+			"createdAt": "2015-10-28T11:36:57.913Z",
+			"updatedAt": "2015-10-28T11:36:57.913Z"
 		},
 		{
 			"AlbumId": 1,
 			"UserId": 2,
-			"createdAt": "2015-10-28T11:10:53.840Z",
-			"updatedAt": "2015-10-28T11:10:53.840Z"
+			"createdAt": "2015-10-28T11:36:55.172Z",
+			"updatedAt": "2015-10-28T11:36:55.172Z"
 		},
 		{
 			"AlbumId": 1,
 			"UserId": 3,
-			"createdAt": "2015-10-28T11:10:53.841Z",
-			"updatedAt": "2015-10-28T11:10:53.841Z"
+			"createdAt": "2015-10-28T11:36:55.173Z",
+			"updatedAt": "2015-10-28T11:36:55.173Z"
 		}
 	]
 }

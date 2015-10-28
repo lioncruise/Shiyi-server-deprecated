@@ -22,8 +22,8 @@ output:
 		"qqToken": null,
 		"isBlocked": false,
 		"type": "user",
-		"createdAt": "2015-10-28T11:10:42.609Z",
-		"updatedAt": "2015-10-28T11:10:46.704Z",
+		"createdAt": "2015-10-28T11:36:47.269Z",
+		"updatedAt": "2015-10-28T11:36:50.442Z",
 		"deletedAt": null,
 		"ownAlbums": [
 			{
@@ -37,8 +37,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-28T11:10:42.859Z",
-				"updatedAt": "2015-10-28T11:10:42.859Z",
+				"createdAt": "2015-10-28T11:36:47.451Z",
+				"updatedAt": "2015-10-28T11:36:47.451Z",
 				"deletedAt": null,
 				"UserId": 1
 			},
@@ -53,8 +53,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-28T11:10:47.012Z",
-				"updatedAt": "2015-10-28T11:10:47.012Z",
+				"createdAt": "2015-10-28T11:36:50.650Z",
+				"updatedAt": "2015-10-28T11:36:50.650Z",
 				"deletedAt": null,
 				"UserId": 1
 			}

@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"type": "1",
-		"createdAt": "2015-10-28T11:10:53.354Z",
-		"updatedAt": "2015-10-28T11:10:53.354Z",
+		"createdAt": "2015-10-28T11:36:54.827Z",
+		"updatedAt": "2015-10-28T11:36:54.827Z",
 		"ActionId": 1,
 		"PictureId": "",
 		"UserId": 1,
@@ -30,8 +30,8 @@ output:
 			"qqToken": "",
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-28 11:10:52.582 +00:00",
-			"updatedAt": "2015-10-28 11:10:56.487 +00:00",
+			"createdAt": "2015-10-28 11:36:54.315 +00:00",
+			"updatedAt": "2015-10-28 11:36:57.413 +00:00",
 			"deletedAt": ""
 		},
 		"Picture": "",

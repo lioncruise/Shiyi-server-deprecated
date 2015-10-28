@@ -28,8 +28,8 @@ output:
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
 		"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
-		"updatedAt": "2015-10-28T11:10:46.548Z",
-		"createdAt": "2015-10-28T11:10:46.548Z",
+		"updatedAt": "2015-10-28T11:36:50.322Z",
+		"createdAt": "2015-10-28T11:36:50.322Z",
 		"ownAlbums": [
 			{
 				"id": 4,
@@ -42,8 +42,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-28T11:10:46.603Z",
-				"updatedAt": "2015-10-28T11:10:46.603Z",
+				"createdAt": "2015-10-28T11:36:50.370Z",
+				"updatedAt": "2015-10-28T11:36:50.370Z",
 				"deletedAt": null,
 				"UserId": 7
 			}

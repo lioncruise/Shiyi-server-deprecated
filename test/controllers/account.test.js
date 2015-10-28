@@ -176,7 +176,8 @@ describe('test/controllers/account.test.js', function() {
         password: utility.md5('123456'),
         gender: 'M',
         motto: 'Just do it.',
-        nickname: '一个昵称'
+        nickname: '一个昵称',
+        avatarUrl: "https://dn-itimepost.qbox.me/default.jpg"
       };
       request(server)
         .post('/getSeccode')

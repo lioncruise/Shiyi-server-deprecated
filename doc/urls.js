@@ -30,7 +30,7 @@ var urls = [{
     gender: 'M',
     motto: "Let's go!",
     token: utility.md5('eeeee'),
-    avatarUrl: 'https://dn-itimepost.qbox.me/default.jpg'
+    avatarUrl: "https://dn-itimepost.qbox.me/default.jpg"
   }
 }, {
   url: '/login',
