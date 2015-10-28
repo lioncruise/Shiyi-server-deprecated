@@ -11,14 +11,14 @@ input:
 	"password": "123456789",
 	"gender": "M",
 	"motto": "Let's go!",
-	"token": "86871b9b1ab33b0834d455c540d82e89"
+	"token": "86871b9b1ab33b0834d455c540d82e89",
+	"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg"
 }
 
 output: 
 {
 	"statusCode": 200,
 	"data": {
-		"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
 		"isBlocked": false,
 		"type": "user",
 		"id": 7,
@@ -27,8 +27,9 @@ output:
 		"gender": "M",
 		"motto": "Let's go!",
 		"nickname": "一个很好的昵称",
-		"updatedAt": "2015-10-27T13:12:14.466Z",
-		"createdAt": "2015-10-27T13:12:14.466Z",
+		"avatarUrl": "https://dn-itimepost.qbox.me/default.jpg",
+		"updatedAt": "2015-10-28T11:49:50.712Z",
+		"createdAt": "2015-10-28T11:49:50.712Z",
 		"ownAlbums": [
 			{
 				"id": 4,
@@ -41,8 +42,8 @@ output:
 				"allowLike": true,
 				"allowComment": true,
 				"isBlocked": false,
-				"createdAt": "2015-10-27T13:12:14.471Z",
-				"updatedAt": "2015-10-27T13:12:14.471Z",
+				"createdAt": "2015-10-28T11:49:50.746Z",
+				"updatedAt": "2015-10-28T11:49:50.746Z",
 				"deletedAt": null,
 				"UserId": 7
 			}

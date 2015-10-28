@@ -36,8 +36,8 @@ output:
 		"type": "DD",
 		"ActionId": "2",
 		"UserId": 1,
-		"updatedAt": "2015-10-27T13:12:17.928Z",
-		"createdAt": "2015-10-27T13:12:17.928Z"
+		"updatedAt": "2015-10-28T11:49:58.389Z",
+		"createdAt": "2015-10-28T11:49:58.389Z"
 	}
 }
 

@@ -176,12 +176,46 @@ describe('test/controllers/account.test.js', function() {
         password: utility.md5('123456'),
         gender: 'M',
         motto: 'Just do it.',
-        nickname: '一个昵称'
+        nickname: '一个昵称',
+        avatarUrl: "https://dn-itimepost.qbox.me/default.jpg"
       };
       request(server)
         .post('/getSeccode')
         .send({
           phone: '13009865999',
+          type: 'register'
+        })
+        .end(function(err, res) {
+          var token = res.body.data.token;
+          data.token = token;
+          request(server)
+            .post('/register')
+            .expect('Content-type', 'application/json; charset=utf-8')
+            .expect(200)
+            .send(data)
+            .end(function(err, res) {
+              if (err) {
+                return done(err);
+              }
+              res.body.statusCode.should.be.equal(200);
+              res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+              done();
+            });
+        });
+    });
+
+    it('should register ok', function(done) {
+      var data = {
+        phone: '13009865998',
+        password: utility.md5('123456'),
+        gender: 'M',
+        motto: 'Just do it.',
+        nickname: '一个昵称'
+      };
+      request(server)
+        .post('/getSeccode')
+        .send({
+          phone: '13009865998',
           type: 'register'
         })
         .end(function(err, res) {

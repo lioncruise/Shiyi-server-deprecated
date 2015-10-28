@@ -23,7 +23,7 @@ output:
 		"position": "position",
 		"AlbumId": 1,
 		"UserId": 1,
-		"updatedAt": "2015-10-27T13:12:14.557Z",
-		"createdAt": "2015-10-27T13:12:14.557Z"
+		"updatedAt": "2015-10-28T11:49:50.973Z",
+		"createdAt": "2015-10-28T11:49:50.973Z"
 	}
 }

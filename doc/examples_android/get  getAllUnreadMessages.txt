@@ -12,8 +12,8 @@ output:
 			"id": 5,
 			"type": "C",
 			"content": null,
-			"createdAt": "2015-10-27T13:12:14.798Z",
-			"updatedAt": "2015-10-27T13:12:14.798Z",
+			"createdAt": "2015-10-28T11:49:51.503Z",
+			"updatedAt": "2015-10-28T11:49:51.503Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": null,
@@ -22,8 +22,8 @@ output:
 				"id": 7,
 				"content": "二条评论",
 				"isBlocked": false,
-				"createdAt": "2015-10-27 13:12:14.794 +00:00",
-				"updatedAt": "2015-10-27 13:12:14.794 +00:00",
+				"createdAt": "2015-10-28 11:49:51.495 +00:00",
+				"updatedAt": "2015-10-28 11:49:51.495 +00:00",
 				"deletedAt": null,
 				"PictureId": null,
 				"UserId": 1,
@@ -47,8 +47,8 @@ output:
 				"qqToken": null,
 				"isBlocked": false,
 				"type": "user",
-				"createdAt": "2015-10-27 13:12:13.187 +00:00",
-				"updatedAt": "2015-10-27 13:12:14.498 +00:00",
+				"createdAt": "2015-10-28 11:49:47.767 +00:00",
+				"updatedAt": "2015-10-28 11:49:50.829 +00:00",
 				"deletedAt": null
 			}
 		},
@@ -56,8 +56,8 @@ output:
 			"id": 6,
 			"type": "L",
 			"content": null,
-			"createdAt": "2015-10-27T13:12:14.862Z",
-			"updatedAt": "2015-10-27T13:12:14.862Z",
+			"createdAt": "2015-10-28T11:49:51.616Z",
+			"updatedAt": "2015-10-28T11:49:51.616Z",
 			"UserId": 1,
 			"TargetUserId": 1,
 			"LikeId": 6,
@@ -66,8 +66,8 @@ output:
 			"Like": {
 				"id": 6,
 				"type": "DD",
-				"createdAt": "2015-10-27 13:12:14.858 +00:00",
-				"updatedAt": "2015-10-27 13:12:14.858 +00:00",
+				"createdAt": "2015-10-28 11:49:51.606 +00:00",
+				"updatedAt": "2015-10-28 11:49:51.606 +00:00",
 				"ActionId": 2,
 				"PictureId": null,
 				"UserId": 1
@@ -87,8 +87,8 @@ output:
 				"qqToken": null,
 				"isBlocked": false,
 				"type": "user",
-				"createdAt": "2015-10-27 13:12:13.187 +00:00",
-				"updatedAt": "2015-10-27 13:12:14.498 +00:00",
+				"createdAt": "2015-10-28 11:49:47.767 +00:00",
+				"updatedAt": "2015-10-28 11:49:50.829 +00:00",
 				"deletedAt": null
 			}
 		}

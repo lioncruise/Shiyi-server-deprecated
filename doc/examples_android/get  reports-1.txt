@@ -10,8 +10,8 @@ output:
 	"data": {
 		"id": 1,
 		"status": "pending",
-		"createdAt": "2015-10-27T13:12:13.371Z",
-		"updatedAt": "2015-10-27T13:12:13.371Z",
+		"createdAt": "2015-10-28T11:49:48.746Z",
+		"updatedAt": "2015-10-28T11:49:48.746Z",
 		"ReporterId": 2,
 		"ActionId": null,
 		"PictureId": null,
@@ -35,8 +35,8 @@ output:
 			"qqToken": null,
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-27 13:12:13.189 +00:00",
-			"updatedAt": "2015-10-27 13:12:13.189 +00:00",
+			"createdAt": "2015-10-28 11:49:47.771 +00:00",
+			"updatedAt": "2015-10-28 11:49:47.771 +00:00",
 			"deletedAt": null
 		},
 		"User": {
@@ -54,8 +54,8 @@ output:
 			"qqToken": null,
 			"isBlocked": false,
 			"type": "user",
-			"createdAt": "2015-10-27 13:12:13.190 +00:00",
-			"updatedAt": "2015-10-27 13:12:13.190 +00:00",
+			"createdAt": "2015-10-28 11:49:47.773 +00:00",
+			"updatedAt": "2015-10-28 11:49:47.773 +00:00",
 			"deletedAt": null
 		}
 	}
