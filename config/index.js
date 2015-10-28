@@ -10,9 +10,9 @@ config.db = {
   database: 'shiyi',
   dialect: 'sqlite',
   pool: {
-    max: 10,
-    min: 0,
-    idle: 10000
+    maxConnections: 10,
+    minConnections: 1,
+    maxIdleTime: 10000
   },
   logging: false,
   storage: path.join(__dirname, '../shiyi.sqlite')
