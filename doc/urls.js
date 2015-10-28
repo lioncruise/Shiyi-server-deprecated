@@ -29,7 +29,8 @@ var urls = [{
     password: '123456789',
     gender: 'M',
     motto: "Let's go!",
-    token: utility.md5('eeeee')
+    token: utility.md5('eeeee'),
+    avatarUrl: 'https://dn-itimepost.qbox.me/default.jpg'
   }
 }, {
   url: '/login',

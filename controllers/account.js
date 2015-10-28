@@ -149,7 +149,8 @@ router.post('/register', function*() {
       password: this.request.body.password,
       gender: this.request.body.gender,
       motto: this.request.body.motto,
-      nickname: this.request.body.nickname
+      nickname: this.request.body.nickname,
+      avatarUrl: this.request.body.avatarUrl
     });
 
     this.body = utils.cloneJson(user);
