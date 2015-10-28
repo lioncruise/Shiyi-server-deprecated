@@ -150,7 +150,7 @@ router.post('/register', function*() {
       gender: this.request.body.gender,
       motto: this.request.body.motto,
       nickname: this.request.body.nickname,
-      avatarUrl: this.request.body.avatarUrl
+      avatarUrl: (this.request.body.avatarUrl)?this.request.body.avatarUrl:"https://dn-itimepost.qbox.me/default.jpg"
     });
 
     this.body = utils.cloneJson(user);
