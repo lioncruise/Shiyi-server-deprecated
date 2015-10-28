@@ -92,4 +92,11 @@ autod: install
 cloc:
 	@cloc --exclude-dir=node_modules,coverage .
 
-.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc cloc doc_android doc_ios
+doc_update:
+	cd ../shiyi-doc
+	git add -A
+	git commit -am "update"
+	git push origin master
+	cd ../shiyi-server
+
+.PHONY: start dev production_dev authdev init fake install jshint test testwithoutfake test-all test-cov cov clean autod doc cloc doc_android doc_ios doc_update

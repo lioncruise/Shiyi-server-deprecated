@@ -71,7 +71,7 @@ var getFileString = function(url, method, note, input, output) {
 var processes = function*(isIOS) {
   var dirName = isIOS ? 'examples_ios' : 'examples_android';
 
-  yield fs.remove(path.join(__dirname, dirName));
+  yield fs.remove(path.join(__dirname, '../../shiyi-doc/', dirName));
 
   for (var i = 0; i < urls.length; i++) {
     var url = urls[i];
@@ -94,7 +94,7 @@ var processes = function*(isIOS) {
       fileString += (yield agent(url.url, url.method, url.note, url.input, true));
     }
 
-    var filePath = path.join(__dirname, dirName, url.method + '  ' + url.url.substring(1).replace(/\//g, '-').replace(/\?/g, '-').replace(/=/g, '-') + '.txt');
+    var filePath = path.join(__dirname, '../../shiyi-doc/', dirName, url.method + '  ' + url.url.substring(1).replace(/\//g, '-').replace(/\?/g, '-').replace(/=/g, '-') + '.txt');
     yield fs.outputFile(filePath, fileString);
 
     debug(url.method + ' ' + url.url + ' doc for ' + (isIOS ? 'ios' : 'android') + ' build finish.');

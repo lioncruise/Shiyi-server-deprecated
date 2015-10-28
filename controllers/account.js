@@ -128,7 +128,7 @@ router.post('/register', function*() {
     },
     avatarUrl: {
       required: false,
-      type: 'url'
+      type: 'string'
     }
   });
 

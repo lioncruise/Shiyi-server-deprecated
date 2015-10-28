@@ -1,14 +1,14 @@
 'use strict';
+
 var moment = require('moment');
+var modelUtils = require('./modelUtils');
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
     pictureUrl: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isUrl: true
-      }
+      get: modelUtils.getUrlFunction('pictureUrl')
     },
     shareNum: {
       type: DataTypes.INTEGER,

@@ -2,6 +2,7 @@
 
 var utils = require('../../utils');
 var config = require('../../config');
+var modelUtils = require('./modelUtils');
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
@@ -47,9 +48,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: config.defaultPictureUrl,
-      validate: {
-        isUrl: true
-      }
+      get: modelUtils.getUrlFunction('avatarUrl')
     },
     wechatToken: {
       type: DataTypes.STRING

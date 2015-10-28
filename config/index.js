@@ -20,13 +20,14 @@ config.db = {
 
 config.workerNum = 1;
 
-config.defaultPictureUrl = "https://dn-itimepost.qbox.me/default.jpg";
+config.defaultPictureUrl = "default";
 
 config.isUseRedis = false;
 
 config.qiniu = {
   ACCESS_KEY: 'yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC',
-  SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2'
+  SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2',
+  domain: 'dn-itimepost.qbox.me'
 };
 
 config.IOSNotification = {

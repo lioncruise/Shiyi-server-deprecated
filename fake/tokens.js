@@ -13,6 +13,12 @@ tokens.push({
 });
 
 tokens.push({
+  phone: '15945990589',
+  token: utility.md5('eeeee'),
+  type: 'register'
+});
+
+tokens.push({
   phone: '13000000001',
   token: utility.md5('eeeee'),
   type: 'register'

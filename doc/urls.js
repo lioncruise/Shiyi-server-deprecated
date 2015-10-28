@@ -24,13 +24,13 @@ var urls = [{
   url: '/register',
   method: 'post',
   input: {
-    phone: '15555555550',
+    phone: '15945990589',
     nickname: '一个很好的昵称',
     password: '123456789',
     gender: 'M',
     motto: "Let's go!",
     token: utility.md5('eeeee'),
-    avatarUrl: "https://dn-itimepost.qbox.me/default.jpg"
+    avatarUrl: "oijsdfo"
   }
 }, {
   url: '/login',
@@ -228,7 +228,7 @@ urls.push({
   url: '/pictures',
   method: 'post',
   input: {
-    pictureUrl: 'http://test.com/10086',
+    pictureUrl: 'lsadjfo',
     AlbumId: '1',
     ActionId: '1'
   }
