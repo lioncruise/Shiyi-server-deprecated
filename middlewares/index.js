@@ -3,7 +3,7 @@
 var isJSON = require('is-json');
 var debug = require('debug')('middlewares/index');
 
-var urlsWithoutSession = ['/', '/test', '/getSeccode', '/changePassword', '/register', '/login', '/logout', '/getVersion'];
+var urlsWithoutSession = ['/', '/test', '/getSeccode', '/changePassword', '/register', '/login', '/logout', '/getVersion', '/getQiniuUptoken'];
 
 //如无错误发生，添加200状态码
 exports.addStatusCode = function() {
