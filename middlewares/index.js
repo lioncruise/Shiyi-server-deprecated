@@ -3,27 +3,33 @@
 var isJSON = require('is-json');
 var debug = require('debug')('middlewares/index');
 
-var urlsWithoutSession = ['/', '/test', '/getSeccode', '/changePassword', '/register', '/login', '/logout', '/getVersion', '/getQiniuUptoken'];
+var urlsWithoutSession = ['/', '/test', '/getSeccode', '/changePassword',
+  '/register', '/login', '/logout', '/getVersion',
+  '/getQiniuUptoken'
+];
 
-//如无错误发生，添加200状态码
+
 exports.addStatusCode = function() {
   return function*(next) {
     yield next;
     debug('It is addStatusCode middleware');
 
-    if (this.body && this.body.message && this.body.message === 'Validation Failed') {
-      this.status = 200;
-      return this.body.statusCode = 422;
-    }
+    if (this.body) {
+      if (this.body.message && this.body.message === 'Validation Failed') {
+        //如Validation Failed，修改status为200，添加422状态码
+        this.status = 200;
+        return this.body.statusCode = 422;
+      }
 
-    if (this.body && !this.body.statusCode) {
-      return this.body = {
-        statusCode: 200,
-        data: this.body
-      };
-    }
-
-    if (!this.body) {
+      if (!this.body.statusCode) {
+        //如无错误发生，添加200状态码
+        return this.body = {
+          statusCode: 200,
+          data: this.body
+        };
+      }
+    } else {
+      //如空body，添加200状态码
       return this.body = {
         statusCode: 200
       };
@@ -31,19 +37,18 @@ exports.addStatusCode = function() {
   };
 };
 
-//针对IOS的json请求修改true,false
 exports.iOSJsonFormat = function() {
   return function*(next) {
-    if(this.query &&  this.query.system === 'ios' && this.request.body && isJSON(this.request.body, true)) {
-      var _str1 = JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/'@true'/g, 'true').replace(/"@false"/g, 'false').replace(/'@false'/g, 'false');
-      this.request.body = JSON.parse(_str1);
+    //针对IOS的json请求修改true,false
+    if (this.query && this.query.system === 'ios' && this.request.body && isJSON(this.request.body, true)) {
+      this.request.body = JSON.parse(JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/"@false"/g, 'false'));
     }
 
     yield next;
 
-    if(this.query &&  this.query.system === 'ios' && this.body && isJSON(this.body, true)) {
-      var _str2 = JSON.stringify(this.body).replace(/null/g, '""');
-      this.body = JSON.parse(_str2);
+    //针对IOS的json请求修改Null返回
+    if (this.query && this.query.system === 'ios' && this.body && isJSON(this.body, true)) {
+      this.body = JSON.parse(JSON.stringify(this.body).replace(/null/g, '""'));
     }
   };
 };
@@ -89,14 +94,7 @@ exports.auth = function*(next) {
           "gender": "M",
           "birthday": '1993-10-11',
           "hometown": '黑龙江 哈尔滨',
-          "motto": "Do cool things that matter.",
-          "avatarUrl": null,
-          "wechatToken": null,
-          "weiboToken": null,
-          "qqToken": null,
-          "isBlocked": false,
-          "createdAt": "2015-09-09T05:43:11.021Z",
-          "updatedAt": "2015-09-09T05:43:11.021Z"
+          "motto": "Do cool things that matter."
         }
       };
     }

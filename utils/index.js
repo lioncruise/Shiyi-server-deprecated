@@ -4,6 +4,7 @@ var config = require('../config');
 var urllib = require('urllib');
 var notification = require('./notification');
 var debug = require('debug')('utils/index');
+var util = require('util');
 
 exports.notification = notification;
 
@@ -15,9 +16,23 @@ exports.cloneJson = function(obj) {
 
 //发送短信
 exports.sendSMS = function*(phone, code) {
-  //TODO: 完成验证码发送
-
   debug('Security code [%s] has sent to phone [%s].', code, phone);
+
+  if (!config.sms.isOK) {
+    return true;
+  }
+
+  var result = yield urllib.requestThunk(config.sms.url, {
+    method: 'POST',
+    dataType: 'json',
+    data: {
+      apikey: config.sms.apikey,
+      mobile: phone,
+      text: util.format(config.sms.smsTemplate, code)
+    }
+  });
+
+  return (result.data && result.data.result && result.data.result.count > 0);
 };
 
 //获取更新instance时的obj

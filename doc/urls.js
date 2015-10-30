@@ -2,6 +2,30 @@
 var utility = require('utility');
 
 var urls = [{
+  url: '/getAllUnreadMessages',
+  method: 'get'
+}, {
+  url: '/getActions',
+  note: '后面可以加参数，如/getActions?userId=2,不加参数默认是查自己的全部动态',
+  method: 'get'
+}, {
+  url: '/getActions?userId=2',
+  method: 'get'
+}, {
+  url: '/getRelatedAlbums',
+  note: '后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册',
+  method: 'get'
+}, {
+  url: '/getRelatedAlbums?userId=2',
+  method: 'get'
+}, {
+  url: '/getOwnAlbums',
+  note: '后面可以加参数，如/getOwnAlbums?userId=2,不加参数默认是查自己的建立相册',
+  method: 'get'
+}, {
+  url: '/getOwnAlbums?userId=2',
+  method: 'get'
+}, {
   url: '/getSeccode',
   method: 'post',
   note: '获取手机验证码，验证码是4位数字，前后端均验证手机号合法性，用这个正则`(^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$`，用户验证码是否输入正确在前端进行判断，后端没有存储验证码。',
@@ -162,51 +186,13 @@ var urls = [{
 }, {
   url: '/messages/1',
   method: 'get'
-}];
-
-urls.unshift({
-  url: '/getOwnAlbums',
-  note: '后面可以加参数，如/getOwnAlbums?userId=2,不加参数默认是查自己的建立相册',
-  method: 'get'
 }, {
-  url: '/getOwnAlbums?userId=2',
-  method: 'get'
-});
-
-urls.unshift({
-  url: '/getRelatedAlbums',
-  note: '后面可以加参数，如/getRelatedAlbums?userId=2,不加参数默认是查自己的加入相册',
-  method: 'get'
-}, {
-  url: '/getRelatedAlbums?userId=2',
-  method: 'get'
-});
-
-urls.unshift({
-  url: '/getActions',
-  note: '后面可以加参数，如/getActions?userId=2,不加参数默认是查自己的全部动态',
-  method: 'get'
-}, {
-  url: '/getActions?userId=2',
-  method: 'get'
-});
-
-urls.push({
-  url: '/getAllUnreadMessages',
-  method: 'get'
-});
-
-urls.push({
   url: '/getQiniuUptoken',
   method: 'get'
-});
-
-urls.push({
+}, {
   url: '/reports/1',
   method: 'get'
-});
-
-urls.push({
+}, {
   url: '/reports',
   method: 'post',
   input: [{
@@ -219,9 +205,7 @@ urls.push({
     UserId: '2'
   }],
   note: '可以对Action, Picture, Album, User进行举报'
-});
-
-urls.push({
+}, {
   url: '/pictures/1',
   method: 'get'
 }, {
@@ -235,6 +219,6 @@ urls.push({
 }, {
   url: '/pictures/2',
   method: 'delete'
-});
+}];
 
 module.exports = urls;

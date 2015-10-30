@@ -30,6 +30,13 @@ config.qiniu = {
   domain: 'dn-itimepost.qbox.me'
 };
 
+config.sms = {
+  isOK: false,
+  smsTemplate: '【拾忆APP】您的验证码是%s。如非本人操作，请忽略本短信',
+  url: 'http://yunpian.com/v1/sms/send.json',
+  apikey: '2bafb98c7a73e2566f318cf468e096ae'
+};
+
 config.IOSNotification = {
   keyFile: path.join(__dirname, '../crts', 'for apns', 'key.pem'),
   certFile: path.join(__dirname, '../crts', 'for apns', 'cert.pem'),
