@@ -20,7 +20,7 @@ config.db = {
 
 config.workerNum = 1;
 
-config.defaultPictureUrl = "default";
+config.defaultPictureKey = "default";
 
 config.isUseRedis = false;
 

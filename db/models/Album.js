@@ -12,11 +12,10 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
-    coverUrl: {
+    coverKey: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: config.defaultPictureUrl,
-      get: modelUtils.getUrlFunction('coverUrl')
+      defaultValue: config.defaultPictureKey
     },
     description: {
       type: DataTypes.STRING
@@ -55,6 +54,11 @@ module.exports = function(sequelize, DataTypes) {
     }, {
       fields: ['id']
     }],
+    getterMethods: {
+      coverUrl: function() {
+        return modelUtils.getUrlFunction(this.coverKey);
+      }
+    },
     instanceMethods: {
       getTagsString: function() {
         var that = this;

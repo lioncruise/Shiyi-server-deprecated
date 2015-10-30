@@ -6,42 +6,42 @@ var debug = require('debug')('fake/pictures');
 var pictures = [];
 
 pictures.push({
-  pictureUrl: 'http://test.com/1',
+  pictureKey: 'http://test.com/1',
   AlbumId: 1,
   ActionId: 1,
   UserId: 1
 });
 
 pictures.push({
-  pictureUrl: 'http://test.com/2',
+  pictureKey: 'http://test.com/2',
   AlbumId: 1,
   ActionId: 1,
   UserId: 1
 });
 
 pictures.push({
-  pictureUrl: 'http://test.com/3',
+  pictureKey: 'http://test.com/3',
   AlbumId: 1,
   ActionId: 1,
   UserId: 1
 });
 
 pictures.push({
-  pictureUrl: 'http://test.com/4',
+  pictureKey: 'http://test.com/4',
   AlbumId: 1,
   ActionId: 2,
   UserId: 1
 });
 
 pictures.push({
-  pictureUrl: 'http://test.com/5',
+  pictureKey: 'http://test.com/5',
   AlbumId: 1,
   ActionId: 2,
   UserId: 1
 });
 
 pictures.push({
-  pictureUrl: 'http://test.com/6',
+  pictureKey: 'http://test.com/6',
   AlbumId: 1,
   ActionId: 2,
   UserId: 1

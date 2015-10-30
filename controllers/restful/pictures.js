@@ -3,6 +3,7 @@
 var models = require('../../db').models;
 var utils = require('../../utils');
 var copy = require('copy-to');
+var config = require('../../config');
 
 exports.show = function*() {
   this.verifyParams({
@@ -41,7 +42,7 @@ exports.show = function*() {
 
 exports.create = function*() {
   this.verifyParams({
-    pictureUrl: 'string',
+    pictureKey: 'string',
     AlbumId: 'id',
     ActionId: 'id'
   });
@@ -52,13 +53,13 @@ exports.create = function*() {
 
   this.body = picture.toJSON();
 
-  //如果相册中无coverUrl，则把第一张图作为封面
+  //如果相册中无coverKey，则把第一张图作为封面
   yield models.Album.update({
-    coverUrl: this.request.body.pictureUrl
+    coverKey: this.request.body.pictureKey
   }, {
     where: {
       id: this.request.body.AlbumId,
-      coverUrl: null
+      coverKey: config.defaultPictureKey
     }
   });
 };

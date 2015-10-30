@@ -126,9 +126,10 @@ router.post('/register', function*() {
       allowEmpty: true,
       max: 50
     },
-    avatarUrl: {
+    avatarKey: {
       required: false,
-      type: 'string'
+      type: 'string',
+      allowEmpty: true
     }
   });
 

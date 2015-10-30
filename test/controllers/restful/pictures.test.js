@@ -17,7 +17,15 @@ describe('test/controllers/restful/pictures.test.js', function() {
       request(server)
         .get('/pictures/1')
         .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200, done);
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+          res.body.statusCode.should.equal(200);
+          res.body.data.should.have.properties(['pictureUrl']);
+          done();
+        });
     });
 
     it('should get status 404', function(done) {
@@ -38,7 +46,7 @@ describe('test/controllers/restful/pictures.test.js', function() {
 
   describe('POST /pictures', function() {
     var picture = {
-      pictureUrl: 'http://test.com/10086',
+      pictureKey: 'sadjfo',
       AlbumId: '1',
       ActionId: '1'
     };

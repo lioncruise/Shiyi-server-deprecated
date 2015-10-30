@@ -5,10 +5,9 @@ var modelUtils = require('./modelUtils');
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
-    pictureUrl: {
+    pictureKey: {
       type: DataTypes.STRING,
-      allowNull: false,
-      get: modelUtils.getUrlFunction('pictureUrl')
+      allowNull: false
     },
     shareNum: {
       type: DataTypes.INTEGER,
@@ -21,6 +20,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     paranoid: true,
+    getterMethods: {
+      pictureUrl: function() {
+        return modelUtils.getUrlFunction(this.pictureKey);
+      }
+    },
     indexes: [{
       fields: ['AlbumId', 'UserId', 'isBlocked', 'createdAt', 'id']
     }, {

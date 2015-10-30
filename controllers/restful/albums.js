@@ -94,6 +94,11 @@ exports.create = function*() {
       required: true,
       allowEmpty: true
     },
+    coverKey: {
+      type: 'string',
+      required: false,
+      allowEmpty: false
+    },
     isShare: 'bool',
     isPublic: 'bool',
     isShowRawInfo: 'bool',
@@ -134,6 +139,11 @@ exports.update = function*() {
       type: 'string',
       required: false,
       allowEmpty: true
+    },
+    coverKey: {
+      type: 'string',
+      required: false,
+      allowEmpty: false
     },
     tags: {
       type: 'string',

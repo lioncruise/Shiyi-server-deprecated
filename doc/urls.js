@@ -30,7 +30,7 @@ var urls = [{
     gender: 'M',
     motto: "Let's go!",
     token: utility.md5('eeeee'),
-    avatarUrl: "oijsdfo"
+    avatarKey: "oijsdfo"
   }
 }, {
   url: '/login',
@@ -228,7 +228,7 @@ urls.push({
   url: '/pictures',
   method: 'post',
   input: {
-    pictureUrl: 'lsadjfo',
+    pictureKey: 'lsadjfo',
     AlbumId: '1',
     ActionId: '1'
   }

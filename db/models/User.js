@@ -44,11 +44,10 @@ module.exports = function(sequelize, DataTypes) {
         len: [0, 50]
       }
     },
-    avatarUrl: {
+    avatarKey: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: config.defaultPictureUrl,
-      get: modelUtils.getUrlFunction('avatarUrl')
+      defaultValue: config.defaultPictureKey
     },
     wechatToken: {
       type: DataTypes.STRING
@@ -71,6 +70,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     paranoid: true,
+    getterMethods: {
+      avatarUrl: function() {
+        return modelUtils.getUrlFunction(this.avatarKey);
+      }
+    },
     indexes: [{
       fields: ['type', 'isBlocked', 'phone', 'password']
     }, {
