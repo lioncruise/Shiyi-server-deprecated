@@ -177,7 +177,7 @@ describe('test/controllers/account.test.js', function() {
         gender: 'M',
         motto: 'Just do it.',
         nickname: '一个昵称',
-        avatarUrl: "https://dn-itimepost.qbox.me/default.jpg"
+        avatarKey: '12345'
       };
       request(server)
         .post('/getSeccode')
@@ -199,6 +199,7 @@ describe('test/controllers/account.test.js', function() {
               }
               res.body.statusCode.should.be.equal(200);
               res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
+              res.body.data.should.have.property('avatarKey').with.lengthOf(5);
               done();
             });
         });

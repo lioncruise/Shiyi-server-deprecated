@@ -70,9 +70,9 @@ app.use(formidable());
 app.use(middlewares.iOSJsonFormat());
 
 //显示参数
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+//if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   app.use(middlewares.showBody());
-}
+//}
 
 //参数验证
 app.use(parameter(app));
