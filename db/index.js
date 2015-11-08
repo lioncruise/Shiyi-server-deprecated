@@ -5,6 +5,12 @@ var sqlite3 = require('sqlite3');
 var config = require('../config');
 var path = require('path');
 
+var types = require('pg').types;
+var timestampOID = 1114;
+types.setTypeParser(1114, function(stringValue) {
+  return new Date( Date.parse(stringValue + "0000") );
+});
+
 var sequelize = new Sequelize(config.db.database, null, null, config.db);
 
 var models = {};
