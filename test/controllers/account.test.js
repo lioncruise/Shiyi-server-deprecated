@@ -200,6 +200,7 @@ describe('test/controllers/account.test.js', function() {
               res.body.statusCode.should.be.equal(200);
               res.body.data.should.have.properties(['phone', 'gender', 'motto', 'id', 'isBlocked']);
               res.body.data.should.have.property('avatarKey').with.lengthOf(5);
+              res.body.data.avatarUrl.should.be.a.String().and.match(/.*12345.*/);
               done();
             });
         });
