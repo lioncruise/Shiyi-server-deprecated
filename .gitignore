@@ -3,6 +3,7 @@ logs
 *.log
 
 # Runtime data
+data
 pids
 *.pid
 *.seed
@@ -26,8 +27,11 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
+# babel out directory
+out
+
+# OSX directory useless file
 .DS_Store
 
-shiyi.sqlite
-
+# intellij idea directory
 .idea

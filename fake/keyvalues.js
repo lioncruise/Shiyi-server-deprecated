@@ -1,6 +1,6 @@
 'use strict';
 
-var db = require('../db');
+var db = require('../src/db');
 var debug = require('debug')('fake/keyvalues');
 
 var keyvalues = [];

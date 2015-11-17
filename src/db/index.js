@@ -10,14 +10,24 @@ var sequelize = new Sequelize(config.db.database, null, null, config.db);
 var models = {};
 exports.models = models;
 
-var modelNames = ['User', 'Album', 'Tag', 'Action', 'Picture', 'Like', 'Message', 'Comment', 'Report', 'Feedback', 'AlbumTag', 'AlbumUser', 'Keyvalue', 'Admin', 'Token'];
+var modelNames = ['Action', 'Admin', 'Album', 'AlbumTag',
+  'AlbumUser', 'Comment', 'Feedback', 'Keyvalue', 'Like',
+  'Memory', 'Message', 'Picture', 'Report',
+  'Story', 'Tag', 'Token', 'User'
+];
 
+/**
+ * 定义每一个类型
+ */
 exports.define = function() {
   modelNames.forEach(function(modelName) {
     models[modelName] = sequelize.import(path.join(__dirname, 'models', modelName + '.js'));
   });
 };
 
+/**
+ * 建立类型间的关联关系
+ */
 exports.setAssociations = function() {
   models.User.hasMany(models.Album, {
     as: 'ownAlbums'
@@ -93,6 +103,9 @@ exports.setAssociations = function() {
 exports.define();
 exports.setAssociations();
 
+/**
+ * 强制重建数据库
+ */
 exports.init = function*() {
   var syncModelsArray = modelNames.map(function(modelName) {
     return models[modelName].sync({
@@ -103,7 +116,6 @@ exports.init = function*() {
   yield syncModelsArray;
 };
 
-//添加新的消息
 exports.addNewMessage = function*(UserId, TargetUserId, type, CommentId, LikeId, content) {
   var data = {
     type: type,

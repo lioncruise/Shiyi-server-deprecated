@@ -3,10 +3,16 @@
 var moment = require('moment');
 var modelUtils = require('./modelUtils');
 
+//图片或小视频
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
     pictureKey: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    type: {
+      type: DataTypes.ENUM('picture', 'video'),
+      defaultValue: 'picture',
       allowNull: false
     },
     shareNum: {
@@ -25,17 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         return modelUtils.getUrlFunction(this.pictureKey);
       }
     },
-    indexes: [{
-      fields: ['AlbumId', 'UserId', 'isBlocked', 'createdAt', 'id']
-    }, {
-      fields: ['ActionId', 'UserId', 'isBlocked', 'createdAt', 'id']
-    }, {
-      fields: ['UserId', 'isBlocked', 'createdAt', 'id']
-    }, {
-      fields: ['shareNum', 'isBlocked', 'createdAt', 'id']
-    }, {
-      fields: ['id']
-    }],
+    indexes: [],
     classMethods: {
       getPictureCountByAlbumId: function*(albumId) {
         return yield this.count({

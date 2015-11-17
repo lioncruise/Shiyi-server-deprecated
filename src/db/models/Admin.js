@@ -1,7 +1,6 @@
 'use strict';
 
-var utils = require('../../utils');
-
+//管理员
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Admin', {
     username: {
@@ -29,15 +28,9 @@ module.exports = function(sequelize, DataTypes) {
     type: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "user"
+      defaultValue: 'user'
     }
   }, {
-    indexes: [{
-      fields: ['username', 'id']
-    }, {
-      fields: ['type', 'username', 'id']
-    }, {
-      fields: ['id']
-    }]
+    indexes: []
   });
 };

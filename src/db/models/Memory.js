@@ -1,7 +1,8 @@
 'use strict';
 
+//记忆
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Action', {
+  return sequelize.define('Memory', {
     content: {
       type: DataTypes.STRING
     },
@@ -18,10 +19,6 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     paranoid: true,
-    indexes: [{
-      fields: ['UserId', 'isBlocked', 'id']
-    }, {
-      fields: ['id']
-    }]
+    indexes: []
   });
 };

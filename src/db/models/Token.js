@@ -2,6 +2,8 @@
 
 var utils = require('../../utils');
 
+//用户高危操作的token
+//与用户表不关联，只用手机号作为查找主键
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Token', {
     phone: {
@@ -25,12 +27,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    indexes: [{
-      fields: ['phone', 'type', 'id']
-    }, {
-      fields: ['type', 'phone', 'id']
-    }, {
-      fields: ['id']
-    }]
+    indexes: []
   });
 };

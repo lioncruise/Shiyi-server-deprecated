@@ -1,14 +1,14 @@
 {
   "apps": [{
     "name": "shiyi-server",
-    "script": "worker.js",
+    "script": "src/worker.js",
     "watch": false,
     "node_args": "--harmony",
     "merge_logs": true,
     "autorestart": true,
     "instances": 4,
-    "out_file": "logs/node.stdout.log",
-    "error_file": "logs/node.stderr.log",
+    "out_file": "data/logs/node.stdout.log",
+    "error_file": "data/logs/node.stderr.log",
     "env": {
       "NODE_ENV": "production"
     }

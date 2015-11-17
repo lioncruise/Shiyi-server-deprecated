@@ -35,6 +35,10 @@ exports.sendSMS = function*(phone, code) {
   return (result.data && result.data.result && result.data.result.count > 0);
 };
 
+exports.escapeRegExp = function(str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+};
+
 //获取更新instance时的obj
 exports.getUpdateData = function(body, fields) {
   var data = {};

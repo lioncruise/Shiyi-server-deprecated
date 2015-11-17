@@ -1,5 +1,6 @@
 'use strict';
 
+//键值
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Keyvalue', {
     key: {
@@ -9,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     }
   }, {
-    indexes: [{
-      fields: ['key', 'id']
-    }, {
-      fields: ['id']
-    }]
+    indexes: []
   });
 };

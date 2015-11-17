@@ -1,5 +1,6 @@
 'use strict';
 
+//相册和标签的多对多关系
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('AlbumTag', {
     AlbumId: {
@@ -9,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER
     }
   }, {
-    indexes: [{
-      fields: ['AlbumId', 'TagId']
-    }, {
-      fields: ['TagId', 'AlbumId']
-    }]
+    indexes: []
   });
 };

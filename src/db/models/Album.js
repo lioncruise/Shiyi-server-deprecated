@@ -3,6 +3,7 @@
 var config = require('../../config');
 var modelUtils = require('./modelUtils');
 
+//相册
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Album', {
     title: {
@@ -20,25 +21,17 @@ module.exports = function(sequelize, DataTypes) {
     description: {
       type: DataTypes.STRING
     },
-    isShare: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-    },
     isPublic: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
+      type: DataTypes.ENUM('private', 'shared', 'public'),
+      defaultValue: 'shared'
+    },
+    allowComment: {
+      type: DataTypes.ENUM('none', 'collaborators', 'anyone'),
+      defaultValue: 'collaborators'
     },
     isShowRawInfo: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    },
-    allowLike: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-    },
-    allowComment: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
     },
     isBlocked: {
       type: DataTypes.BOOLEAN,
@@ -47,13 +40,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     paranoid: true,
-    indexes: [{
-      fields: ['UserId', 'isBlocked', 'createdAt', 'id']
-    }, {
-      fields: ['isBlocked', 'createdAt']
-    }, {
-      fields: ['id']
-    }],
+    indexes: [],
     getterMethods: {
       coverUrl: function() {
         return modelUtils.getUrlFunction(this.coverKey);

@@ -4,6 +4,7 @@ var utils = require('../../utils');
 var config = require('../../config');
 var modelUtils = require('./modelUtils');
 
+//用户
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
     phone: {
@@ -21,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [2, 10]
       }
     },
-    password: { //前后端密码强度验证
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -64,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     },
     type: {
-      type: DataTypes.ENUM('user', 'crowdfunding', 'member'),
+      type: DataTypes.ENUM('user', 'crowdfunding', 'vip'),
       allowNull: false,
       defaultValue: 'user'
     }
@@ -75,24 +76,6 @@ module.exports = function(sequelize, DataTypes) {
         return modelUtils.getUrlFunction(this.avatarKey);
       }
     },
-    indexes: [{
-      fields: ['type', 'isBlocked', 'phone', 'password']
-    }, {
-      fields: ['phone', 'isBlocked', 'password']
-    }, {
-      fields: ['hometown', 'phone', 'isBlocked', 'gender', 'password']
-    }, {
-      fields: ['birthday', 'phone', 'isBlocked', 'gender', 'password']
-    }, {
-      fields: ['nickname', 'isBlocked', 'password']
-    }, {
-      fields: ['wechatToken', 'isBlocked']
-    }, {
-      fields: ['weiboToken', 'isBlocked']
-    }, {
-      fields: ['qqToken', 'isBlocked']
-    }, {
-      fields: ['id']
-    }]
+    indexes: []
   });
 };

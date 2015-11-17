@@ -83,11 +83,11 @@ clean:
 	@rm -rf node_modules
 	@rm -rf coverage
 
-autod: install
+autod:
 	@./node_modules/.bin/autod \
 		-w \
-		-f "~"
-	@$(MAKE) install
+		-f "~" \
+		-F "~"
 
 cloc:
 	@cloc --exclude-dir=node_modules,coverage .
