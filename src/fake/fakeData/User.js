@@ -20,7 +20,7 @@ for (let i = 1; i <= 10; i++) {
     gender,
     birthday: moment(chance.birthday({ year: chance.year({ min: 1980, max: 2000 }) })).format('YYYY-MM-DD'),
     hometown: hometowns[chance.integer({min: 0, max: 2})],
-    motto: chance.sentence(),
+    motto: chance.sentence({ words: 5 }),
     ip: chance.ip(),
     device,
     androidId: device === 'ios' ? null : chance.android_id(),

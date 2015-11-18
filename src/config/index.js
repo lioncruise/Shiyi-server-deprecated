@@ -19,8 +19,7 @@ config.db = {
     minConnections: 0,
     maxIdleTime: 5000,
   },
-  // logging: false,
-  logging: console.log,
+  logging: false,
 };
 
 config.defaultPictureKey = 'default';

@@ -11,7 +11,7 @@ const memories = [];
 for (let i = 1; i <= 10; i++) {
   let UserId = i;
   for (let j = 1; j <= 3; j++) {
-    let AlbumId = 10 * (i - 1) + j;
+    let AlbumId = 3 * (i - 1) + j;
     for (let k = 1; k <= 3; k++) {
       memories.push({
         content: chance.sentence(),

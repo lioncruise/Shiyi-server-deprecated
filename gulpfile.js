@@ -25,7 +25,7 @@ gulp.task('compile', () => {
 });
 
 gulp.task('jscs', () => {
-  return gulp.src(['./src/db/**/*.js'])
+  return gulp.src(['./src/**/*.js'])
     .pipe(jscs({
       configPath: '.jscsrc',
     }))
@@ -33,7 +33,7 @@ gulp.task('jscs', () => {
 });
 
 gulp.task('lint', () => {
-  return gulp.src(['./src/db/**/*.js'])
+  return gulp.src(['./src/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish))
     .pipe(jshint.reporter('fail'));
@@ -46,12 +46,12 @@ gulp.task('init', ['compile'], (done) => {
   init.run().then(done);
 });
 
-gulp.task('fake', ['compile'], (done) => {
+gulp.task('fake', ['init'], (done) => {
   const fake = require('./out/fake');
   fake.run().then(done);
 });
 
-gulp.task('default', ['lint', 'jscs', 'test', 'compile', 'init'], () => {
+gulp.task('default', ['lint', 'jscs', 'test', 'fake'], () => {
   gulp.src('/')
     .pipe(notify({
       title: 'Task Builder',

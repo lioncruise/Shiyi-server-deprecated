@@ -17,7 +17,11 @@ for (let name of fakeModelNames) {
 
 exports.run = co.wrap(function*() {
   for (let [name, value] of fakeDataArray) {
-    yield db.models[name].create(value);
+    try {
+      yield db.models[name].create(value);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   console.log('Database data fake finish.');
