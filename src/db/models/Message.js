@@ -4,16 +4,15 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Message', {
     type: {
-      type: DataTypes.ENUM('comment', /*评论*/
-        'like', /*点赞*/
+      type: DataTypes.ENUM(
         'broadcast', /*推送通知*/
         'letter' /*用户间的私信*/
-      )
+      ),
     },
     content: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   }, {
-    indexes: []
+    indexes: [],
   });
 };

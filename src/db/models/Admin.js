@@ -9,28 +9,28 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       validate: {
         notEmpty: true,
-      }
+      },
     },
     nickname: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     type: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'user'
-    }
+      defaultValue: 'user',
+    },
   }, {
-    indexes: []
+    indexes: [],
   });
 };

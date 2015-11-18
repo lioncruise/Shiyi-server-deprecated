@@ -1,8 +1,8 @@
 'use strict';
 
-var utils = require('../../utils');
-var config = require('../../config');
-var modelUtils = require('./modelUtils');
+const utils = require('../../utils');
+const config = require('../../config');
+const modelUtils = require('../modelUtils');
 
 //用户
 module.exports = function(sequelize, DataTypes) {
@@ -13,69 +13,85 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       validate: {
         notEmpty: true,
-        is: utils.phoneRegExp
-      }
+        is: utils.phoneRegExp,
+      },
     },
     nickname: {
       type: DataTypes.STRING,
       validate: {
-        len: [2, 10]
-      }
+        len: [1, 20],
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     gender: {
       type: DataTypes.ENUM('F', 'M'),
-      allowNull: false
+      allowNull: false,
     },
     birthday: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     hometown: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     motto: {
       type: DataTypes.STRING,
       validate: {
-        len: [0, 50]
-      }
+        len: [0, 100],
+      },
     },
     avatarKey: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: config.defaultPictureKey
+      defaultValue: config.defaultPictureKey,
     },
     wechatToken: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     weiboToken: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     qqToken: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+    },
+    device: {
+      type: DataTypes.STRING,
+    },
+    androidId: {
+      type: DataTypes.STRING,
+    },
+    appleId: {
+      type: DataTypes.STRING,
+    },
+    ip: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        isIP: true,
+      },
     },
     isBlocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
     type: {
       type: DataTypes.ENUM('user', 'crowdfunding', 'vip'),
       allowNull: false,
-      defaultValue: 'user'
-    }
+      defaultValue: 'user',
+    },
   }, {
     paranoid: true,
     getterMethods: {
-      avatarUrl: function() {
+      avatarUrl() {
         return modelUtils.getUrlFunction(this.avatarKey);
-      }
+      },
     },
-    indexes: []
+    indexes: [],
   });
 };

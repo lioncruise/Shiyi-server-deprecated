@@ -1,12 +1,12 @@
 'use strict';
 
-//相册和标签的多对多关系
+//用户和用户之间的关注关系
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('AlbumTag', {
-    AlbumId: {
+  return sequelize.define('UserUserFollow', {
+    SourceUserId: {
       type: DataTypes.INTEGER,
     },
-    TagId: {
+    TargetUserId: {
       type: DataTypes.INTEGER,
     },
   }, {

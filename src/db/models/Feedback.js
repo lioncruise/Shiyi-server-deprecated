@@ -4,8 +4,8 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Feedback', {
     content: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
   }, {
-    indexes: []
+    indexes: [],
   });
 };

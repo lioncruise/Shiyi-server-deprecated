@@ -4,18 +4,18 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Like', {
     type: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   }, {
     indexes: [],
     classMethods: {
-      getLikeCountByMemoryId: function*(memoryId) {
+      *getLikeCountByMemoryId(memoryId) {
         return yield this.count({
           where: {
-            MemoryId: memoryId
-          }
+            MemoryId: memoryId,
+          },
         });
-      }
-    }
+      },
+    },
   });
 };

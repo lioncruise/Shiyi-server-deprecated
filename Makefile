@@ -17,7 +17,7 @@ authdev:
 	@NODE_ENV=test DEBUG=* ./node_modules/.bin/node-dev --harmony ./worker.js
 
 init:
-	@DEBUG=* node --harmony ./init/index.js
+	@DEBUG=* node --harmony ./out/init/index.js
 
 doc:
 	@DEBUG=* node --harmony ./init/index.js
@@ -87,7 +87,8 @@ autod:
 	@./node_modules/.bin/autod \
 		-w \
 		-f "~" \
-		-F "~"
+		-F "~" \
+		-e 'gulpfile.js'
 
 cloc:
 	@cloc --exclude-dir=node_modules,coverage .

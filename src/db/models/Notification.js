@@ -1,9 +1,9 @@
 'use strict';
 
-//相册标签
+//推送
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Tag', {
-    name: {
+  return sequelize.define('Notification', {
+    content: {
       type: DataTypes.STRING,
     },
   }, {

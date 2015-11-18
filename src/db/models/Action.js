@@ -5,15 +5,15 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Action', {
     type: {
       type: DataTypes.ENUM('upload', 'new', 'open', 'follow', 'estory'),
-      allowNull: false
+      allowNull: false,
     },
     isBlocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     paranoid: true,
-    indexes: []
+    indexes: [],
   });
 };

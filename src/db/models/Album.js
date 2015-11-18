@@ -1,7 +1,7 @@
 'use strict';
 
-var config = require('../../config');
-var modelUtils = require('./modelUtils');
+const config = require('../../config');
+const modelUtils = require('../modelUtils');
 
 //相册
 module.exports = function(sequelize, DataTypes) {
@@ -10,81 +10,85 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     coverKey: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: config.defaultPictureKey
+      defaultValue: config.defaultPictureKey,
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     isPublic: {
       type: DataTypes.ENUM('private', 'shared', 'public'),
-      defaultValue: 'shared'
+      defaultValue: 'shared',
     },
     allowComment: {
       type: DataTypes.ENUM('none', 'collaborators', 'anyone'),
-      defaultValue: 'collaborators'
+      defaultValue: 'collaborators',
     },
     isShowRawInfo: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
     isBlocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     paranoid: true,
     indexes: [],
     getterMethods: {
-      coverUrl: function() {
+      coverUrl() {
         return modelUtils.getUrlFunction(this.coverKey);
-      }
+      },
     },
     instanceMethods: {
-      getTagsString: function() {
-        var that = this;
+      getTagsString() {
+        const _this = this;
         return function*() {
-          return (yield that.getTags()).map(function(Tag) {
-            return Tag.name;
-          }).join(',');
+          return (yield _this.getTags()).map((tag) => tag.name).join(',');
         };
       },
-      toJSONwithAttributes: function(Attributes) {
-        Attributes = ['Tags', 'pictureCount', 'lastCreatedPicture'].concat(Attributes ? Attributes : []);
-        var that = this;
-        var data = that.toJSON();
-        Attributes.forEach(function(attr) {
-          data[attr] = that[attr];
-        });
+
+      toJSONwithistributes(attributes = []) {
+        attributes = ['Tags', 'pictureCount', 'lastCreatedPicture', ...attributes];
+        const data = this.toJSON();
+        attributes.forEach((attr) => this[attr]);
         return data;
       },
-      getRelatedInfo: function() {
-        var that = this;
+
+      getRelatedInfo() {
+        const _this = this;
         return function*() {
-          that.Tags = yield that.getTagsString();
-          that.pictureCount = yield sequelize.model('Picture').getPictureCountByAlbumId(that.id);
-          that.lastCreatedPicture = yield sequelize.model('Picture').find({
+          _this.Tags = yield _this.getTagsString();
+          _this.pictureCount = yield sequelize.model('Picture').getPictureCountByAlbumId(_this.id);
+          _this.lastCreatedPicture = yield sequelize.model('Picture').find({
             paranoid: true,
             where: {
               isBlocked: false,
-              AlbumId: that.id
+              AlbumId: _this.id,
             },
             order: [
-              ['createdAt', 'DESC']
+              [
+                'createdAt',
+                'DESC',
+                ],
             ],
-            include: [{
-              model: sequelize.model('User')
-            }]
+            include: [
+              {
+                model: sequelize.model('User'),
+              },
+              ],
           });
-          return that;
+          return _this;
         };
-      }
-    }
+      },
+
+    },
+
   });
 };

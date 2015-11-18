@@ -1,34 +1,30 @@
 'use strict';
 
-var koa = require('koa');
-var ms = require('ms');
-var staticCache = require('koa-static-cache');
-var rt = require('koa-rt');
-var logger = require('koa-logger');
-var session = require('koa-generic-session');
-var sessionWithoutRedis = require('koa-session');
-var redisStore = require('koa-redis');
-var onerror = require('koa-onerror');
-var https = require('https');
-var parameter = require('koa-parameter');
-var formidable = require('koa-formidable');
-var http = require('http');
-var path = require('path');
-var config = require('./config');
-var router = require('./router');
-var debug = require('debug')('server');
-var middlewares = require('./middlewares');
+const koa = require('koa');
+const ms = require('ms');
+const staticCache = require('koa-static-cache');
+const rt = require('koa-rt');
+const logger = require('koa-logger');
+const session = require('koa-generic-session');
+const sessionWithoutRedis = require('koa-session');
+const redisStore = require('koa-redis');
+const https = require('https');
+const parameter = require('koa-parameter');
+const formidable = require('koa-formidable');
+const http = require('http');
+const path = require('path');
+const config = require('./config');
+const router = require('./router');
+const debug = require('debug')('server');
+const middlewares = require('./middlewares');
 
-var app = koa();
+const app = koa();
 app.name = 'shiyi-server';
 
 //cookie加密
 app.keys = config.keys;
 
 //抓取错误
-if (!config.debug) {
-  onerror(app);
-}
 app.on('error', function(err) {
   console.error(err.stack);
 });
@@ -41,10 +37,10 @@ app.use(middlewares.addStatusCode());
 
 //静态资源缓存
 app.use(staticCache({
-  dir: path.join(__dirname, 'static'),
+  dir: path.join(__dirname, '../static'),
   maxAge: ms('1y'),
   buffer: !config.debug,
-  gzip: !config.debug
+  gzip: !config.debug,
 }));
 
 //显示请求、响应
@@ -55,11 +51,11 @@ if (config.debug) {
 //使用cookie、session
 if (config.debug || !config.isUseRedis) {
   app.use(sessionWithoutRedis({
-    maxAge: ms('365 days')
+    maxAge: ms('365 days'),
   }, app));
 } else {
   app.use(session({
-    store: redisStore()
+    store: redisStore(),
   }));
 }
 

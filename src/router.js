@@ -1,21 +1,22 @@
 'use strict';
 
-var compose = require('koa-compose');
-var Resource = require('koa-resource-router');
-var router = require('koa-router')();
-var middlewares = require('./middlewares');
-var path = require('path');
+const compose = require('koa-compose');
+const Resource = require('koa-resource-router');
+const router = require('koa-router')();
+const middlewares = require('./middlewares');
+const path = require('path');
 
 //路由中间件数组
-var middlewaresArray = [middlewares.auth, router.routes()];
+const middlewaresArray = [middlewares.auth, router.routes()];
 
 //各restful路由
-var controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes', 'reports'];
-for (var i = 0; i < controllerNames.length; i++) {
-  var name = controllerNames[i];
-  var controller = require(path.join(__dirname, 'controllers/restful', name));
+const controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes', 'reports'];
+
+for (let i = 0; i < controllerNames.length; i++) {
+  const name = controllerNames[i];
+  const controller = require(path.join(__dirname, 'controllers/restful', name));
   middlewaresArray.push((new Resource(name, controller, {
-    id: 'id'
+    id: 'id',
   })).middleware());
 }
 
@@ -23,6 +24,7 @@ for (var i = 0; i < controllerNames.length; i++) {
 router.get('/', function*() {
   this.body = 'Everything looks good.';
 });
+
 router.post('/test', function*() {
   console.log('-----------------this.query--------------------');
   console.log(this.query);
@@ -33,7 +35,7 @@ router.post('/test', function*() {
   console.log('--------------this.request.files-----------------');
   console.log(this.request.files);
 
-  this.body = '成功';
+  this.body = 'success';
 });
 
 exports.router = router;

@@ -1,43 +1,60 @@
-var gulp = require('gulp');
-var notify = require('gulp-notify');
-var babel = require('gulp-babel');
-var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+'use strict';
 
-gulp.task('compile', function() {
+const gulp = require('gulp');
+const notify = require('gulp-notify');
+const babel = require('gulp-babel');
+const jscs = require('gulp-jscs');
+const jshint = require('gulp-jshint');
+const stylish = require('jshint-stylish');
+const nodemon = require('gulp-nodemon');
+const co = require('co');
+
+gulp.task('dev', ['compile'], () => {
+  nodemon({
+    script: 'out/worker.js',
+    env: {
+      NODE_ENV: 'dev',
+    },
+  });
+});
+
+gulp.task('compile', () => {
   return gulp.src(['./src/**/*.js'])
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+    .pipe(babel())
     .pipe(gulp.dest('out'));
 });
 
-gulp.task('jscs', function() {
-  return gulp.src(['./src/**/*.js'])
+gulp.task('jscs', () => {
+  return gulp.src(['./src/db/**/*.js'])
     .pipe(jscs({
-      configPath: '.jscsrc'
+      configPath: '.jscsrc',
     }))
     .pipe(jscs.reporter());
 });
 
-gulp.task('lint', function() {
-  return gulp.src(['./src/**/*.js'])
+gulp.task('lint', () => {
+  return gulp.src(['./src/db/**/*.js'])
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter(stylish))
-    .pipe(jshint.reporter('fail'))
-    .pipe(notify({
-      title: 'JSHint',
-      message: 'JSHint Passed. Let it fly!',
-    }));
+    .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', function() {});
+gulp.task('test', () => {});
 
-gulp.task('default', ['lint', 'jscs', 'test', 'compile'], function() {
+gulp.task('init', ['compile'], (done) => {
+  const init = require('./out/init');
+  init.run().then(done);
+});
+
+gulp.task('fake', ['compile'], (done) => {
+  const fake = require('./out/fake');
+  fake.run().then(done);
+});
+
+gulp.task('default', ['lint', 'jscs', 'test', 'compile', 'init'], () => {
   gulp.src('/')
     .pipe(notify({
       title: 'Task Builder',
-      message: 'Successfully built server'
-    }))
+      message: 'Successfully built server',
+    }));
 });
