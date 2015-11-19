@@ -14,13 +14,17 @@ for (let i = 1; i <= 10; i++) {
     description: '默认相册',
     UserId,
   });
-  for (let j = 1; j <= 2; j++) {
-    albums.push({
-      title: chance.state({ full: true }),
-      description: chance.state({ full: true }),
-      UserId,
-    });
-  }
+  albums.push({
+    title: chance.state({ full: true }),
+    description: chance.state({ full: true }),
+    UserId,
+  });
+  albums.push({
+    title: chance.state({ full: true }),
+    description: chance.state({ full: true }),
+    UserId,
+    isPublic: 'public',
+  });
 }
 
 //共30个相册

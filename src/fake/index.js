@@ -5,7 +5,9 @@ const fse = require('co-fs-extra');
 const co = require('co');
 
 const fakeModelNames = [
+  'Keyvalue',
   'User', 'Album', 'Memory', 'Picture',
+  'Tag', 'AlbumTag', 'AlbumUserCollaborate', 'AlbumUserFollow',
 ];
 
 const fakeDataArray = [];
@@ -20,6 +22,7 @@ exports.run = co.wrap(function*() {
     try {
       yield db.models[name].create(value);
     } catch (e) {
+      console.log([name, value]);
       console.log(e);
     }
   }
