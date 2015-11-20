@@ -5,9 +5,24 @@ const utils = require('../../utils');
 const config = require('../../config');
 
 exports.getCreateFuction = function(modelName) {
+  let actionType;
+  let targetFieldName;
+  switch (modelName)
+  {
+    case 'AlbumUserCollaborate':
+     [actionType, targetFieldName] = ['collaborateAlbum', 'AlbumId'];
+     break;
+    case 'AlbumUserFollow':
+     [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
+     break;
+    case 'UserUserFollow':
+     [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
+     break;
+  }
+
   return function*() {
     this.verifyParams({
-      AlbumId: 'id',
+      [targetFieldName]: 'id',
       UserId: {
         type: 'id',
         required: false,
@@ -25,37 +40,40 @@ exports.getCreateFuction = function(modelName) {
       };
     }
 
-    // 同一条AlbumId、UserId数据库中只能插入一次
-    // 插入数据时会进行外键检测
-    try {
-      if (this.request.body.UserIds) {
-        //多用户UserIds
-        const result = yield this.request.body.UserIds.split(',').filter((UserId) => UserId !== '')
-          .map((UserId) => {
-            return models[modelName].findOrCreate({
-              where: {
-                AlbumId: this.request.body.AlbumId,
-                UserId,
-              },
-            });
+    let results;
+    if (this.request.body.UserIds) {
+      //多用户UserIds
+      results = yield this.request.body.UserIds.split(',').filter((UserId) => UserId !== '')
+        .map((UserId) => {
+          return models[modelName].findOrCreate({
+            where: {
+              [targetFieldName]: this.request.body[targetFieldName],
+              UserId: UserId,
+            },
           });
-        this.body = result.map((item) => item.toJSON());
-      } else {
-        //单用户UserId
-        const result = yield models[modelName].findOrCreate({
-          where: {
-            AlbumId: this.request.body.AlbumId,
-            UserId: this.request.body.UserId,
-          },
         });
-        this.body = result[0].toJSON();
-      }
-    } catch (e) {
-      this.body = {
-        statusCode: 422,
-        message: e.name,
-      };
+
+      this.body = results.map((item) => item[0].toJSON());
+    } else {
+      //单用户UserId
+      const result = yield models[modelName].findOrCreate({
+        where: {
+          [targetFieldName]: this.request.body[targetFieldName],
+          UserId: this.request.body.UserId,
+        },
+      });
+      this.body = result[0].toJSON();
+      results = [result];
     }
+
+    //创建相关action
+    yield results.filter((result) => result[1]).map((result) => {
+      return utils.models.createAction({
+        type: actionType,
+        [targetFieldName]: result[0][targetFieldName],
+        UserId: result[0].UserId,
+      });
+    });
   };
 };
 

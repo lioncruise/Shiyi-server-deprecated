@@ -173,6 +173,15 @@ exports.create = function*() {
   yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
 
   this.body = album.toJSON();
+
+  //创建相关action
+  if (album.isPublic === 'public') {
+    yield utils.models.createAction({
+      type: 'createAlbum',
+      AlbumId: album.id,
+      UserId: this.session.user.id,
+    });
+  }
 };
 
 exports.update = function*() {
@@ -218,6 +227,7 @@ exports.update = function*() {
       UserId: this.session.user.id,
     },
   });
+  const originIsPublic = String(album.isPublic);
 
   if (!album) {
     return this.body = {
@@ -229,6 +239,15 @@ exports.update = function*() {
   album = yield album.update(this.request.body);
 
   yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
+
+  //创建相关action
+  if (originIsPublic !== 'public' && album.isPublic === 'public') {
+    utils.models.createAction({
+      type: 'openAlbum',
+      AlbumId: album.id,
+      UserId: this.session.user.id,
+    });
+  }
 };
 
 exports.destroy = function*() {

@@ -4,7 +4,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Action', {
     type: {
-      type: DataTypes.ENUM('upload', 'new', 'open', 'follow', 'estory'),
+      type: DataTypes.ENUM('createMemory', 'createAlbum', 'openAlbum', 'collaborateAlbum', 'followAlbum', 'followUser', 'estory'),
       allowNull: false,
     },
   }, {

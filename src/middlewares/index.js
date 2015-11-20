@@ -55,7 +55,7 @@ exports.iOSJsonFormat = function() {
 
 exports.showBody = function() {
   return function*(next) {
-    console.log('-----------------this.path--------------------');
+    console.log('-----------------this.path---------------------');
     console.log(this.path);
     console.log('-----------------this.query--------------------');
     console.log(this.query);
@@ -63,6 +63,7 @@ exports.showBody = function() {
     console.log(this.params);
     console.log('--------------this.request.body-----------------');
     console.log(this.request.body);
+    console.log('------------------------------------------------');
 
     yield next;
 

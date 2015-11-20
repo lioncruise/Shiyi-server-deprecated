@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = require('../../utils');
+const modelUtils = require('../modelUtils');
 
 //用户高危操作的token
 //与用户表不关联，只用手机号作为查找主键
@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         notEmpty: true,
-        is: utils.phoneRegExp,
+        is: modelUtils.phoneRegExp,
       },
     },
     type: {

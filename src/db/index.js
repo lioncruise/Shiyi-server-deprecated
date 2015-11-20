@@ -37,20 +37,24 @@ function setAssociations() {
   //用户是相册的维护者
   models.User.belongsToMany(models.Album, {
     through: 'AlbumUserCollaborate',
+    foreignKey: 'UserId',
     as: 'relatedAlbums',
   });
   models.Album.belongsToMany(models.User, {
     through: 'AlbumUserCollaborate',
+    foreignKey: 'AlbumId',
     as: 'collaborators',
   });
 
   //用户关注相册
   models.User.belongsToMany(models.Album, {
     through: 'AlbumUserFollow',
+    foreignKey: 'UserId',
     as: 'followAlbums',
   });
   models.Album.belongsToMany(models.User, {
     through: 'AlbumUserFollow',
+    foreignKey: 'AlbumId',
     as: 'fans',
   });
 
@@ -62,7 +66,7 @@ function setAssociations() {
   });
   models.User.belongsToMany(models.User, {
     through: 'UserUserFollow',
-    foreignKey: 'SourceUserId',
+    foreignKey: 'UserId',
     as: 'followers',
   });
 
@@ -107,6 +111,10 @@ function setAssociations() {
   //人与动态
   models.User.hasMany(models.Action);
   models.Action.belongsTo(models.User);
+  models.Action.belongsTo(models.User, {
+    as: 'TargetUser',
+    foreignKey: 'TargetUserId',
+  });
 
   //相册与标签
   models.Album.belongsToMany(models.Tag, {

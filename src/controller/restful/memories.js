@@ -89,11 +89,34 @@ exports.create = function*() {
     },
   });
 
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      AlbumId: this.request.body.AlbumId,
+    },
+  });
+
+  if (!album) {
+    return this.body = {
+      statusCode: 404,
+      message: '相册不存在',
+    };
+  }
+
   const memory = yield models.Memory.create(Objcet.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
   this.body = memory.toJSON();
+
+  //创建相关action
+  if (album.isPublic === 'public') {
+    yield utils.models.createAction({
+      type: 'createMemory',
+      MemoryId: memory.id,
+      UserId: this.session.user.id,
+    });
+  }
 };
 
 exports.destroy = function*() {

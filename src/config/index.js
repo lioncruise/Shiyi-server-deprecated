@@ -19,6 +19,7 @@ config.db = {
     minConnections: 0,
     maxIdleTime: 5000,
   },
+  // logging: console.log,
   logging: false,
 };
 

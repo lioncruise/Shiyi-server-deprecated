@@ -1,6 +1,5 @@
 'use strict';
 
-const utils = require('../../utils');
 const config = require('../../config');
 const modelUtils = require('../modelUtils');
 
@@ -13,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       validate: {
         notEmpty: true,
-        is: utils.phoneRegExp,
+        is: modelUtils.phoneRegExp,
       },
     },
     nickname: {
