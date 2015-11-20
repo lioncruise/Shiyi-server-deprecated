@@ -13,11 +13,11 @@ exports.getTagObjsArray = function*(tags = '') {
   const tagNames = tags.split(',').filter((tag) => tag !== '');
   const tagObjsArray = [];
   for (let name of tagNames) {
-    TagObjsArray.push(yield models.Tag.findOrCreate({
+    tagObjsArray.push((yield models.Tag.findOrCreate({
       where: {
         name,
       },
-    }));
+    }))[0]);
   }
 
   return tagObjsArray;
@@ -166,13 +166,14 @@ exports.create = function*() {
     },
   });
 
-  const album = yield models.Album.create(Objcet.assign(this.request.body, {
+  const album = yield models.Album.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
   yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
 
   this.body = album.toJSON();
+  this.body.tags = this.request.body.tags;
 
   //创建相关action
   if (album.isPublic === 'public') {

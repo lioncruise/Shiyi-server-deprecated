@@ -4,3 +4,8 @@
 
 require('./albumUserCollaborates');
 require('./albumUserFollows');
+require('./account');
+require('./albums');
+require('./actions');
+require('./qiniu');
+require('./keyvalue');

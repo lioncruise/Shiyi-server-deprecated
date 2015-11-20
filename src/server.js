@@ -32,9 +32,6 @@ app.on('error', function(err) {
 //响应计时
 app.use(rt());
 
-//如无错误发生，添加200状态码
-app.use(middlewares.addStatusCode());
-
 //静态资源缓存
 app.use(staticCache({
   dir: path.join(__dirname, '../static'),
@@ -67,8 +64,8 @@ if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   app.use(middlewares.showBody());
 }
 
-//针对IOS的json请求修改true,false
-app.use(middlewares.iOSJsonFormat());
+//如无错误发生，添加200状态码
+app.use(middlewares.addStatusCode());
 
 //参数验证
 app.use(parameter(app));

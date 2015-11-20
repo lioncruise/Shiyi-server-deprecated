@@ -12,7 +12,7 @@ const models = {};
 const modelNames = ['Action', 'Admin', 'Album', 'AlbumTag',
   'AlbumUserCollaborate', 'AlbumUserFollow', 'Comment', 'Feedback', 'Keyvalue',
   'Like', 'Memory', 'Message', 'Notification', 'Picture', 'Report',
-  'Story', 'Tag', 'Token', 'User', 'UserUserFollow',
+  'Story', 'Tag', 'User', 'UserUserFollow',
 ];
 
 //定义每一个类型
@@ -147,10 +147,7 @@ function setAssociations() {
   models.Like.belongsTo(models.User);
 
   //用户与私信
-  models.Message.belongsTo(models.User, {
-    as: 'SourceUser',
-    foreignKey: 'SourceUserId',
-  });
+  models.Message.belongsTo(models.User);
   models.Message.belongsTo(models.User, {
     as: 'TargetUser',
     foreignKey: 'TargetUserId',
@@ -170,10 +167,7 @@ function setAssociations() {
 
   //举报与用户
   models.User.hasMany(models.Report);
-  models.Report.belongsTo(models.User, {
-    as: 'SourceUser',
-    foreignKey: 'SourceUserId',
-  });
+  models.Report.belongsTo(models.User);
   models.Report.belongsTo(models.User, {
     as: 'TargetUser',
     foreignKey: 'TargetUserId',

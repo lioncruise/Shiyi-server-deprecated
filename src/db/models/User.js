@@ -27,9 +27,12 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: true,
       },
+      get() {
+        return undefined;
+      },
     },
     gender: {
-      type: DataTypes.ENUM('F', 'M'),
+      type: DataTypes.ENUM('M', 'F'),
       allowNull: false,
     },
     birthday: {
@@ -83,7 +86,7 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true,
     getterMethods: {
       avatarDownloadUrl() {
-        return modelUtils.getUrlFunction(this.avatarKey);
+        return modelUtils.getUrlFunction(this.avatarStoreKey);
       },
     },
     indexes: [],

@@ -13,42 +13,26 @@ exports.addStatusCode = function() {
   return function*(next) {
     yield next;
     debug('It is addStatusCode middleware');
-
+    this.status = 200;
     if (this.body) {
       if (this.body.message && this.body.message === 'Validation Failed') {
         //如Validation Failed，修改status为200，添加422状态码
-        this.status = 200;
-        return this.body.statusCode = 422;
+        this.body.statusCode = 422;
       }
 
       if (!this.body.statusCode) {
         //如无错误发生，添加200状态码
-        return this.body = {
+        this.body = {
           statusCode: 200,
           data: this.body,
         };
       }
     } else {
       //如空body，添加200状态码
-      return this.body = {
+      this.body = {
         statusCode: 200,
+        data: null,
       };
-    }
-  };
-};
-
-exports.iOSJsonFormat = function() {
-  return function*(next) {
-    //针对IOS的json请求修改true,false
-    if (this.query && this.query.system === 'ios' && this.request.body && isJSON(this.request.body, true)) {
-      this.request.body = JSON.parse(JSON.stringify(this.request.body).replace(/"@true"/g, 'true').replace(/"@false"/g, 'false'));
-    }
-
-    yield next;
-
-    //针对IOS的json请求修改Null返回
-    if (this.query && this.query.system === 'ios' && this.body && isJSON(this.body, true)) {
-      this.body = JSON.parse(JSON.stringify(this.body).replace(/null/g, '""'));
     }
   };
 };

@@ -1,0 +1,64 @@
+'use strict';
+
+const models = require('../../db').models;
+const utils = require('../../utils');
+
+exports.show = function*() {
+  this.verifyParams({
+    id: 'id',
+    isWithUsers: {
+      type: 'bool',
+      required: false,
+      allowEmpty: false,
+    },
+  });
+
+  const include = [];
+
+  if (this.query.isWithUsers === 'true') {
+    include.push({
+      model: models.User,
+    }, {
+      model: models.User,
+      as: 'TargetUser',
+    });
+  }
+
+  var message = yield models.Message.find({
+    where: {
+      id: this.params.id,
+    },
+    include,
+  });
+
+  if (!message) {
+    return this.body = {
+      statusCode: 404,
+      message: '消息不存在',
+    };
+  }
+
+  this.body = message.toJSON();
+};
+
+exports.create = function*() {
+  this.verifyParams({
+    content: {
+      type: 'string',
+      required: true,
+      allowEmpty: false,
+    },
+    TargetUserId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+  });
+
+  const message = yield models.Message.create(Object.assign(this.request.body, {
+    type: 'letter',
+    UserId: this.session.user.id,
+  }));
+
+  this.body = message.toJSON();
+};
