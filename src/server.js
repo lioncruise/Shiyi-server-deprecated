@@ -75,7 +75,6 @@ app.use(parameter(app));
 
 //路由
 app.use(router.serverRouter);
-
-// require('./controllers/index.js');
+require('./controllers/index.js');
 
 module.exports = http.createServer(app.callback());

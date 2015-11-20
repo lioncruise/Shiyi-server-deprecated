@@ -12,6 +12,7 @@ const middlewaresArray = [middlewares.auth, router.routes()];
 //各restful路由
 const restfulControllerNames = [
   'users', 'albums', 'memories', 'pictures',
+  'albumUserCollaborates', 'albumUserFollows',
 ];
 
 for (const name of restfulControllerNames) {
