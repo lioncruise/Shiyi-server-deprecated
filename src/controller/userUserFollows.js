@@ -3,4 +3,4 @@
 const router = require('../router').router;
 const albumUserCollaboratesRestfulController = require('./albumUserCollaborates');
 
-router.delete('/albumUserFollows', albumUserCollaboratesRestfulController.getDeleteFuction('AlbumUserFollow'));
+router.delete('/userUserFollows', albumUserCollaboratesRestfulController.getDeleteFuction('UserUserFollow'));

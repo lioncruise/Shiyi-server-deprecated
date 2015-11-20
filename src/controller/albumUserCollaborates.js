@@ -4,9 +4,24 @@ const router = require('../router').router;
 const models = require('../db').models;
 
 exports.getDeleteFuction = function(modelName) {
+  let actionType;
+  let targetFieldName;
+  switch (modelName)
+  {
+    case 'AlbumUserCollaborate':
+     [actionType, targetFieldName] = ['collaborateAlbum', 'AlbumId'];
+     break;
+    case 'AlbumUserFollow':
+     [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
+     break;
+    case 'UserUserFollow':
+     [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
+     break;
+  }
+
   return function*() {
     this.verifyParams({
-      AlbumId: 'id',
+      [targetFieldName]: 'id',
       UserId: {
         type: 'id',
         required: false,
@@ -37,7 +52,18 @@ exports.getDeleteFuction = function(modelName) {
         UserId: {
           $in: UserIds,
         },
-        AlbumId: this.request.body.AlbumId,
+        [targetFieldName]: this.request.body[targetFieldName],
+      },
+    });
+
+    //删除相关action
+    yield models.Action.destroy({
+      where: {
+        UserId: {
+          $in: UserIds,
+          type: actionType,
+          [targetFieldName]: this.request.body[targetFieldName]
+        },
       },
     });
   };
