@@ -10,11 +10,12 @@ const path = require('path');
 const middlewaresArray = [middlewares.auth, router.routes()];
 
 //各restful路由
-const controllerNames = ['users', 'albums', 'albumUsers', 'actions', 'messages', 'pictures', 'comments', 'likes', 'reports'];
+const restfulControllerNames = [
+  'users', 'albums', 'memories', 'pictures',
+];
 
-for (let i = 0; i < controllerNames.length; i++) {
-  const name = controllerNames[i];
-  const controller = require(path.join(__dirname, 'controllers/restful', name));
+for (const name of restfulControllerNames) {
+  const controller = require(path.join(__dirname, 'controller/restful', name));
   middlewaresArray.push((new Resource(name, controller, {
     id: 'id',
   })).middleware());

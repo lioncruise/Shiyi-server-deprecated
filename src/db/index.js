@@ -28,8 +28,11 @@ function setAssociations() {
   //用户是相册的主人
   models.User.hasMany(models.Album, {
     as: 'ownAlbums',
+    foreignKey: 'UserId',
   });
-  models.Album.belongsTo(models.User);
+  models.Album.belongsTo(models.User, {
+    foreignKey: 'UserId',
+  });
 
   //用户是相册的维护者
   models.User.belongsToMany(models.Album, {
@@ -48,7 +51,7 @@ function setAssociations() {
   });
   models.Album.belongsToMany(models.User, {
     through: 'AlbumUserFollow',
-    as: 'followers',
+    as: 'fans',
   });
 
   //用户与用户
@@ -81,6 +84,13 @@ function setAssociations() {
   //相册与图片
   models.Album.hasMany(models.Picture);
   models.Picture.belongsTo(models.Album);
+
+  //相册与最近一张图片
+  models.Album.belongsTo(models.Picture, {
+    as: 'RecentPicture',
+    foreignKey: 'RecentPictureId',
+    constraints: false,
+  });
 
   //记忆与图片
   models.Memory.hasMany(models.Picture);

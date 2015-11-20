@@ -13,13 +13,37 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true,
       },
     },
-    coverKey: {
+    coverStoreKey: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
     description: {
       type: DataTypes.STRING,
+    },
+    memoryNum: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    pictureNum: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    likeNum: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    commentNum: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    RecentPictureId: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      allowNull: true,
     },
     isPublic: {
       type: DataTypes.ENUM('private', 'shared', 'public'),
@@ -33,62 +57,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    isBlocked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
   }, {
     paranoid: true,
     indexes: [],
     getterMethods: {
-      coverUrl() {
-        return modelUtils.getUrlFunction(this.coverKey);
+      coverDownloadUrl() {
+        return modelUtils.getUrlFunction(this.coverStoreKey);
       },
     },
-    instanceMethods: {
-      getTagsString() {
-        const _this = this;
-        return function*() {
-          return (yield _this.getTags()).map((tag) => tag.name).join(',');
-        };
-      },
-
-      toJSONwithistributes(attributes = []) {
-        attributes = ['Tags', 'pictureCount', 'lastCreatedPicture', ...attributes];
-        const data = this.toJSON();
-        attributes.forEach((attr) => this[attr]);
-        return data;
-      },
-
-      getRelatedInfo() {
-        const _this = this;
-        return function*() {
-          _this.Tags = yield _this.getTagsString();
-          _this.pictureCount = yield sequelize.model('Picture').getPictureCountByAlbumId(_this.id);
-          _this.lastCreatedPicture = yield sequelize.model('Picture').find({
-            paranoid: true,
-            where: {
-              isBlocked: false,
-              AlbumId: _this.id,
-            },
-            order: [
-              [
-                'createdAt',
-                'DESC',
-                ],
-            ],
-            include: [
-              {
-                model: sequelize.model('User'),
-              },
-              ],
-          });
-          return _this;
-        };
-      },
-
-    },
-
   });
 };

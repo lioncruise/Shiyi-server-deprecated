@@ -43,7 +43,9 @@ gulp.task('test', () => {});
 
 gulp.task('init', ['compile'], (done) => {
   const init = require('./out/init');
-  init.run().then(done);
+  init.run().then(done).catch((e) => {
+    console.log(e);
+  });
 });
 
 gulp.task('fake', ['init'], (done) => {

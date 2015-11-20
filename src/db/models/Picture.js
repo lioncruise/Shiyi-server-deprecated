@@ -6,7 +6,7 @@ const modelUtils = require('../modelUtils');
 //图片或小视频
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
-    pictureKey: {
+    storeKey: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -19,16 +19,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    isBlocked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
   }, {
     paranoid: true,
     getterMethods: {
-      pictureUrl() {
-        return modelUtils.getUrlFunction(this.pictureKey);
+      downloadUrl() {
+        return modelUtils.getUrlFunction(this.storeKey);
       },
     },
     indexes: [],
@@ -38,7 +33,6 @@ module.exports = function(sequelize, DataTypes) {
           // paranoid: true, //count函数不需要添加paranoid参数
           where: {
             AlbumId: albumId,
-            isBlocked: false,
           },
         });
       },

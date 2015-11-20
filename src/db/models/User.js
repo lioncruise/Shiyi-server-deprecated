@@ -45,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
         len: [0, 100],
       },
     },
-    avatarKey: {
+    avatarStoreKey: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: config.defaultPictureKey,
@@ -75,11 +75,6 @@ module.exports = function(sequelize, DataTypes) {
         isIP: true,
       },
     },
-    isBlocked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
     type: {
       type: DataTypes.ENUM('user', 'crowdfunding', 'vip'),
       allowNull: false,
@@ -88,7 +83,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     paranoid: true,
     getterMethods: {
-      avatarUrl() {
+      avatarDownloadUrl() {
         return modelUtils.getUrlFunction(this.avatarKey);
       },
     },

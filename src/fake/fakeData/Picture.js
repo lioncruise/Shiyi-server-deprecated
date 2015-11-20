@@ -17,7 +17,7 @@ for (let i = 1; i <= 10; i++) {
       // 插入k张图片
       for (let p = 1; p <= k; p++) {
         pictures.push({
-          pictureKey: 'default',
+          storeKey: 'default',
           type: 'picture',
           UserId,
           AlbumId,

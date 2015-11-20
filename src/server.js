@@ -62,19 +62,20 @@ if (config.debug || !config.isUseRedis) {
 //解析http头
 app.use(formidable());
 
-//针对IOS的json请求修改true,false
-app.use(middlewares.iOSJsonFormat());
-
 //显示参数
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   app.use(middlewares.showBody());
 }
+
+//针对IOS的json请求修改true,false
+app.use(middlewares.iOSJsonFormat());
 
 //参数验证
 app.use(parameter(app));
 
 //路由
 app.use(router.serverRouter);
-require('./controllers/index.js');
+
+// require('./controllers/index.js');
 
 module.exports = http.createServer(app.callback());

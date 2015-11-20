@@ -6,11 +6,6 @@ module.exports = function(sequelize, DataTypes) {
     content: {
       type: DataTypes.STRING,
     },
-    isBlocked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
-    },
   }, {
     paranoid: true,
     indexes: [],

@@ -1,13 +1,13 @@
 'use strict';
 
-var isJSON = require('is-json');
-var debug = require('debug')('middlewares/index');
+const isJSON = require('is-json');
+const debug = require('debug')('middlewares/index');
 
-var urlsWithoutSession = ['/', '/test', '/getSeccode', '/changePassword',
+const urlsWithoutSession = [
+  '/', '/test', '/getSeccode', '/changePassword',
   '/register', '/login', '/logout', '/getVersion',
-  '/getQiniuUptoken'
+  '/getQiniuUptoken',
 ];
-
 
 exports.addStatusCode = function() {
   return function*(next) {
@@ -25,13 +25,13 @@ exports.addStatusCode = function() {
         //如无错误发生，添加200状态码
         return this.body = {
           statusCode: 200,
-          data: this.body
+          data: this.body,
         };
       }
     } else {
       //如空body，添加200状态码
       return this.body = {
-        statusCode: 200
+        statusCode: 200,
       };
     }
   };
@@ -75,29 +75,25 @@ exports.showBody = function() {
 exports.auth = function*(next) {
   debug('It is auth middleware');
 
-  if (urlsWithoutSession.indexOf(this.path) === -1) {
-    if (process.env.NODE_ENV !== 'test') {
-      if (!this.session || !this.session.user) {
-        debug('auth middleware: Not login.');
-        return this.body = {
-          statusCode: 401,
-          message: '请登录后访问'
-        };
-      }
-    } else {
-      this.session = {
-        user: {
-          "id": 1,
-          "phone": "15945990589",
-          "nickname": '小王',
-          "password": "123456",
-          "gender": "M",
-          "birthday": '1993-10-11',
-          "hometown": '黑龙江 哈尔滨',
-          "motto": "Do cool things that matter."
-        }
+  if (urlsWithoutSession.indexOf(this.path) >= 0) {
+    yield next;
+    return;
+  }
+
+  if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'dev') {
+    if (!this.session || !this.session.user) {
+      debug('auth middleware: Not login.');
+      return this.body = {
+        statusCode: 401,
+        message: '请登录后访问',
       };
     }
+  } else {
+    this.session = {
+      user: {
+        id: 1,
+      },
+    };
   }
 
   yield next;
