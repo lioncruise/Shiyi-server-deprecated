@@ -8,10 +8,14 @@ const jshint = require('gulp-jshint');
 const stylish = require('jshint-stylish');
 const nodemon = require('gulp-nodemon');
 const co = require('co');
+const watch = require('gulp-watch');
 
-gulp.task('dev', ['compile'], () => {
+gulp.task('dev', () => {
   nodemon({
     script: 'out/worker.js',
+    ext: 'src/**/*.js',
+    ignore: ['out/**/*.js'],
+    tasks: ['compile'],
     env: {
       NODE_ENV: 'dev',
     },
@@ -19,7 +23,7 @@ gulp.task('dev', ['compile'], () => {
 });
 
 gulp.task('compile', () => {
-  return gulp.src(['./src/**/*.js'])
+  return gulp.src(['src/**/*.js'])
     .pipe(babel())
     .pipe(gulp.dest('out'));
 });
