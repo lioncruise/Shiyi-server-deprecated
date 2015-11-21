@@ -69,6 +69,7 @@ exports.show = function*() {
   ];
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
+
   if (this.query.isWithMemories === 'true') {
     include.push({
       model: models.Memory,
@@ -148,7 +149,7 @@ exports.create = function*() {
       required: true,
       allowEmpty: true,
     },
-    coverKey: {
+    coverStoreKey: {
       type: 'string',
       required: false,
       allowEmpty: false,
@@ -198,7 +199,7 @@ exports.update = function*() {
       required: false,
       allowEmpty: true,
     },
-    coverKey: {
+    coverStoreKey: {
       type: 'string',
       required: false,
       allowEmpty: false,

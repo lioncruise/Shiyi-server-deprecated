@@ -1,22 +1,24 @@
 'use strict';
 
 const koa = require('koa');
-const ms = require('ms');
 const staticCache = require('koa-static-cache');
 const rt = require('koa-rt');
 const logger = require('koa-logger');
 const session = require('koa-generic-session');
 const sessionWithoutRedis = require('koa-session');
 const redisStore = require('koa-redis');
-const https = require('https');
 const parameter = require('koa-parameter');
 const formidable = require('koa-formidable');
-const http = require('http');
+const ipFilter = require('koa-ip-filter');
+const ms = require('ms');
 const path = require('path');
+const http = require('http');
+
 const config = require('./config');
 const router = require('./router');
-const debug = require('debug')('server');
 const middlewares = require('./middlewares');
+
+const debug = require('debug')('server');
 
 const app = koa();
 app.name = 'shiyi-server';
@@ -32,6 +34,16 @@ app.on('error', function(err) {
 //响应计时
 app.use(rt());
 
+//显示请求、响应
+if (config.debug) {
+  app.use(logger());
+}
+
+app.use(ipFilter({
+  forbidden: '{ statusCode: 403, message: "Forbidden!" }',
+  filter: config.ipFilter,
+}));
+
 //静态资源缓存
 app.use(staticCache({
   dir: path.join(__dirname, '../static'),
@@ -39,11 +51,6 @@ app.use(staticCache({
   buffer: !config.debug,
   gzip: !config.debug,
 }));
-
-//显示请求、响应
-if (config.debug) {
-  app.use(logger());
-}
 
 //使用cookie、session
 if (config.debug || !config.isUseRedis) {

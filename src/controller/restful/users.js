@@ -16,9 +16,22 @@ exports.show = function*() {
       required: false,
       allowEmpty: false,
     },
+    offset: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+    limit: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
   });
 
   const include = [];
+  const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
+  const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
+
   if (this.query.isWithAlbums === 'true') {
     include.push({
       model: models.Album,
@@ -29,6 +42,8 @@ exports.show = function*() {
   if (this.query.isWithActions === 'true') {
     include.push({
       model: models.Action,
+      limit,
+      offset,
     });
   }
 

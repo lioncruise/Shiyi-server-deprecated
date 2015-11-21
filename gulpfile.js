@@ -56,6 +56,16 @@ gulp.task('fake', ['init'], (done) => {
   fake.run().then(done);
 });
 
+gulp.task('doc', ['fake'], () => {
+  nodemon({
+    script: 'out/doc/index.js',
+    ignore: ['**/*.js'],
+    env: {
+      NODE_ENV: 'test',
+    },
+  });
+});
+
 gulp.task('default', ['lint', 'jscs', 'test', 'fake'], () => {
   gulp.src('/')
     .pipe(notify({

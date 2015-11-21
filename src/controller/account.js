@@ -2,17 +2,8 @@
 
 const router = require('../router').router;
 const models = require('../db').models;
-const chance = require('chance').Chance();
-const debug = require('debug')('controllers/account');
 const utils = require('../utils');
-const utility = require('utility');
-const moment = require('moment');
 const modelUtils = require('../db/modelUtils');
-
-const chanceOption = {
-  length: 4,
-  pool: '0123456789',
-};
 
 //注册
 router.post('/register', function*() {
@@ -94,6 +85,10 @@ router.post('/login', function*() {
     };
     return;
   }
+
+  yield user.update({
+    ip: this.ip,
+  });
 
   this.session = {
     user: user.toJSON(),

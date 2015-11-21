@@ -52,9 +52,11 @@ config.AndroidNotification = {
   logo: null,
 };
 
-config.keys = ['shiyi', 'qwoajef'];
+config.keys = ['shiyi', 'q(*^#"}}|ef'];
 config.debug = true;
 config.port = 8080;
+
+config.ipFilter = ['*'];
 
 if (process.env.NODE_ENV === 'production') {
   let customConfig = {};

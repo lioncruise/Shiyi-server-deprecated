@@ -124,9 +124,9 @@ function setAssociations() {
     through: 'AlbumTag',
   });
 
-  //动态与评论
-  models.Action.hasMany(models.Comment);
-  models.Comment.belongsTo(models.Action);
+  //记忆与评论
+  models.Memory.hasMany(models.Comment);
+  models.Comment.belongsTo(models.Memory);
 
   //用户与评论
   models.User.hasMany(models.Comment);
@@ -138,9 +138,9 @@ function setAssociations() {
     foreignKey: 'OrignalCommentId',
   });
 
-  //动态与点赞
-  models.Action.hasMany(models.Like);
-  models.Like.belongsTo(models.Action);
+  //记忆与点赞
+  models.Memory.hasMany(models.Like);
+  models.Like.belongsTo(models.Memory);
 
   //用户与点赞
   models.User.hasMany(models.Like);

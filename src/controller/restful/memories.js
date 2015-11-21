@@ -34,16 +34,20 @@ exports.show = function*() {
   if (this.query.isWithComments === 'true') {
     include.push({
       model: models.Comment,
-
-      //TODO: 添加User
+      include: [{
+        model: models.User,
+      },
+      ],
     });
   }
 
   if (this.query.isWithLikes === 'true') {
     include.push({
       model: models.Like,
-
-      //TODO: 添加User
+      include: [{
+        model: models.User,
+      },
+      ],
     });
   }
 
@@ -75,13 +79,13 @@ exports.create = function*() {
     },
     gps: {
       type: 'string',
-      required: true,
-      allowEmpty: true,
+      required: false,
+      allowEmpty: false,
     },
     position: {
       type: 'string',
-      required: true,
-      allowEmpty: true,
+      required: false,
+      allowEmpty: false,
     },
     AlbumId: {
       type: 'id',
@@ -93,7 +97,7 @@ exports.create = function*() {
   const album = yield models.Album.find({
     paranoid: true,
     where: {
-      AlbumId: this.request.body.AlbumId,
+      id: this.request.body.AlbumId,
     },
   });
 
@@ -112,7 +116,7 @@ exports.create = function*() {
   this.body = memory.toJSON();
 
   //创建相关action
-  if (album.isPublic === 'public') {
+  if (album.isPublic !== 'private') {
     yield utils.models.createAction({
       type: 'createMemory',
       MemoryId: memory.id,
@@ -132,7 +136,7 @@ exports.destroy = function*() {
   const result = yield models.Album.destroy({
     where: {
       id: this.params.id,
-      CreatorId: this.session.user.id,
+      UserId: this.session.user.id,
     },
   });
 
