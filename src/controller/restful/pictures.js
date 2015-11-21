@@ -12,7 +12,7 @@ exports.show = function*() {
       required: false,
       allowEmpty: false,
     },
-    isWithMemories: {
+    isWithMemory: {
       type: 'bool',
       required: false,
       allowEmpty: false,
@@ -35,7 +35,7 @@ exports.show = function*() {
     });
   }
 
-  if (this.query.isWithMemories === 'true') {
+  if (this.query.isWithMemory === 'true') {
     include.push({
       model: models.Memory,
     });
@@ -99,27 +99,4 @@ exports.create = function*() {
   }));
 
   this.body = picture.toJSON();
-};
-
-exports.destroy = function*() {
-  this.verifyParams({
-    id: 'id',
-  });
-
-  //删除与图片相关的信息
-  //TODO:
-
-  const result = yield models.Picture.destroy({
-    where: {
-      id: this.params.id,
-      UserId: this.session.user.id,
-    },
-  });
-
-  if (result === 0) {
-    this.body = {
-      statusCode: 404,
-      message: '删除失败',
-    };
-  }
 };

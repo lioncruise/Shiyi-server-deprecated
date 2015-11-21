@@ -6,7 +6,7 @@ const utils = require('../../utils');
 exports.create = function*() {
   this.verifyParams({
     type: 'string',
-    ActionId: {
+    MemoryId: {
       type: 'id',
       required: true,
       allowEmpty: false,

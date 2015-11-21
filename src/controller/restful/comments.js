@@ -66,7 +66,7 @@ exports.show = function*() {
 exports.create = function*() {
   this.verifyParams({
     content: 'string',
-    ActionId: {
+    MemoryId: {
       type: 'id',
       required: true,
       allowEmpty: false,

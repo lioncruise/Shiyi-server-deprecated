@@ -2,7 +2,6 @@
 
 const router = require('../router').router;
 const models = require('../db').models;
-const utils = require('../utils');
 const modelUtils = require('../db/modelUtils');
 
 //注册
@@ -18,7 +17,7 @@ router.post('/register', function*() {
     gender: {
       type: 'enum',
       values: ['M', 'F'],
-      required: false,
+      required: true,
       allowEmpty: false,
     },
     motto: {
@@ -63,7 +62,7 @@ router.post('/register', function*() {
 //登录
 router.post('/login', function*() {
   this.verifyParams({
-    phone: utils.phoneRegExp,
+    phone: modelUtils.phoneRegExp,
     password: {
       type: 'password',
       required: true,
@@ -137,6 +136,10 @@ router.put('/update', function*() {
       required: false,
       allowEmpty: true,
       max: 100,
+    },
+    avatarStoreKey: {
+      type: 'string',
+      required: false,
     },
   });
 

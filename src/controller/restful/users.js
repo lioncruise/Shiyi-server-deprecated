@@ -42,6 +42,15 @@ exports.show = function*() {
   if (this.query.isWithActions === 'true') {
     include.push({
       model: models.Action,
+      include: [{
+      model: models.Memory,
+    }, {
+      model: models.Album,
+    }, {
+      model: models.User,
+      as: 'TargetUser',
+    },
+    ],
       limit,
       offset,
     });

@@ -16,7 +16,7 @@ server.listen(config.port);
 const host = `http://localhost:${config.port}`;
 
 const eachFile = function*({fileName, func, note, requests}) {
-  let fileString = `接口功能： ${func}\n\n备注：\n${note.join('\n')}\n\n`;
+  let fileString = `接口功能： ${func}\n\n备注：\n${note ? note.join('\n') : ''}\n\n`;
 
   for (let {method, url, data, info} of requests) {
     const result = yield urllib.requestThunk(host + url, {
@@ -25,9 +25,7 @@ const eachFile = function*({fileName, func, note, requests}) {
       dataType: 'json',
     });
 
-    fileString = fileString
-                  + `\n请求接口： ${url}\n请求动作：${method}\n` + (info ? `备注：\n${info}\n` : '') + (data ? `发送内容:\n${JSON.stringify(data, null, '\t')}\n` : '')
-                  + `返回内容: \n${JSON.stringify(result.data, null, '\t')}\n`;
+    fileString = fileString + `\n请求接口： ${url}\n请求动作：${method}\n` + (info ? `备注：\n${info}\n` : '') + (data ? `发送内容:\n${JSON.stringify(data, null, '\t')}\n` : '') + `返回内容: \n${JSON.stringify(result.data, null, '\t')}\n`;
   }
 
   const filePath = path.join(__dirname, '../../../shiyi-doc/', fileName);

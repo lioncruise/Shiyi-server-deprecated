@@ -16,7 +16,7 @@ exports.getCreateFuction = function(modelName) {
       [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
       break;
     case 'UserUserFollow':
-      [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
+      [actionType, targetFieldName] = ['followUser', 'TargetUserId'];
       break;
   }
 
@@ -39,6 +39,23 @@ exports.getCreateFuction = function(modelName) {
         message: 'Validation Failed',
       };
       return;
+    }
+
+    //如果是用户加入相册，检测相册是否公开
+    if (modelName === 'AlbumUserCollaborate') {
+      const album = yield models.Album.find({
+        paranoid: true,
+        where: {
+          id: this.request.body.AlbumId,
+        },
+      });
+      if (album.isPublic !== 'public') {
+        this.body = {
+          statusCode: 403,
+          message: '相册不是公开相册',
+        };
+        return;
+      }
     }
 
     let results;
@@ -75,6 +92,18 @@ exports.getCreateFuction = function(modelName) {
         UserId: result[0].UserId,
       });
     });
+
+    //如果是用户加入相册，创建关注关系
+    if (modelName === 'AlbumUserCollaborate') {
+      yield results.filter((result) => result[1]).map((result) => {
+        return models.AlbumUserFollow.findOrCreate({
+          where: {
+            AlbumId: result[0].AlbumId,
+            UserId: result[0].UserId,
+          },
+        });
+      });
+    }
   };
 };
 

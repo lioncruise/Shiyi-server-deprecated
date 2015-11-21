@@ -42,7 +42,7 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', () => {});
+gulp.task('test', ['lint', 'jscs'], () => {});
 
 gulp.task('init', ['compile'], (done) => {
   const init = require('./out/init');

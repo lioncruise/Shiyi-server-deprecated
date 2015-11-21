@@ -4,12 +4,12 @@ module.exports = [{
   fileName: 'GET memories :id',
   func: '获取某条记忆信息',
   note: [
-          '2.可加 isWithPictures=true 参数，在返回内容中添加 记忆中的图片 内容。',
-          '3.可加 isWithComments=true 参数，在返回内容中添加 记忆评论 内容。（附带每条评论的用户信息）',
-          '4.可加 isWithLikes=true 参数，在返回内容中添加 记忆点赞 内容。（附带每条点赞的用户信息）',
-          '5.可加 isWithFans=true 参数，在返回内容中添加 相册的关注者（关注相册的人）的信息 内容。',
-          '6.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
-          '7.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
+          '1.可加 isWithPictures=true 参数，在返回内容中添加 记忆中的图片 内容。',
+          '2.可加 isWithComments=true 参数，在返回内容中添加 记忆评论 内容。（附带每条评论的用户信息）',
+          '3.可加 isWithLikes=true 参数，在返回内容中添加 记忆点赞 内容。（附带每条点赞的用户信息）',
+          '4.可加 isWithFans=true 参数，在返回内容中添加 相册的关注者（关注相册的人）的信息 内容。',
+          '5.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
+          '6.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
           ],
   requests: [
     {
@@ -45,7 +45,7 @@ module.exports = [{
     },
   },
   ],
-},  {
+}, {
   fileName: 'DELETE memories :id',
   func: '删除某条记忆',
   note: [

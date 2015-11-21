@@ -15,7 +15,7 @@ exports.getDeleteFuction = function(modelName) {
       [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
       break;
     case 'UserUserFollow':
-      [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
+      [actionType, targetFieldName] = ['followUser', 'TargetUserId'];
       break;
   }
 
@@ -62,9 +62,9 @@ exports.getDeleteFuction = function(modelName) {
       where: {
         UserId: {
           $in: UserIds,
-          type: actionType,
-          [targetFieldName]: this.request.body[targetFieldName],
         },
+        type: actionType,
+        [targetFieldName]: this.request.body[targetFieldName],
       },
     });
   };
