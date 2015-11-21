@@ -56,10 +56,11 @@ exports.show = function*() {
   });
 
   if (!picture) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '图片不存在',
     };
+    return;
   }
 
   this.body = picture.toJSON();
@@ -93,7 +94,7 @@ exports.create = function*() {
     },
   });
 
-  const picture = yield models.Picture.create(Objcet.assign(this.request.body, {
+  const picture = yield models.Picture.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
@@ -116,7 +117,7 @@ exports.destroy = function*() {
   });
 
   if (result === 0) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '删除失败',
     };

@@ -36,7 +36,7 @@ exports.destroy = function*() {
   });
 
   if (result === 0) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '删除失败',
     };

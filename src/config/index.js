@@ -57,7 +57,7 @@ config.debug = true;
 config.port = 8080;
 
 if (process.env.NODE_ENV === 'production') {
-  var customConfig = {};
+  let customConfig = {};
   try {
     customConfig = require(path.join(__dirname, './config.js'));
   } catch (err) {

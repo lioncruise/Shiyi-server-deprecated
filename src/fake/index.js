@@ -6,7 +6,7 @@ const co = require('co');
 
 const fakeModelNames = [
   'Keyvalue',
-  'User', 'Album', 'Memory', 'Picture',
+  'User', 'Album', 'Memory', 'Picture',  'Message',
   'Tag', 'AlbumTag', 'AlbumUserCollaborate', 'AlbumUserFollow',
 ];
 

@@ -44,7 +44,7 @@ exports.show = function*() {
     }
   }
 
-  var comment = yield models.Comment.find({
+  const comment = yield models.Comment.find({
     paranoid: true,
     where: {
       id: this.params.id,
@@ -53,10 +53,11 @@ exports.show = function*() {
   });
 
   if (!comment) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '评论不存在',
     };
+    return;
   }
 
   this.body = comment.toJSON();
@@ -100,7 +101,7 @@ exports.destroy = function*() {
   });
 
   if (result === 0) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '删除失败',
     };

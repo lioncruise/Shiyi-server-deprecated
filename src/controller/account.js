@@ -47,10 +47,11 @@ router.post('/register', function*() {
   try {
     user = yield models.User.create(this.request.body);
   } catch (e) {
-    return this.body = {
+    this.body = {
       statusCode: 409,
       message: '用户已存在',
     };
+    return;
   }
 
   this.body = user.toJSON();
@@ -87,10 +88,11 @@ router.post('/login', function*() {
     },
   });
   if (!user) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '用户名或密码错误',
     };
+    return;
   }
 
   this.session = {

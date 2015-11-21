@@ -1,8 +1,8 @@
 'use strict';
 
-var router = require('../router').router;
-var models = require('../db').models;
-var utils = require('../utils');
+const router = require('../router').router;
+const models = require('../db').models;
+const utils = require('../utils');
 
 // 获取一个人的全部动态
 router.get('/getActions', function*() {

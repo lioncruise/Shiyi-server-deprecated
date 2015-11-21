@@ -23,8 +23,8 @@ for (let i = 1; i <= 10; i++) {
     motto: chance.sentence({ words: 5 }),
     ip: chance.ip(),
     device,
-    androidId: device === 'ios' ? null : chance.android_id(),
-    appleId: device === 'ios' ? chance.apple_token() : null,
+    androidId: device === 'ios' ? null : chance.android_id(),// jscs:ignore
+    appleId: device === 'ios' ? chance.apple_token() : null,// jscs:ignore
   });
 }
 

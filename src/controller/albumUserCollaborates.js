@@ -9,14 +9,14 @@ exports.getDeleteFuction = function(modelName) {
   switch (modelName)
   {
     case 'AlbumUserCollaborate':
-     [actionType, targetFieldName] = ['collaborateAlbum', 'AlbumId'];
-     break;
+      [actionType, targetFieldName] = ['collaborateAlbum', 'AlbumId'];
+      break;
     case 'AlbumUserFollow':
-     [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
-     break;
+      [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
+      break;
     case 'UserUserFollow':
-     [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
-     break;
+      [actionType, targetFieldName] = ['collaborateAlbum', 'TargetUserId'];
+      break;
   }
 
   return function*() {
@@ -33,10 +33,11 @@ exports.getDeleteFuction = function(modelName) {
     });
 
     if (!this.request.body.UserId && !this.request.body.UserIds) {
-      return this.body = {
+      this.body = {
         statusCode: 422,
         message: 'Validation Failed',
       };
+      return;
     }
 
     let UserIds = [];
@@ -62,7 +63,7 @@ exports.getDeleteFuction = function(modelName) {
         UserId: {
           $in: UserIds,
           type: actionType,
-          [targetFieldName]: this.request.body[targetFieldName]
+          [targetFieldName]: this.request.body[targetFieldName],
         },
       },
     });

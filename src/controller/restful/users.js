@@ -6,12 +6,12 @@ const utils = require('../../utils');
 exports.show = function*() {
   this.verifyParams({
     id: 'id',
-    isWithAlbum: {
+    isWithAlbums: {
       type: 'bool',
       required: false,
       allowEmpty: false,
     },
-    isWithAction: {
+    isWithActions: {
       type: 'bool',
       required: false,
       allowEmpty: false,
@@ -19,14 +19,14 @@ exports.show = function*() {
   });
 
   const include = [];
-  if (this.query.isWithAlbum === 'true') {
+  if (this.query.isWithAlbums === 'true') {
     include.push({
       model: models.Album,
       as: 'ownAlbums',
     });
   }
 
-  if (this.query.isWithAction === 'true') {
+  if (this.query.isWithActions === 'true') {
     include.push({
       model: models.Action,
     });
@@ -41,10 +41,11 @@ exports.show = function*() {
   });
 
   if (!user) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '用户不存在',
     };
+    return;
   }
 
   this.body = user.toJSON();

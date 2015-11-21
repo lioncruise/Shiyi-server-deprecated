@@ -8,7 +8,6 @@ const jshint = require('gulp-jshint');
 const stylish = require('jshint-stylish');
 const nodemon = require('gulp-nodemon');
 const co = require('co');
-const watch = require('gulp-watch');
 
 gulp.task('dev', () => {
   nodemon({

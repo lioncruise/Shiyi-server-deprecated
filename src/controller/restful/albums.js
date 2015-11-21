@@ -125,10 +125,11 @@ exports.show = function*() {
   });
 
   if (!album) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '相册不存在',
     };
+    return;
   }
 
   this.body = exports.setAlbumTags(album.toJSON());
@@ -231,10 +232,11 @@ exports.update = function*() {
   const originIsPublic = String(album.isPublic);
 
   if (!album) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '相册不存在',
     };
+    return;
   }
 
   album = yield album.update(this.request.body);
@@ -267,7 +269,7 @@ exports.destroy = function*() {
   });
 
   if (result === 0) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '删除失败',
     };

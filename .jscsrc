@@ -1,5 +1,6 @@
 {
   "fix": false,
   "preset": "airbnb",
-  "requireCurlyBraces": null // or false
+  "requireCurlyBraces": null, // or false
+  "esnext": true
 }

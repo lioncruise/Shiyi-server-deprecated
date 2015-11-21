@@ -1,8 +1,8 @@
 'use strict';
 
-const db = require('./db');
+const db = require('../db');
 const fse = require('co-fs-extra');
-const config = require('./config');
+const config = require('../config');
 const co = require('co');
 
 exports.run = co.wrap(function*() {

@@ -6,7 +6,7 @@ const utils = require('../../utils');
 exports.show = function*() {
   this.verifyParams({
     id: 'id',
-    isWithUsers: {
+    isWithUsersInfo: {
       type: 'bool',
       required: false,
       allowEmpty: false,
@@ -15,7 +15,7 @@ exports.show = function*() {
 
   const include = [];
 
-  if (this.query.isWithUsers === 'true') {
+  if (this.query.isWithUsersInfo === 'true') {
     include.push({
       model: models.User,
     }, {
@@ -24,7 +24,7 @@ exports.show = function*() {
     });
   }
 
-  var message = yield models.Message.find({
+  const message = yield models.Message.find({
     where: {
       id: this.params.id,
     },
@@ -32,10 +32,11 @@ exports.show = function*() {
   });
 
   if (!message) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '消息不存在',
     };
+    return;
   }
 
   this.body = message.toJSON();

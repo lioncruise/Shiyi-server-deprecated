@@ -56,10 +56,11 @@ exports.show = function*() {
   });
 
   if (!memory) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '记忆不存在',
     };
+    return;
   }
 
   this.body = memory.toJSON();
@@ -97,13 +98,14 @@ exports.create = function*() {
   });
 
   if (!album) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '相册不存在',
     };
+    return;
   }
 
-  const memory = yield models.Memory.create(Objcet.assign(this.request.body, {
+  const memory = yield models.Memory.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
@@ -135,7 +137,7 @@ exports.destroy = function*() {
   });
 
   if (result === 0) {
-    return this.body = {
+    this.body = {
       statusCode: 404,
       message: '删除失败',
     };

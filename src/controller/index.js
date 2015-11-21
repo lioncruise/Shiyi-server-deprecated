@@ -8,4 +8,5 @@ require('./account');
 require('./albums');
 require('./actions');
 require('./qiniu');
-require('./keyvalue');
+require('./keyvalues');
+require('./messages');

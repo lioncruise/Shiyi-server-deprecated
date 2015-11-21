@@ -68,10 +68,11 @@ exports.auth = function*(next) {
   if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'dev') {
     if (!this.session || !this.session.user) {
       debug('auth middleware: Not login.');
-      return this.body = {
+      this.body = {
         statusCode: 401,
         message: '请登录后访问',
       };
+      return;
     }
   } else {
     this.session = {
