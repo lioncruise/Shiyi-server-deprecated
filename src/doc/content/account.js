@@ -55,7 +55,7 @@ module.exports = [{
   },
   ],
 },  {
-  fileName: 'POST update',
+  fileName: 'PUT update',
   func: '更新用户信息',
   note: [
           '1.增量更新，可以只添加需要更改的项。',
@@ -63,7 +63,7 @@ module.exports = [{
           ],
   requests: [
     {
-      method: 'post',
+      method: 'put',
       url: '/update',
       data: {
         phone: '13000000071',

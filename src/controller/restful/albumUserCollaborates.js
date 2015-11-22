@@ -41,7 +41,7 @@ exports.getCreateFuction = function(modelName) {
       return;
     }
 
-    //如果是用户加入相册，检测相册是否公开
+    //如果是用户加入相册，检测相册是否为public或shared
     if (modelName === 'AlbumUserCollaborate') {
       const album = yield models.Album.find({
         paranoid: true,
@@ -49,10 +49,10 @@ exports.getCreateFuction = function(modelName) {
           id: this.request.body.AlbumId,
         },
       });
-      if (album.isPublic !== 'public') {
+      if (album.isPublic === 'private') {
         this.body = {
           statusCode: 403,
-          message: '相册不是公开相册',
+          message: '相册不可加入',
         };
         return;
       }

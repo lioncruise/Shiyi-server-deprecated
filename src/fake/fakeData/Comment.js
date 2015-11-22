@@ -13,7 +13,7 @@ for (let i = 1; i <= 10; i++) {
     content: chance.sentence({ words: 5 }),
     UserId,
     MemoryId: 4,
-    OrignalCommentId: i > 1 ? i : null,
+    OrignalCommentId: i > 1 ? i - 1 : null,
   });
 }
 

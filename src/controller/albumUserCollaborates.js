@@ -70,4 +70,4 @@ exports.getDeleteFuction = function(modelName) {
   };
 };
 
-router.delete('/albumUserCollaborates', exports.getDeleteFuction('albumUserCollaborates'));
+router.delete('/albumUserCollaborates', exports.getDeleteFuction('AlbumUserCollaborate'));

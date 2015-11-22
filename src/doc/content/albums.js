@@ -33,7 +33,7 @@ module.exports = [{
   requests: [
     {
       method: 'get',
-      url: '/getFollowAlbums?userId=1',
+      url: '/getFollowAlbums?userId=3',
     },
   ],
 },
