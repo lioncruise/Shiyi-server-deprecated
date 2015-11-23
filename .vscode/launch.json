@@ -1,0 +1,24 @@
+{
+	"version": "0.1.0",
+	"configurations": [
+		{
+			"name": "dev",
+			"type": "node",
+			"request": "launch",
+			"program": "out/worker.js",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": ".",
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"externalConsole": false,
+			"sourceMaps": false,
+			"outDir": null
+		}
+	]
+}

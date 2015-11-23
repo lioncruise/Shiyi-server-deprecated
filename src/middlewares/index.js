@@ -65,7 +65,7 @@ exports.auth = function*(next) {
     return;
   }
 
-  if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'dev') {
+  if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
     if (!this.session || !this.session.user) {
       debug('auth middleware: Not login.');
       this.body = {

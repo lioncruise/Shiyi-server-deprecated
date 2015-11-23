@@ -16,7 +16,7 @@ gulp.task('dev', () => {
     ignore: ['out/**/*.js'],
     tasks: ['compile'],
     env: {
-      NODE_ENV: 'dev',
+      NODE_ENV: 'development',
     },
   });
 });
@@ -66,7 +66,7 @@ gulp.task('doc', ['fake'], () => {
   });
 });
 
-gulp.task('default', ['lint', 'jscs', 'test', 'fake'], () => {
+gulp.task('build', ['test', 'fake'], () => {
   gulp.src('/')
     .pipe(notify({
       title: 'Task Builder',

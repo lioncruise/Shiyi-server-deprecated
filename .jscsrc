@@ -1,6 +1,6 @@
 {
   "fix": false,
-  "preset": "airbnb",
   "requireCurlyBraces": null, // or false
-  "esnext": true
+  "esnext": true,
+  "excludeFiles": ["out/**"]
 }
