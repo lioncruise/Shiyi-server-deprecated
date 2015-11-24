@@ -6,7 +6,7 @@ const debug = require('debug')('middlewares/index');
 const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
   '/register', '/login', '/logout', '/getVersion',
-  '/getQiniuUptoken',
+  '/getQiniuUptoken', '/rebuildDatabaseRedundancy',
 ];
 
 exports.addStatusCode = function() {
