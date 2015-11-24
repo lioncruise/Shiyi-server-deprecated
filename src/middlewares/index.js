@@ -39,6 +39,8 @@ exports.addStatusCode = function() {
 
 exports.showBody = function() {
   return function*(next) {
+    console.log('--------------this.headers-----------------');
+    console.log(this.headers);
     console.log('-----------------this.path---------------------');
     console.log(this.path);
     console.log('-----------------this.query--------------------');
@@ -65,21 +67,29 @@ exports.auth = function*(next) {
     return;
   }
 
-  if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
-    if (!this.session || !this.session.user) {
-      debug('auth middleware: Not login.');
-      this.body = {
-        statusCode: 401,
-        message: '请登录后访问',
-      };
-      return;
-    }
-  } else {
+  if (this.headers.userfrompc && Number.parseInt(this.headers.userfrompc)) {
     this.session = {
       user: {
-        id: 1,
+        id: Number.parseInt(this.headers.userfrompc),
       },
     };
+  } else {
+    if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
+      if (!this.session || !this.session.user) {
+        debug('auth middleware: Not login.');
+        this.body = {
+          statusCode: 401,
+          message: '请登录后访问',
+        };
+        return;
+      }
+    } else {
+      this.session = {
+        user: {
+          id: 1,
+        },
+      };
+    }
   }
 
   yield next;
