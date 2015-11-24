@@ -172,7 +172,7 @@ exports.create = function*() {
 
   //创建相关action
   if (album.isPublic === 'public') {
-    yield utils.models.createAction({
+    yield utils.models.createReletedAction({
       type: 'createAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
@@ -239,7 +239,7 @@ exports.update = function*() {
 
   //创建相关action
   if (originIsPublic !== 'public' && album.isPublic === 'public') {
-    utils.models.createAction({
+    utils.models.createReletedAction({
       type: 'openAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
@@ -252,20 +252,20 @@ exports.destroy = function*() {
     id: 'id',
   });
 
-  //删除与相册相关的信息
-  //TODO:
-
-  const result = yield models.Album.destroy({
+  const album = yield models.Album.find({
     where: {
       id: this.params.id,
       UserId: this.session.user.id,
     },
   });
 
-  if (result === 0) {
+  if (!album) {
     this.body = {
       statusCode: 404,
       message: '删除失败',
     };
+    return;
   }
+
+  yield utils.models.deleteAlbum(album.id);
 };

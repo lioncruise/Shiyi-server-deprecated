@@ -1,7 +1,6 @@
 'use strict';
 
 const Sequelize = require('sequelize');
-const sqlite3 = require('sqlite3');
 const config = require('../config');
 const path = require('path');
 
@@ -126,7 +125,7 @@ function setAssociations() {
 
   //相册与评论
   models.Comment.belongsTo(models.Album);
-  
+
   //记忆与评论
   models.Memory.hasMany(models.Comment);
   models.Comment.belongsTo(models.Memory);
@@ -143,7 +142,7 @@ function setAssociations() {
 
   //相册与评论
   models.Like.belongsTo(models.Album);
-  
+
   //记忆与点赞
   models.Memory.hasMany(models.Like);
   models.Like.belongsTo(models.Memory);
@@ -166,6 +165,8 @@ function setAssociations() {
   });
 
   //推送与其内容
+  models.Notification.belongsTo(models.Album);
+  models.Notification.belongsTo(models.Memory);
   models.Notification.belongsTo(models.Message);
   models.Notification.belongsTo(models.Action);
   models.Notification.belongsTo(models.Comment);

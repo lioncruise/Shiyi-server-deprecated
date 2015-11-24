@@ -117,7 +117,7 @@ exports.create = function*() {
 
   //创建相关action
   if (album.isPublic !== 'private') {
-    yield utils.models.createAction({
+    yield utils.models.createReletedAction({
       type: 'createMemory',
       MemoryId: memory.id,
       UserId: this.session.user.id,

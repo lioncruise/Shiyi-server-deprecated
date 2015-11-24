@@ -4,7 +4,7 @@ const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
 
-const getGetUsersControllerFunction = function (modelName, sourceFieldName, TargetFieldName) {
+const getGetUsersControllerFunction = function(modelName, sourceFieldName, TargetFieldName) {
   return function*() {
     const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
     const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
@@ -16,9 +16,9 @@ const getGetUsersControllerFunction = function (modelName, sourceFieldName, Targ
       limit,
       offset,
     });
-    
+
     const userIds = result.rows.map((elm) => elm[TargetFieldName]);
-    
+
     const users = yield models.User.findAll({
       paranoid: true,
       where: {
@@ -31,7 +31,6 @@ const getGetUsersControllerFunction = function (modelName, sourceFieldName, Targ
     this.body = users.map((user) => user.toJSON());
   };
 };
-
 
 //获取一个用户的关注者
 router.get('/getFollowers', getGetUsersControllerFunction('UserUserFollow', 'UserId', 'TargetUserId'));

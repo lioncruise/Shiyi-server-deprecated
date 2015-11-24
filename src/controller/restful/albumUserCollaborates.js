@@ -86,7 +86,7 @@ exports.getCreateFuction = function(modelName) {
 
     //创建相关action
     yield results.filter((result) => result[1]).map((result) => {
-      return utils.models.createAction({
+      return utils.models.createReletedAction({
         type: actionType,
         [targetFieldName]: result[0][targetFieldName],
         UserId: result[0].UserId,
