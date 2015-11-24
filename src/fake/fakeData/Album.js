@@ -13,23 +13,17 @@ for (let i = 1; i <= 10; i++) {
     title: '默认相册',
     description: '默认相册',
     UserId,
-    memoryNum: 3,
-    pictureNum: 6,
   });
   albums.push({
     title: chance.state({ full: true }),
     description: chance.state({ full: true }),
     UserId,
-    memoryNum: 3,
-    pictureNum: 6,
   });
   albums.push({
     title: chance.state({ full: true }),
     description: chance.state({ full: true }),
     UserId,
     isPublic: 'public',
-    memoryNum: 3,
-    pictureNum: 6,
   });
 }
 

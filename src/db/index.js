@@ -124,6 +124,9 @@ function setAssociations() {
     through: 'AlbumTag',
   });
 
+  //相册与评论
+  models.Comment.belongsTo(models.Album);
+  
   //记忆与评论
   models.Memory.hasMany(models.Comment);
   models.Comment.belongsTo(models.Memory);
@@ -138,6 +141,9 @@ function setAssociations() {
     foreignKey: 'OrignalCommentId',
   });
 
+  //相册与评论
+  models.Like.belongsTo(models.Album);
+  
   //记忆与点赞
   models.Memory.hasMany(models.Like);
   models.Like.belongsTo(models.Memory);

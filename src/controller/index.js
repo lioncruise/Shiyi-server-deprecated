@@ -10,3 +10,5 @@ require('./actions');
 require('./qiniu');
 require('./keyvalues');
 require('./messages');
+require('./users');
+require('./rebuild');

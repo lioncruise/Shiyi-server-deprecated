@@ -66,7 +66,7 @@ gulp.task('doc', ['fake'], () => {
   });
 });
 
-gulp.task('build', ['test', 'fake'], () => {
+gulp.task('build', ['test', 'doc'], () => {
   gulp.src('/')
     .pipe(notify({
       title: 'Task Builder',

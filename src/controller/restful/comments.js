@@ -76,6 +76,11 @@ exports.create = function*() {
       required: false,
       allowEmpty: false,
     },
+    AlbumId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
   });
 
   const comment = yield models.Comment.create(Object.assign(this.request.body, {

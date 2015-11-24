@@ -110,13 +110,6 @@ exports.show = function*() {
     });
   }
 
-  if (this.query.isWithFans === 'true') {
-    include.push({
-      model: models.User,
-      as: 'fans',
-    });
-  }
-
   const album = yield models.Album.find({
     paranoid: true,
     where: {

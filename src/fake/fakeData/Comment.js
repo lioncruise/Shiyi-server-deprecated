@@ -14,6 +14,7 @@ for (let i = 1; i <= 10; i++) {
     UserId,
     MemoryId: 4,
     OrignalCommentId: i > 1 ? i - 1 : null,
+    AlbumId: 2,
   });
 }
 
@@ -26,6 +27,7 @@ for (let i = 1; i <= 10; i++) {
       content: chance.sentence({ words: 5 }),
       UserId,
       MemoryId,
+      AlbumId: 2,
     });
   }
 }

@@ -8,7 +8,7 @@ const fakeModelNames = [
   'Keyvalue',
   'User', 'Album', 'Memory', 'Picture',  'Message',
   'Tag', 'AlbumTag', 'AlbumUserCollaborate', 'AlbumUserFollow',
-  'Comment', 'Like',
+  'Comment', 'Like', 'UserUserFollow',
 ];
 
 const fakeDataArray = [];

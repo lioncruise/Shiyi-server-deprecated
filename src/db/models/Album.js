@@ -21,22 +21,32 @@ module.exports = function(sequelize, DataTypes) {
     description: {
       type: DataTypes.STRING,
     },
-    memoryNum: { //冗余数据，减少跨表联合查询
+    memoriesCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
-    pictureNum: { //冗余数据，减少跨表联合查询
+    picturesCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
-    likeNum: { //冗余数据，减少跨表联合查询
+    fansCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
-    commentNum: { //冗余数据，减少跨表联合查询
+    collaboratorsCount: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    likesCount: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    commentsCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,

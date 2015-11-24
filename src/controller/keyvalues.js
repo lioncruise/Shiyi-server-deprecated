@@ -3,11 +3,7 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
-const LRU = require('lru-cache');
-
-let cache = LRU({
-  maxAge: 1000 * 60 * 60,
-});
+const cache = require('../cache');
 
 exports.getKeyValueFromDB = function*(key) {
   return yield models.Keyvalue.find({

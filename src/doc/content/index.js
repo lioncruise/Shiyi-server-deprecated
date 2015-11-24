@@ -22,6 +22,7 @@ let files = [
   require('./keyvalues'),
   require('./messages'),
   require('./qiniu'),
+  require('./users'),
 ];
 
 for (let file of files) {

@@ -12,12 +12,12 @@ module.exports = function(sequelize, DataTypes) {
     position: {
       type: DataTypes.STRING,
     },
-    likeNum: { //冗余数据，减少跨表联合查询
+    likesCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
     },
-    commentNum: { //冗余数据，减少跨表联合查询
+    commentsCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,

@@ -8,9 +8,9 @@ module.exports = [{
           '2.可加 isWithPictures=true 参数，在返回内容中添加 相册中的图片 内容。',
           '3.可加 isWithUser=true 参数，在返回内容中添加 相册的创建者信息 内容。',
           '4.可加 isWithCollaborators=true 参数，在返回内容中添加 相册的维护者（加入相册的人）的信息 内容。',
-          '5.可加 isWithFans=true 参数，在返回内容中添加 相册的关注者（关注相册的人）的信息 内容。',
-          '6.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
-          '7.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
+          '5.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
+          '6.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
+          '7.相册的基本信息里面，含有collaborators和fans的数量。',
           ],
   requests: [
     {
@@ -28,9 +28,6 @@ module.exports = [{
     }, {
       method: 'get',
       url: '/albums/1?isWithCollaborators=true',
-    }, {
-      method: 'get',
-      url: '/albums/1?isWithFans=true',
     }, {
       method: 'get',
       url: '/albums/1?isWithPictures=true&offset=0&limit=10',

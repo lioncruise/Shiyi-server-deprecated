@@ -52,6 +52,21 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
+    followersCount: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    followAlbumsCount: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    fansCount: { //冗余数据，减少跨表联合查询
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     wechatToken: {
       type: DataTypes.STRING,
     },

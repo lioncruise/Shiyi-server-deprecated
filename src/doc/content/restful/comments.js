@@ -37,6 +37,7 @@ module.exports = [{
       content: '这并没有什么意思。',
       MemoryId: '1',
       OrignalCommentId: '1',
+      AlbumId: '1',
     },
   },
   ],

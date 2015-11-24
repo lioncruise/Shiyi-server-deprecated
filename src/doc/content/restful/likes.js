@@ -13,6 +13,7 @@ module.exports = [{
     data: {
       type: 'smile',
       MemoryId: '8',
+      AlbumId: '3',
     },
   },
   ],

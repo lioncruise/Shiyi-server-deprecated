@@ -4,7 +4,7 @@ const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
 
-//获取自己的相册
+//获取自己创建的相册
 router.get('/getOwnAlbums', function*() {
   const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
   const albums = yield models.Album.findAll({

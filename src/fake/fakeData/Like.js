@@ -15,6 +15,7 @@ for (let i = 1; i <= 10; i++) {
       type: 'smile',
       UserId,
       MemoryId,
+      AlbumId: 2,
     });
   }
 }

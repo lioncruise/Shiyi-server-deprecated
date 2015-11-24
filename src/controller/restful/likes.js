@@ -11,6 +11,11 @@ exports.create = function*() {
       required: true,
       allowEmpty: false,
     },
+    AlbumId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
   });
 
   const like = yield models.Like.create(Object.assign(this.request.body, {
