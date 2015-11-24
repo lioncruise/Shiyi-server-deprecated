@@ -1,0 +1,6 @@
+{
+  "fix": false,
+  "requireCurlyBraces": null, // or false
+  "esnext": true,
+  "excludeFiles": ["out/**"]
+}
