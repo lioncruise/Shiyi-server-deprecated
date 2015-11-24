@@ -6,7 +6,7 @@
     "node_args": "--harmony",
     "merge_logs": true,
     "autorestart": true,
-    "instances": 4,
+    "instances": 1,
     "out_file": "data/logs/node.stdout.log",
     "error_file": "data/logs/node.stderr.log",
     "env": {
