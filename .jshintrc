@@ -62,7 +62,7 @@
     "dojo"          : false,    // Dojo Toolkit
     "jasmine"       : false,    // Jasmine
     "jquery"        : false,    // jQuery
-    "mocha"         : true,     // Mocha
+    "mocha"         : false,    // Mocha
     "module"        : true,
     "mootools"      : false,    // MooTools
     "node"          : true,     // Node.js
@@ -78,5 +78,12 @@
     "yui"           : false,    // Yahoo User Interface
 
     // Custom Globals
-    "globals": {} // additional predefined global variables
+    "globals": {
+      "describe": true,
+      "it": true,
+      "before": true,
+      "afterEach": true,
+      "beforeEach": true,
+      "after": true
+    } // additional predefined global variables
 }

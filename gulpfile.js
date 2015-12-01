@@ -8,6 +8,7 @@ const jshint = require('gulp-jshint');
 const stylish = require('jshint-stylish');
 const nodemon = require('gulp-nodemon');
 const co = require('co');
+const mocha = require('gulp-mocha');
 
 gulp.task('dev', () => {
   nodemon({
@@ -42,7 +43,10 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', ['lint', 'jscs'], () => {});
+gulp.task('test', ['lint', 'jscs', 'compile'], () => {
+  return gulp.src('out/test/**/*.test.js', {read: false})
+    .pipe(mocha({reporter: 'nyan'}));
+});
 
 gulp.task('init', ['compile'], (done) => {
   const init = require('./out/init');

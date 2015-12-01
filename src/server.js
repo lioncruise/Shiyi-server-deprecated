@@ -68,7 +68,7 @@ if (config.debug || !config.isUseRedis) {
 app.use(formidable());
 
 //显示参数
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV === 'development') {
   app.use(middlewares.showBody());
 }
 
