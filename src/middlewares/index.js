@@ -5,7 +5,7 @@ const debug = require('debug')('middlewares/index');
 
 const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
-  '/register', '/login', '/logout', '/getVersion',
+  '/register', '/login', '/logout', '/getValue', '/resetCache',
   '/getQiniuUptoken', '/rebuildDatabaseRedundancy',
 ];
 
