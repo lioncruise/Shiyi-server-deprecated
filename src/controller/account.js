@@ -3,6 +3,7 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const modelUtils = require('../db/modelUtils');
+const cache = require('../cache').userCodeCache;
 
 //注册
 router.post('/register', function*() {
@@ -93,6 +94,28 @@ router.post('/login', function*() {
     user: user.toJSON(),
   };
   this.body = user.toJSON();
+});
+
+//PC端扫码登录
+router.post('/pcLogin', function*() {
+  const key = this.query.key;
+  cache.set(key, this.session.user.id);
+});
+
+//PC端服务器查找用户
+router.get('/getUserIdByKey', function*() {
+  const key = this.query.key;
+  if (cache.has(key)) {
+    this.body = {
+      UserId: cache.peek(key),
+      isLogin: true,
+    };
+  } else {
+    this.body = {
+      UserId: null,
+      isLogin: false,
+    };
+  }
 });
 
 //登出

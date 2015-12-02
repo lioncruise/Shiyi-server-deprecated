@@ -2,8 +2,15 @@
 
 const LRU = require('lru-cache');
 
-let cache = LRU({
+let keyValueCache = LRU({
   maxAge: 1000 * 60 * 60,
 });
 
-module.exports = cache;
+let userCodeCache = LRU({
+  maxAge: 1000 * 60 * 5,
+});
+
+module.exports = {
+  keyValueCache,
+  userCodeCache,
+};
