@@ -6,18 +6,22 @@ const request = require('supertest');
 const mm = require('mm');
 const should = require('should');
 
-describe('test/controllers/restful/albums.test.js', function() {
+describe('test/controllers/restful/reports.test.js', function() {
   before(server.listen.bind(server, 0));
   after(server.close.bind(server));
   afterEach(mm.restore);
 
-  describe('GET /reports/', function() {
+  describe('GET /reports', function() {
     it('should get all reports of a user OK', function(done) {
       request(server)
-        .get('/reports/index')
+        .get('/reports')
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
-        .expect(function(res) {
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
           res.body.data.length.should.equal(4);
           done();
         });
@@ -36,7 +40,7 @@ describe('test/controllers/restful/albums.test.js', function() {
           }
 
           res.body.statusCode.should.equal(200);
-          res.body.data.length.should.equal(4);
+          res.body.data.should.have.properties(['id', 'status', 'content']);
           done();
         });
     });
@@ -64,7 +68,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     it('should create report of a user OK', function(done) {
       let data = {
         content: 'add report test TargetUserId',
-        TargetUserId: 5,
+        TargetUserId: '5',
       };
       request(server)
         .post('/reports')
@@ -84,7 +88,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     it('should create report of a user OK', function(done) {
       let data = {
         content: 'add report test AlbumId',
-        AlbumId: 5,
+        AlbumId: '5',
       };
       request(server)
         .post('/reports')
@@ -104,7 +108,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     it('should create report of a user OK', function(done) {
       let data = {
         content: 'add report test MemoryId',
-        MemoryId: 5,
+        MemoryId: '5',
       };
       request(server)
         .post('/reports')
@@ -124,7 +128,7 @@ describe('test/controllers/restful/albums.test.js', function() {
     it('should create report of a user OK', function(done) {
       let data = {
         content: 'add report test PhotoId',
-        PhotoId: 5,
+        PhotoId: '5',
       };
       request(server)
         .post('/reports')
@@ -150,12 +154,13 @@ describe('test/controllers/restful/albums.test.js', function() {
         .post('/reports')
         .send(data)
         .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(403)
+        .expect(200)
         .end(function(err, res) {
           if (err) {
             return done(err);
           }
 
+          res.body.statusCode.should.equal(403);
           res.body.message.should.equal('report对象至少要指定一个');
           done();
         });

@@ -9,7 +9,7 @@ exports.index = function*() {
   const reports = yield models.Report.findAll({
     paranoid: true,
     where: {
-      UserId: this.session.user.id,
+      UserId: '' + this.session.user.id,
     },
   });
   this.body = reports.map((item) => item.toJSON());
@@ -59,18 +59,18 @@ exports.create = function*() {
       required: false,
     },
   });
+  const params = this.request.body;
 
-  if (this.params.TargetUserId || this.params.AlbumId || this.params.MemoryId || this.params.PhotoId) {
+  if (params.TargetUserId || params.AlbumId || params.MemoryId || params.PhotoId) {
+    const report = yield models.Report.create(Object.assign(this.request.body, {
+      UserId: this.session.user.id,
+    }));
+    this.body = report.toJSON();
+  }else {
     this.body = {
       statusCode: 403,
       message: 'report对象至少要指定一个',
     };
     return;
   }
-
-  const report = yield models.Report.create(Object.assign(this.request.body, {
-    UserId: this.session.user.id,
-  }));
-
-  this.body = report.toJSON();
 };
