@@ -58,6 +58,15 @@ config.port = 8080;
 
 config.ipFilter = ['*'];
 
+let devConfig = {};
+try {
+  devConfig = require(path.join(__dirname, './devConfig.js'));
+} catch (err) {
+  // ignore error
+}
+
+config = Object.assign(config, devConfig);
+
 if (process.env.NODE_ENV === 'production') {
   let customConfig = {};
   try {
