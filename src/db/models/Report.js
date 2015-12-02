@@ -6,6 +6,14 @@ module.exports = function(sequelize, DataTypes) {
     status: {
       type: DataTypes.ENUM,
       values: ['pending', 'pass', 'deny'],
+      defaultValue: 'pending',
+    },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty: true,
+      },
     },
   }, {
     indexes: [],
