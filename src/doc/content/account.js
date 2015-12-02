@@ -43,6 +43,18 @@ module.exports = [{
   },
   ],
 }, {
+  fileName: 'GET getUserIdByKey',
+  func: 'PC端服务器通过用户特征值获得用户id',
+  note: [
+          '1.PC端服务器调用的接口，app不调用这个接口',
+          ],
+  requests: [
+  {
+    method: 'get',
+    url: '/getUserIdByKey?key=123456',
+  },
+  ],
+}, {
   fileName: 'GET logout',
   func: '登出',
   note: [

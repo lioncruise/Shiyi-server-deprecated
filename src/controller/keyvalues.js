@@ -3,7 +3,7 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
-const cache = require('../cache');
+const cache = require('../cache').keyValueCache;
 
 exports.getKeyValueFromDB = function*(key) {
   return yield models.Keyvalue.find({
