@@ -74,7 +74,7 @@ exports.auth = function*(next) {
       },
     };
   } else {
-    if (process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'development') {
+    if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
       if (!this.session || !this.session.user) {
         debug('auth middleware: Not login.');
         this.body = {
