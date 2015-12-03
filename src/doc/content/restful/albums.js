@@ -11,14 +11,18 @@ module.exports = [{
           '5.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
           '6.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
           '7.相册的基本信息里面，含有collaborators和fans的数量。',
+          '8.如果isWithMemories=true的同时isWithMemoriesDetails=true，则返回详细的记忆信息，包括每一条记忆的评论、点赞详情。',
           ],
   requests: [
     {
       method: 'get',
-      url: '/albums/1',
+      url: '/albums/2',
     }, {
       method: 'get',
-      url: '/albums/1?isWithMemories=true',
+      url: '/albums/2?isWithMemories=true',
+    }, {
+      method: 'get',
+      url: '/albums/2?isWithMemories=true&isWithMemoriesDetails=true',
     }, {
       method: 'get',
       url: '/albums/1?isWithPictures=true',

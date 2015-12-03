@@ -41,6 +41,11 @@ exports.show = function*() {
       required: false,
       allowEmpty: false,
     },
+    isWithMemoriesDetails: {
+      type: 'bool',
+      required: false,
+      allowEmpty: false,
+    },
     isWithPictures: {
       type: 'bool',
       required: false,
@@ -71,15 +76,46 @@ exports.show = function*() {
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
   if (this.query.isWithMemories === 'true') {
-    include.push({
-      model: models.Memory,
-      limit,
-      offset,
-      include: [{
-        model: models.Picture,
-      },
-      ],
-    });
+    if (this.query.isWithMemoriesDetails === 'true') {
+      include.push({
+        model: models.Memory,
+        limit,
+        offset,
+        include: [{
+          model: models.Picture,
+        }, {
+          model: models.Comment,
+
+          //TODO
+          // include: [{
+          //   model: models.Comment,
+          //   as: 'OrignalComment',
+          // }, {
+          //   model: models.User,
+          // },
+          // ],
+        }, {
+          model: models.Like,
+
+          //TODO
+          // include: [{
+          //   model: models.User,
+          // },
+          // ],
+        },
+        ],
+      });
+    } else {
+      include.push({
+        model: models.Memory,
+        limit,
+        offset,
+        include: [{
+          model: models.Picture,
+        },
+        ],
+      });
+    }
   }
 
   if (this.query.isWithRecentPicture === 'true') {
