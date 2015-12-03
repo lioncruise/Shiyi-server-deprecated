@@ -3,7 +3,27 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const modelUtils = require('../db/modelUtils');
-const cache = require('../cache').userCodeCache;
+const userCodeCache = require('../cache').userCodeCache;
+const userSecCodeCache = require('../cache').userSecCodeCache;
+
+//验证手机号
+router.post('/verifyPhone', function*() {
+  this.verifyParams({
+    phone: modelUtils.phoneRegExp,
+    secCode: 'string',
+  });
+
+  //TODO:向mob验证验证
+  const flag = true;
+
+  if (flag) {
+    userSecCodeCache.set(this.request.body.phone, true);
+  }
+
+  this.body = {
+    status: true,
+  };
+});
 
 //注册
 router.post('/register', function*() {
@@ -33,6 +53,16 @@ router.post('/register', function*() {
       allowEmpty: true,
     },
   });
+
+  if (!userSecCodeCache.has(this.request.body.phone)) {
+    this.body = {
+      statusCode: 409,
+      message: '手机号未验证',
+    };
+    return;
+  }
+
+  userSecCodeCache.del(this.request.body.phone);
 
   let user;
   try {
@@ -99,15 +129,15 @@ router.post('/login', function*() {
 //PC端扫码登录
 router.post('/pcLogin', function*() {
   const key = this.query.key;
-  cache.set(key, this.session.user.id);
+  userCodeCache.set(key, this.session.user.id);
 });
 
 //PC端服务器查找用户
 router.get('/getUserIdByKey', function*() {
   const key = this.query.key;
-  if (cache.has(key)) {
+  if (userCodeCache.has(key)) {
     this.body = {
-      UserId: cache.peek(key),
+      UserId: userCodeCache.peek(key),
       isLogin: true,
     };
   } else {
