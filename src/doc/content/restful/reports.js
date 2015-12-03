@@ -16,7 +16,7 @@ module.exports = [{
   fileName: 'GET reports :id',
   func: '获取某个举报信息',
   note: [
-    '1.获取举报的登录者必须为其上传者，否则无法取到',
+    '1.获取举报的登录者必须为其上传者，请前台注意检查',
   ],
   requests: [
     {

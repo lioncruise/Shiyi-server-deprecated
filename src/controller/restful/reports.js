@@ -5,11 +5,10 @@ const utils = require('../../utils');
 
 // get / 返回此人的所有report
 exports.index = function*() {
-  this.verifyParams({});
   const reports = yield models.Report.findAll({
     paranoid: true,
     where: {
-      UserId: '' + this.session.user.id,
+      UserId: this.session.user.id,
     },
   });
   this.body = reports.map((item) => item.toJSON());
@@ -26,15 +25,6 @@ exports.show = function*() {
       id: this.params.id,
     },
   });
-
-  if (report.UserId !== this.session.user.id) {
-    this.body = {
-      statusCode: 403,
-      message: '请求report不属于此人',
-    };
-    return;
-  }
-
   this.body = report.toJSON();
 };
 
@@ -59,9 +49,9 @@ exports.create = function*() {
       required: false,
     },
   });
-  const params = this.request.body;
+  const bodyParams = this.request.body;
 
-  if (params.TargetUserId || params.AlbumId || params.MemoryId || params.PictureId) {
+  if (bodyParams.TargetUserId || bodyParams.AlbumId || bodyParams.MemoryId || bodyParams.PictureId) {
     const report = yield models.Report.create(Object.assign(this.request.body, {
       UserId: this.session.user.id,
     }));
@@ -71,6 +61,5 @@ exports.create = function*() {
       statusCode: 403,
       message: 'report对象至少要指定一个',
     };
-    return;
   }
 };

@@ -45,27 +45,10 @@ describe('test/controllers/restful/reports.test.js', function() {
         });
     });
 
-    it('should NOT get report belongs to other users OK', function(done) {
-      request(server)
-        .get('/reports/5')
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.should.have.properties(['statusCode', 'message']);
-          res.body.statusCode.should.equal(403);
-          res.body.message.should.equal('请求report不属于此人');
-          done();
-        });
-    });
-
   });
 
   describe('POST /reports', function() {
-    it('should create report of a user OK', function(done) {
+    it('should create report to a user OK', function(done) {
       let data = {
         content: 'add report test TargetUserId',
         TargetUserId: '5',
@@ -85,7 +68,7 @@ describe('test/controllers/restful/reports.test.js', function() {
         });
     });
 
-    it('should create report of a user OK', function(done) {
+    it('should create report to a album OK', function(done) {
       let data = {
         content: 'add report test AlbumId',
         AlbumId: '5',
@@ -105,7 +88,7 @@ describe('test/controllers/restful/reports.test.js', function() {
         });
     });
 
-    it('should create report of a user OK', function(done) {
+    it('should create report to a memory OK', function(done) {
       let data = {
         content: 'add report test MemoryId',
         MemoryId: '5',
@@ -125,10 +108,10 @@ describe('test/controllers/restful/reports.test.js', function() {
         });
     });
 
-    it('should create report of a user OK', function(done) {
+    it('should create report to a photo OK', function(done) {
       let data = {
         content: 'add report test PhotoId',
-        PhotoId: '5',
+        PictureId: '5',
       };
       request(server)
         .post('/reports')
