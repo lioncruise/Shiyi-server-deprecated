@@ -3,6 +3,7 @@
 const db = require('../db');
 const fse = require('co-fs-extra');
 const co = require('co');
+const utils = require('../utils');
 
 const fakeModelNames = [
   'Keyvalue',
@@ -27,6 +28,8 @@ exports.run = co.wrap(function*() {
       console.log(e);
     }
   }
+
+  yield utils.models.rebuildDatabaseRedundancy;
 
   console.log('Database data fake finish.');
 });
