@@ -175,4 +175,73 @@ describe('src/test/controllers/restful/albums.test.js', function() {
         });
     });
   });
+
+  describe('POST /albums', function() {
+    let album = {
+      title: '哈工大二公寓',
+      description: '人间第二地狱',
+      tags: '哈工大,破,公寓,男生',
+      coverStoreKey: '123.jpg',
+      isPublic: 'private',
+      allowCommen: 'collaborators',
+    };
+
+    it('should create new album OK', function(done) {
+      request(server)
+        .post('/albums')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.data.tags.should.be.equal('哈工大,破,公寓,男生');
+          res.body.data.coverStoreKey.should.be.equal('123.jpg');
+          res.body.data.isPublic.should.be.equal('private');
+          res.body.data.allowComment.should.be.equal('collaborators');
+          done();
+        });
+    });
+
+    it('should create new album without tags OK', function(done) {
+      album.tags = '';
+      request(server)
+        .post('/albums')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.data.tags.should.be.equal('');
+          res.body.data.coverStoreKey.should.be.equal('123.jpg');
+          res.body.data.isPublic.should.be.equal('private');
+          res.body.data.allowComment.should.be.equal('collaborators');
+          done();
+        });
+    });
+
+    it('should get status 422', function(done) {
+      album.isPublic = 123;
+      request(server)
+        .post('/albums')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.message.should.equal('Validation Failed');
+          res.body.statusCode.should.equal(422);
+          done();
+        });
+    });
+
+  });
 });
