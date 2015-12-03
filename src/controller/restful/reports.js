@@ -61,7 +61,7 @@ exports.create = function*() {
   });
   const params = this.request.body;
 
-  if (params.TargetUserId || params.AlbumId || params.MemoryId || params.PhotoId) {
+  if (params.TargetUserId || params.AlbumId || params.MemoryId || params.PictureId) {
     const report = yield models.Report.create(Object.assign(this.request.body, {
       UserId: this.session.user.id,
     }));
