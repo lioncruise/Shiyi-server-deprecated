@@ -60,7 +60,7 @@ gulp.task('fake', ['init'], (done) => {
   fake.run().then(done);
 });
 
-gulp.task('doc', () => {
+gulp.task('doc', ['compile', 'fake'], () => {
   nodemon({
     script: 'out/doc/index.js',
     ignore: ['**/*.js'],
