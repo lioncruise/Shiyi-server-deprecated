@@ -7,6 +7,7 @@ const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
   '/register', '/login', '/logout', '/getValue', '/resetCache',
   '/getQiniuUptoken', '/rebuildDatabaseRedundancy',
+  '/verifyPhone', '/pcLogin', '/getUserIdByKey',
 ];
 
 exports.addStatusCode = function() {
