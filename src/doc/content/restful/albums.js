@@ -8,10 +8,11 @@ module.exports = [{
           '2.可加 isWithPictures=true 参数，在返回内容中添加 相册中的图片 内容。',
           '3.可加 isWithUser=true 参数，在返回内容中添加 相册的创建者信息 内容。',
           '4.可加 isWithCollaborators=true 参数，在返回内容中添加 相册的维护者（加入相册的人）的信息 内容。',
-          '5.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
-          '6.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
-          '7.相册的基本信息里面，含有collaborators和fans的数量。',
-          '8.如果isWithMemories=true的同时isWithMemoriesDetails=true，则返回详细的记忆信息，包括每一条记忆的评论、点赞详情。',
+          '5.可加 isWithRecentPicture=true 参数，在返回内容中添加 最近一张上传照片 的信息内容。',
+          '6.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
+          '7.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
+          '8.相册的基本信息里面，含有collaborators和fans的数量。',
+          '9.如果isWithMemories=true的同时isWithMemoriesDetails=true，则返回详细的记忆信息，包括每一条记忆的评论、点赞详情。',
           ],
   requests: [
     {
@@ -25,16 +26,19 @@ module.exports = [{
       url: '/albums/2?isWithMemories=true&isWithMemoriesDetails=true',
     }, {
       method: 'get',
-      url: '/albums/1?isWithPictures=true',
+      url: '/albums/2?isWithPictures=true',
     }, {
       method: 'get',
-      url: '/albums/1?isWithUser=true',
+      url: '/albums/2?isWithRecentPicture=true',
     }, {
       method: 'get',
-      url: '/albums/1?isWithCollaborators=true',
+      url: '/albums/2?isWithUser=true',
     }, {
       method: 'get',
-      url: '/albums/1?isWithPictures=true&offset=0&limit=10',
+      url: '/albums/2?isWithCollaborators=true',
+    }, {
+      method: 'get',
+      url: '/albums/2?isWithPictures=true&offset=0&limit=10',
     },
   ],
 }, {
