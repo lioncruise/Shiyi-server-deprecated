@@ -327,9 +327,72 @@ describe('src/test/controllers/restful/albums.test.js', function() {
             return done(err);
           }
 
-          console.log(res.body);
+          res.body.statusCode.should.be.equal(404);
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /albums/:id', function() {
+    it('should delete album OK', function(done) {
+      request(server)
+        .delete('/albums/3')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should delete album with 404', function(done) {
+      request(server)
+        .delete('/albums/3')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
 
           res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
+          done();
+        });
+    });
+
+    it('should delete album with 404', function(done) {
+      request(server)
+        .delete('/albums/8')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
+          done();
+        });
+    });
+
+    it('should delete album with 404', function(done) {
+      request(server)
+        .delete('/albums/10000')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
           done();
         });
     });
