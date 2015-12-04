@@ -40,25 +40,10 @@ describe('src/test/controllers/restful/albums.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('相册不存在');
           done();
         });
     });
-
-    // it('should get album info 422', function(done) {
-    //   request(server)
-    //     .get('/albums/###')
-    //     .expect('Content-type', 'application/json; charset=utf-8')
-    //     .expect(200)
-    //     .end(function(err, res) {
-    //       if (err) {
-    //         return done(err);
-    //       }
-
-    //       console.log(res.body);
-    //       res.body.statusCode.should.be.equal(422);
-    //       done();
-    //     });
-    // });
 
     it('should get album info with limit and offset OK', function(done) {
       request(server)
@@ -143,7 +128,7 @@ describe('src/test/controllers/restful/albums.test.js', function() {
 
     it('should get album info with recent picture OK', function(done) {
       request(server)
-        .get('/albums/1?isWithRecentPicture=true')
+        .get('/albums/2?isWithRecentPicture=true')
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
@@ -152,6 +137,8 @@ describe('src/test/controllers/restful/albums.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
+          res.body.data.RecentPicture.id.should.be.a.Number();
+          res.body.data.RecentPicture.should.have.properties(['downloadUrl', 'storeKey']);
           done();
         });
     });
