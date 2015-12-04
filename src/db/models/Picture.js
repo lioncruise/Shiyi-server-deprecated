@@ -25,6 +25,14 @@ module.exports = function(sequelize, DataTypes) {
       downloadUrl() {
         return modelUtils.getUrlFunction(this.storeKey);
       },
+
+      createdTimestamp: function() {
+        return moment(this.createdAt).unix();
+      },
+
+      updatedTimestamp: function() {
+        return moment(this.updateAt).unix();
+      },
     },
     indexes: [],
     classMethods: {

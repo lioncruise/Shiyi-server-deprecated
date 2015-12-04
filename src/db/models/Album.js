@@ -2,6 +2,7 @@
 
 const config = require('../../config');
 const modelUtils = require('../modelUtils');
+const moment = require('moment');
 
 //相册
 module.exports = function(sequelize, DataTypes) {
@@ -73,6 +74,14 @@ module.exports = function(sequelize, DataTypes) {
     getterMethods: {
       coverDownloadUrl() {
         return modelUtils.getUrlFunction(this.coverStoreKey);
+      },
+
+      createdTimestamp: function() {
+        return moment(this.createdAt).unix();
+      },
+
+      updatedTimestamp: function() {
+        return moment(this.updateAt).unix();
       },
     },
   });

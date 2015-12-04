@@ -2,6 +2,7 @@
 
 const config = require('../../config');
 const modelUtils = require('../modelUtils');
+const moment = require('moment');
 
 //用户
 module.exports = function(sequelize, DataTypes) {
@@ -102,6 +103,14 @@ module.exports = function(sequelize, DataTypes) {
     getterMethods: {
       avatarDownloadUrl() {
         return modelUtils.getUrlFunction(this.avatarStoreKey);
+      },
+
+      createdTimestamp: function() {
+        return moment(this.createdAt).unix();
+      },
+
+      updatedTimestamp: function() {
+        return moment(this.updateAt).unix();
       },
     },
     indexes: [],

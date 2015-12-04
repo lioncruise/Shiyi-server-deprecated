@@ -1,5 +1,7 @@
 'use strict';
 
+const moment = require('moment');
+
 //记忆
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Memory', {
@@ -25,5 +27,14 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     paranoid: true,
     indexes: [],
+    getterMethods: {
+      createdTimestamp: function() {
+        return moment(this.createdAt).unix();
+      },
+
+      updatedTimestamp: function() {
+        return moment(this.updateAt).unix();
+      },
+    },
   });
 };
