@@ -44,6 +44,22 @@ describe('src/test/controllers/restful/albums.test.js', function() {
         });
     });
 
+    // it('should get album info 422', function(done) {
+    //   request(server)
+    //     .get('/albums/###')
+    //     .expect('Content-type', 'application/json; charset=utf-8')
+    //     .expect(200)
+    //     .end(function(err, res) {
+    //       if (err) {
+    //         return done(err);
+    //       }
+
+    //       console.log(res.body);
+    //       res.body.statusCode.should.be.equal(422);
+    //       done();
+    //     });
+    // });
+
     it('should get album info with limit and offset OK', function(done) {
       request(server)
         .get('/albums/1?limit=1&offset=1')
@@ -136,8 +152,6 @@ describe('src/test/controllers/restful/albums.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
-          console.log(res.body);
-          res.body.data.should.have.property('RecentPictureId');
           done();
         });
     });
@@ -183,7 +197,7 @@ describe('src/test/controllers/restful/albums.test.js', function() {
       tags: '哈工大,破,公寓,男生',
       coverStoreKey: '123.jpg',
       isPublic: 'private',
-      allowCommen: 'collaborators',
+      allowComment: 'collaborators',
     };
 
     it('should create new album OK', function(done) {
@@ -197,6 +211,7 @@ describe('src/test/controllers/restful/albums.test.js', function() {
             return done(err);
           }
 
+          res.body.statusCode.should.be.equal(200);
           res.body.data.tags.should.be.equal('哈工大,破,公寓,男生');
           res.body.data.coverStoreKey.should.be.equal('123.jpg');
           res.body.data.isPublic.should.be.equal('private');
@@ -217,6 +232,7 @@ describe('src/test/controllers/restful/albums.test.js', function() {
             return done(err);
           }
 
+          res.body.statusCode.should.be.equal(200);
           res.body.data.tags.should.be.equal('');
           res.body.data.coverStoreKey.should.be.equal('123.jpg');
           res.body.data.isPublic.should.be.equal('private');
@@ -243,5 +259,79 @@ describe('src/test/controllers/restful/albums.test.js', function() {
         });
     });
 
+  });
+
+  describe('PUT /albums/:id', function() {
+    it('should update album OK', function(done) {
+      let album = {
+        title: '哈工大三公寓',
+        description: '人间第三地狱',
+        tags: '哈工大,破,公寓,女生',
+        isPublic: 'public',
+        allowComment: 'anyone',
+      };
+
+      request(server)
+        .put('/albums/1')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should update album without tags OK', function(done) {
+      let album = {
+        title: '哈工大三公寓',
+        description: '人间第三地狱就是666',
+      };
+
+      request(server)
+        .put('/albums/1')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should get statusCode 404', function(done) {
+      let album = {
+        title: '哈工大二公寓',
+        description: '人间第二地狱',
+        tags: '哈工大,破,公寓,男生',
+        coverStoreKey: '123.jpg',
+        isPublic: 'private',
+        allowComment: 'collaborators',
+      };
+
+      request(server)
+        .put('/albums/10000')
+        .send(album)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          console.log(res.body);
+
+          res.body.statusCode.should.be.equal(404);
+          done();
+        });
+    });
   });
 });

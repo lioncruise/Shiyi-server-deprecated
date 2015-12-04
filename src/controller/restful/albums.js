@@ -223,7 +223,6 @@ exports.update = function*() {
       UserId: this.session.user.id,
     },
   });
-  const originIsPublic = String(album.isPublic);
 
   if (!album) {
     this.body = {
@@ -232,6 +231,8 @@ exports.update = function*() {
     };
     return;
   }
+
+  const originIsPublic = String(album.isPublic);
 
   album = yield album.update(this.request.body);
 
