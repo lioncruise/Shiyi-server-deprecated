@@ -25,6 +25,14 @@ exports.show = function*() {
       id: this.params.id,
     },
   });
+  if (!report) {
+    this.body = {
+      statusCode: 404,
+      message: '举报不存在',
+    };
+    return;
+  }
+
   this.body = report.toJSON();
 };
 
