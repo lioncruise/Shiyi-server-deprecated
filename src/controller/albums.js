@@ -31,7 +31,7 @@ router.get('/getOwnAlbums', function*() {
   this.body = albums.map((album) => album.toJSON());
 });
 
-const getGetAlbumsControllerFuction =  function(modelName) {
+const getGetAlbumsControllerFunction =  function(modelName) {
   return function*() {
     const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
     const albumIds = (yield models[modelName].findAll({
@@ -67,7 +67,7 @@ const getGetAlbumsControllerFuction =  function(modelName) {
 };
 
 //获取自己加入的相册
-router.get('/getRelatedAlbums', getGetAlbumsControllerFuction('AlbumUserCollaborate'));
+router.get('/getRelatedAlbums', getGetAlbumsControllerFunction('AlbumUserCollaborate'));
 
 //获取自己关注的相册
-router.get('/getFollowAlbums', getGetAlbumsControllerFuction('AlbumUserFollow'));
+router.get('/getFollowAlbums', getGetAlbumsControllerFunction('AlbumUserFollow'));
