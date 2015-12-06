@@ -105,4 +105,142 @@ describe('src/test/controllers/restful/memories.test.js', function() {
         });
     });
   });
+
+  describe('POST /memories', function() {
+    it('should post memory info OK', function(done) {
+      const memory = {
+        content: '今天我非常高兴',
+        gps: '9.13716, -151.5152',
+        position: '哈工大',
+        AlbumId: '1',
+      };
+      request(server)
+        .post('/memories')
+        .send(memory)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          res.body.data.content.should.be.equal('今天我非常高兴');
+          res.body.data.UserId.should.be.equal(1);
+          res.body.data.AlbumId.should.be.equal('1');
+          done();
+        });
+    });
+
+    it('should post memory info 404', function(done) {
+      const memory = {
+        content: '今天我非常高兴',
+        gps: '9.13716, -151.5152',
+        position: '哈工大',
+        AlbumId: '10000',
+      };
+      request(server)
+        .post('/memories')
+        .send(memory)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('相册不存在');
+          done();
+        });
+    });
+
+    it('should post memory info 422', function(done) {
+      const memory = {
+        content: '今天我非常高兴',
+        gps: '9.13716, -151.5152',
+        position: '哈工大',
+        AlbumId: 1,
+      };
+      request(server)
+        .post('/memories')
+        .send(memory)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(422);
+          res.body.message.should.be.equal('Validation Failed');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE /memories/: id', function() {
+    it('should delete memory info OK', function(done) {
+      request(server)
+        .delete('/memories/1')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should delete memory info 404', function(done) {
+      request(server)
+        .delete('/memories/1')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
+          done();
+        });
+    });
+
+    it('should delete memory info 404', function(done) {
+      request(server)
+        .delete('/memories/12')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
+          done();
+        });
+    });
+
+    it('should delete memory info 404', function(done) {
+      request(server)
+        .delete('/memories/10000')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('删除失败');
+          done();
+        });
+    });
+  });
 });
