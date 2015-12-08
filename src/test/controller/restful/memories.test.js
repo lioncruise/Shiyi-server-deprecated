@@ -112,7 +112,7 @@ describe('src/test/controllers/restful/memories.test.js', function() {
         content: '今天我非常高兴',
         gps: '9.13716, -151.5152',
         position: '哈工大',
-        AlbumId: '1',
+        AlbumId: '2',
       };
       request(server)
         .post('/memories')
@@ -127,7 +127,7 @@ describe('src/test/controllers/restful/memories.test.js', function() {
           res.body.statusCode.should.be.equal(200);
           res.body.data.content.should.be.equal('今天我非常高兴');
           res.body.data.UserId.should.be.equal(1);
-          res.body.data.AlbumId.should.be.equal('1');
+          res.body.data.AlbumId.should.be.equal('2');
           done();
         });
     });
