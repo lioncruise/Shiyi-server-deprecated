@@ -77,7 +77,6 @@ describe('src/test/controllers/restful/users.test.js', function() {
           res.body.statusCode.should.be.equal(200);
           res.body.data.id.should.be.equal(1);
           res.body.data.should.have.properties(['avatarDownloadUrl', 'phone', 'nickname', 'avatarStoreKey', 'Actions']);
-          res.body.data.Actions[0].Memory.id.should.be.a.Number();
           done();
         });
     });
@@ -95,7 +94,6 @@ describe('src/test/controllers/restful/users.test.js', function() {
           res.body.statusCode.should.be.equal(200);
           res.body.data.id.should.be.equal(1);
           res.body.data.should.have.properties(['avatarDownloadUrl', 'phone', 'nickname', 'avatarStoreKey', 'Actions']);
-          res.body.data.Actions[0].Memory.id.should.be.a.Number();
           done();
         });
     });

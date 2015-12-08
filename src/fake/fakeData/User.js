@@ -9,7 +9,7 @@ const hometowns = ['北京', '上海', '广州'];
 const devices = ['ios', 'android'];
 
 //共10个用户
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 20; i++) {
   const phone = `130000000${ i < 10 ? '0' + i : i}`;
   const gender = chance.character({ pool: 'FM' });
   const device = devices[chance.integer({min: 0, max: 1})];
