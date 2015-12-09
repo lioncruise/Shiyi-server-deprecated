@@ -41,6 +41,11 @@ exports.show = function*() {
       required: false,
       allowEmpty: false,
     },
+    isWithMemoriesDetails: {
+      type: 'bool',
+      required: false,
+      allowEmpty: false,
+    },
     isWithPictures: {
       type: 'bool',
       required: false,
@@ -70,16 +75,49 @@ exports.show = function*() {
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
+  let isWithDetails = false;
   if (this.query.isWithMemories === 'true') {
-    include.push({
-      model: models.Memory,
-      limit,
-      offset,
-      include: [{
-        model: models.Picture,
-      },
-      ],
-    });
+    if (this.query.isWithMemoriesDetails === 'true') {
+      isWithDetails = true;
+      include.push({
+        model: models.Memory,
+        limit,
+        offset,
+        include: [{
+          model: models.Picture,
+        }, {
+          model: models.Comment,
+
+          //TODO 用一条查询查到全部信息
+          // include: [{
+          //   model: models.Comment,
+          //   as: 'OrignalComment',
+          // }, {
+          //   model: models.User,
+          // },
+          // ],
+        }, {
+          model: models.Like,
+
+          //TODO 用一条查询查到全部信息
+          // include: [{
+          //   model: models.User,
+          // },
+          // ],
+        },
+        ],
+      });
+    } else {
+      include.push({
+        model: models.Memory,
+        limit,
+        offset,
+        include: [{
+          model: models.Picture,
+        },
+        ],
+      });
+    }
   }
 
   if (this.query.isWithRecentPicture === 'true') {
@@ -127,6 +165,75 @@ exports.show = function*() {
   }
 
   this.body = exports.setAlbumTags(album.toJSON());
+
+  if (isWithDetails) {
+    //如果需要详细信息，进行二次查询
+
+    //Comment二次数据
+    const commentIds = new Set();
+    this.body.Memories.forEach(function(memory) {
+      memory.Comments.forEach(function(comment) {
+        commentIds.add(comment.id);
+      });
+    });
+
+    const detailedCommentsSQLResults = yield models.Comment.findAll({
+      paranoid: true,
+      where: {
+        id: {
+          $in: Array.from(commentIds.values()),
+        },
+      },
+      include: [{
+        model: models.Comment,
+        as: 'OrignalComment',
+        include: [{
+          model: models.User,
+        },
+        ],
+      }, {
+        model: models.User,
+      },
+      ],
+    });
+
+    const detailedComments = new Map();
+    detailedCommentsSQLResults.forEach(function(comment) {
+      detailedComments.set(comment.id, comment);
+    });
+
+    //Like二次数据
+    const likeIds = new Set();
+    this.body.Memories.forEach(function(memory) {
+      memory.Likes.forEach(function(like) {
+        likeIds.add(like.id);
+      });
+    });
+
+    const detailedLikesSQLResults = yield models.Like.findAll({
+      paranoid: true,
+      where: {
+        id: {
+          $in: Array.from(likeIds.values()),
+        },
+      },
+      include: [{
+        model: models.User,
+      },
+      ],
+    });
+
+    const detailedLikes = new Map();
+    detailedLikesSQLResults.forEach(function(like) {
+      detailedLikes.set(like.id, like);
+    });
+
+    //进行替换
+    this.body.Memories.forEach(function(memory) {
+      memory.Comments = memory.Comments.map((comment) => detailedComments.get(comment.id));
+      memory.Likes = memory.Likes.map((like) => detailedLikes.get(like.id));
+    });
+  }
 };
 
 exports.create = function*() {
