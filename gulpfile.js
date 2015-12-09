@@ -9,6 +9,7 @@ const stylish = require('jshint-stylish');
 const nodemon = require('gulp-nodemon');
 const co = require('co');
 const mocha = require('gulp-mocha');
+const istanbul = require('gulp-babel-istanbul');
 
 gulp.task('dev', () => {
   nodemon({
@@ -43,9 +44,17 @@ gulp.task('lint', () => {
     .pipe(jshint.reporter('fail'));
 });
 
-gulp.task('test', ['lint', 'jscs', 'compile'], () => {
-  return gulp.src('out/test/**/*.test.js', {read: false})
-    .pipe(mocha({reporter: 'nyan'}));
+gulp.task('test', ['lint', 'jscs', 'fake'], (cb) => {
+  gulp.src(['src/**/*.js'])
+    .pipe(istanbul()) // Covering files
+    .pipe(istanbul.hookRequire()) // Force `require` to return covered files
+    .on('finish', function() {
+      gulp.src(['src/test/**/*.test.js'])
+        .pipe(mocha())
+        .pipe(istanbul.writeReports()) // Creating the reports after tests ran
+        .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } })) // Enforce a coverage of at least 90%
+        .on('end', cb);
+    });
 });
 
 gulp.task('init', ['compile'], (done) => {
