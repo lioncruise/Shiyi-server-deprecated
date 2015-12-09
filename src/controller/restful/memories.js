@@ -121,6 +121,7 @@ exports.create = function*() {
       type: 'createMemory',
       MemoryId: memory.id,
       UserId: this.session.user.id,
+      AlbumId: memory.AlbumId,
     });
   }
 };
