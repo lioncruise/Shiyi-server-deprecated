@@ -10,7 +10,7 @@ describe('src/test/controllers/albumUserFollows.test.js', function() {
   before(server.listen.bind(server, 0));
   after(server.close.bind(server));
   afterEach(mm.restore);
-  
+
   describe('DELETE /albumUserFollows', function() {
     it('should delete album user follow OK', function(done) {
       request(server)
