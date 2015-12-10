@@ -94,9 +94,47 @@ exports.create = function*() {
     },
   });
 
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: this.request.body.AlbumId,
+    },
+  });
+
+  if (!album) {
+    this.body = {
+      statusCode: 404,
+      message: '相册不存在',
+    };
+    return;
+  }
+
+  const memory = yield models.Memory.find({
+    paranoid: true,
+    where: {
+      id: this.request.body.MemoryId,
+    },
+  });
+
+  if (!memory) {
+    this.body = {
+      statusCode: 404,
+      message: '记忆不存在',
+    };
+    return;
+  }
+
   const picture = yield models.Picture.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
+
+  yield models.Album.update({
+    picturesCount: album.picturesCount + 1,
+  }, {
+    where:{
+      id: album.id,
+    },
+  });
 
   this.body = picture.toJSON();
 };

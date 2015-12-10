@@ -113,6 +113,14 @@ exports.create = function*() {
     UserId: this.session.user.id,
   }));
 
+  yield models.Album.update({
+    memoriesCount: album.memoriesCount + 1,
+  }, {
+    where:{
+      id: album.id,
+    },
+  });
+
   this.body = memory.toJSON();
 
   //创建相关action
