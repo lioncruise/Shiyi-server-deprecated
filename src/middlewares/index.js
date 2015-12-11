@@ -40,22 +40,14 @@ exports.addStatusCode = function() {
 
 exports.showBody = function() {
   return function*(next) {
-    console.log('--------------this.headers-----------------');
-    console.log(this.headers);
-    console.log('-----------------this.path---------------------');
-    console.log(this.path);
-    console.log('-----------------this.query--------------------');
-    console.log(this.query);
-    console.log('-----------------this.params--------------------');
-    console.log(this.params);
-    console.log('--------------this.request.body-----------------');
-    console.log(this.request.body);
+    console.log('------------------------------------------------');
+    console.log(this.request);
     console.log('------------------------------------------------');
 
     yield next;
-
-    console.log('--------------this.body-----------------');
-    console.log(this.body);
+    console.log('------------------------------------------------');
+    console.log(this.response);
+    console.log('------------------------------------------------');
   };
 };
 
