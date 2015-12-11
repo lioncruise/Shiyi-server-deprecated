@@ -10,7 +10,7 @@
     "out_file": "data/logs/node.stdout.log",
     "error_file": "data/logs/node.stderr.log",
     "env": {
-      "NODE_ENV": "dev"
+      "NODE_ENV": "development"
     }
   }]
 }
