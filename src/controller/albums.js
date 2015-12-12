@@ -3,6 +3,24 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
+const config = require('../config');
+
+//获取相册二维码
+router.get('/getQRCode', function*() {
+  const AlbumId = parseInt(this.query.albumId);
+  if (!AlbumId) {
+    this.body = {
+      statusCode: 404,
+      message: '获取失败',
+    };
+    return;
+  }
+
+  const secCode = utils.getJoinAlbumSecCode(AlbumId);
+  const url = config.url + `/joinAlbum?a=${AlbumId}&c=${secCode}`;
+
+  this.body = url;
+});
 
 //获取自己创建的相册
 router.get('/getOwnAlbums', function*() {

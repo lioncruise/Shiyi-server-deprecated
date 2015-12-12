@@ -2,6 +2,42 @@
 
 const router = require('../router').router;
 const models = require('../db').models;
+const utils = require('../utils');
+const config = require('../config');
+
+router.get('/joinAlbum', function*() {
+  const AlbumId = parseInt(this.query.a);
+  const secCode = this.query.c;
+  if (!AlbumId || !secCode || secCode !== utils.getJoinAlbumSecCode(AlbumId)) {
+    this.body = {
+      statusCode: 404,
+      message: '参数错误，添加失败',
+    };
+    return;
+  }
+
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: AlbumId,
+    },
+  });
+
+  if (!album || !this.session || !this.session.user || !this.session.user.id) {
+    this.body = {
+      statusCode: 404,
+      message: '数据错误，添加失败',
+    };
+    return;
+  }
+
+  yield models.AlbumUserCollaborate.findOrCreate({
+    where: {
+      AlbumId,
+      UserId: this.session.user.id,
+    },
+  });
+});
 
 exports.getDeleteFuction = function(modelName) {
   let actionType;
