@@ -20,14 +20,24 @@ router.get('/joinAlbum', function*() {
     paranoid: true,
     where: {
       id: AlbumId,
+      isPublic: {
+        $ne: 'private',
+      },
     },
   });
 
   if (!album || !this.session || !this.session.user || !this.session.user.id) {
     this.body = {
       statusCode: 404,
-      message: '数据错误，添加失败',
+      message: '权限错误，添加失败',
     };
+    return;
+  }
+
+  this.body = album.toJSON();
+
+  //自己无法加入到自己创建的相册中
+  if (parseInt(this.session.user.id) === parseInt(album.UserId)) {
     return;
   }
 
