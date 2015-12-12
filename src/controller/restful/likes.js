@@ -43,10 +43,11 @@ exports.destroy = function*() {
       statusCode: 404,
       message: '删除失败',
     };
+    return;
   }
 
   yield models.Memory.update({
-    likesCount: sequelize.col('likesCount') - 1,
+    likesCount: sequelize.literal('likesCount - 1'),
   }, {
     where: {
       id: like.MemoryId,

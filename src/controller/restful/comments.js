@@ -108,6 +108,7 @@ exports.destroy = function*() {
       statusCode: 404,
       message: '删除失败',
     };
+    return;
   }
 
   yield models.Comment.update({
@@ -119,7 +120,7 @@ exports.destroy = function*() {
   });
 
   yield models.Memory.update({
-    commentsCount: sequelize.col('commentsCount') - 1,
+    commentsCount: sequelize.literal('commentsCount - 1'),
   }, {
     where: {
       id: comment.MemoryId,

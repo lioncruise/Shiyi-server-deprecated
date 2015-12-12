@@ -17,7 +17,7 @@ exports.deleteReletedAction = function*(actionWhereParameter) {
 };
 
 exports.deleteData = function*(modelName, where) {
-  yield models[modelName].destroy({
+  return yield models[modelName].destroy({
     where,
   });
 };
@@ -35,22 +35,6 @@ exports.deleteMemory = function*(MemoryId) {
     throw new Error('Memory Not Found.');
   }
 
-  yield [exports.deleteData('Comment', {
-    MemoryId,
-  }), exports.deleteData('Like', {
-    MemoryId,
-  }),
-  ];
-  yield exports.deleteData('Action', {
-    MemoryId,
-  });
-  const deletedPicturesCount = yield exports.deleteData('Picture', {
-    MemoryId,
-  });
-  yield exports.deleteData('Notification', {
-    MemoryId,
-  });
-
   const album = yield models.Album.find({
     paranoid: true,
     where: {
@@ -62,7 +46,23 @@ exports.deleteMemory = function*(MemoryId) {
     throw new Error('Album Not Found.');
   }
 
-  //删除冗余统计信息
+  yield [exports.deleteData('Comment', {
+    MemoryId,
+  }), exports.deleteData('Like', {
+    MemoryId,
+  }),
+  ];
+  yield exports.deleteData('Action', {
+    MemoryId,
+  });
+  yield exports.deleteData('Notification', {
+    MemoryId,
+  });
+  const deletedPicturesCount = yield exports.deleteData('Picture', {
+    MemoryId,
+  });
+
+  //修改冗余统计信息
   yield album.update({
     memoriesCount: album.memoriesCount - 1,
     picturesCount: album.picturesCount - deletedPicturesCount,
@@ -98,14 +98,14 @@ exports.deleteAlbum = function*(AlbumId) {
     AlbumId,
   });
 
+  //修改冗余统计信息
   const AlbumUserFollows = yield models.AlbumUserFollow.findAll({
     where: {
       AlbumId,
     },
   });
-
   yield models.User.update({
-    followAlbumsCount: sequelize.col('followAlbumsCount') + 1,
+    followAlbumsCount: sequelize.literal('followAlbumsCount - 1'),
   }, {
     where: {
       id: {
@@ -144,13 +144,14 @@ exports.deleteUser = function*(UserId) {
     UserId,
   });
 
+  //修改冗余统计信息
   const AlbumUserCollaborates = yield models.AlbumUserCollaborate.findAll({
     where: {
       UserId,
     },
   });
   yield models.Album.update({
-    collaboratorsCount: sequelize.col('collaboratorsCount') - 1,
+    collaboratorsCount: sequelize.literal('collaboratorsCount - 1'),
   }, {
     where: {
       id: {
@@ -159,13 +160,14 @@ exports.deleteUser = function*(UserId) {
     },
   });
 
+  //修改冗余统计信息
   const AlbumUserFollows = yield models.AlbumUserFollow.findAll({
     where: {
       UserId,
     },
   });
   yield models.Album.update({
-    fansCount: sequelize.col('fansCount') - 1,
+    fansCount: sequelize.literal('fansCount - 1'),
   }, {
     where: {
       id: {
@@ -174,13 +176,14 @@ exports.deleteUser = function*(UserId) {
     },
   });
 
+  //修改冗余统计信息
   const UserUserFollows = yield models.UserUserFollow.findAll({
     where: {
       UserId,
     },
   });
   yield models.User.update({
-    fansCount: sequelize.col('fansCount') - 1,
+    fansCount: sequelize.literal('fansCount - 1'),
   }, {
     where: {
       id: {
