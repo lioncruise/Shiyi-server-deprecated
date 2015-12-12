@@ -18,9 +18,18 @@ function getUrlFunction(key) {
   return policy.makeRequest(baseUrl);
 }
 
+function getThumbnailUrlFunction(key) {
+  const baseUrl = qiniu.rs.makeBaseUrl(config.qiniu.domain, key);
+  const iv = new qiniu.fop.ImageView();
+  iv.width = 200;
+  const policy = new qiniu.rs.GetPolicy();
+  return policy.makeRequest(iv.makeRequest(baseUrl));
+}
+
 const phoneRegExp = /(^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$/;
 
 module.exports = {
   getUrlFunction,
   phoneRegExp,
+  getThumbnailUrlFunction,
 };
