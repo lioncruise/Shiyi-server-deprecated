@@ -84,6 +84,8 @@ exports.show = function*() {
         limit,
         offset,
         include: [{
+          model: models.User,
+        }, {
           model: models.Picture,
         }, {
           model: models.Comment,
