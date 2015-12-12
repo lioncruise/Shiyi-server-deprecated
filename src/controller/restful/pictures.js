@@ -130,6 +130,7 @@ exports.create = function*() {
 
   yield models.Album.update({
     picturesCount: album.picturesCount + 1,
+    coverStoreKey: this.request.body.storeKey,
   }, {
     where:{
       id: album.id,
