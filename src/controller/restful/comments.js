@@ -2,6 +2,7 @@
 
 const models = require('../../db').models;
 const utils = require('../../utils');
+const sequelize = require('sequelize');
 
 exports.show = function*() {
   this.verifyParams({
@@ -95,8 +96,36 @@ exports.destroy = function*() {
     id: 'id',
   });
 
-  //删除与评论相关的信息
-  //TODO:
+  const comment = yield models.Comment.find({
+    paranoid: true,
+    where: {
+      id: this.params.id,
+    },
+  });
+
+  if (!comment) {
+    this.body = {
+      statusCode: 404,
+      message: '删除失败',
+    };
+    return;
+  }
+
+  yield models.Comment.update({
+    OrignalCommentId: null,
+  }, {
+    where: {
+      OrignalCommentId: this.params.id,
+    },
+  });
+
+  yield models.Memory.update({
+    commentsCount: sequelize.literal('commentsCount - 1'),
+  }, {
+    where: {
+      id: comment.MemoryId,
+    },
+  });
 
   const result = yield models.Comment.destroy({
     where: {

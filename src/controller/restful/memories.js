@@ -139,20 +139,20 @@ exports.destroy = function*() {
     id: 'id',
   });
 
-  //删除与记忆相关的信息
-  //TODO:
-
-  const result = yield models.Album.destroy({
+  const memory = yield models.Memory.find({
     where: {
       id: this.params.id,
       UserId: this.session.user.id,
     },
   });
 
-  if (result === 0) {
+  if (!memory) {
     this.body = {
       statusCode: 404,
       message: '删除失败',
     };
+    return;
   }
+
+  yield utils.models.deleteMemory(memory.id);
 };
