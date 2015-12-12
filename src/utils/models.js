@@ -2,6 +2,7 @@
 
 const models = require('../db').models;
 const debug = require('debug')('utils/models');
+const sequelize = require('sequelize');
 
 exports.createReletedAction = function*(action) {
   debug('create new action.');
@@ -23,6 +24,17 @@ exports.deleteData = function*(modelName, where) {
 
 //删除记忆相关信息
 exports.deleteMemory = function*(MemoryId) {
+  const memory = yield models.Memory.find({
+    paranoid: true,
+    where: {
+      id: MemoryId,
+    },
+  });
+
+  if (!memory) {
+    throw new Error('Memory Not Found.');
+  }
+
   yield [exports.deleteData('Comment', {
     MemoryId,
   }), exports.deleteData('Like', {
@@ -32,17 +44,34 @@ exports.deleteMemory = function*(MemoryId) {
   yield exports.deleteData('Action', {
     MemoryId,
   });
-  yield exports.deleteData('Picture', {
+  const deletedPicturesCount = yield exports.deleteData('Picture', {
     MemoryId,
   });
   yield exports.deleteData('Notification', {
     MemoryId,
   });
+
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: memory.AlbumId,
+    },
+  });
+
+  if (!album) {
+    throw new Error('Album Not Found.');
+  }
+
+  //删除冗余统计信息
+  yield album.update({
+    memoriesCount: album.memoriesCount - 1,
+    picturesCount: album.picturesCount - deletedPicturesCount,
+  });
+
+  //删除记忆
   yield exports.deleteData('Memory', {
     id: MemoryId,
   });
-
-  //TODO：删除冗余项统计信息
 };
 
 //删除相册相关信息
@@ -65,21 +94,36 @@ exports.deleteAlbum = function*(AlbumId) {
   yield exports.deleteData('Notification', {
     AlbumId,
   });
+  yield exports.deleteData('AlbumTag', {
+    AlbumId,
+  });
+
+  const AlbumUserFollows = yield models.AlbumUserFollow.findAll({
+    where: {
+      AlbumId,
+    },
+  });
+
+  yield models.User.update({
+    followAlbumsCount: sequelize.col('followAlbumsCount') + 1,
+  }, {
+    where: {
+      id: {
+        $in: Array.from(AlbumUserFollows.map((elm) => elm.UserId)),
+      },
+    },
+  });
+
   yield [exports.deleteData('AlbumUserCollaborate', {
     AlbumId,
   }), exports.deleteData('AlbumUserFollow', {
     AlbumId,
   }),
   ];
-  yield exports.deleteData('AlbumTag', {
-    AlbumId,
-  });
+
   yield exports.deleteData('Album', {
     id: AlbumId,
   });
-
-  //TODO:删除冗余项统计信息
-  //User冗余项：followAlbumsCount
 };
 
 //删除用户相关信息
@@ -99,6 +143,52 @@ exports.deleteUser = function*(UserId) {
   yield exports.deleteData('Memory', {
     UserId,
   });
+
+  const AlbumUserCollaborates = yield models.AlbumUserCollaborate.findAll({
+    where: {
+      UserId,
+    },
+  });
+  yield models.Album.update({
+    collaboratorsCount: sequelize.col('collaboratorsCount') - 1,
+  }, {
+    where: {
+      id: {
+        $in: Array.from(AlbumUserCollaborates.map((elm) => elm.AlbumId)),
+      },
+    },
+  });
+
+  const AlbumUserFollows = yield models.AlbumUserFollow.findAll({
+    where: {
+      UserId,
+    },
+  });
+  yield models.Album.update({
+    fansCount: sequelize.col('fansCount') - 1,
+  }, {
+    where: {
+      id: {
+        $in: Array.from(AlbumUserFollows.map((elm) => elm.AlbumId)),
+      },
+    },
+  });
+
+  const UserUserFollows = yield models.UserUserFollow.findAll({
+    where: {
+      UserId,
+    },
+  });
+  yield models.User.update({
+    fansCount: sequelize.col('fansCount') - 1,
+  }, {
+    where: {
+      id: {
+        $in: Array.from(UserUserFollows.map((elm) => elm.AlbumId)),
+      },
+    },
+  });
+
   yield [exports.deleteData('AlbumUserCollaborate', {
     UserId,
   }), exports.deleteData('AlbumUserFollow', {
@@ -131,11 +221,11 @@ exports.deleteUser = function*(UserId) {
       },
     ],
   });
+
+  //删除用户
   yield exports.deleteData('User', {
     id: UserId,
   });
-
-  //TODO：删除冗余项统计信息
 };
 
 //重建数据库冗余项
