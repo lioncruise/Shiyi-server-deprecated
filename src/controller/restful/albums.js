@@ -103,7 +103,7 @@ exports.show = function*() {
         ],
         limit,
         offset,
-        memoryQueryInclude,
+        include: memoryQueryInclude,
       });
   }
 
@@ -156,7 +156,7 @@ exports.show = function*() {
 
   this.body = exports.setAlbumTags(album.toJSON());
 
-  if (this.query.isWithMemories === 'true' && memories.length) {
+  if (this.query.isWithMemories === 'true') {
     this.body.Memories = memories.map((elm) => elm.toJSON());
   }
 
