@@ -76,56 +76,35 @@ exports.show = function*() {
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
   let isWithDetails = false;
+  let memories = [];
   if (this.query.isWithMemories === 'true') {
+    let memoryQueryInclude = [];
     if (this.query.isWithMemoriesDetails === 'true') {
       isWithDetails = true;
-      include.push({
-        model: models.Memory,
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-        limit,
-        offset,
-        include: [{
+      memoryQueryInclude = [{
           model: models.User,
         }, {
           model: models.Picture,
         }, {
           model: models.Comment,
-
-          //TODO 用一条查询查到全部信息
-          // include: [{
-          //   model: models.Comment,
-          //   as: 'OrignalComment',
-          // }, {
-          //   model: models.User,
-          // },
-          // ],
         }, {
           model: models.Like,
-
-          //TODO 用一条查询查到全部信息
-          // include: [{
-          //   model: models.User,
-          // },
-          // ],
         },
-        ],
-      });
-    } else {
-      include.push({
-        model: models.Memory,
+        ];
+    }
+
+    memories = yield models.Memory.findAll({
+        paranoid: true,
+        where: {
+          AlbumId: this.params.id,
+        },
         order: [
           ['createdAt', 'DESC'],
         ],
         limit,
         offset,
-        include: [{
-          model: models.Picture,
-        },
-        ],
+        memoryQueryInclude,
       });
-    }
   }
 
   if (this.query.isWithRecentPicture === 'true') {
@@ -176,6 +155,10 @@ exports.show = function*() {
   }
 
   this.body = exports.setAlbumTags(album.toJSON());
+
+  if (this.query.isWithMemories === 'true' && memories.length) {
+    this.body.Memories = memories.map((elm) => elm.toJSON());
+  }
 
   if (isWithDetails) {
     //如果需要详细信息，进行二次查询
