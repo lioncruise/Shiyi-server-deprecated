@@ -81,6 +81,9 @@ exports.show = function*() {
       isWithDetails = true;
       include.push({
         model: models.Memory,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
         limit,
         offset,
         include: [{
@@ -112,6 +115,9 @@ exports.show = function*() {
     } else {
       include.push({
         model: models.Memory,
+        order: [
+          ['createdAt', 'DESC'],
+        ],
         limit,
         offset,
         include: [{
@@ -132,6 +138,9 @@ exports.show = function*() {
   if (this.query.isWithPictures === 'true') {
     include.push({
       model: models.Picture,
+      order: [
+        ['createdAt', 'DESC'],
+      ],
       limit,
       offset,
     });
