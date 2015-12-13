@@ -78,7 +78,10 @@ exports.show = function*() {
   let isWithDetails = false;
   let memories = [];
   if (this.query.isWithMemories === 'true') {
-    let memoryQueryInclude = [];
+    let memoryQueryInclude = [{
+      model: models.Picture,
+    },
+    ];
     if (this.query.isWithMemoriesDetails === 'true') {
       isWithDetails = true;
       memoryQueryInclude = [{
