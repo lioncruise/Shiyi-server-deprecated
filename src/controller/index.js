@@ -4,7 +4,7 @@
 
 require('./albumUserCollaborates');
 require('./albumUserFollows');
-require('/userUserFollows');
+require('./userUserFollows');
 require('./account');
 require('./albums');
 require('./actions');
