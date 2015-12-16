@@ -39,6 +39,15 @@ config.sms = {
   apikey: '2bafb98c7a73e2566f318cf468e096ae',
 };
 
+config.getui = {
+  host: 'https://api.getui.com/apiex.htm',
+  appId: 'Yezv1XBlh89nw9ShM2Gju5',
+  appKey: 'avLKVJLF1h7rWmHrT4zZ65',
+  appSecert:'on31a4ZCtN9LaawNL6nv99',
+  masterSecret: 'bRsEp8N4XsAteAwUi0hmY6',
+  isOffLine: true, // 是否推送离线的终端
+};
+
 config.IOSNotification = {
   keyFile: path.join(__dirname, '../crts', 'for apns', 'key.pem'),
   certFile: path.join(__dirname, '../crts', 'for apns', 'cert.pem'),
