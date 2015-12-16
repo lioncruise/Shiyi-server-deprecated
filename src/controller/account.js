@@ -197,7 +197,7 @@ router.put('/update', function*() {
     getuiCid: {
       type: 'string',
       required: false,
-    }
+    },
   });
 
   yield models.User.update(this.request.body, {

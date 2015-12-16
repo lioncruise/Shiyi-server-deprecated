@@ -92,6 +92,7 @@ module.exports = [{
   note: [
           '1.增量更新，可以只添加需要更改的项。',
           '2.可以更改手机号。',
+          '3.可以更新个推的推送CID。CID的更新请在登陆和检测到个推CID改变时更新。',
           ],
   requests: [
     {
@@ -106,6 +107,7 @@ module.exports = [{
         hometown: '黑龙江 哈尔滨',
         motto: 'Do cool things that matter.',
         avatarStoreKey: '123',
+        getuiCid: '06fe917679a82622368d08af6f8f21d5',
       },
     },
   ],
