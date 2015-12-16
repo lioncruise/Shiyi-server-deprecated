@@ -40,12 +40,13 @@ exports.addStatusCode = function() {
 
 exports.showBody = function() {
   return function*(next) {
-    console.log('------------------------------------------------');
+    console.log('-------- this.request --------------------------');
     console.log(this.request);
-    console.log('------------------------------------------------');
+    console.log('-------- this.request.body ---------------------');
+    console.log(this.request.body);
 
     yield next;
-    console.log('------------------------------------------------');
+    console.log('-------- this.response --------------------------');
     console.log(this.response);
     console.log('------------------------------------------------');
   };
