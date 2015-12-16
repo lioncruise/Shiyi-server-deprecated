@@ -5,6 +5,8 @@ const models = require('../db').models;
 const modelUtils = require('../db/modelUtils');
 const userCodeCache = require('../cache').userCodeCache;
 const userSecCodeCache = require('../cache').userSecCodeCache;
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 //验证手机号
 router.post('/verifyPhone', function*() {
@@ -76,9 +78,12 @@ router.post('/register', function*() {
   }
 
   this.body = user.toJSON();
-  this.session = {
-    user: user.toJSON(),
-  };
+
+  this.body.token = jwt.sign({
+    user: {
+      id: user.id,
+    },
+  }, config.tokenKey);
 
   //新建用户后建立用户默认相册
   yield models.Album.create({
@@ -120,10 +125,13 @@ router.post('/login', function*() {
     ip: this.ip,
   });
 
-  this.session = {
-    user: user.toJSON(),
-  };
   this.body = user.toJSON();
+
+  this.body.token = jwt.sign({
+    user: {
+      id: user.id,
+    },
+  }, config.tokenKey);
 });
 
 //PC端扫码登录
@@ -150,7 +158,6 @@ router.get('/getUserIdByKey', function*() {
 
 //登出
 router.get('/logout', function*() {
-  this.session = null;
   this.body = {};
 });
 
