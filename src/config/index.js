@@ -46,6 +46,7 @@ config.getui = {
   appSecert:'on31a4ZCtN9LaawNL6nv99',
   masterSecret: 'bRsEp8N4XsAteAwUi0hmY6',
   isOffLine: true, // 是否推送离线的终端
+  offlineExpireTime: 3600 * 12 * 1000, // 离线等待时间
 };
 
 config.IOSNotification = {

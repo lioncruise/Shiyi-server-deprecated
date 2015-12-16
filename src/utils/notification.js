@@ -58,23 +58,30 @@ const NotificationTemplateForMoreOptions = function (title, text, withIOS = fals
   return template;
 };
 
-const sendNotificationToAppCb = function (title, text, cb) {
-  let taskGroupName = null;
-  let template = new NotificationTemplate({
+const constructMessage = function (title, text, messageClass) {
+  let template = new NotificationTemplate({  //设置推送消息类型，默认通知类消息
     appId: APPID,
     appKey: APPKEY,
     title: title,
     text: text,
     logo: LOGO,
   });
-  let message = new AppMessage({
+  let messageConfig = {
     isOffline: config.getui.isOffLine,
-    offlineExpireTime: 3600 * 12 * 1000,
+    offlineExpireTime: config.getui.offlineExpireTime,
     data: template,
-    appIdList: [APPID],
-    speed: 40,
-  });
+  };
+  if(messageClass === AppMessage){
+    messageConfig.appIdList = [APPID];
+    messageConfig.speed = 40;
+  }
 
+  return new messageClass(messageConfig);
+};
+
+const sendNotificationToAppCb = function (title, text, cb) {
+  let taskGroupName = null;
+  let message = constructMessage(title, text, AppMessage);
   gt.connect(function () {
     gt.pushMessageToApp(message, taskGroupName, cb);
   });
@@ -82,26 +89,8 @@ const sendNotificationToAppCb = function (title, text, cb) {
 
 
 const sendNotificationToSingleCb = function (title, text, cid, cb) {
-  let template = new NotificationTemplate({
-    appId: APPID,
-    appKey: APPKEY,
-    title: title,
-    text: text,
-    logo: LOGO,
-  });
-
-  //个推信息体
-  let message = new SingleMessage({
-    isOffline: config.getui.isOffLine,                        //是否离线
-    offlineExpireTime: 3600 * 12 * 1000,    //离线时间
-    data: template,                         //设置推送消息类型
-  });
-
-  //接收方
-  let target = new Target({
-    appId: APPID,
-    clientId: cid,
-  });
+  let message = constructMessage(title, text, SingleMessage);
+  let target = new Target({appId: APPID, clientId: cid });
   gt.connect(function () {
     gt.pushMessageToSingle(message, target, function(err, res) {
       if (err != null && err.exception !== null && err.exception instanceof  RequestError) {
@@ -115,30 +104,17 @@ const sendNotificationToSingleCb = function (title, text, cid, cb) {
 };
 
 const sendNotificationToListCb = function (title, text, cidList, cb) {
-  let template = new NotificationTemplate({
-    appId: APPID,
-    appKey: APPKEY,
-    title: title,
-    text: text,
-    logo: LOGO,
-  });
-  let message = new SingleMessage({
-    isOffline: config.getui.isOffLine,      //是否离线
-    offlineExpireTime: 3600 * 12 * 1000,    //离线时间
-    data: template,                         //设置推送消息类型
-  });
+  let taskGroupName = null;
+  let message = constructMessage(title, text, ListMessage);
   let targetList = cidList.map(function (cid) {
     return new Target({appId: APPID, clientId:cid });
   });
-  let taskGroupName = null;
-
   gt.getContentId(message, taskGroupName, function (err, res) {
     var contentId = res;
     gt.needDetails = true;
     gt.pushMessageToList(contentId, targetList, cb);
   });
-
-}
+};
 
 exports.sendNotificationToApp = function(title, text) {
   return function(cb) {
@@ -156,4 +132,5 @@ exports.sendNotificationToList = function(title, text, cidList) {
   return function(cb) {
     sendNotificationToListCb(title, text, cidList, cb);
   }
-}
+};
+
