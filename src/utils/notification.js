@@ -27,7 +27,7 @@ const MASTERSECRET = config.getui.masterSecret;
 const LOGO = config.getui.logo;
 const gt = new GeTui(HOST, APPKEY, MASTERSECRET);
 
-const NotificationTemplateForMoreOptions = function (title, text, withIOS = false) {
+const NotificationTemplateForMoreOptions = function(title, text, withIOS = false) {
   let template = new NotificationTemplate({
     appId: APPID,
     appKey: APPKEY,
@@ -52,10 +52,11 @@ const NotificationTemplateForMoreOptions = function (title, text, withIOS = fals
     payload.badge = 5;
     template.setApnInfo(payload);
   }
+
   return template;
 };
 
-const constructMessage = function (title, text, messageClass) {
+const constructMessage = function(title, text, MessageClass) {
   let template = new NotificationTemplate({  //设置推送消息类型，默认通知类消息
     appId: APPID,
     appKey: APPKEY,
@@ -68,28 +69,28 @@ const constructMessage = function (title, text, messageClass) {
     offlineExpireTime: config.getui.offlineExpireTime,
     data: template,
   };
-  if(messageClass === AppMessage){
+  if (MessageClass === AppMessage) {
     messageConfig.appIdList = [APPID];
     messageConfig.speed = 40;
   }
 
-  return new messageClass(messageConfig);
+  return new MessageClass(messageConfig);
 };
 
-const sendNotificationToAppCb = function (title, text, cb) {
+const sendNotificationToAppCb = function(title, text, cb) {
   let taskGroupName = null;
   let message = constructMessage(title, text, AppMessage);
-  gt.connect(function () {
+  gt.connect(function() {
     gt.pushMessageToApp(message, taskGroupName, cb);
   });
 };
 
-const sendNotificationToSingleCb = function (title, text, cid, cb) {
+const sendNotificationToSingleCb = function(title, text, cid, cb) {
   let message = constructMessage(title, text, SingleMessage);
   let target = new Target({appId: APPID, clientId: cid });
-  gt.connect(function () {
+  gt.connect(function() {
     gt.pushMessageToSingle(message, target, function(err, res) {
-      if (err != null && err.exception !== null && err.exception instanceof  RequestError) {
+      if (err !== null && err.exception !== null && err.exception instanceof  RequestError) {
         let requestId = err.exception.requestId;
         gt.pushMessageToSingle(message, target, requestId, cb);
       }else {
@@ -99,14 +100,15 @@ const sendNotificationToSingleCb = function (title, text, cid, cb) {
   });
 };
 
-const sendNotificationToListCb = function (title, text, cidList, cb) {
+const sendNotificationToListCb = function(title, text, cidList, cb) {
   let taskGroupName = null;
   let message = constructMessage(title, text, ListMessage);
-  let targetList = cidList.map(function (cid) {
+  let targetList = cidList.map(function(cid) {
     return new Target({appId: APPID, clientId:cid });
   });
-  gt.getContentId(message, taskGroupName, function (err, res) {
-    var contentId = res;
+
+  gt.getContentId(message, taskGroupName, function(err, res) {
+    let contentId = res;
     gt.needDetails = true;
     gt.pushMessageToList(contentId, targetList, cb);
   });
@@ -118,15 +120,15 @@ exports.sendNotificationToApp = function(title, text) {
   };
 };
 
-exports.sendNotificationToSingle = function(title, text, cid){
+exports.sendNotificationToSingle = function(title, text, cid) {
   return function(cb) {
     sendNotificationToSingleCb(title, text, cid, cb);
-  }
+  };
 };
 
 exports.sendNotificationToList = function(title, text, cidList) {
   return function(cb) {
     sendNotificationToListCb(title, text, cidList, cb);
-  }
+  };
 };
 
