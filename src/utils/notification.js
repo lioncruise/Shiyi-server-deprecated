@@ -56,7 +56,7 @@ const NotificationTemplateForMoreOptions = function (title, text, withIOS = fals
     template.setApnInfo(payload);
   }
   return template;
-}
+};
 
 const sendNotificationToAppCb = function (title, text, cb) {
   let taskGroupName = null;
@@ -81,9 +81,39 @@ const sendNotificationToAppCb = function (title, text, cb) {
 };
 
 
+const sendNotificationToSingleCb = function (title, text, cid, cb) {
+  let template = new NotificationTemplate({
+    appId: APPID,
+    appKey: APPKEY,
+    title: title,
+    text: text,
+    logo: LOGO,
+  });
 
+  //个推信息体
+  let message = new SingleMessage({
+    isOffline: true,                        //是否离线
+    offlineExpireTime: 3600 * 12 * 1000,    //离线时间
+    data: template,                         //设置推送消息类型
+  });
 
-
+  //接收方
+  let target = new Target({
+    appId: APPID,
+    clientId: cid,
+  });
+  gt.connect(function () {
+    gt.pushMessageToSingle(message, target, function(err, res) {
+      if (err != null && err.exception !== null && err.exception instanceof  RequestError) {
+        var requestId = err.exception.requestId;
+        console.log(err.exception.requestId);
+        gt.pushMessageToSingle(message, target, requestId, cb);
+      }else {
+        cb(err, res);
+      }
+    });
+  });
+};
 
 exports.sendNotificationToApp = function(title, text) {
   return function (cb) {
@@ -91,4 +121,8 @@ exports.sendNotificationToApp = function(title, text) {
   };
 };
 
-
+exports.sendNotificationToSingle = function(title, text, cid){
+  return function (cb) {
+    sendNotificationToSingleCb(title, text, cid, cb);
+  }
+};
