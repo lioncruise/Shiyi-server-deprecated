@@ -6,6 +6,7 @@ module.exports = [{
   note: [
           '1.此接口为post /albumUserCollaborates 的逆操作。',
           '2.可以包含UserId设置一个用户离开相册，或者UserIds离开多个用户。',
+          '3.也可以采用url参数的方式调用，比如/albumUserCollaborates?UserId=1&AlbumId=1，仅限DELETE动作接口。',
           ],
   requests: [
   {
