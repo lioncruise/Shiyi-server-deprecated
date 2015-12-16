@@ -242,6 +242,7 @@ describe('src/test/controllers/account.test.js', function() {
           gender: 'F',
           motto: '明天好运',
           avatarStoreKey: 'xixixi',
+          getuiCid: '06fe917679a82622368d08af6f8f21d5',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
