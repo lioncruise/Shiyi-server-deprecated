@@ -78,7 +78,10 @@ exports.getDeleteFuction = function(modelName) {
       },
     });
 
-    if (!this.request.body.UserId && !this.request.body.UserIds) {
+    const UserIdString = this.request.body.UserId || this.query.UserId;
+    const UserIdsString = this.request.body.UserIds || this.query.UserIds;
+
+    if (!UserIdString && !UserIdsString) {
       this.body = {
         statusCode: 422,
         message: 'Validation Failed',
@@ -87,11 +90,11 @@ exports.getDeleteFuction = function(modelName) {
     }
 
     let UserIds = [];
-    if (this.request.body.UserIds) {
-      UserIds = this.request.body.UserIds.split(',').filter((UserId) => UserId !== '')
+    if (UserIdsString) {
+      UserIds = UserIdsString.split(',').filter((UserId) => UserId !== '')
         .map((UserId) => parseInt(UserId));
     } else {
-      UserIds.push(parseInt(this.request.body.UserId));
+      UserIds.push(parseInt(UserIdString));
     }
 
     yield models[modelName].destroy({
