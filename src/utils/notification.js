@@ -20,10 +20,7 @@ const SingleMessage = require('../../lib/getui/message/SingleMessage');
 const AppMessage = require('../../lib/getui/message/AppMessage');
 const ListMessage = require('../../lib/getui/message/ListMessage');
 
-// https | http 的域名
 const HOST = config.getui.host;
-
-//Android用户测试
 const APPID = config.getui.appId;
 const APPKEY = config.getui.appKey;
 const MASTERSECRET = config.getui.masterSecret;
@@ -86,7 +83,6 @@ const sendNotificationToAppCb = function (title, text, cb) {
     gt.pushMessageToApp(message, taskGroupName, cb);
   });
 };
-
 
 const sendNotificationToSingleCb = function (title, text, cid, cb) {
   let message = constructMessage(title, text, SingleMessage);
