@@ -24,6 +24,8 @@ config.db = {
 
 config.defaultPictureKey = 'default';
 
+config.tokenKey = 'oihag';
+
 config.isUseRedis = false;
 
 config.qiniu = {

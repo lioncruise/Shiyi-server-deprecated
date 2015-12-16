@@ -4,8 +4,6 @@ const koa = require('koa');
 const staticCache = require('koa-static-cache');
 const rt = require('koa-rt');
 const logger = require('koa-logger');
-const session = require('koa-generic-session');
-const sessionWithoutRedis = require('koa-session');
 const redisStore = require('koa-redis');
 const parameter = require('koa-parameter');
 const formidable = require('koa-formidable');
@@ -52,17 +50,6 @@ app.use(staticCache({
   buffer: !config.debug,
   gzip: !config.debug,
 }));
-
-//使用cookie、session
-if (config.debug || !config.isUseRedis) {
-  app.use(sessionWithoutRedis({
-    maxAge: ms('365 days'),
-  }, app));
-} else {
-  app.use(session({
-    store: redisStore(),
-  }));
-}
 
 //解析http头
 app.use(formidable());

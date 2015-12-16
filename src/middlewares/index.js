@@ -1,7 +1,9 @@
 'use strict';
 
 const isJSON = require('is-json');
+const jwt = require('jsonwebtoken');
 const debug = require('debug')('middlewares/index');
+const config = require('../config');
 
 const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
@@ -54,7 +56,7 @@ exports.showBody = function() {
   };
 };
 
-//用户登录验证
+//用户登录token验证
 exports.auth = function*(next) {
   debug('It is auth middleware');
 
@@ -62,6 +64,8 @@ exports.auth = function*(next) {
     yield next;
     return;
   }
+
+  this.session = {};
 
   if (this.headers.userfrompc && Number.parseInt(this.headers.userfrompc)) {
     this.session = {
@@ -71,8 +75,9 @@ exports.auth = function*(next) {
     };
   } else {
     if (process.env.NODE_ENV === 'production') {
-      if (!this.session || !this.session.user) {
-        debug('auth middleware: Not login.');
+      try {
+        this.session = jwt.verify(this.headers.token, config.tokenKey);
+      } catch (e) {
         this.body = {
           statusCode: 401,
           message: '请登录后访问',
