@@ -105,8 +105,7 @@ const sendNotificationToSingleCb = function (title, text, cid, cb) {
   gt.connect(function () {
     gt.pushMessageToSingle(message, target, function(err, res) {
       if (err != null && err.exception !== null && err.exception instanceof  RequestError) {
-        var requestId = err.exception.requestId;
-        console.log(err.exception.requestId);
+        let requestId = err.exception.requestId;
         gt.pushMessageToSingle(message, target, requestId, cb);
       }else {
         cb(err, res);
@@ -115,14 +114,46 @@ const sendNotificationToSingleCb = function (title, text, cid, cb) {
   });
 };
 
+const sendNotificationToListCb = function (title, text, cidList, cb) {
+  let template = new NotificationTemplate({
+    appId: APPID,
+    appKey: APPKEY,
+    title: title,
+    text: text,
+    logo: LOGO,
+  });
+  let message = new SingleMessage({
+    isOffline: config.getui.isOffLine,      //是否离线
+    offlineExpireTime: 3600 * 12 * 1000,    //离线时间
+    data: template,                         //设置推送消息类型
+  });
+  let targetList = cidList.map(function (cid) {
+    return new Target({appId: APPID, clientId:cid });
+  });
+  let taskGroupName = null;
+
+  gt.getContentId(message, taskGroupName, function (err, res) {
+    var contentId = res;
+    gt.needDetails = true;
+    gt.pushMessageToList(contentId, targetList, cb);
+  });
+
+}
+
 exports.sendNotificationToApp = function(title, text) {
-  return function (cb) {
+  return function(cb) {
     sendNotificationToAppCb(title, text, cb);
   };
 };
 
 exports.sendNotificationToSingle = function(title, text, cid){
-  return function (cb) {
+  return function(cb) {
     sendNotificationToSingleCb(title, text, cid, cb);
   }
 };
+
+exports.sendNotificationToList = function(title, text, cidList) {
+  return function(cb) {
+    sendNotificationToListCb(title, text, cidList, cb);
+  }
+}

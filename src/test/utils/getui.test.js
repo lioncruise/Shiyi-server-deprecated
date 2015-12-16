@@ -18,4 +18,12 @@ describe('utils/notification', function() {
       done(err, res);
     })
   })
+
+  it('should get a notification on the devices with given cids', function(done) {
+    let cidList = ['06fe917679a82622368d08af6f8f21d5'];
+    notification.sendNotificationToList('测试推送标题', '测试推送内容（列表中的设备）', cidList)(function(err, res) {
+      res.result.should.equal('ok');
+      done(err, res);
+    })
+  })
 });
