@@ -76,7 +76,7 @@ exports.getDeleteFuction = function(modelName) {
         type: 'string',
         required: false,
       },
-    });
+    }, Object.assign(this.request.body, this.query));
 
     const UserIdString = this.request.body.UserId || this.query.UserId;
     const UserIdsString = this.request.body.UserIds || this.query.UserIds;
