@@ -80,10 +80,7 @@ module.exports = function(sequelize, DataTypes) {
     device: {
       type: DataTypes.STRING,
     },
-    androidId: {
-      type: DataTypes.STRING,
-    },
-    appleId: {
+    getuiCid: {
       type: DataTypes.STRING,
     },
     ip: {
