@@ -71,10 +71,7 @@ function setAssociations() {
 
   //用户与记忆
   models.User.hasMany(models.Memory);
-  models.Memory.belongsTo(models.User, {
-    as: 'Creator',
-    foreignKey: 'UserId',
-  });
+  models.Memory.belongsTo(models.User);
 
   //用户与图片
   models.User.hasMany(models.Picture);

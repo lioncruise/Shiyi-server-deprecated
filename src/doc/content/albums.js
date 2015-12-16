@@ -48,5 +48,20 @@ module.exports = [{
       url: '/getFollowAlbums?userId=3&isWithRecentPicture=true',
     },
   ],
+}, {
+  fileName: 'GET getQRCode',
+  func: '获取加入某个相册的二维码地址',
+  note: [
+          '1.加入的相册不能是private的。参数是albumId。',
+          '2.用户使用app访问这个地址的时候，需要带着cookie信息。',
+          '3.目前二维码地址没有时间限制，生成一次之后，永远可以扫码加入，二维码不会失效。',
+          '4.形式如 https://api.itimepost.com/joinAlbum?a=4&c=f17713 。',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/getQRCode?albumId=4',
+    },
+  ],
 },
 ];

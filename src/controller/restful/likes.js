@@ -2,6 +2,7 @@
 
 const models = require('../../db').models;
 const utils = require('../../utils');
+const sequelize = require('sequelize');
 
 exports.create = function*() {
   this.verifyParams({
@@ -30,8 +31,28 @@ exports.destroy = function*() {
     id: 'id',
   });
 
-  //删除与点赞相关的信息
-  //TODO:
+  const like = yield models.Like.find({
+    paranoid: true,
+    where: {
+      id: this.params.id,
+    },
+  });
+
+  if (!like) {
+    this.body = {
+      statusCode: 404,
+      message: '删除失败',
+    };
+    return;
+  }
+
+  yield models.Memory.update({
+    likesCount: sequelize.literal('likesCount - 1'),
+  }, {
+    where: {
+      id: like.MemoryId,
+    },
+  });
 
   const result = yield models.Like.destroy({
     where: {

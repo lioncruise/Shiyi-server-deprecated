@@ -24,5 +24,22 @@ module.exports = [{
     },
   },
   ],
+}, {
+  fileName: 'GET joinAlbum',
+  func: '二维码扫码加入相册',
+  note: [
+          '1.访问的地址是由GET getQRCode生成的。不能手动创建。',
+          '2.访问时需要带着cookie。',
+          '3.形式如 https://api.itimepost.com/joinAlbum?a=4&c=f17713 。',
+          '4.自己加入自己的相册不会报错，但是后台实际上没有加入。',
+          '5.不能加入private相册。',
+          '6.data中是加入的相册的信息。',
+          ],
+  requests: [
+  {
+    method: 'get',
+    url: '/joinAlbum?a=4&c=f17713',
+  },
+  ],
 },
 ];

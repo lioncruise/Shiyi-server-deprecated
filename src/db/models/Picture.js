@@ -22,6 +22,10 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     paranoid: true,
     getterMethods: {
+      thumbnailDownloadUrl() {
+        return modelUtils.getThumbnailUrlFunction(this.storeKey);
+      },
+
       downloadUrl() {
         return modelUtils.getUrlFunction(this.storeKey);
       },
