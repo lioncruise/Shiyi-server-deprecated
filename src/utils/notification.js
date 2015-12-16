@@ -68,7 +68,7 @@ const sendNotificationToAppCb = function (title, text, cb) {
     logo: LOGO,
   });
   let message = new AppMessage({
-    isOffline: true,
+    isOffline: config.getui.isOffLine,
     offlineExpireTime: 3600 * 12 * 1000,
     data: template,
     appIdList: [APPID],
@@ -92,7 +92,7 @@ const sendNotificationToSingleCb = function (title, text, cid, cb) {
 
   //个推信息体
   let message = new SingleMessage({
-    isOffline: true,                        //是否离线
+    isOffline: config.getui.isOffLine,                        //是否离线
     offlineExpireTime: 3600 * 12 * 1000,    //离线时间
     data: template,                         //设置推送消息类型
   });
