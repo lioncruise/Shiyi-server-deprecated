@@ -76,7 +76,7 @@ exports.auth = function*(next) {
   } else {
     if (process.env.NODE_ENV === 'production') {
       try {
-        this.session = jwt.verify(this.headers.token, config.tokenKey);
+        this.session = jwt.verify(this.headers.Token, config.tokenKey);
       } catch (e) {
         this.body = {
           statusCode: 401,
