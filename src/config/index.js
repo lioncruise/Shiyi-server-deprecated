@@ -20,6 +20,7 @@ config.db = {
     maxIdleTime: 5000,
   },
   logging: false,
+  timezone: '+08:00',
 };
 
 config.defaultPictureKey = 'default';
