@@ -1,5 +1,7 @@
 'use strict';
 
+require('oneapm');
+
 const koa = require('koa');
 const staticCache = require('koa-static-cache');
 const rt = require('koa-rt');
