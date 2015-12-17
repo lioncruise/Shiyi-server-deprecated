@@ -123,7 +123,6 @@ exports.create = function*() {
     return;
   }
 
-
   const picture = yield models.Picture.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
