@@ -88,6 +88,21 @@ exports.create = function*() {
     UserId: this.session.user.id,
   }));
 
+  yield models.Album.update({
+    commentsCount: sequelize.literal('commentsCount + 1'),
+  }, {
+    where:{
+      id: this.request.body.AlbumId,
+    },
+  });
+  yield models.Memory.update({
+    commentsCount: sequelize.literal('commentsCount + 1'),
+  }, {
+    where:{
+      id: this.request.body.MemoryId,
+    },
+  });
+
   this.body = comment.toJSON();
 };
 
@@ -119,11 +134,19 @@ exports.destroy = function*() {
     },
   });
 
+  //冗余数据-1
   yield models.Memory.update({
     commentsCount: sequelize.literal('commentsCount - 1'),
   }, {
     where: {
       id: comment.MemoryId,
+    },
+  });
+  yield models.Album.update({
+    commentsCount: sequelize.literal('commentsCount - 1'),
+  }, {
+    where: {
+      id: comment.AlbumId,
     },
   });
 
