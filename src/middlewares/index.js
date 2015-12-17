@@ -48,6 +48,9 @@ exports.showBody = function() {
     console.log(this.request.body);
     console.log('-------- this.query ----------------------------');
     console.log(this.query);
+    console.log('-------- this.header ----------------------------');
+    console.log(this.header);
+    console.log('-------------------------------------------------');
 
     yield next;
     console.log('-------- this.response --------------------------');
@@ -74,7 +77,7 @@ exports.auth = function*(next) {
       },
     };
   } else {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
       try {
         this.session = jwt.verify(this.headers.Token, config.tokenKey);
       } catch (e) {
@@ -85,6 +88,7 @@ exports.auth = function*(next) {
         return;
       }
     } else {
+      //test模式
       this.session = {
         user: {
           id: 1,
