@@ -60,11 +60,14 @@ exports.getCreateFuction = function(modelName) {
     }
 
     let results;
+    let albumUserCollaborates;
     if (this.request.body.UserIds) {
       //多用户UserIds
-      results = yield this.request.body.UserIds.split(',').filter((UserId) => UserId !== '')
+      const userIds = this.request.body.UserIds.split(',').filter((UserId) => UserId !== '');
+      //首先找User是否已在这个关系之中
+      albumUserCollaborates = yield userIds
         .map((UserId) => {
-          return models[modelName].findOrCreate({
+          return models.AlbumUserCollaborate.find({
             where: {
               [targetFieldName]: this.request.body[targetFieldName],
               UserId: UserId,
@@ -72,7 +75,25 @@ exports.getCreateFuction = function(modelName) {
           });
         });
 
-      const num = results.length;
+      //创建这个关系
+      results = yield userIds
+        .map((UserId) => {
+          return models.AlbumUserCollaborate.findOrCreate({
+            where: {
+              [targetFieldName]: this.request.body[targetFieldName],
+              UserId: UserId,
+            },
+          });
+        });
+
+      let i = 0;
+      albumUserCollaborates.forEach((albumUserCollaborate)=>{
+        if (albumUserCollaborate) {
+          i++;
+        }
+      });
+
+      let num = results.length - i;
       if (modelName === 'AlbumUserCollaborate') {
         const album = yield models.Album.find({
           where: {
@@ -86,37 +107,37 @@ exports.getCreateFuction = function(modelName) {
               id: this.request.body.AlbumId,
             },
           });
-      }
 
-      if (modelName === 'AlbumUserFollow') {
-        const album = yield models.Album.find({
-          where: {
-            id: this.request.body.AlbumId,
-          },
-        });
-        yield models.Album.update({
-          fansCount: sequelize.literal('fansCount + ' + num),
-        }, {
+        num = 0;
+        for (let i = 0; i < userIds.length; i++) {
+          //检查用户是否先前已经关注了这个相册
+          let albumUserFollow = yield models.AlbumUserFollow.find({
             where: {
-              id: this.request.body.AlbumId,
+              UserId: userIds[i],
+              AlbumId: results[i].AlbumId,
             },
           });
+
+          if (!albumUserFollow) {
+            yield models.User.update({
+              followAlbumsCount: sequelize.literal('followAlbumsCount + ' + 1),
+            }, {
+              where: {
+                id: userIds[i],
+              },
+            });
+            num++;
+          }
+        }
       }
 
-      if (modelName === 'UserUserFollow') {
-        const user = yield models.User.find({
-          where: {
-            id: this.request.body.TargetUserId,
-          },
-        });
-        yield models.User.update({
-          fansCount: sequelize.literal('fansCount + ' + num),
-        }, {
-            where: {
-              id: this.request.body.TargetUserId,
-            },
-          });
-      }
+      yield models.Album.update({
+         fansCount: sequelize.literal('fansCount + ' + num),
+       }, {
+         where: {
+           id: this.request.body.AlbumId,
+         },
+       });
 
       this.body = results.map((item) => item[0].toJSON());
     } else {

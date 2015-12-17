@@ -52,26 +52,5 @@ describe('src/test/controllers/restful/userUserFollow.test.js', function() {
           done();
         });
     });
-
-    it('should create user users follow OK', function(done) {
-      request(server)
-        .post('/userUserFollows')
-        .send({
-          TargetUserId: '11',
-          UserIds: '2,3,4',
-        })
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(200);
-          res.body.data.length.should.be.equal(3);
-          res.body.data[0].TargetUserId.should.be.equal('11');
-          done();
-        });
-    });
   });
 });

@@ -17,13 +17,6 @@ module.exports = [{
       AlbumId: '2',
       UserId: '2',
     },
-  }, {
-    method: 'post',
-    url: '/albumUserFollows',
-    data: {
-      AlbumId: '2',
-      UserIds: '3,4,5,6,7',
-    },
   },
   ],
 },
