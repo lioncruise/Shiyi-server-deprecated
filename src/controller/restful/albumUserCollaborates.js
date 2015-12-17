@@ -80,7 +80,7 @@ exports.getCreateFuction = function(modelName) {
           },
         });
         yield models.Album.update({
-          collaboratorsCount: album.collaboratorsCount + num,
+          collaboratorsCount: sequelize.literal('collaboratorsCount + ' + num),
         }, {
             where: {
               id: this.request.body.AlbumId,
@@ -95,7 +95,7 @@ exports.getCreateFuction = function(modelName) {
           },
         });
         yield models.Album.update({
-          fansCount: album.fansCount + num,
+          fansCount: sequelize.literal('fansCount + ' + num),
         }, {
             where: {
               id: this.request.body.AlbumId,
@@ -110,7 +110,7 @@ exports.getCreateFuction = function(modelName) {
           },
         });
         yield models.User.update({
-          fansCount: user.fansCount + num,
+          fansCount: sequelize.literal('fansCount + ' + num),
         }, {
             where: {
               id: this.request.body.TargetUserId,
