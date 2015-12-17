@@ -158,12 +158,20 @@ router.get('/getUserIdByKey', function*() {
 
 //登出
 router.get('/logout', function*() {
+  //TODO:移除token
   this.body = {};
 });
 
 //更新个人信息
+//这个接口不能更新phone
 router.put('/update', function*() {
   this.verifyParams({
+    phone: {
+      type: 'string',
+      required: false,
+      allowEmpty: false,
+      format: modelUtils.phoneRegExp,
+    },
     nickname: {
       type: 'string',
       required: false,
@@ -207,9 +215,12 @@ router.put('/update', function*() {
     },
   });
 
-  yield models.User.update(this.request.body, {
+  const user = yield models.User.find({
+    paranoid: true,
     where: {
       id: this.session.user.id,
     },
   });
+  yield user.update(this.request.body);
+  this.body = user.toJSON();
 });
