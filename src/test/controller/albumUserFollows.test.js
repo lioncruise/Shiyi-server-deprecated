@@ -16,8 +16,8 @@ describe('src/test/controllers/albumUserFollows.test.js', function() {
       request(server)
         .delete('/albumUserFollows')
         .send({
-          AlbumId: '11',
-          UserId: '1',
+          AlbumId: '4',
+          UserId: '10',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -70,12 +70,12 @@ describe('src/test/controllers/albumUserFollows.test.js', function() {
         });
     });
 
-    it('should delete album users follow OK', function(done) {
+    it('should delete album user follow 404', function(done) {
       request(server)
         .delete('/albumUserFollows')
         .send({
-          AlbumId: '11',
-          UserIds: '2,3,4',
+          AlbumId: '4',
+          UserId: '19',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -84,7 +84,8 @@ describe('src/test/controllers/albumUserFollows.test.js', function() {
             return done(err);
           }
 
-          res.body.statusCode.should.be.equal(200);
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('该关系不存在');
           done();
         });
     });

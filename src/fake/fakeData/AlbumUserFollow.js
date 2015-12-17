@@ -6,9 +6,9 @@ const moment = require('moment');
 
 const albumUserFollows = [];
 
-for (let i = 2; i <= 10; i++) {
+for (let i = 3; i <= 10; i++) {
   albumUserFollows.push({
-    AlbumId: 3,
+    AlbumId: 4,
     UserId: i,
   });
 }

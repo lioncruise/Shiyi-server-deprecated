@@ -3,6 +3,7 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const albumsRestfulController = require('./albums');
+const sequelize = require('sequelize');
 
 exports.show = function*() {
   this.verifyParams({
@@ -100,7 +101,6 @@ exports.create = function*() {
       id: this.request.body.AlbumId,
     },
   });
-
   if (!album) {
     this.body = {
       statusCode: 404,
@@ -115,7 +115,6 @@ exports.create = function*() {
       id: this.request.body.MemoryId,
     },
   });
-
   if (!memory) {
     this.body = {
       statusCode: 404,
@@ -124,16 +123,18 @@ exports.create = function*() {
     return;
   }
 
+
   const picture = yield models.Picture.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
   yield models.Album.update({
-    picturesCount: album.picturesCount + 1,
+    picturesCount: sequelize.literal('picturesCount + 1'),
     coverStoreKey: this.request.body.storeKey,
+    RecentPictureId: picture.id,
   }, {
     where:{
-      id: album.id,
+      id: this.request.body.AlbumId,
     },
   });
 

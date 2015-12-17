@@ -35,26 +35,6 @@ describe('src/test/controllers/albumUserCollaborates.test.js', function() {
       request(server)
         .delete('/albumUserCollaborates')
         .send({
-          AlbumId: 3,
-          UserId: '10',
-        })
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(422);
-          res.body.message.should.be.equal('Validation Failed');
-          done();
-        });
-    });
-
-    it('should delete album user collaborate 422', function(done) {
-      request(server)
-        .delete('/albumUserCollaborates')
-        .send({
           AlbumId: '3',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
@@ -70,12 +50,12 @@ describe('src/test/controllers/albumUserCollaborates.test.js', function() {
         });
     });
 
-    it('should delete album users collaborate OK', function(done) {
+    it('should delete album user collaborate 404', function(done) {
       request(server)
         .delete('/albumUserCollaborates')
         .send({
-          AlbumId: '2',
-          UserIds: '4,5,6',
+          AlbumId: '3',
+          UserId: '20',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -84,7 +64,8 @@ describe('src/test/controllers/albumUserCollaborates.test.js', function() {
             return done(err);
           }
 
-          res.body.statusCode.should.be.equal(200);
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('该关系不存在');
           done();
         });
     });
