@@ -1,5 +1,10 @@
 'use strict';
 
+const process = require('process');
+if (process.env.NODE_ENV === 'production') {
+  require('oneapm');
+}
+
 const koa = require('koa');
 const staticCache = require('koa-static-cache');
 const rt = require('koa-rt');
@@ -11,7 +16,7 @@ const ipFilter = require('koa-ip-filter');
 const ms = require('ms');
 const path = require('path');
 const http = require('http');
-const process = require('process');
+
 
 const config = require('./config');
 const router = require('./router');
