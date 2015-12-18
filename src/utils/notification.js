@@ -21,7 +21,11 @@ const AppMessage = require('../../lib/getui/message/AppMessage');
 const ListMessage = require('../../lib/getui/message/ListMessage');
 
 const {host:HOST, appId:APPID, appKey:APPKEY, masterSecret:MASTERSECRET, logo:LOGO } = config.getui;
-const gt = new GeTui(HOST, APPKEY, MASTERSECRET);
+let gt = null;
+
+exports.notificationInit = function() {
+  gt = new GeTui(HOST, APPKEY, MASTERSECRET);
+};
 
 const NotificationTemplateForMoreOptions = function(title, text, withIOS = false) {
   let template = new NotificationTemplate({
