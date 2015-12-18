@@ -15,6 +15,13 @@ module.exports = [{
       TargetUserId: '1',
       UserId: '2',
     },
+  }, {
+    method: 'post',
+    url: '/userUserFollows',
+    data: {
+      TargetUserId: '1',
+      UserIds: '3,4,5,6,7',
+    },
   },
   ],
 },

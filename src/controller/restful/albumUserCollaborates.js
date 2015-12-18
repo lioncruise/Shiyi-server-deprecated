@@ -60,14 +60,15 @@ exports.getCreateFuction = function(modelName) {
     }
 
     let results;
-    let albumUserCollaborates;
+    let relations;
     if (this.request.body.UserIds) {
       //多用户UserIds
       const userIds = this.request.body.UserIds.split(',').filter((UserId) => UserId !== '');
+
       //首先找User是否已在这个关系之中
-      albumUserCollaborates = yield userIds
+      relations = yield userIds
         .map((UserId) => {
-          return models.AlbumUserCollaborate.find({
+          return models[modelName].find({
             where: {
               [targetFieldName]: this.request.body[targetFieldName],
               UserId: UserId,
@@ -78,7 +79,7 @@ exports.getCreateFuction = function(modelName) {
       //创建这个关系
       results = yield userIds
         .map((UserId) => {
-          return models.AlbumUserCollaborate.findOrCreate({
+          return models[modelName].findOrCreate({
             where: {
               [targetFieldName]: this.request.body[targetFieldName],
               UserId: UserId,
@@ -87,13 +88,15 @@ exports.getCreateFuction = function(modelName) {
         });
 
       let i = 0;
-      albumUserCollaborates.forEach((albumUserCollaborate)=>{
-        if (albumUserCollaborate) {
+      relations.forEach((relation)=> {
+        if (relation) {
           i++;
         }
       });
 
       let num = results.length - i;
+
+      //将用户加入相册
       if (modelName === 'AlbumUserCollaborate') {
         const album = yield models.Album.find({
           where: {
@@ -114,10 +117,11 @@ exports.getCreateFuction = function(modelName) {
           let albumUserFollow = yield models.AlbumUserFollow.find({
             where: {
               UserId: userIds[i],
-              AlbumId: results[i].AlbumId,
+              AlbumId: results[i][0].AlbumId,
             },
           });
 
+          //如果用户先前未关注此相册，则＋1
           if (!albumUserFollow) {
             yield models.User.update({
               followAlbumsCount: sequelize.literal('followAlbumsCount + ' + 1),
@@ -126,18 +130,67 @@ exports.getCreateFuction = function(modelName) {
                 id: userIds[i],
               },
             });
+
+            //统计加入关注的人数
             num++;
           }
         }
-      }
 
-      yield models.Album.update({
+        //更新相册的冗余数据
+        yield models.Album.update({
          fansCount: sequelize.literal('fansCount + ' + num),
        }, {
          where: {
            id: this.request.body.AlbumId,
          },
        });
+      }
+
+      if (modelName === 'AlbumUserFollow') {
+        yield models.Album.update({
+          fansCount: sequelize.literal('fansCount + ' + num),
+        }, {
+            where: {
+              id: this.request.body.AlbumId,
+            },
+          });
+
+        for (let i = 0; i < userIds.length; i++) {
+          //如果原本关系不存在，则更新user的冗余数据
+          if (!relations[i]) {
+            yield models.User.update({
+              followAlbumsCount: sequelize.literal('followAlbumsCount + 1'),
+            }, {
+              where: {
+                id: userIds[i],
+              },
+            });
+          }
+        }
+      }
+
+      if (modelName === 'UserUserFollow') {
+        yield models.User.update({
+          fansCount: sequelize.literal('fansCount + ' + num),
+        }, {
+            where: {
+              id: this.request.body.TargetUserId,
+            },
+          });
+
+        for (let i = 0; i < userIds.length; i++) {
+          //如果原本关系不存在，则更新user的冗余数据
+          if (!relations[i]) {
+            yield models.User.update({
+              followersCount: sequelize.literal('followersCount + 1'),
+            }, {
+              where: {
+                id: userIds[i],
+              },
+            });
+          }
+        }
+      }
 
       this.body = results.map((item) => item[0].toJSON());
     } else {

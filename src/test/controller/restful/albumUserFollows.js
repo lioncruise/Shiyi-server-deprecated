@@ -72,5 +72,28 @@ describe('src/test/controllers/restful/albumUserFollows.test.js', function() {
           done();
         });
     });
+
+    it('should create album users follow OK', function(done) {
+      request(server)
+        .post('/albumUserFollows')
+        .send({
+          AlbumId: '11',
+          UserIds: '6,7,8',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          res.body.data.length.should.be.equal(3);
+          res.body.data[0].AlbumId.should.be.equal('11');
+          res.body.data[1].AlbumId.should.be.equal('11');
+          res.body.data[2].AlbumId.should.be.equal('11');
+          done();
+        });
+    });
   });
 });
