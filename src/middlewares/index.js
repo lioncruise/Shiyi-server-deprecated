@@ -78,8 +78,9 @@ exports.auth = function*(next) {
     };
   } else {
     if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+      const token = this.headers.token || this.query.token;
       try {
-        this.session = jwt.verify(this.headers.token, config.tokenKey);
+        this.session = jwt.verify(token, config.tokenKey);
       } catch (e) {
         this.body = {
           statusCode: 401,
