@@ -1,7 +1,8 @@
 'use strict';
 
-const redis = require('redis');
+const redis = require('then-redis');
 const debug = require('debug')('util/redisToken');
+const co = require('co');
 
 const redisConfig = require('../config').redis;
 
@@ -12,11 +13,11 @@ function init() {
     redisClient = redis.createClient(redisConfig);
 
     redisClient.on('error', function(err) {
-      debug('Error ' + err);
+      console.log('Error ' + err);
     });
 
     redisClient.on('connect', function() {
-      debug('Redis is ready');
+      console.log('Redis is ready');
     });
   }
 }
@@ -30,9 +31,10 @@ function save(id, token) {
   return redisClient.set(id, token);
 }
 
-function * verify(id, token) {
-  return token === (yield redisClient.get(id));
-}
+let verify = co.wrap(function*(id, token) {
+  let storedToken = yield redisClient.get(id);
+  return token.toString() === storedToken;
+});
 
 function remove(id) {
   return redisClient.del(id);
