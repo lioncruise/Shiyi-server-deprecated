@@ -128,8 +128,8 @@ router.post('/login', function*() {
 
   this.body = user.toJSON();
 
-  // 生成用于验证token用户登录唯一性 时间戳 连接 4位随机数
-  let tokenVerify = Date.parse(new Date()).toString() + parseInt(Math.random()*10000);
+  // 生成用于验证token用户登录唯一性
+  let tokenVerify = redisToken.verifyCode();
 
   this.body.token = jwt.sign({
     user: {
@@ -138,7 +138,7 @@ router.post('/login', function*() {
     },
   }, config.tokenKey);
 
-  redisToken.set(user.id, this.body.token);
+  redisToken.save(user.id, this.body.token);
 });
 
 //PC端扫码登录
