@@ -7,6 +7,7 @@ const userCodeCache = require('../cache').userCodeCache;
 const userSecCodeCache = require('../cache').userSecCodeCache;
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const redisToken = require('../utils').redisToken;
 
 //验证手机号
 router.post('/verifyPhone', function*() {
