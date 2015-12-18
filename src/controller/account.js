@@ -128,11 +128,17 @@ router.post('/login', function*() {
 
   this.body = user.toJSON();
 
+  // 生成用于验证token用户登录唯一性 时间戳 连接 4位随机数
+  let tokenVerify = Date.parse(new Date()).toString() + parseInt(Math.random()*10000);
+
   this.body.token = jwt.sign({
     user: {
       id: user.id,
+      tokenVerify,
     },
   }, config.tokenKey);
+
+  redisToken.set(user.id, this.body.token);
 });
 
 //PC端扫码登录
@@ -159,7 +165,7 @@ router.get('/getUserIdByKey', function*() {
 
 //登出
 router.get('/logout', function*() {
-  //TODO:移除token
+  redisToken.remove(this.session.user.id);
   this.body = {};
 });
 

@@ -29,8 +29,13 @@ function verify(id, token){
   return token === (yield redisClient.get(id));
 }
 
+function remove(id){
+  return redisClient.del(id);
+}
+
 exports = {
   init,
   set,
   verify,
+  remove,
 };
