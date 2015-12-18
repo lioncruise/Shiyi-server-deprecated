@@ -16,11 +16,15 @@ const process = require('process');
 const config = require('./config');
 const router = require('./router');
 const middlewares = require('./middlewares');
+const notification = require('./utils').notification;
 
 const debug = require('debug')('server');
 
 const app = koa();
 app.name = 'shiyi-server';
+
+//notification 初始化
+notification.notificationInit();
 
 //cookie加密
 app.keys = config.keys;
