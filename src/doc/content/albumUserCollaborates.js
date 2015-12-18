@@ -5,7 +5,7 @@ module.exports = [{
   func: '删除用户和相册的维护者关系',
   note: [
           '1.此接口为post /albumUserCollaborates 的逆操作。',
-          '2.可以包含UserId设置一个用户离开相册，这个接口不支持UserIds！',
+          '2.可以包含UserId设置一个用户离开相册，或者UserIds多个用户。',
           '3.也可以采用url参数的方式调用，比如/albumUserCollaborates?UserId=1&AlbumId=1，仅限DELETE动作接口。',
           ],
   requests: [
@@ -15,6 +15,13 @@ module.exports = [{
     data: {
       AlbumId: '1',
       UserId: '2',
+    },
+  }, {
+    method: 'delete',
+    url: '/albumUserCollaborates',
+    data: {
+      AlbumId: '1',
+      UserIds: '2,3',
     },
   },
   ],

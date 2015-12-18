@@ -28,7 +28,7 @@ router.get('/getActions', function*() {
     where: {
       UserId: this.session.user.id,
     },
-  })).map((album) => album.id);
+  })).map((relation) => relation.AlbumId);
 
   const allAlbumIds = ownAlbumIds.concat(followAlbumIds);
 
@@ -37,7 +37,7 @@ router.get('/getActions', function*() {
     where: {
       UserId: this.session.user.id,
     },
-  })).map((user) => user.id);
+  })).map((relation) => relation.TargetUserId);
 
   const actions = yield models.Action.findAll({
     paranoid: true,

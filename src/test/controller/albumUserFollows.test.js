@@ -69,25 +69,5 @@ describe('src/test/controllers/albumUserFollows.test.js', function() {
           done();
         });
     });
-
-    it('should delete album user follow 404', function(done) {
-      request(server)
-        .delete('/albumUserFollows')
-        .send({
-          AlbumId: '4',
-          UserId: '19',
-        })
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(404);
-          res.body.message.should.be.equal('该关系不存在');
-          done();
-        });
-    });
   });
 });
