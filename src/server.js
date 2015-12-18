@@ -51,8 +51,8 @@ app.use(ipFilter({
 app.use(staticCache({
   dir: path.join(__dirname, '../static'),
   maxAge: ms('1y'),
-  buffer: !config.debug,
-  gzip: !config.debug,
+  buffer: true,
+  gzip: false,
 }));
 
 //解析http头
