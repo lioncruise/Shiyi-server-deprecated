@@ -13,6 +13,7 @@ let files = [
   require('./restful/comments'),
   require('./restful/likes'),
   require('./restful/reports'),
+  require('./restful/feedbacks'),
 
   require('./account'),
   require('./actions'),
