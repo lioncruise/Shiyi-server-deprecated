@@ -131,3 +131,4 @@ exports.sendNotificationToList = function(title, text, cidList) {
     sendNotificationToListCb(title, text, cidList, cb);
   };
 };
+
