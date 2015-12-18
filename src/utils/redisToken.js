@@ -9,7 +9,7 @@ let redisClient = null;
 
 function init() {
   if(redisClient === null) {
-    redisClient = redis.createClient(redisConfig.port);
+    redisClient = redis.createClient(redisConfig);
 
     redisClient.on('error', function(err) {
       debug('Error ' + err);
@@ -21,12 +21,12 @@ function init() {
   }
 }
 
-function * set(id, token) {
-
+function set(id, token) {
+  return redisClient.set(id, token);
 }
 
-function * verify(id, token){
-
+function verify(id, token){
+  return token === (yield redisClient.get(id));
 }
 
 exports = {
