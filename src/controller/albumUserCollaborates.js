@@ -76,7 +76,7 @@ exports.getDeleteFuction = function(modelName) {
       [targetFieldName]: 'id',
       UserId: {
         type: 'id',
-        required: true,
+        required: false,
       },
     }, Object.assign(this.request.body, this.query));
 
