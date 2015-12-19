@@ -51,101 +51,97 @@ router.get('/joinAlbum', function*() {
 });
 
 exports.getDeleteFuction = function(modelName) {
-  let actionType;
-  let targetFieldName;
+  let actionType; //相关action的type
+  let targetFieldName; //关系中的字段名
+  let addSubject; //发起人
+  let addSubjectAddFieldName; //发起人需要更新的字段
+  let addObject; //被影响人
+  let addObjectAddFieldName; //被影响人需要更新的字段
   switch (modelName)
   {
     case 'AlbumUserCollaborate':
-      [actionType, targetFieldName] = ['collaborateAlbum', 'AlbumId'];
+      [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['collaborateAlbum', 'AlbumId', null, null, 'Album', 'collaboratorsCount'];
       break;
     case 'AlbumUserFollow':
-      [actionType, targetFieldName] = ['followAlbum', 'AlbumId'];
+      [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['followAlbum', 'AlbumId', 'User', 'followAlbumsCount', 'Album', 'fansCount'];
       break;
     case 'UserUserFollow':
-      [actionType, targetFieldName] = ['followUser', 'TargetUserId'];
+      [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['followUser', 'TargetUserId', 'User', 'followAlbumsCount', 'User', 'fansCount'];
       break;
   }
 
   return function*() {
+    //参数验证
     this.verifyParams({
       [targetFieldName]: 'id',
       UserId: {
         type: 'id',
-        required: true,
+        required: false,
       },
     }, Object.assign(this.request.body, this.query));
 
-    const UserIdString = this.request.body.UserId || this.query.UserId;
-
-    const result = yield models[modelName].find({
-      where: {
-        UserId: UserIdString,
-        [targetFieldName]: this.request.body[targetFieldName],
-      },
-    });
-    if (!result) {
+    if (!this.request.body.UserId && !this.request.body.UserIds) {
       this.body = {
-        statusCode: 404,
-        message: '该关系不存在',
+        statusCode: 422,
+        message: 'Validation Failed',
       };
       return;
     }
 
-    yield models[modelName].destroy({
+    const isSingleUser = !!this.request.body.UserId;
+    const userIds = isSingleUser ? [this.request.body.UserId] : this.request.body.UserIds.split(',').filter((UserId) => UserId !== '');
+
+    //查找关系
+    const existRelations = yield models[modelName].findAll({
       where: {
-        UserId: UserIdString,
+        UserId: {
+          $in: userIds,
+        },
+        [targetFieldName]: this.request.body[targetFieldName],
+      },
+    });
+    const haveToBeUpdatedUserIds = existRelations.map((relation) => relation.UserId);
+
+    //发起人相关字段更新
+    if (addSubject) {
+      yield models[addSubject].update({
+        [addSubjectAddFieldName]: sequelize.literal(`${addSubjectAddFieldName} - 1`),
+      }, {
+        where: {
+          id: {
+            $in: haveToBeUpdatedUserIds,
+          },
+        },
+      });
+    }
+
+    //被影响人相关字段更新
+    if (addObject) {
+      yield models[addObject].update({
+        [addObjectAddFieldName]: sequelize.literal(`${addObjectAddFieldName} - ${existRelations.length}`),
+      }, {
+        where: {
+          id: this.request.body[targetFieldName],
+        },
+      });
+    }
+
+    //删除关系
+    const deleteCount = yield models[modelName].destroy({
+      where: {
+        UserId: {
+          $in: userIds,
+        },
         [targetFieldName]: this.request.body[targetFieldName],
       },
     });
 
-    if (modelName === 'AlbumUserCollaborate') {
-      yield models.Album.update({
-        collaboratorsCount: sequelize.literal('collaboratorsCount - 1'),
-      }, {
-          where: {
-            id: this.request.body.AlbumId,
-          },
-        });
-    }
-
-    if (modelName === 'AlbumUserFollow') {
-      yield models.Album.update({
-        fansCount: sequelize.literal('fansCount - 1'),
-      }, {
-          where: {
-            id: this.request.body.AlbumId,
-          },
-        });
-      yield models.User.update({
-        followAlbumsCount: sequelize.literal('followAlbumsCount - 1'),
-      }, {
-          where: {
-            id: this.request.body.UserId,
-          },
-        });
-    }
-
-    if (modelName === 'UserUserFollow') {
-      yield models.User.update({
-        fansCount: sequelize.literal('fansCount - 1'),
-      }, {
-          where: {
-            id: this.request.body.TargetUserId,
-          },
-        });
-      yield models.User.update({
-        followersCount: sequelize.literal('followersCount - 1'),
-      }, {
-          where: {
-            id: this.request.body.UserId,
-          },
-        });
-    }
-
     //删除相关action
     yield models.Action.destroy({
       where: {
-        UserId: UserIdString,
+        UserId: {
+          $in: userIds,
+        },
         type: actionType,
         [targetFieldName]: this.request.body[targetFieldName],
       },

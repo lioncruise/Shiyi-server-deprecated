@@ -342,6 +342,8 @@ exports.update = function*() {
 
   yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
 
+  this.body = album.toJSON();
+
   //创建相关action
   if (originIsPublic !== 'public' && album.isPublic === 'public') {
     utils.models.createReletedAction({

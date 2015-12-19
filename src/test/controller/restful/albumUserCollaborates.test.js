@@ -11,7 +11,7 @@ describe('src/test/controllers/restful/albumUserCollaborates.test.js', function(
   after(server.close.bind(server));
   afterEach(mm.restore);
 
-  describe('POST /userUserFollows', function() {
+  describe('POST /albumUserCollaborates', function() {
     it('should create album user collaborate OK', function(done) {
       request(server)
         .post('/albumUserCollaborates')
