@@ -168,6 +168,10 @@ describe('src/test/controllers/account.test.js', function() {
   });
 
   describe('POST /login', function() {
+
+    // 用户登录唯一性验证
+    let token;
+
     it('should login OK', function(done) {
       request(server)
         .post('/login')
@@ -187,7 +191,55 @@ describe('src/test/controllers/account.test.js', function() {
           res.body.data.gender.should.be.equal('M');
           res.body.data.motto.should.be.equal('新的一天开始了');
           res.body.data.avatarStoreKey.should.be.equal('hahaha');
+
+          // token 记录，用于之后的验证
+          token = res.body.data.token;
           done();
+        });
+    });
+
+    it('should get returns (with right token)', function(done) {
+      request(server)
+        .get('/reports?testEnterVerify=true&token=' + token)  // 利用reports接口测试验证
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should get 401 (other side login)', function(done) {
+      request(server)
+        .post('/login')
+        .send({
+          phone: '15945990588',
+          password: '12345689',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          request(server)
+            .get('/reports?testEnterVerify=true&token=' + token)  // 利用reports接口测试验证
+            .expect('Content-type', 'application/json; charset=utf-8')
+            .expect(200)
+            .end(function(err, res) {
+              if (err) {
+                return done(err);
+              }
+
+              res.body.statusCode.should.be.equal(401);
+              done();
+            });
         });
     });
 

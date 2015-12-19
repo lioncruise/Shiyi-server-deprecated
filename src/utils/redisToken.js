@@ -13,11 +13,11 @@ function init() {
     redisClient = redis.createClient(redisConfig);
 
     redisClient.on('error', function(err) {
-      console.log('Error ' + err);
+      debug('Error ' + err);
     });
 
     redisClient.on('connect', function() {
-      console.log('Redis is ready');
+      debug('Redis is ready');
     });
   }
 }
