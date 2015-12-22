@@ -84,7 +84,7 @@ exports.create = function*() {
     },
   });
 
-  let comment = yield models.Comment.create(Object.assign(this.request.body, {
+  const comment = yield models.Comment.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
   }));
 
@@ -103,22 +103,34 @@ exports.create = function*() {
     },
   });
 
+  this.body = comment.toJSON();
+
   //在返回的信息中加入User信息
   if (this.query.isWithUser === 'true') {
-    comment = yield models.Comment.find({
-      paranoid: true,
+    const user = yield models.User.find({
       where: {
-        id: comment.id,
+        id: comment.UserId,
       },
-      include: [
-        {
-          model: models.User,
-        },
-      ],
     });
-  }
+    this.body.UserName = user.nickname;
 
-  this.body = comment.toJSON();
+    //如果是对评论评论，返回两个人的信息
+    if (this.request.body.OrignalCommentId) {
+      const originalComment = yield models.Comment.find({
+        paranoid: true,
+        where: {
+          id: comment.OrignalCommentId,
+        },
+        include: [
+          {
+            model: models.User,
+          },
+        ],
+      });
+      this.body.OriginalUserId = originalComment.User.id;
+      this.body.OriginalUserName = originalComment.User.nickname;
+    }
+  }
 };
 
 exports.destroy = function*() {

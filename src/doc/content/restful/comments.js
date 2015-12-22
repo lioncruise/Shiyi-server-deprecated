@@ -28,7 +28,7 @@ module.exports = [{
   func: '新建一条评论',
   note: [
           '1.可以不包含OrignalCommentId项，但是不能为空字符串。',
-          '2.可以加上isWithUser=true，返回用户信息。',
+          '2.可以加上isWithUser=true，返回用户信息。直接对记忆评论返回一个用户，对之前的评论进行评论返回两个用户',
           ],
   requests: [
   {
