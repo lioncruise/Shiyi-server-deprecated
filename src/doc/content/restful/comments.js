@@ -28,11 +28,22 @@ module.exports = [{
   func: '新建一条评论',
   note: [
           '1.可以不包含OrignalCommentId项，但是不能为空字符串。',
+          '2.可以加上isWithUser=true，返回用户信息。',
           ],
   requests: [
   {
     method: 'post',
     url: '/comments',
+    data: {
+      content: '这并没有什么意思。',
+      MemoryId: '1',
+      OrignalCommentId: '1',
+      AlbumId: '1',
+    },
+  },
+  {
+    method: 'post',
+    url: '/comments?isWithUser=true',
     data: {
       content: '这并没有什么意思。',
       MemoryId: '1',
