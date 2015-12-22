@@ -17,7 +17,6 @@ const ms = require('ms');
 const path = require('path');
 const http = require('http');
 
-
 const config = require('./config');
 const router = require('./router');
 const middlewares = require('./middlewares');
