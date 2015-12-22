@@ -26,7 +26,6 @@ describe('src/test/controllers/restful/albumUserFollows.test.js', function() {
             return done(err);
           }
 
-          console.log(res.body);
           res.body.statusCode.should.be.equal(200);
           res.body.data.AlbumId.should.be.equal('11');
           res.body.data.UserId.should.be.equal('5');
@@ -48,7 +47,6 @@ describe('src/test/controllers/restful/albumUserFollows.test.js', function() {
             return done(err);
           }
 
-          console.log(res.body);
           res.body.statusCode.should.be.equal(200);
           res.body.data.should.be.Array();
           res.body.data.map((x) => x.UserId).should.containDeepOrdered(['6']);
@@ -71,7 +69,6 @@ describe('src/test/controllers/restful/albumUserFollows.test.js', function() {
             return done(err);
           }
 
-          console.log(res.body);
           res.body.statusCode.should.be.equal(200);
           res.body.data.should.be.Array();
           res.body.data.map((x) => x.UserId).should.containDeepOrdered(testUserList);
@@ -134,9 +131,7 @@ describe('src/test/controllers/restful/albumUserFollows.test.js', function() {
 
           res.body.statusCode.should.be.equal(200);
           res.body.data.length.should.be.equal(3);
-          res.body.data[0].AlbumId.should.be.equal('11');
-          res.body.data[1].AlbumId.should.be.equal('11');
-          res.body.data[2].AlbumId.should.be.equal('11');
+          res.body.data.map((x) => x.AlbumId).should.containDeepOrdered([11, 11, 11]);
           done();
         });
     });
