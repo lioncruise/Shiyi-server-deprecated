@@ -2,7 +2,6 @@
 
 const redis = require('then-redis');
 const debug = require('debug')('util/redisToken');
-const co = require('co');
 
 const redisConfig = require('../config').redis;
 
@@ -31,10 +30,10 @@ function save(id, token) {
   return redisClient.set(id, token);
 }
 
-let verify = co.wrap(function*(id, token) {
+function* verify(id, token) {
   let storedToken = yield redisClient.get(id);
   return token.toString() === storedToken;
-});
+}
 
 function remove(id) {
   return redisClient.del(id);
