@@ -198,6 +198,7 @@ describe('src/test/controllers/account.test.js', function() {
         });
     });
 
+    let token2;
     it('should get returns (with right token)', function(done) {
       request(server)
         .get('/reports?testEnterVerify=true&token=' + token)  // 利用reports接口测试验证
@@ -228,8 +229,37 @@ describe('src/test/controllers/account.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
+
+          // token 记录，用于之后的验证
+          token2 = res.body.data.token;
           request(server)
             .get('/reports?testEnterVerify=true&token=' + token)  // 利用reports接口测试验证
+            .expect('Content-type', 'application/json; charset=utf-8')
+            .expect(200)
+            .end(function(err, res) {
+              if (err) {
+                return done(err);
+              }
+
+              res.body.statusCode.should.be.equal(401);
+              done();
+            });
+        });
+    });
+
+    it('should logout with token OK and should never use this token', function(done) {
+      request(server)
+        .get('/logout?testEnterVerify=true&token=' + token2) // 登出
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          request(server)
+            .get('/reports?testEnterVerify=true&token=' + token2)  // 利用reports接口测试验证
             .expect('Content-type', 'application/json; charset=utf-8')
             .expect(200)
             .end(function(err, res) {
