@@ -8,7 +8,7 @@ const redisToken = require('../utils').redisToken;
 
 const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
-  '/register', '/login', '/logout', '/getValue', '/resetCache',
+  '/register', '/login', '/getValue', '/resetCache',
   '/getQiniuUptoken', '/rebuildDatabaseRedundancy',
   '/verifyPhone', '/pcLogin', '/getUserIdByKey',
 ];
