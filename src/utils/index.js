@@ -8,6 +8,7 @@ const utility = require('utility');
 
 exports.notification = require('./notification');
 exports.models = require('./models');
+exports.redisToken = require('./redisToken');
 
 exports.cloneJson = function(obj) {
   return JSON.parse(JSON.stringify(obj));

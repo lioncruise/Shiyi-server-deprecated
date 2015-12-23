@@ -29,6 +29,12 @@ config.tokenKey = 'oihag';
 
 config.isUseRedis = false;
 
+config.redis = {
+  host: 'localhost',
+  port: 6379,
+  password: 'admin',
+};
+
 config.qiniu = {
   ACCESS_KEY: 'yoAi_mu1Km0b6BnogEqanD7R-nGGkomgHRXYsjJC',
   SECRET_KEY: 'ewvO5zokNKU9dxtdWpIE5NCKx1pKw33e0Q9pfwA2',

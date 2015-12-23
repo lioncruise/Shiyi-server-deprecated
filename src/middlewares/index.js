@@ -4,6 +4,7 @@ const isJSON = require('is-json');
 const jwt = require('jsonwebtoken');
 const debug = require('debug')('middlewares/index');
 const config = require('../config');
+const redisToken = require('../utils').redisToken;
 
 const urlsWithoutSession = [
   '/', '/test', '/getSeccode', '/changePassword',
@@ -77,10 +78,19 @@ exports.auth = function*(next) {
       },
     };
   } else {
-    if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development' || this.query.testEnterVerify) {
       const token = this.headers.token || this.query.token;
       try {
         this.session = jwt.verify(token, config.tokenKey);
+
+        // 验证登录唯一性
+        if (!(yield redisToken.verify(this.session.user.id, token))) {
+          this.body = {
+            statusCode: 401,
+            message: '已在其他客户端登录，请重新登录',
+          };
+          return;
+        }
       } catch (e) {
         this.body = {
           statusCode: 401,

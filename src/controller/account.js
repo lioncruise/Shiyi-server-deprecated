@@ -7,6 +7,7 @@ const userCodeCache = require('../cache').userCodeCache;
 const userSecCodeCache = require('../cache').userSecCodeCache;
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const redisToken = require('../utils').redisToken;
 
 //验证手机号
 router.post('/verifyPhone', function*() {
@@ -127,11 +128,17 @@ router.post('/login', function*() {
 
   this.body = user.toJSON();
 
+  // 生成用于验证token用户登录唯一性
+  let tokenVerify = redisToken.verifyCode();
+
   this.body.token = jwt.sign({
     user: {
       id: user.id,
+      tokenVerify,
     },
   }, config.tokenKey);
+
+  redisToken.save(user.id, this.body.token);
 });
 
 //PC端扫码登录
@@ -158,7 +165,7 @@ router.get('/getUserIdByKey', function*() {
 
 //登出
 router.get('/logout', function*() {
-  //TODO:移除token
+  redisToken.remove(this.session.user.id);
   this.body = {};
 });
 

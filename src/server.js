@@ -21,11 +21,15 @@ const config = require('./config');
 const router = require('./router');
 const middlewares = require('./middlewares');
 const notification = require('./utils').notification;
+const redisToken = require('./utils').redisToken;
 
 const debug = require('debug')('server');
 
 const app = koa();
 app.name = 'shiyi-server';
+
+//redis 初始化
+redisToken.init();
 
 //notification 初始化
 notification.notificationInit();
