@@ -3,6 +3,10 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 
+function sortFun(a, b) {
+  return (a.createdTimestamp === b.createdTimestamp ? (a.id - b.id) : (a.createdTimestamp - b.createdTimestamp));
+}
+
 exports.setAlbumTags = function(album = { Tags: []}) {
   album.tags = album.Tags.map((tag) => tag.name).join(',');
   delete album.Tags;
@@ -120,9 +124,6 @@ exports.show = function*() {
   if (this.query.isWithPictures === 'true') {
     include.push({
       model: models.Picture,
-      order: [
-        ['createdAt', 'DESC'],
-      ],
       limit,
       offset,
     });
@@ -227,6 +228,12 @@ exports.show = function*() {
 
     //进行替换
     this.body.Memories.forEach(function(memory) {
+      if (memory.Pictures) {
+        memory.Pictures.sort(sortFun);
+      }
+
+      memory.Comments.sort(sortFun);
+      memory.Likes.sort(sortFun);
       memory.Comments = memory.Comments.map((comment) => detailedComments.get(comment.id));
       memory.Likes = memory.Likes.map((like) => detailedLikes.get(like.id));
     });
