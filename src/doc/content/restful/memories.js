@@ -55,7 +55,7 @@ module.exports = [{
   requests: [
   {
     method: 'delete',
-    url: '/memories/9',
+    url: '/memories/5',
   },
   ],
 },
