@@ -22,9 +22,30 @@ router.get('/getQRCode', function*() {
   this.body = url;
 });
 
+//获取自己创建的公开相册
+router.get('/getPublicAlbums', function*() {
+  this.verifyParams({
+    userId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+  }, Object.assign(this.request.body, this.query));
+
+  const albums = yield models.Album.findAll({
+    paranoid: true,
+    where: {
+      UserId: this.query.userId,
+      isPublic: 'public',
+    },
+  });
+
+  this.body = albums;
+});
+
 //获取自己创建的相册
 router.get('/getOwnAlbums', function*() {
-  const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
 
   const include = [];
   if (this.query.isWithRecentPicture === 'true') {
