@@ -49,6 +49,18 @@ module.exports = [{
     },
   ],
 }, {
+  fileName: 'GET getPublicAlbums',
+  func: '获取一个人所创建的公开的相册',
+  note: [
+          '1.必须带着userId=2的参数，指定某一个特定的用户。',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/getPublicAlbums?userId=1',
+    },
+  ],
+}, {
   fileName: 'GET getQRCode',
   func: '获取加入某个相册的二维码地址',
   note: [
