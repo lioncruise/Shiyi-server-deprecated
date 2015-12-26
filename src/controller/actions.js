@@ -3,11 +3,46 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
+const moment = require('moment');
 
 // 获取一个人所应该展示接收的动态
 router.get('/getActions', function*() {
+  this.verifyParams({
+    offset: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+    limit: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+    lastActionId: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+    lastActionCreatedAt: {  // 这个参数应为Unix时间戳
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+  });
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
+
+  // 通过“最后创建时间”或者“最后一条的id”构造最后动态的时间
+  let lastActionCreatedAt = this.query.lastActionCreatedAt ?
+                              new Date(Number.parseInt(this.query.lastActionCreatedAt) * 1000)
+                              :
+                              0;
+  if (this.query.hasOwnProperty('lastActionId')) {
+    const lastAction = yield models.Action.findById(Number.parseInt(this.query.lastActionId));
+    if (lastAction && lastAction.createdAt > lastActionCreatedAt) {
+      lastActionCreatedAt = lastAction.createdAt;
+    }
+  }
 
   /**
    * 用户可以收到的动态类型：
@@ -42,6 +77,9 @@ router.get('/getActions', function*() {
   const actions = yield models.Action.findAll({
     paranoid: true,
     where: {
+      createdAt:{
+        $gt: lastActionCreatedAt,
+      },
       $or:[
         {
           AlbumId: {
