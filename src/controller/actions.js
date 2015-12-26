@@ -23,7 +23,7 @@ router.get('/getActions', function*() {
       required: false,
       allowEmpty: false,
     },
-    lastActionCreatedAt: {  // 这个参数应为Unix时间戳
+    lastActionCreatedTimestamp: {  // 这个参数应为Unix时间戳
       type: 'int',
       required: false,
       allowEmpty: false,
@@ -33,8 +33,8 @@ router.get('/getActions', function*() {
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
   // 通过“最后创建时间”或者“最后一条的id”构造最后动态的时间
-  let lastActionCreatedAt = this.query.lastActionCreatedAt ?
-                              new Date(Number.parseInt(this.query.lastActionCreatedAt) * 1000)
+  let lastActionCreatedAt = this.query.lastActionCreatedTimestamp ?
+                              new Date(Number.parseInt(this.query.lastActionCreatedTimestamp) * 1000)
                               :
                               0;
   if (this.query.hasOwnProperty('lastActionId')) {

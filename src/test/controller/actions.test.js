@@ -59,9 +59,9 @@ describe('src/test/controllers/restful/albums.test.js', function() {
         });
     });
 
-    it('should get own action info with lastActionCreatedAt OK', function(done) {
+    it('should get own action info with lastActionCreatedTimestamp OK', function(done) {
       request(server)
-        .get('/getActions?lastActionCreatedAt=' + createdTimeStamp)
+        .get('/getActions?lastActionCreatedTimestamp=' + createdTimeStamp)
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
