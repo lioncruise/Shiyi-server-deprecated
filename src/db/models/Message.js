@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     type: {
       type: DataTypes.ENUM(
         'broadcast', //推送通知
-        'letter' //用户间的私信
+        'message' //用户间的私信
       ),
     },
     content: {
