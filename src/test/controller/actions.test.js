@@ -41,5 +41,38 @@ describe('src/test/controllers/restful/albums.test.js', function() {
           done();
         });
     });
+
+    let createdTimeStamp;
+    it('should get own action info with lastActionId OK', function(done) {
+      request(server)
+        .get('/getActions?lastActionId=1')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          // todo Change createAt and test the returns
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
+
+    it('should get own action info with lastActionCreatedTimestamp OK', function(done) {
+      request(server)
+        .get('/getActions?lastActionCreatedTimestamp=' + createdTimeStamp)
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          // todo Change createAt and test the returns
+          res.body.statusCode.should.be.equal(200);
+          done();
+        });
+    });
   });
 });
