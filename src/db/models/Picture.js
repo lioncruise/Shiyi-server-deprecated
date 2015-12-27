@@ -7,7 +7,7 @@ const modelUtils = require('../modelUtils');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Picture', {
     storeKey: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       allowNull: false,
     },
     type: {
@@ -20,6 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0,
     },
   }, {
+    engine: 'MYISAM',
     paranoid: true,
     getterMethods: {
       thumbnailDownloadUrl() {

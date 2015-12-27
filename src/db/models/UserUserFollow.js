@@ -6,6 +6,7 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('UserUserFollow', {
   }, {
+    engine: 'MYISAM',
     indexes: [],
     getterMethods: {
       createdTimestamp: function() {

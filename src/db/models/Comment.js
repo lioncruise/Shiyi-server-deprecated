@@ -6,9 +6,10 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Comment', {
     content: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
   }, {
+    engine: 'MYISAM',
     charset: 'utf8mb4',
     paranoid: true,
     indexes: [],
