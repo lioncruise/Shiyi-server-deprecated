@@ -96,6 +96,54 @@ router.post('/register', function*() {
   });
 });
 
+//忘记密码
+router.post('/changePassword', function*() {
+  this.verifyParams({
+    phone: modelUtils.phoneRegExp,
+    newPassword: {
+      type: 'password',
+      required: true,
+      allowEmpty: false,
+    },
+  });
+
+  let user = yield models.User.find({
+    paranoid: true,
+    where: {
+      phone: this.request.body.phone,
+    },
+  });
+  if (!user) {
+    this.body = {
+      statusCode: 404,
+      message: '用户未注册',
+    };
+    return;
+  }
+
+  if (!userSecCodeCache.has(this.request.body.phone)) {
+    this.body = {
+      statusCode: 409,
+      message: '手机号未验证',
+    };
+    return;
+  }
+
+  userSecCodeCache.del(this.request.body.phone);
+
+  yield user.update({
+    password: this.request.body.newPassword,
+  });
+
+  this.body = user.toJSON();
+
+  jwt.sign({
+    user: {
+      id: user.id,
+    },
+  }, config.tokenKey);
+});
+
 //登录
 router.post('/login', function*() {
   this.verifyParams({

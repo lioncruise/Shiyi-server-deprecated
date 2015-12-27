@@ -20,6 +20,14 @@ module.exports = [{
         secCode: '5678',
       },
     },
+    {
+      method: 'post',
+      url: '/verifyPhone',
+      data: {
+        phone: '13000000007',
+        secCode: '5678',
+      },
+    },
   ],
 }, {
   fileName: 'POST register',
@@ -43,6 +51,25 @@ module.exports = [{
         gender: 'M',
         motto: 'Do cool things that matter.',
         avatarStoreKey: '123',
+      },
+    },
+  ],
+}, {
+  fileName: 'POST changePassword',
+  func: '用户登录忘记密码时修改',
+  note: [
+          '1.phone会进行正则检测  (^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$  。',
+          '2.前端对password进行md5加密。',
+          '3.会建立cookie。',
+          '4.手机号需要提前调用/verifyPhone接口验证，否则无法正常注册。',
+          ],
+  requests: [
+    {
+      method: 'post',
+      url: '/changePassword',
+      data: {
+        phone: '13000000007',
+        newPassword: utility.md5('123456'),
       },
     },
   ],
