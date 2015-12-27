@@ -29,7 +29,7 @@ describe('src/test/controllers/restful/messages.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
-          res.body.data.type.should.be.equal('letter');
+          res.body.data.type.should.be.equal('message');
           res.body.data.content.should.be.equal('嗨，美女');
           res.body.data.UserId.should.be.equal(1);
           res.body.data.TargetUserId.should.be.equal('2');

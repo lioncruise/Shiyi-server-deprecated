@@ -2,6 +2,74 @@
 
 const router = require('../router').router;
 const models = require('../db').models;
+const sequelize = require('sequelize');
+
+//获取全部未读的信息的发送者，每个不同User返回一条，User里附带最近一条message信息
+router.get('/getAllUnreadMessageSenders', function*() {
+  const messages = yield models.Message.findAll({
+    paranoid: true,
+    attributes: [
+      [sequelize.literal('DISTINCT `UserId`'), 'UserId'],
+      'type',
+      'content',
+      'TargetUserId',
+    ],
+    where: {
+      TargetUserId: this.session.user.id,
+    },
+  });
+  const userIds = messages.map(elm => elm.UserId);
+
+  const messagesMap = new Map();
+  messages.forEach(message => messagesMap.set(message.UserId, message));
+
+  const users = yield models.User.findAll({
+    paranoid: true,
+    where: {
+      id: {
+        $in: userIds,
+      },
+    },
+  });
+
+  this.body = users.map(function(user) {
+    const obj = user.toJSON();
+    obj.recentMessage = messagesMap.get(obj.id);
+    return obj;
+  });
+});
+
+//按UserId获取未读信息，和这个用户的互相message信息
+router.get('/getAllUnreadMessagesWithOneUser', function*() {
+  this.verifyParams({
+    userId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+  }, this.query);
+
+  const messages = yield models.Message.findAll({
+    paranoid: true,
+    where: {
+      UserId: this.query.userId,
+      TargetUserId: this.session.user.id,
+    },
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+  });
+
+  this.body = messages;
+
+  //消息被提取之后删除
+  yield models.Message.destroy({
+    where: {
+      UserId: this.query.userId,
+      TargetUserId: this.session.user.id,
+    },
+  });
+});
 
 //获取自己全部的未读消息
 //message中不包含TargetUser信息，因为TargetUser都是接口请求者

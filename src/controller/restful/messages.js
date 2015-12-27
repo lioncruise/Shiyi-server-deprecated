@@ -57,7 +57,7 @@ exports.create = function*() {
   });
 
   const message = yield models.Message.create(Object.assign(this.request.body, {
-    type: 'letter',
+    type: 'message',
     UserId: this.session.user.id,
   }));
 
