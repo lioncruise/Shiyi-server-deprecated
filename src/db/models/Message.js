@@ -12,9 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       ),
     },
     content: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
   }, {
+    engine: 'MYISAM',
+    charset: 'utf8mb4',
     paranoid: true,
     indexes: [],
     getterMethods: {

@@ -8,7 +8,7 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
     phone: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       allowNull: false,
       unique: true,
       validate: {
@@ -17,13 +17,13 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     nickname: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       validate: {
         len: [1, 20],
       },
     },
     password: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -37,19 +37,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     birthday: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     hometown: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     motto: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       validate: {
         len: [0, 100],
       },
     },
     avatarStoreKey: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
@@ -69,22 +69,22 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     wechatToken: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     weiboToken: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     qqToken: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     device: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     getuiCid: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
     },
     ip: {
-      type: DataTypes.STRING,
+      type: 'VARCHAR(248)',
       allowNull: true,
       validate: {
         isIP: true,
@@ -96,6 +96,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'user',
     },
   }, {
+    engine: 'MYISAM',
+    charset: 'utf8mb4',
     paranoid: true,
     getterMethods: {
       avatarDownloadUrl() {
