@@ -80,11 +80,17 @@ router.post('/register', function*() {
 
   this.body = user.toJSON();
 
+  // 生成用于验证token用户登录唯一性
+  let tokenVerify = redisToken.verifyCode();
+
   this.body.token = jwt.sign({
     user: {
       id: user.id,
+      tokenVerify,
     },
   }, config.tokenKey);
+
+  redisToken.save(user.id, this.body.token);
 
   //新建用户后建立用户默认相册
   yield models.Album.create({
@@ -137,11 +143,7 @@ router.post('/changePassword', function*() {
 
   this.body = user.toJSON();
 
-  jwt.sign({
-    user: {
-      id: user.id,
-    },
-  }, config.tokenKey);
+  redisToken.remove(user.id);
 });
 
 //登录
