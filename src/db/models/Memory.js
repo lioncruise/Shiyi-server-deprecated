@@ -25,6 +25,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
   }, {
+    charset: 'utf8mb4',
     paranoid: true,
     indexes: [],
     getterMethods: {

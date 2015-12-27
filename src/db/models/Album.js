@@ -69,6 +69,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false,
     },
   }, {
+    charset: 'utf8mb4',
     paranoid: true,
     indexes: [],
     getterMethods: {

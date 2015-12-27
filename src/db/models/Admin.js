@@ -33,6 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'user',
     },
   }, {
+    charset: 'utf8mb4',
     indexes: [],
     getterMethods: {
       createdTimestamp: function() {

@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
     },
   }, {
+    charset: 'utf8mb4',
     indexes: [],
     getterMethods: {
       createdTimestamp: function() {

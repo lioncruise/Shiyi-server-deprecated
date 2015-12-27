@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
   }, {
+    charset: 'utf8mb4',
     indexes: [],
     getterMethods: {
       createdTimestamp: function() {
