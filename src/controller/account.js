@@ -80,11 +80,17 @@ router.post('/register', function*() {
 
   this.body = user.toJSON();
 
+  // 生成用于验证token用户登录唯一性
+  let tokenVerify = redisToken.verifyCode();
+
   this.body.token = jwt.sign({
     user: {
       id: user.id,
+      tokenVerify,
     },
   }, config.tokenKey);
+
+  redisToken.save(user.id, this.body.token);
 
   //新建用户后建立用户默认相册
   yield models.Album.create({
@@ -94,6 +100,50 @@ router.post('/register', function*() {
     isPublic: 'shared',
     allowComment: 'collaborators',
   });
+});
+
+//忘记密码
+router.post('/changePassword', function*() {
+  this.verifyParams({
+    phone: modelUtils.phoneRegExp,
+    newPassword: {
+      type: 'password',
+      required: true,
+      allowEmpty: false,
+    },
+  });
+
+  let user = yield models.User.find({
+    paranoid: true,
+    where: {
+      phone: this.request.body.phone,
+    },
+  });
+  if (!user) {
+    this.body = {
+      statusCode: 404,
+      message: '用户未注册',
+    };
+    return;
+  }
+
+  if (!userSecCodeCache.has(this.request.body.phone)) {
+    this.body = {
+      statusCode: 409,
+      message: '手机号未验证',
+    };
+    return;
+  }
+
+  userSecCodeCache.del(this.request.body.phone);
+
+  yield user.update({
+    password: this.request.body.newPassword,
+  });
+
+  this.body = user.toJSON();
+
+  redisToken.remove(user.id);
 });
 
 //登录

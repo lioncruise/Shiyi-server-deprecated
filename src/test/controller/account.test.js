@@ -167,6 +167,101 @@ describe('src/test/controllers/account.test.js', function() {
     });
   });
 
+  describe('POST /changePassword', function() {
+    it('should change password OK', function(done) {
+      request(server)
+        .post('/verifyPhone')
+        .send({
+          phone: '13000000005',
+          secCode: '1234',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          request(server)
+          .post('/changePassword')
+          .send({
+            phone: '13000000005',
+            newPassword: '7777777',
+          })
+          .expect('Content-type', 'application/json; charset=utf-8')
+          .expect(200)
+          .end(function(err, res) {
+            if (err) {
+              return done(err);
+            }
+
+            res.body.statusCode.should.be.equal(200);
+            res.body.data.phone.should.be.equal('13000000005');
+            done();
+          });
+        });
+    });
+
+    it('should change password 404', function(done) {
+        request(server)
+        .post('/changePassword')
+        .send({
+          phone: '13000000777',
+          newPassword: '7777777',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(404);
+          res.body.message.should.be.equal('用户未注册');
+          done();
+        });
+      });
+
+    it('should change password 409', function(done) {
+        request(server)
+        .post('/changePassword')
+        .send({
+          phone: '13000000007',
+          newPassword: '666666',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(409);
+          res.body.message.should.be.equal('手机号未验证');
+          done();
+        });
+      });
+
+    it('should change password 422', function(done) {
+        request(server)
+        .post('/changePassword')
+        .send({
+          phone: '13000000007',
+        })
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(422);
+          res.body.message.should.be.equal('Validation Failed');
+          done();
+        });
+      });
+  });
+
   describe('POST /login', function() {
 
     // 用户登录唯一性验证
