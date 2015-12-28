@@ -51,7 +51,11 @@ router.get('/getFans', getGetUsersControllerFunction('UserUserFollow', 'fans'));
 //获取当前登录用户和指定用户的关系
 router.get('/getOneUserRelation', function*() {
   this.verifyParams({
-    userId: 'id',
+    userId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
     targetUserId: 'id',
   }, this.query);
 
@@ -71,22 +75,6 @@ router.get('/getOneUserRelation', function*() {
     },
   });
 
-  let relation;
-  if (AFollowB && BFollowA) {
-    relation = '1';
-  }
-
-  if (!AFollowB && BFollowA) {
-    relation = '2';
-  }
-
-  if (AFollowB && !BFollowA) {
-    relation = '3';
-  }
-
-  if (!AFollowB && !BFollowA) {
-    relation = '4';
-  }
-
-  this.body = relation;
+  // 3:互相关注 2:B关注A 1:A关注B 0:互不关注
+  this.body = (AFollowB ? 1 : 0) + (BFollowA ? 2 : 0);
 });
