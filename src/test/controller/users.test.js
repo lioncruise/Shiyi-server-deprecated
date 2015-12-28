@@ -150,4 +150,38 @@ describe('src/test/controllers/users.test.js', function() {
         });
     });
   });
+
+  describe('GET /getOneUserRelation', function() {
+    it('should get one user with current user relation OK', function(done) {
+      request(server)
+        .get('/getOneUserRelation?userId=1&targetUserId=2')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(200);
+          res.body.data.should.be.equal('3');
+          done();
+        });
+    });
+
+    it('should get one user with current user relation 422', function(done) {
+      request(server)
+        .get('/getOneUserRelation?userId=1')
+        .expect('Content-type', 'application/json; charset=utf-8')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            return done(err);
+          }
+
+          res.body.statusCode.should.be.equal(422);
+          res.body.message.should.be.equal('Validation Failed');
+          done();
+        });
+    });
+  });
 });
