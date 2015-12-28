@@ -47,3 +47,46 @@ router.get('/getFollowers', getGetUsersControllerFunction('UserUserFollow', 'fol
 
 //获取一个用户的粉丝
 router.get('/getFans', getGetUsersControllerFunction('UserUserFollow', 'fans'));
+
+//获取当前登录用户和指定用户的关系
+router.get('/getOneUserRelation', function*() {
+  this.verifyParams({
+    userId: 'id',
+    targetUserId: 'id',
+  }, this.query);
+
+  const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+  const TargetUserId  = parseInt(this.query.targetUserId);
+
+  const AFollowB = yield models.UserUserFollow.find({
+    where: {
+      UserId: UserId,
+      TargetUserId: TargetUserId,
+    },
+  });
+  const BFollowA = yield models.UserUserFollow.find({
+    where: {
+      UserId: TargetUserId,
+      TargetUserId: UserId,
+    },
+  });
+
+  let relation;
+  if (AFollowB && BFollowA) {
+    relation = '1';
+  }
+
+  if (!AFollowB && BFollowA) {
+    relation = '2';
+  }
+
+  if (AFollowB && !BFollowA) {
+    relation = '3';
+  }
+
+  if (!AFollowB && !BFollowA) {
+    relation = '4';
+  }
+
+  this.body = relation;
+});
