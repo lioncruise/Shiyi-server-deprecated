@@ -113,5 +113,7 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     indexes: [],
+    freezeTableName: true,
+    tableName: 'users',
   });
 };

@@ -18,5 +18,7 @@ module.exports = function(sequelize, DataTypes) {
         return moment(this.createdAt).unix();
       },
     },
+    freezeTableName: true,
+    tableName: 'feedbacks',
   });
 };

@@ -38,5 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         return moment(this.updateAt).unix();
       },
     },
+    freezeTableName: true,
+    tableName: 'memories',
   });
 };
