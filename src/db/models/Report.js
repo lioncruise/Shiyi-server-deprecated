@@ -11,14 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'pending',
     },
     content: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       validate:{
         notEmpty: true,
       },
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     indexes: [],
     getterMethods: {

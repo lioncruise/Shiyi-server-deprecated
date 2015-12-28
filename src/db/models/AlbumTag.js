@@ -12,7 +12,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
     },
   }, {
-    engine: 'MYISAM',
     indexes: [],
     getterMethods: {
       createdTimestamp: function() {

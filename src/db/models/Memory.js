@@ -6,13 +6,13 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Memory', {
     content: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     gps: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     position: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     likesCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
@@ -25,7 +25,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     paranoid: true,
     indexes: [],

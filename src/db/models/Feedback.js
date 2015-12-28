@@ -6,10 +6,9 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Feedback', {
     content: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
   }, {
-    engine: 'MYISAM',
     timestamps: true,
     updatedAt: false,
     indexes: [],
