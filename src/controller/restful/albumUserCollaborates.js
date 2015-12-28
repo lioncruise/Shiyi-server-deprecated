@@ -70,7 +70,7 @@ exports.getCreateFuction = function(modelName) {
     this.body = [];
 
     let countAddNum = 0;
-    for (const userId of userIds) {
+    for (let userId of userIds) {
       const result = yield models[modelName].findOrCreate({
         where: {
           [targetFieldName]: this.request.body[targetFieldName],
