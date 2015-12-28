@@ -6,7 +6,6 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Story', {
   }, {
-    engine: 'MYISAM',
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();

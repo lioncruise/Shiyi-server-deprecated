@@ -6,10 +6,9 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Tag', {
     name: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     indexes: [],
     getterMethods: {

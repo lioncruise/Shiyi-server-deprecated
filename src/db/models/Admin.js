@@ -6,7 +6,7 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Admin', {
     username: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       unique: true,
       validate: {
@@ -14,26 +14,25 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     nickname: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     password: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     type: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       defaultValue: 'user',
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     indexes: [],
     getterMethods: {
