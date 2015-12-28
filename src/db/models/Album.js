@@ -8,19 +8,19 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Album', {
     title: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     coverStoreKey: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
     description: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     memoriesCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
@@ -69,7 +69,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false,
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     paranoid: true,
     indexes: [],

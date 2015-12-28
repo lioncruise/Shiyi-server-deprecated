@@ -8,7 +8,7 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
     phone: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       unique: true,
       validate: {
@@ -17,13 +17,13 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     nickname: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       validate: {
         len: [1, 20],
       },
     },
     password: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -37,19 +37,19 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     birthday: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     hometown: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     motto: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       validate: {
         len: [0, 100],
       },
     },
     avatarStoreKey: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
@@ -69,22 +69,22 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     wechatToken: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     weiboToken: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     qqToken: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     device: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     getuiCid: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
     },
     ip: {
-      type: 'VARCHAR(248)',
+      type: 'VARCHAR(185)',
       allowNull: true,
       validate: {
         isIP: true,
@@ -96,7 +96,6 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 'user',
     },
   }, {
-    engine: 'MYISAM',
     charset: 'utf8mb4',
     paranoid: true,
     getterMethods: {

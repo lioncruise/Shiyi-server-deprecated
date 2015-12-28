@@ -10,7 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
   }, {
-    engine: 'MYISAM',
     paranoid: true,
     indexes: [],
     getterMethods: {
