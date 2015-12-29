@@ -163,7 +163,7 @@ describe('src/test/controllers/users.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
-          res.body.data.should.be.equal('3');
+          res.body.data.should.be.equal('1');
           done();
         });
     });

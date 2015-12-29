@@ -75,6 +75,6 @@ router.get('/getOneUserRelation', function*() {
     },
   });
 
-  // 3:互相关注 2:B关注A 1:A关注B 0:互不关注
-  this.body = (AFollowB ? 1 : 0) + (BFollowA ? 2 : 0);
+  // 3:互相关注 2:B关注A 1:A关注B 0:互不关注 //字符串类型
+  this.body = '' + ((AFollowB ? 1 : 0) + (BFollowA ? 2 : 0));
 });
