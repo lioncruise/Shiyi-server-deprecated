@@ -41,13 +41,6 @@ config.qiniu = {
   domain: 'dn-itimepost.qbox.me',
 };
 
-config.sms = {
-  isOK: false,
-  smsTemplate: '【拾忆APP】您的验证码是%s。如非本人操作，请忽略本短信',
-  url: 'http://yunpian.com/v1/sms/send.json',
-  apikey: '2bafb98c7a73e2566f318cf468e096ae',
-};
-
 config.getui = {
   host: 'https://api.getui.com/apiex.htm',
   appId: 'Yezv1XBlh89nw9ShM2Gju5',
@@ -78,24 +71,13 @@ config.url = 'https://api.itimepost.com';
 
 config.ipFilter = ['*'];
 
-let devConfig = {};
+let customConfig = {};
 try {
-  devConfig = require(path.join(__dirname, './devConfig.js'));
+  customConfig = require(path.join(__dirname, './config.js'));
 } catch (err) {
   // ignore error
 }
 
-config = Object.assign(config, devConfig);
-
-if (process.env.NODE_ENV === 'production') {
-  let customConfig = {};
-  try {
-    customConfig = require(path.join(__dirname, './config.js'));
-  } catch (err) {
-    // ignore error
-  }
-
-  config = Object.assign(config, customConfig);
-}
+config = Object.assign(config, customConfig);
 
 module.exports = config;
