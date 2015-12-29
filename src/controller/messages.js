@@ -10,9 +10,13 @@ router.get('/getAllUnreadMessageSenders', function*() {
     paranoid: true,
     attributes: [
       [sequelize.literal('DISTINCT `UserId`'), 'UserId'],
+      'id',
       'type',
       'content',
       'TargetUserId',
+      'createdAt',
+      'updatedAt',
+      'deletedAt',
     ],
     where: {
       TargetUserId: this.session.user.id,
