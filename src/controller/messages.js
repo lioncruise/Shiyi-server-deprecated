@@ -49,6 +49,21 @@ router.get('/getAllUnreadMessagesWithOneUser', function*() {
     },
   }, this.query);
 
+  const user = yield models.User.find({
+    paranoid: true,
+    where: {
+      id: this.query.userId,
+    },
+  });
+
+  if (!user) {
+    this.body = {
+      statusCode: 404,
+      message: '用户不存在',
+    };
+    return;
+  }
+
   const messages = yield models.Message.findAll({
     paranoid: true,
     where: {
@@ -60,7 +75,10 @@ router.get('/getAllUnreadMessagesWithOneUser', function*() {
     ],
   });
 
-  this.body = messages;
+  this.body = {
+    user,
+    messages,
+  };
 
   //消息被提取之后删除
   if (process.env.NODE_ENV === 'development') {
