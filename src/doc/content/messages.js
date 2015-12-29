@@ -46,7 +46,7 @@ module.exports = [{
   requests: [
     {
       method: 'get',
-      url: '/getAllUnreadMessagesWithOneUser?userId=1',
+      url: '/getAllUnreadMessagesWithOneUser?userId=2',
     },
   ],
 },
