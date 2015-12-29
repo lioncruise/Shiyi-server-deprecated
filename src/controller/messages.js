@@ -63,12 +63,14 @@ router.get('/getAllUnreadMessagesWithOneUser', function*() {
   this.body = messages;
 
   //消息被提取之后删除
-  yield models.Message.destroy({
-    where: {
-      UserId: this.query.userId,
-      TargetUserId: this.session.user.id,
-    },
-  });
+  if (process.env.NODE_ENV === 'development') {
+    yield models.Message.destroy({
+      where: {
+        UserId: this.query.userId,
+        TargetUserId: this.session.user.id,
+      },
+    });
+  }
 });
 
 //获取自己全部的未读消息
@@ -88,11 +90,13 @@ router.get('/getAllUnreadMessages', function*() {
   this.body = messages.map((message) => message.toJSON());
 
   //消息被提取之后删除
-  yield models.Message.destroy({
-    where: {
-      TargetUserId: this.session.user.id,
-    },
-  });
+  if (process.env.NODE_ENV === 'development') {
+    yield models.Message.destroy({
+      where: {
+        TargetUserId: this.session.user.id,
+      },
+    });
+  }
 });
 
 //获取所有以往的Messages信息
@@ -132,11 +136,13 @@ router.get('/getAllMessages', function*() {
   this.body = messages.map((message) => message.toJSON());
 
   //消息被提取之后删除
-  yield models.Message.destroy({
-    where: {
-      id: {
-        $in: this.body.map((message) => message.id),
+  if (process.env.NODE_ENV === 'development') {
+    yield models.Message.destroy({
+      where: {
+        id: {
+          $in: this.body.map((message) => message.id),
+        },
       },
-    },
-  });
+    });
+  }
 });
