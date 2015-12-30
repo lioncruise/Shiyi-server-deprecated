@@ -10,7 +10,7 @@ config.db = {
   database: 'shiyi',
   dialect: 'mysql',
   username: 'root',
-  password: 'admin',
+  password: '123456',
   pool: {
     max: 100,
     min: 0,
@@ -27,6 +27,9 @@ config.db = {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',
     timestamps: true,
+  },
+  dialectOptions: {
+    charset: 'utf8mb4',
   },
 };
 
