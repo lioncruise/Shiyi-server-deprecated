@@ -39,7 +39,6 @@ describe('src/test/controllers/restful/messages.test.js', function() {
 
     it('should create new message 422', function(done) {
       const message = {
-        content: '',
         TargetUserId: '2',
       };
 

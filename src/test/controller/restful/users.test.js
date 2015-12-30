@@ -44,58 +44,5 @@ describe('src/test/controllers/restful/users.test.js', function() {
           done();
         });
     });
-
-    it('should get user with albums OK', function(done) {
-      request(server)
-        .get('/users/1?isWithAlbums=true')
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(200);
-          res.body.data.id.should.be.equal(1);
-          res.body.data.should.have.properties(['avatarDownloadUrl', 'phone', 'nickname', 'avatarStoreKey', 'ownAlbums']);
-          res.body.data.ownAlbums[0].id.should.be.a.Number();
-          res.body.data.ownAlbums[0].UserId.should.be.equal(1);
-          done();
-        });
-    });
-
-    it('should get user with actions OK', function(done) {
-      request(server)
-        .get('/users/1?isWithActions=true')
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(200);
-          res.body.data.id.should.be.equal(1);
-          res.body.data.should.have.properties(['avatarDownloadUrl', 'phone', 'nickname', 'avatarStoreKey', 'Actions']);
-          done();
-        });
-    });
-
-    it('should get user and actions with limit an offset OK', function(done) {
-      request(server)
-        .get('/users/1?isWithActions=true&offset=0&limit=10')
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(200);
-          res.body.data.id.should.be.equal(1);
-          res.body.data.should.have.properties(['avatarDownloadUrl', 'phone', 'nickname', 'avatarStoreKey', 'Actions']);
-          done();
-        });
-    });
   });
 });

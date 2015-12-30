@@ -26,5 +26,20 @@ module.exports = [{
       url: '/getFans?userId=1',
     },
   ],
+}, {
+  fileName: 'GET getOneUserRelation',
+  func: '获取当前用户和指定用户的关系',
+  note: [
+          '1.可以带着userId=2的参数，指定当前的用户，如果不带的话则使用请求者当前用户。',
+          '2.必须带targetUserId参数。',
+          '3.可能返回4种状态。3表示相互关注，2表示只有target用户关注user用户，1表示只有user用户关注target用户，0表示互相不关注。',
+          '4.返回的都是字符串类型！',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/getOneUserRelation?userId=1&targetUserId=2',
+    },
+  ],
 },
 ];

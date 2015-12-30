@@ -108,14 +108,15 @@ exports.create = function*() {
   //在返回的信息中加入User信息
   if (this.query.isWithUser === 'true') {
     const user = yield models.User.find({
+      paranoid: true,
       where: {
         id: comment.UserId,
       },
     });
-    this.body.UserName = user.nickname;
+    this.body.User = user.toJSON();
 
     //如果是对评论评论，返回两个人的信息
-    if (this.request.body.OrignalCommentId) {
+    if (this.body.OrignalCommentId) {
       const originalComment = yield models.Comment.find({
         paranoid: true,
         where: {
@@ -127,8 +128,7 @@ exports.create = function*() {
           },
         ],
       });
-      this.body.OriginalUserId = originalComment.User.id;
-      this.body.OriginalUserName = originalComment.User.nickname;
+      this.body.OrignalComment = originalComment.toJSON();
     }
   }
 };
