@@ -10,7 +10,7 @@ config.db = {
   database: 'shiyi',
   dialect: 'mysql',
   username: 'root',
-  password: '123456',
+  password: 'admin',
   pool: {
     max: 100,
     min: 0,
