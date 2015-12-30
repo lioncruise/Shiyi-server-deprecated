@@ -98,6 +98,5 @@ function overwrite(obj1, obj2) {
 }
 
 config = overwrite(config, customConfig);
-console.log(JSON.stringify(config));
 
 module.exports = config;
