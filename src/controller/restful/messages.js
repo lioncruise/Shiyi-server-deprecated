@@ -47,7 +47,7 @@ exports.create = function*() {
     content: {
       type: 'string',
       required: true,
-      allowEmpty: false,
+      allowEmpty: true,
     },
     TargetUserId: {
       type: 'id',
