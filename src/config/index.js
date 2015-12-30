@@ -21,13 +21,6 @@ config.db = {
   },
   logging: false,
   timezone: '+08:00',
-  charset: 'utf8mb4',
-  collate: 'utf8mb4_general_ci',
-  define: {
-    charset: 'utf8mb4',
-    collate: 'utf8mb4_general_ci',
-    timestamps: true,
-  },
   dialectOptions: {
     charset: 'utf8mb4',
   },
@@ -88,6 +81,23 @@ try {
   // ignore error
 }
 
-config = Object.assign(config, customConfig);
+function overwrite(obj1, obj2) {
+  for (let key in obj2) {
+    if (typeof (obj2[key]) === 'object' && obj2[key].constructor !== Array) {
+      if (!obj1.hasOwnProperty(key)) {
+        obj1[key] = {};
+      }
+
+      overwrite(obj1[key], obj2[key]);
+    }else {
+      obj1[key] = obj2[key];
+    }
+  }
+
+  return obj1;
+}
+
+config = overwrite(config, customConfig);
+console.log(JSON.stringify(config));
 
 module.exports = config;
