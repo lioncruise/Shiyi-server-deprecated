@@ -21,6 +21,8 @@ config.db = {
   },
   logging: false,
   timezone: '+08:00',
+  charset: 'utf8mb4',
+  collate: 'utf8mb4_general_ci',
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_general_ci',
