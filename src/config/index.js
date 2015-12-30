@@ -21,6 +21,9 @@ config.db = {
   },
   logging: false,
   timezone: '+08:00',
+  dialectOptions: {
+    charset: 'utf8mb4',
+  },
 };
 
 config.defaultPictureKey = 'default';
@@ -78,6 +81,22 @@ try {
   // ignore error
 }
 
-config = Object.assign(config, customConfig);
+function overwrite(obj1, obj2) {
+  for (let key in obj2) {
+    if (typeof (obj2[key]) === 'object' && obj2[key].constructor !== Array) {
+      if (!obj1.hasOwnProperty(key)) {
+        obj1[key] = {};
+      }
+
+      overwrite(obj1[key], obj2[key]);
+    } else {
+      obj1[key] = obj2[key];
+    }
+  }
+
+  return obj1;
+}
+
+config = overwrite(config, customConfig);
 
 module.exports = config;

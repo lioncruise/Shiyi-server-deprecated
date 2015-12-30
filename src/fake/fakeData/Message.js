@@ -68,7 +68,7 @@ const messages = [{
   TargetUserId: 7,
   content: '9 ……',
   createdAt: moment().subtract(4, 'minutes'),
-}
+},
 ];
 
 exports.data = messages;
