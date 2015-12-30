@@ -21,6 +21,11 @@ config.db = {
   },
   logging: false,
   timezone: '+08:00',
+  define: {
+    charset: 'utf8mb4',
+    collate: 'utf8mb4_general_ci',
+    timestamps: true,
+  },
 };
 
 config.defaultPictureKey = 'default';
