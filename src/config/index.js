@@ -89,7 +89,7 @@ function overwrite(obj1, obj2) {
       }
 
       overwrite(obj1[key], obj2[key]);
-    }else {
+    } else {
       obj1[key] = obj2[key];
     }
   }
