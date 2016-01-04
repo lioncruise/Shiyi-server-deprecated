@@ -8,6 +8,7 @@ const userSecCodeCache = require('../cache').userSecCodeCache;
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const redisToken = require('../utils').redisToken;
+const urllib = require('urllib');
 
 //验证手机号
 router.post('/verifyPhone', function*() {
@@ -16,11 +17,36 @@ router.post('/verifyPhone', function*() {
     secCode: 'string',
   });
 
-  //TODO:向mob验证验证
-  const flag = true;
+  //向mob验证验证
+  let result = {
+    data: {
+      status: 200,
+    },
+  };
+  if (process.env.NODE_ENV === 'production') {
+    result = yield urllib.requestThunk('https://webapi.sms.mob.com/sms/verify', {
+      method: 'POST',
+      data: {
+        appkey: config.mob.appKey,
+        phone: this.request.body.phone,
+        zone: '86',
+        code: this.request.body.secCode,
+      },
+      dataType: 'json',
+    });
+  }
 
-  if (flag) {
+  if (result.data.status === 200) {
     userSecCodeCache.set(this.request.body.phone, true);
+  } else {
+    this.body = {
+      statusCode: result.data.status,
+      data: {
+        status: false,
+      },
+      message: '验证码错误',
+    };
+    return;
   }
 
   this.body = {

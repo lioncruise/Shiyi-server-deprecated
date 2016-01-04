@@ -26,6 +26,11 @@ config.db = {
   },
 };
 
+config.mob = {
+  appKey: 'a8abe6eaf81e',
+  appSecret: '99261fc4b5b8277e9256677932b0b840',
+};
+
 config.defaultPictureKey = 'default';
 
 config.tokenKey = 'oihag';
