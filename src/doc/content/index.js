@@ -25,6 +25,7 @@ let files = [
   require('./messages'),
   require('./qiniu'),
   require('./users'),
+  require('./search'),
 ];
 
 for (let file of files) {
