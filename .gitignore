@@ -30,9 +30,6 @@ node_modules
 # babel out directory
 out
 
-# dev config
-src/config/devConfig.js
-
 # OSX directory useless file
 .DS_Store
 

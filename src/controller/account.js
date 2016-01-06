@@ -23,7 +23,7 @@ router.post('/verifyPhone', function*() {
       status: 200,
     },
   };
-  if (process.env.NODE_ENV === 'production') {
+  if (!config.debug) {
     result = yield urllib.requestThunk('https://webapi.sms.mob.com/sms/verify', {
       method: 'POST',
       data: {

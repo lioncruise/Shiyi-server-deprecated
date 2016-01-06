@@ -16,7 +16,6 @@ const ipFilter = require('koa-ip-filter');
 const ms = require('ms');
 const path = require('path');
 const http = require('http');
-
 const config = require('./config');
 const router = require('./router');
 const middlewares = require('./middlewares');
@@ -26,7 +25,7 @@ const redisToken = require('./utils').redisToken;
 const debug = require('debug')('server');
 
 const app = koa();
-app.name = 'shiyi-server';
+app.name = config.appName;
 
 //redis 初始化
 redisToken.init();
@@ -67,7 +66,7 @@ app.use(staticCache({
 app.use(formidable());
 
 //显示参数
-if (process.env.NODE_ENV === 'development') {
+if (!config.debug) {
   app.use(middlewares.showBody());
 }
 

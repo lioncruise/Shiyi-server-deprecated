@@ -59,29 +59,27 @@ config.getui = {
   offlineExpireTime: 3600 * 12 * 1000, // 离线等待时间
 };
 
-config.IOSNotification = {
-  keyFile: path.join(__dirname, '../crts', 'for apns', 'key.pem'),
-  certFile: path.join(__dirname, '../crts', 'for apns', 'cert.pem'),
-  passphrase: '123456',
-  debug: true,
-};
-
 config.AndroidNotification = {
   appId: null,
   appKey: null,
   logo: null,
 };
 
+config.appName = 'shiyi_dev';
 config.keys = ['shiyi', 'q(*^#"}}|ef'];
 config.debug = true;
 config.port = 8080;
-config.url = 'https://api.itimepost.com';
+config.url = 'http://127.0.0.1:8080';
 
 config.ipFilter = ['*'];
 
 let customConfig = {};
 try {
-  customConfig = require(path.join(__dirname, './config.js'));
+  if (process.env.NODE_ENV === 'production') {
+    customConfig = require(path.join(__dirname, './production.js'));
+  } else if (process.env.NODE_ENV === 'production_test') {
+    customConfig = require(path.join(__dirname, './production_test.js'));
+  }
 } catch (err) {
   // ignore error
 }
