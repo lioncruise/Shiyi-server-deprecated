@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "shiyi-server",
+    "name": "shiyi_test",
     "script": "out/worker.js",
     "watch": false,
     "node_args": "--harmony",
