@@ -15,6 +15,7 @@ router.post('/verifyPhone', function*() {
   this.verifyParams({
     phone: modelUtils.phoneRegExp,
     secCode: 'string',
+    system: ['android', 'ios'],
   });
 
   //向mob验证验证
@@ -27,7 +28,7 @@ router.post('/verifyPhone', function*() {
     result = yield urllib.requestThunk('https://webapi.sms.mob.com/sms/verify', {
       method: 'POST',
       data: {
-        appkey: config.mob.appKey,
+        appkey: config.mob.appKey[this.request.body.system],
         phone: this.request.body.phone,
         zone: '86',
         code: this.request.body.secCode,

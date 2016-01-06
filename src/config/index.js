@@ -27,8 +27,10 @@ config.db = {
 };
 
 config.mob = {
-  appKey: 'a8abe6eaf81e',
-  appSecret: '99261fc4b5b8277e9256677932b0b840',
+  appKey: {
+    android: 'e522f4154186', //0cc394ac1a42f52ecd6e4bbd0ff0a6a8
+    ios: 'e5234ac2176c', //36517dab04a46497fba706e587298edd
+  },
 };
 
 config.defaultPictureKey = 'default';

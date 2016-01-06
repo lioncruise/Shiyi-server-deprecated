@@ -10,6 +10,7 @@ module.exports = [{
           '2.后端会验证验证码是否正确，返回status为是否正确。',
           '3.也就是说，验证码是mob的SDK发送的，验证是否正确是我的服务器进行的。',
           '4.这样设计的原因，是防止别人抓包、反编译，来直接模拟发送register接口。后端记录一下验证内容，可以在注册的时候，知道哪些手机是被验证过的。',
+          '5.需要加system为ios或android',
           ],
   requests: [
     {
@@ -18,6 +19,7 @@ module.exports = [{
       data: {
         phone: '15945990589',
         secCode: '5678',
+        system: 'ios',
       },
     },
     {
@@ -26,6 +28,7 @@ module.exports = [{
       data: {
         phone: '13000000007',
         secCode: '5678',
+        system: 'android',
       },
     },
   ],
