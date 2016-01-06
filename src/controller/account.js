@@ -44,7 +44,7 @@ router.post('/verifyPhone', function*() {
       data: {
         status: false,
       },
-      message: '验证码错误',
+      message: result.data.status + '验证码错误',
     };
     return;
   }
