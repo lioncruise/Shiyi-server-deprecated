@@ -3,6 +3,7 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const sequelize = require('sequelize');
+const config = require('../config');
 
 //获取全部未读的信息的发送者，每个不同User返回一条，User里附带最近一条message信息
 router.get('/getAllUnreadMessageSenders', function*() {
@@ -67,7 +68,7 @@ router.get('/getAllUnreadMessagesWithOneUser', function*() {
   this.body = messages;
 
   //消息被提取之后删除
-  if (process.env.NODE_ENV === 'development' && this.query.isSave !== 'true') {
+  if (!config.debug && this.query.isSave !== 'true') {
     yield models.Message.destroy({
       where: {
         UserId: this.query.userId,
@@ -94,7 +95,7 @@ router.get('/getAllUnreadMessages', function*() {
   this.body = messages.map((message) => message.toJSON());
 
   //消息被提取之后删除
-  if (process.env.NODE_ENV === 'development' && this.query.isSave !== 'true') {
+  if (!config.debug && this.query.isSave !== 'true') {
     yield models.Message.destroy({
       where: {
         TargetUserId: this.session.user.id,
@@ -140,7 +141,7 @@ router.get('/getAllMessages', function*() {
   this.body = messages.map((message) => message.toJSON());
 
   //消息被提取之后删除
-  if (process.env.NODE_ENV === 'development' && this.query.isSave !== 'true') {
+  if (!config.debug && this.query.isSave !== 'true') {
     yield models.Message.destroy({
       where: {
         id: {

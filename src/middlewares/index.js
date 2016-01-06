@@ -78,7 +78,7 @@ exports.auth = function*(next) {
       },
     };
   } else {
-    if (process.env.NODE_ENV === 'production' || this.query.testEnterVerify) {
+    if (!config.debug || this.query.testEnterVerify) {
       const token = this.headers.token || this.query.token;
       try {
         this.session = jwt.verify(token, config.tokenKey);
@@ -100,7 +100,6 @@ exports.auth = function*(next) {
       }
     } else {
       //test模式进行用户模拟
-      //process.env.NODE_ENV === 'development' 也进行用户模拟
       this.session = {
         user: {
           id: 1,

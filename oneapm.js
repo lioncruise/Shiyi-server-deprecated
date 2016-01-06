@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name : ['shiyi-server'],
+  app_name : ['shiyi'],
   /**
    * Your OneAPM license key.
    */
