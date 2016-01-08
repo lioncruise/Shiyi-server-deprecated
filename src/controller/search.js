@@ -82,3 +82,21 @@ router.get('/searchUsers', function*() {
     });
   }
 });
+
+router.get('/searchAlbums', function*() {
+  this.verifyParams({
+    keyword: 'string',
+  }, this.query);
+
+  this.body = yield models.Album.findAll({
+    paranoid: true,
+    where: {
+      title: {
+        $like: '%' + this.query.keyword + '%',
+      },
+      isPublic: 'public',
+    },
+  });
+
+  this.body = this.body.map((album) => album.toJSON());
+});
