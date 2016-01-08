@@ -48,8 +48,8 @@ router.get('/getFollowers', getGetUsersControllerFunction('UserUserFollow', 'fol
 //获取一个用户的粉丝
 router.get('/getFans', getGetUsersControllerFunction('UserUserFollow', 'fans'));
 
-//获取当前登录用户和指定用户的关系
-router.get('/getOneUserRelation', function*() {
+//获取用户和用户的关系
+router.get('/getUserUserRelation', function*() {
   this.verifyParams({
     userId: {
       type: 'id',
@@ -77,4 +77,72 @@ router.get('/getOneUserRelation', function*() {
 
   // 3:互相关注 2:B关注A 1:A关注B 0:互不关注 //字符串类型
   this.body = '' + ((AFollowB ? 1 : 0) + (BFollowA ? 2 : 0));
+});
+
+//获取用户和相册的关系
+router.get('/getAlbumUserRelation', function*() {
+  this.verifyParams({
+    userId: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+    albumId: 'id',
+  }, this.query);
+
+  const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+  const AlbumId  = parseInt(this.query.albumId);
+
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: AlbumId,
+    },
+  });
+
+  const user = yield models.User.find({
+    paranoid: true,
+    where: {
+      id: UserId,
+    },
+  });
+
+  if (!album || !user) {
+    this.body = {
+      statusCode: 404,
+      message: '相册或用户不存在',
+    };
+    return;
+  }
+
+  if (album.UserId === user.id) {
+    this.body = '1'; //用户是相册的主人
+    return;
+  }
+
+  const albumUserCollaborate = yield models.AlbumUserCollaborate.find({
+    where: {
+      AlbumId,
+      UserId,
+    },
+  });
+
+  if (albumUserCollaborate) {
+    this.body = '2';
+    return; //用户是相册的维护成员之一
+  }
+
+  const albumUserFollow = yield models.AlbumUserFollow.find({
+    where: {
+      AlbumId,
+      UserId,
+    },
+  });
+
+  if (albumUserFollow) {
+    this.body = '3';
+    return; //用户是相册的关注者之一
+  }
+
+  this.body = '0'; //用户和相册无关系
 });

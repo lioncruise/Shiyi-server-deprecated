@@ -27,7 +27,7 @@ module.exports = [{
     },
   ],
 }, {
-  fileName: 'GET getOneUserRelation',
+  fileName: 'GET getUserUserRelation',
   func: '获取当前用户和指定用户的关系',
   note: [
           '1.可以带着userId=2的参数，指定当前的用户，如果不带的话则使用请求者当前用户。',
@@ -38,7 +38,22 @@ module.exports = [{
   requests: [
     {
       method: 'get',
-      url: '/getOneUserRelation?userId=1&targetUserId=2',
+      url: '/getUserUserRelation?userId=1&targetUserId=2',
+    },
+  ],
+}, {
+  fileName: 'GET getAlbumUserRelation',
+  func: '获取当前用户和指定相册的关系',
+  note: [
+          '1.可以带着userId=2的参数，指定当前的用户，如果不带的话则使用请求者当前用户。',
+          '2.必须带albumId参数。',
+          '3.可能返回4种状态。0:用户和相册无关系  1:用户是相册主人   2：用户是相册的维护者之一   3：用户是相册的关注者之一。',
+          '4.返回的都是字符串类型！',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/getAlbumUserRelation?userId=3&albumId=4',
     },
   ],
 },
