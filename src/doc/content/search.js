@@ -22,5 +22,19 @@ module.exports = [{
       url: '/searchUsers?keyword=B',
     },
   ],
+}, {
+  fileName: 'GET searchAlbums',
+  func: '根据关键字搜索相册',
+  note: [
+          '1.参数keyword，作为搜索关键字。',
+          '2.按title进行关键字查询。',
+          '3.只能搜到公开相册。',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/searchAlbums?keyword=N',
+    },
+  ],
 },
 ];
