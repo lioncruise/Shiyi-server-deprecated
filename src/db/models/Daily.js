@@ -1,28 +1,29 @@
 'use strict';
 
+const config = require('../../config');
+const modelUtils = require('../modelUtils');
 const moment = require('moment');
 
-//记忆
+//日报
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Memory', {
-    content: {
+  return sequelize.define('Daily', {
+    title: {
       type: 'VARCHAR(185)',
-    },
-    gps: {
-      type: 'VARCHAR(185)',
-    },
-    position: {
-      type: 'VARCHAR(185)',
-    },
-    likesCount: { //冗余数据，减少跨表联合查询
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
-    commentsCount: { //冗余数据，减少跨表联合查询
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    coverStoreKey: {
+      type: 'VARCHAR(185)',
       allowNull: false,
+      defaultValue: config.defaultPictureKey,
+    },
+    description: {
+      type: 'VARCHAR(185)',
+    },
+    url: {
+      type: 'VARCHAR(185)',
     },
     viewsCount: { //浏览量
       type: DataTypes.INTEGER,
@@ -31,9 +32,12 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     charset: 'utf8mb4',
-    paranoid: true,
     indexes: [],
     getterMethods: {
+      coverDownloadUrl() {
+        return modelUtils.getUrlFunction(this.coverStoreKey);
+      },
+
       createdTimestamp: function() {
         return moment(this.createdAt).unix();
       },
@@ -43,6 +47,6 @@ module.exports = function(sequelize, DataTypes) {
       },
     },
     freezeTableName: true,
-    tableName: 'memories',
+    tableName: 'dailies',
   });
 };

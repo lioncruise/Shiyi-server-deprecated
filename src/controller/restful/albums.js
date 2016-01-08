@@ -2,6 +2,7 @@
 
 const models = require('../../db').models;
 const utils = require('../../utils');
+const sequelize = require('sequelize');
 
 function sortFun(a, b) {
   return (a.createdTimestamp === b.createdTimestamp ? (a.id - b.id) : (a.createdTimestamp - b.createdTimestamp));
@@ -157,6 +158,11 @@ exports.show = function*() {
     };
     return;
   }
+
+  //更新浏览量
+  yield album.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  });
 
   this.body = exports.setAlbumTags(album.toJSON());
 

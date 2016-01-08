@@ -4,6 +4,7 @@ const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
 const moment = require('moment');
+const sequelize = require('sequelize');
 
 // 获取一个人所应该展示接收的动态
 router.get('/getActions', function*() {
@@ -113,5 +114,23 @@ router.get('/getActions', function*() {
     ],
   });
 
-  this.body = actions.map((action) => action.toJSON());
+  const memoriesToUpdate = [];
+  this.body = actions.map(function(action) {
+    if (action.Memory) {
+      memoriesToUpdate.push(action.Memory.id);
+    }
+
+    return action.toJSON();
+  });
+
+  //更新浏览量
+  yield models.Memory.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  }, {
+    where: {
+      id: {
+        $in: memoriesToUpdate,
+      },
+    },
+  });
 });

@@ -2,6 +2,7 @@
 
 const models = require('../../db').models;
 const utils = require('../../utils');
+const sequelize = require('sequelize');
 
 exports.show = function*() {
   this.verifyParams({
@@ -67,6 +68,11 @@ exports.show = function*() {
     return;
   }
 
+  //更新浏览量
+  yield memory.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  });
+
   this.body = memory.toJSON();
 };
 
@@ -114,7 +120,7 @@ exports.create = function*() {
   }));
 
   yield models.Album.update({
-    memoriesCount: album.memoriesCount + 1,
+    memoriesCount: sequelize.literal('memoriesCount + 1'),
   }, {
     where:{
       id: album.id,

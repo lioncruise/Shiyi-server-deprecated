@@ -14,6 +14,7 @@ let files = [
   require('./restful/likes'),
   require('./restful/reports'),
   require('./restful/feedbacks'),
+  require('./restful/dailies'),
 
   require('./account'),
   require('./actions'),
@@ -26,6 +27,7 @@ let files = [
   require('./qiniu'),
   require('./users'),
   require('./search'),
+  require('./discover'),
 ];
 
 for (let file of files) {
