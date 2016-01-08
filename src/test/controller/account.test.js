@@ -18,6 +18,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           phone: '15945990588',
           secCode: '1234',
+          system: 'ios',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -38,6 +39,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           phone: '15945990589',
           secCode: 123456,
+          system: 'ios',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -58,6 +60,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           phone: '159459905890',
           secCode: '123456',
+          system: 'ios',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -132,6 +135,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           phone: '13000000001',
           secCode: '1234',
+          system: 'ios',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
@@ -174,6 +178,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           phone: '13000000005',
           secCode: '1234',
+          system: 'ios',
         })
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
