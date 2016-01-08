@@ -11,14 +11,6 @@ module.exports = {
     dialect: 'mysql',
     username: 'shiyi_test',
     password: 'ZmcOfUy7r7sAtr7A',
-    pool: {
-      max: 100,
-      min: 0,
-      idle: 5000,
-      maxConnections: 100,
-      minConnections: 0,
-      maxIdleTime: 5000,
-    },
     logging: false,
   },
   redis: {

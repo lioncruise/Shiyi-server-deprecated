@@ -146,6 +146,7 @@ exports.destroy = function*() {
   });
 
   const memory = yield models.Memory.find({
+    paranoid: true,
     where: {
       id: this.params.id,
       UserId: this.session.user.id,
