@@ -14,3 +14,4 @@ require('./messages');
 require('./users');
 require('./rebuild');
 require('./search');
+require('./discover');

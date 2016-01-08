@@ -26,6 +26,7 @@ let files = [
   require('./qiniu'),
   require('./users'),
   require('./search'),
+  require('./discover'),
 ];
 
 for (let file of files) {
