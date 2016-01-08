@@ -14,6 +14,7 @@ let files = [
   require('./restful/likes'),
   require('./restful/reports'),
   require('./restful/feedbacks'),
+  require('./restful/dailies'),
 
   require('./account'),
   require('./actions'),

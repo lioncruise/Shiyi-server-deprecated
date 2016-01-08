@@ -13,7 +13,7 @@ const middlewaresArray = [middlewares.auth, router.routes()];
 const restfulControllerNames = [
   'users', 'albums', 'memories', 'pictures',
   'albumUserCollaborates', 'albumUserFollows', 'userUserFollows',
-  'comments', 'likes', 'messages', 'reports', 'feedbacks',
+  'comments', 'likes', 'messages', 'reports', 'feedbacks', 'dailies',
 ];
 
 for (const name of restfulControllerNames) {

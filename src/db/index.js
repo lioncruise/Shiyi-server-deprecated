@@ -11,7 +11,7 @@ const models = {};
 const modelNames = ['Action', 'Admin', 'Album', 'AlbumTag',
   'AlbumUserCollaborate', 'AlbumUserFollow', 'Comment', 'Feedback', 'Keyvalue',
   'Like', 'Memory', 'Message', 'Notification', 'Picture', 'Report',
-  'Story', 'Tag', 'User', 'UserUserFollow',
+  'Story', 'Tag', 'User', 'UserUserFollow', 'Daily',
 ];
 
 //定义每一个类型
@@ -183,6 +183,12 @@ function setAssociations() {
   //反馈与用户
   models.User.hasMany(models.Feedback);
   models.Feedback.belongsTo(models.User);
+
+  //日报与用户
+  models.Daily.belongsTo(models.User);
+
+  //日报与相册
+  models.Daily.belongsTo(models.Album);
 }
 
 //强制重建数据库
