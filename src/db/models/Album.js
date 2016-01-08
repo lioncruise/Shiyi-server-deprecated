@@ -56,6 +56,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    viewsCount: { //浏览量
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
     isPublic: {
       type: DataTypes.ENUM('private', 'shared', 'public'),
       defaultValue: 'shared',

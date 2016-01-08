@@ -79,7 +79,7 @@ let customConfig = {};
 try {
   if (process.env.NODE_ENV === 'production') {
     customConfig = require(path.join(__dirname, './production.js'));
-  } else if (process.env.NODE_ENV === 'production_test') {
+  } else if (process.env.NODE_ENV === 'production_test' || process.env.NODE_ENV === 'production_test_dev') {
     customConfig = require(path.join(__dirname, './production_test.js'));
   }
 } catch (err) {

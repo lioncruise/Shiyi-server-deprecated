@@ -24,6 +24,11 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: 0,
       allowNull: false,
     },
+    viewsCount: { //浏览量
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
   }, {
     charset: 'utf8mb4',
     paranoid: true,

@@ -66,7 +66,7 @@ app.use(staticCache({
 app.use(formidable());
 
 //显示参数
-if (config.debug) {
+if (process.env.NODE_ENV === 'production_test_dev') {
   app.use(middlewares.showBody());
 }
 
