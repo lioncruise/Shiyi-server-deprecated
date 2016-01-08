@@ -49,8 +49,6 @@ exports.showBody = function() {
     console.log(this.request.body);
     console.log('-------- this.query ----------------------------');
     console.log(this.query);
-    console.log('-------- this.header ----------------------------');
-    console.log(this.header);
     console.log('-------------- next -----------------------------');
     yield next;
     console.log('-------- this.response --------------------------');
