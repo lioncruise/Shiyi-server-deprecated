@@ -52,6 +52,15 @@ exports.show = function*() {
     });
   }
 
+  //更新浏览量
+  yield models.Memory.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  }, {
+    where: {
+      id: this.params.id,
+    },
+  });
+
   const memory = yield models.Memory.find({
     paranoid: true,
     where: {
@@ -67,11 +76,6 @@ exports.show = function*() {
     };
     return;
   }
-
-  //更新浏览量
-  yield memory.update({
-    viewsCount: sequelize.literal('viewsCount + 1'),
-  });
 
   this.body = memory.toJSON();
 };

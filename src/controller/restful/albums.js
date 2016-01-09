@@ -143,6 +143,15 @@ exports.show = function*() {
     });
   }
 
+  //更新浏览量
+  yield models.Album.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  }, {
+    where: {
+      id: this.params.id,
+    },
+  });
+
   const album = yield models.Album.find({
     paranoid: true,
     where: {
@@ -158,11 +167,6 @@ exports.show = function*() {
     };
     return;
   }
-
-  //更新浏览量
-  yield album.update({
-    viewsCount: sequelize.literal('viewsCount + 1'),
-  });
 
   this.body = exports.setAlbumTags(album.toJSON());
 
