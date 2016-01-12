@@ -77,6 +77,7 @@ exports.show = function*() {
     model: models.Tag,
   },
   ];
+  const order = [];
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
@@ -125,9 +126,8 @@ exports.show = function*() {
   if (this.query.isWithPictures === 'true') {
     include.push({
       model: models.Picture,
-      limit,
-      offset,
     });
+    order.push([models.Picture, 'id', 'DESC']);
   }
 
   if (this.query.isWithUser === 'true') {
@@ -158,6 +158,7 @@ exports.show = function*() {
       id: this.params.id,
     },
     include,
+    order,
   });
 
   if (!album) {
@@ -169,6 +170,20 @@ exports.show = function*() {
   }
 
   this.body = exports.setAlbumTags(album.toJSON());
+
+  if (this.query.isWithPictures === 'true') {
+    const pictures = [];
+    //先把一个相册的照片全部取出来，然后再手动根据limit和offset进行筛选
+    for (let i = offset; i < offset + limit; i++) {
+      if (!this.body.Pictures[i]) {
+        break;
+      }
+
+      pictures.push(this.body.Pictures[i]);
+    }
+
+    this.body.Pictures = pictures;
+  }
 
   if (this.query.isWithMemories === 'true') {
     this.body.Memories = memories.map((elm) => elm.toJSON());
