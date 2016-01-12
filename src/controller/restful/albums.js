@@ -172,17 +172,7 @@ exports.show = function*() {
   this.body = exports.setAlbumTags(album.toJSON());
 
   if (this.query.isWithPictures === 'true') {
-    const pictures = [];
-    //先把一个相册的照片全部取出来，然后再手动根据limit和offset进行筛选
-    for (let i = offset; i < offset + limit; i++) {
-      if (!this.body.Pictures[i]) {
-        break;
-      }
-
-      pictures.push(this.body.Pictures[i]);
-    }
-
-    this.body.Pictures = pictures;
+    this.body.Pictures = this.body.Pictures.slice(offset, offset + limit);
   }
 
   if (this.query.isWithMemories === 'true') {
