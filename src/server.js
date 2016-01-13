@@ -57,6 +57,7 @@ app.use(ipFilter({
 //静态资源缓存
 app.use(staticCache({
   dir: path.join(__dirname, '../static'),
+  prefix: '/static',
   maxAge: ms('1y'),
   buffer: true,
   gzip: false,
