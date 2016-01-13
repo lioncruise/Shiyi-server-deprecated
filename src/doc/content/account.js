@@ -58,7 +58,7 @@ module.exports = [{
     },
   ],
 }, {
-  fileName: 'POST changePassword',
+  fileName: 'POST recoverPassword',
   func: '用户登录忘记密码时修改',
   note: [
           '1.phone会进行正则检测  (^(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$  。',
@@ -69,7 +69,7 @@ module.exports = [{
   requests: [
     {
       method: 'post',
-      url: '/changePassword',
+      url: '/recoverPassword',
       data: {
         phone: '13000000007',
         newPassword: utility.md5('123456'),
@@ -123,6 +123,7 @@ module.exports = [{
           '1.增量更新，可以只添加需要更改的项。',
           '2.可以更改手机号。',
           '3.可以更新个推的推送CID。CID的更新请在登陆和检测到个推CID改变时更新。',
+          '4.update用于更新个人信息和密码，当更新项包括password时，必须添加一个字段oldPassword，如果没有旧密码或者旧密码错误，都无法正常更新；如果不更新密码，则可以不带oldPassword字段。',
           ],
   requests: [
     {
