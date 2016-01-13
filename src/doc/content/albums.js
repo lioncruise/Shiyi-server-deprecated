@@ -2,7 +2,7 @@
 
 module.exports = [{
   fileName: 'GET getOwnAlbums',
-  func: '获取一个人所创建的相册',
+  func: '获取一个人所创建的相册（包括公开、不公开）',
   note: [
           '1.可以带着userId=2的参数，指定某一个特定的用户。',
           '2.可以加isWithRecentPicture=true参数，获得最近一张图片的信息，其中里面包含着最后一张图片主人的信息',
@@ -18,7 +18,7 @@ module.exports = [{
   ],
 }, {
   fileName: 'GET getRelatedAlbums',
-  func: '获取一个人所加入的相册',
+  func: '获取一个人所加入的相册（别人创建的，他加入的）',
   note: [
           '1.可以带着userId=2的参数，指定某一个特定的用户。',
           '2.可以加isWithRecentPicture=true参数，获得最近一张图片的信息，其中里面包含着最后一张图片主人的信息',
@@ -49,10 +49,26 @@ module.exports = [{
     },
   ],
 }, {
-  fileName: 'GET getPublicAlbums',
-  func: '获取一个人所创建的公开的相册',
+  fileName: 'GET getOwnAndRelatedAlbums',
+  func: '获取首页展示的相册，自己创建和加入的相册（他所创建的和他所加入的），用于“首页”',
   note: [
-          '1.必须带着userId=2的参数，指定某一个特定的用户。',
+          '1.可以带着userId=2的参数，指定某一个特定的用户。',
+          '2.可以加isWithRecentPicture=true参数，获得最近一张图片的信息，其中里面包含着最后一张图片主人的信息',
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/getOwnAndRelatedAlbums?userId=1',
+    }, {
+      method: 'get',
+      url: '/getOwnAndRelatedAlbums?userId=1&isWithRecentPicture=true',
+    },
+  ],
+}, {
+  fileName: 'GET getPublicAlbums',
+  func: '获取一个人所创建的公开的相册（他所创建的，公开的相册），用于“个人信息”界面',
+  note: [
+          '1.可以带着userId=2的参数，指定某一个特定的用户。',
           ],
   requests: [
     {

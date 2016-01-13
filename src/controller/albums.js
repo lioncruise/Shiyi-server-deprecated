@@ -24,18 +24,12 @@ router.get('/getQRCode', function*() {
 
 //获取自己创建的公开相册
 router.get('/getPublicAlbums', function*() {
-  this.verifyParams({
-    userId: {
-      type: 'id',
-      required: true,
-      allowEmpty: false,
-    },
-  }, Object.assign(this.request.body, this.query));
+  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
 
   const albums = yield models.Album.findAll({
     paranoid: true,
     where: {
-      UserId: this.query.userId,
+      UserId,
       isPublic: 'public',
     },
   });
@@ -63,6 +57,48 @@ router.get('/getOwnAlbums', function*() {
     paranoid: true,
     where: {
       UserId,
+    },
+    include,
+  });
+
+  this.body = albums.map((album) => album.toJSON());
+});
+
+//获取首页展示的相册，自己创建和加入的相册
+router.get('/getOwnAndRelatedAlbums', function*() {
+  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
+
+  const include = [];
+  if (this.query.isWithRecentPicture === 'true') {
+    include.push({
+      model: models.Picture,
+      as: 'RecentPicture',
+      include: [{
+        model: models.User,
+      },
+      ],
+    });
+  }
+
+  const albumIds = (yield models.AlbumUserCollaborate.findAll({
+    where: {
+      UserId,
+    },
+  })).map((elm) => elm.AlbumId);
+
+  const albums = yield models.Album.findAll({
+    paranoid: true,
+    where: {
+      $or: [
+        {
+          UserId,
+        },
+        {
+          id: {
+            $in: albumIds,
+          },
+        },
+      ],
     },
     include,
   });
