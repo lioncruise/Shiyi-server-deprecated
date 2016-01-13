@@ -61,7 +61,7 @@ router.get('/getAllUnreadMessagesWithOneUser', function*() {
       TargetUserId: this.session.user.id,
     },
     order: [
-      ['createdAt', 'DESC'],
+      ['createdAt'],
     ],
   });
 
