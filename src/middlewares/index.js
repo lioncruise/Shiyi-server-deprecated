@@ -7,10 +7,37 @@ const config = require('../config');
 const redisToken = require('../utils').redisToken;
 
 const urlsWithoutSession = [
-  '/', '/test', '/getSeccode', '/changePassword',
-  '/register', '/login', '/getValue', '/resetCache',
-  '/getQiniuUptoken', '/rebuildDatabaseRedundancy',
-  '/verifyPhone', '/pcLogin', '/getUserIdByKey',
+  /\//,
+  /\/test/,
+  /\/getSeccode/,
+  /\/changePassword/,
+  /\/register/,
+  /\/login/,
+  /\/getValue/,
+  /\/resetCache/,
+  /\/getQiniuUptoken/,
+  /\/rebuildDatabaseRedundancy/,
+  /\/verifyPhone/,
+  /\/pcLogin/,
+  /\/getUserIdByKey/,
+
+  // 公开信息权限
+  /\/albums\/\d+/,
+  /\/memories\/\d+/,
+  /\/pictures\/\d+/,
+  /\/users\/\d+/,
+  /\/reports\/\d+/,
+  /\searchAlbums/,
+  /\searchUsers/,
+  /\/albumRanklist/,
+  /\/dailies/,
+  /\/getAlbumUserRelation/,
+  /\getUserUserRelation/,
+  /\/getFans/,
+  /\getFollowAlbums/,
+  /\getFollowers/,
+  /\getPublicAlbums/,
+  /\getQRCode/,
 ];
 
 exports.addStatusCode = function() {
@@ -61,9 +88,11 @@ exports.showBody = function() {
 exports.auth = function*(next) {
   debug('It is auth middleware');
 
-  if (urlsWithoutSession.indexOf(this.path) >= 0) {
-    yield next;
-    return;
+  for (const reg of urlsWithoutSession) {
+    if (reg.test(this.path)) {
+      yield next;
+      return;
+    }
   }
 
   this.session = {};
