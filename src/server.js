@@ -76,6 +76,9 @@ app.use(middlewares.addStatusCode());
 //参数验证
 app.use(parameter(app));
 
+//添加getUserIdByQueryAndSession方法
+app.use(middlewares.addFunctionGetUserIdByQueryAndSession(app));
+
 //路由
 app.use(router.serverRouter);
 require('./controller/index.js');

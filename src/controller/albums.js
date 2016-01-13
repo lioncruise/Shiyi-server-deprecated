@@ -24,7 +24,10 @@ router.get('/getQRCode', function*() {
 
 //获取自己创建的公开相册
 router.get('/getPublicAlbums', function*() {
-  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
+  const UserId = this.getUserIdByQueryAndSession();
+  if (!UserId) {
+    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+  }
 
   const albums = yield models.Album.findAll({
     paranoid: true,
@@ -39,7 +42,10 @@ router.get('/getPublicAlbums', function*() {
 
 //获取自己创建的相册
 router.get('/getOwnAlbums', function*() {
-  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
+  const UserId = this.getUserIdByQueryAndSession();
+  if (!UserId) {
+    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+  }
 
   const include = [];
   if (this.query.isWithRecentPicture === 'true') {
@@ -66,7 +72,10 @@ router.get('/getOwnAlbums', function*() {
 
 //获取首页展示的相册，自己创建和加入的相册
 router.get('/getOwnAndRelatedAlbums', function*() {
-  const UserId = Number.parseInt(this.query.userId) ? Number.parseInt(this.query.userId) : this.session.user.id;
+  const UserId = this.getUserIdByQueryAndSession();
+  if (!UserId) {
+    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+  }
 
   const include = [];
   if (this.query.isWithRecentPicture === 'true') {
@@ -108,7 +117,11 @@ router.get('/getOwnAndRelatedAlbums', function*() {
 
 const getGetAlbumsControllerFunction =  function(modelName) {
   return function*() {
-    const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+    const UserId = this.getUserIdByQueryAndSession();
+    if (!UserId) {
+      return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+    }
+
     const albumIds = (yield models[modelName].findAll({
       where: {
         UserId,

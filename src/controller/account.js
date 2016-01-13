@@ -130,7 +130,7 @@ router.post('/register', function*() {
 });
 
 //忘记密码
-router.post('/changePassword', function*() {
+router.post('/recoverPassword', function*() {
   this.verifyParams({
     phone: modelUtils.phoneRegExp,
     newPassword: {
@@ -268,6 +268,11 @@ router.put('/update', function*() {
       required: false,
       allowEmpty: false,
     },
+    oldPassword: {
+      type: 'password',
+      required: false,
+      allowEmpty: false,
+    },
     gender: {
       type: 'enum',
       values: ['M', 'F'],
@@ -299,12 +304,40 @@ router.put('/update', function*() {
     },
   });
 
-  const user = yield models.User.find({
-    paranoid: true,
-    where: {
-      id: this.session.user.id,
-    },
-  });
+  let user;
+  let flag = true;
+  if (this.request.body.password) {
+    flag = !!this.request.body.oldPassword;
+    if (flag) {
+      user = yield models.User.find({
+        paranoid: true,
+        where: {
+          id: this.session.user.id,
+          password: this.request.body.oldPassword,
+        },
+      });
+
+      if (!user) {
+        flag = false;
+      }
+    }
+  } else {
+    user = yield models.User.find({
+      paranoid: true,
+      where: {
+        id: this.session.user.id,
+      },
+    });
+  }
+
+  if (!flag) {
+    this.body = {
+      statusCode: '422',
+      message: '原密码错误或用户不存在',
+    };
+    return;
+  }
+
   yield user.update(this.request.body);
   this.body = user.toJSON();
 });

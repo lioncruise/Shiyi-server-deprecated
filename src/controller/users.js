@@ -6,7 +6,10 @@ const utils = require('../utils');
 
 const getGetUsersControllerFunction = function(modelName, type) {
   return function*() {
-    const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+    const UserId = this.getUserIdByQueryAndSession();
+    if (!UserId) {
+      return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+    }
 
     const fansResult = yield models[modelName].findAll({
       where: {
@@ -59,7 +62,11 @@ router.get('/getUserUserRelation', function*() {
     targetUserId: 'id',
   }, this.query);
 
-  const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+  const UserId = this.getUserIdByQueryAndSession();
+  if (!UserId) {
+    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+  }
+
   const TargetUserId  = parseInt(this.query.targetUserId);
 
   const AFollowB = yield models.UserUserFollow.find({
@@ -90,7 +97,11 @@ router.get('/getAlbumUserRelation', function*() {
     albumId: 'id',
   }, this.query);
 
-  const UserId = parseInt(this.query.userId) ? parseInt(this.query.userId) : this.session.user.id;
+  const UserId = this.getUserIdByQueryAndSession();
+  if (!UserId) {
+    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+  }
+
   const AlbumId  = parseInt(this.query.albumId);
 
   const album = yield models.Album.find({

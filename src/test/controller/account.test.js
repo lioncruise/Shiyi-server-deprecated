@@ -5,6 +5,7 @@ const http = require('http');
 const request = require('supertest');
 const mm = require('mm');
 const should = require('should');
+const utility = require('utility');
 
 describe('src/test/controllers/account.test.js', function() {
   before(server.listen.bind(server, 0));
@@ -171,7 +172,7 @@ describe('src/test/controllers/account.test.js', function() {
     });
   });
 
-  describe('POST /changePassword', function() {
+  describe('POST /recoverPassword', function() {
     it('should change password OK', function(done) {
       request(server)
         .post('/verifyPhone')
@@ -188,7 +189,7 @@ describe('src/test/controllers/account.test.js', function() {
           }
 
           request(server)
-          .post('/changePassword')
+          .post('/recoverPassword')
           .send({
             phone: '13000000005',
             newPassword: '7777777',
@@ -209,7 +210,7 @@ describe('src/test/controllers/account.test.js', function() {
 
     it('should change password 404', function(done) {
         request(server)
-        .post('/changePassword')
+        .post('/recoverPassword')
         .send({
           phone: '13000000777',
           newPassword: '7777777',
@@ -229,7 +230,7 @@ describe('src/test/controllers/account.test.js', function() {
 
     it('should change password 409', function(done) {
         request(server)
-        .post('/changePassword')
+        .post('/recoverPassword')
         .send({
           phone: '13000000007',
           newPassword: '666666',
@@ -249,7 +250,7 @@ describe('src/test/controllers/account.test.js', function() {
 
     it('should change password 422', function(done) {
         request(server)
-        .post('/changePassword')
+        .post('/recoverPassword')
         .send({
           phone: '13000000007',
         })
@@ -421,6 +422,7 @@ describe('src/test/controllers/account.test.js', function() {
         .send({
           nickname: 'Jack',
           password: '123456789',
+          oldPassword: utility.md5('13000000001'),
           gender: 'F',
           motto: '明天好运',
           avatarStoreKey: 'xixixi',

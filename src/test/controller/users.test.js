@@ -99,23 +99,6 @@ describe('src/test/controllers/users.test.js', function() {
         });
     });
 
-    it('should get fans with limit and offset OK', function(done) {
-      request(server)
-        .get('/getFans?offset=1&limit=2')
-        .expect('Content-type', 'application/json; charset=utf-8')
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            return done(err);
-          }
-
-          res.body.statusCode.should.be.equal(200);
-          res.body.data.length.should.be.above(0);
-          res.body.data[0].id.should.be.a.Number();
-          done();
-        });
-    });
-
     it('should get fans with user id OK', function(done) {
       request(server)
         .get('/getFans?userId=1')
@@ -151,10 +134,10 @@ describe('src/test/controllers/users.test.js', function() {
     });
   });
 
-  describe('GET /getOneUserRelation', function() {
+  describe('GET /getUserUserRelation', function() {
     it('should get one user with current user relation OK', function(done) {
       request(server)
-        .get('/getOneUserRelation?userId=1&targetUserId=2')
+        .get('/getUserUserRelation?userId=1&targetUserId=2')
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {
@@ -170,7 +153,7 @@ describe('src/test/controllers/users.test.js', function() {
 
     it('should get one user with current user relation 422', function(done) {
       request(server)
-        .get('/getOneUserRelation?userId=1')
+        .get('/getUserUserRelation?userId=1')
         .expect('Content-type', 'application/json; charset=utf-8')
         .expect(200)
         .end(function(err, res) {

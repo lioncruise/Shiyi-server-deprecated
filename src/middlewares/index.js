@@ -7,37 +7,37 @@ const config = require('../config');
 const redisToken = require('../utils').redisToken;
 
 const urlsWithoutSession = [
-  /\//,
-  /\/test/,
-  /\/getSeccode/,
-  /\/changePassword/,
-  /\/register/,
-  /\/login/,
-  /\/getValue/,
-  /\/resetCache/,
-  /\/getQiniuUptoken/,
-  /\/rebuildDatabaseRedundancy/,
-  /\/verifyPhone/,
-  /\/pcLogin/,
-  /\/getUserIdByKey/,
+  /^\/$/,
+  /^\/test$/,
+  /^\/getSeccode$/,
+  /^\/changePassword$/,
+  /^\/register$/,
+  /^\/login$/,
+  /^\/getValue$/,
+  /^\/resetCache$/,
+  /^\/getQiniuUptoken$/,
+  /^\/rebuildDatabaseRedundancy$/,
+  /^\/verifyPhone$/,
+  /^\/pcLogin$/,
+  /^\/getUserIdByKey$/,
 
   // 公开信息权限
-  /\/albums\/\d+/,
-  /\/memories\/\d+/,
-  /\/pictures\/\d+/,
-  /\/users\/\d+/,
-  /\/reports\/\d+/,
-  /\searchAlbums/,
-  /\searchUsers/,
-  /\/albumRanklist/,
-  /\/dailies/,
-  /\/getAlbumUserRelation/,
-  /\getUserUserRelation/,
-  /\/getFans/,
-  /\getFollowAlbums/,
-  /\getFollowers/,
-  /\getPublicAlbums/,
-  /\getQRCode/,
+  /^\/albums\/\d+$/,
+  /^\/memories\/\d+$/,
+  /^\/pictures\/\d+$/,
+  /^\/users\/\d+$/,
+  /^\/reports\/\d+$/,
+  /^\searchAlbums$/,
+  /^\searchUsers$/,
+  /^\/albumRanklist$/,
+  /^\/dailies$/,
+  /^\/getAlbumUserRelation$/,
+  /^\getUserUserRelation$/,
+  /^\/getFans$/,
+  /^\/getFollowAlbums$/,
+  /^\/getFollowers$/,
+  /^\/getPublicAlbums$/,
+  /^\/getQRCode$/,
 ];
 
 exports.addStatusCode = function() {
@@ -84,55 +84,88 @@ exports.showBody = function() {
   };
 };
 
-//用户登录token验证
-exports.auth = function*(next) {
-  debug('It is auth middleware');
-
+function isInUrlsWithoutSession(str) {
   for (const reg of urlsWithoutSession) {
-    if (reg.test(this.path)) {
-      yield next;
-      return;
+    if (str.match(reg)) {
+      return true;
     }
   }
 
+  return false;
+}
+
+//用户登录token验证
+exports.auth = function*(next) {
+  debug('It is auth middleware');
   this.session = {};
 
+  //PC端登录：用户模拟
   if (this.headers.userfrompc && Number.parseInt(this.headers.userfrompc)) {
     this.session = {
       user: {
         id: Number.parseInt(this.headers.userfrompc),
       },
     };
-  } else {
-    if (!config.debug || this.query.testEnterVerify) {
-      const token = this.headers.token || this.query.token;
-      try {
-        this.session = jwt.verify(token, config.tokenKey);
+  }
 
-        // 验证登录唯一性
-        if (!(yield redisToken.verify(this.session.user.id, token))) {
+  //非debug模式
+  if (!config.debug || this.query.testEnterVerify) {
+    const token = this.headers.token || this.query.token;
+    try {
+      this.session = jwt.verify(token, config.tokenKey);
+
+      // 验证登录唯一性
+      if (!(yield redisToken.verify(this.session.user.id, token))) {
+        if (!isInUrlsWithoutSession(this.path)) {
           this.body = {
             statusCode: 401,
             message: '已在其他客户端登录，请重新登录',
           };
           return;
         }
-      } catch (e) {
+      }
+    } catch (e) {
+      if (!isInUrlsWithoutSession(this.path)) {
         this.body = {
           statusCode: 401,
           message: '请登录后访问',
         };
         return;
       }
-    } else {
-      //test模式进行用户模拟
-      this.session = {
-        user: {
-          id: 1,
-        },
-      };
     }
+  } else {
+    //debug模式下，test时进行用户模拟
+    this.session = {
+      user: {
+        id: 1,
+      },
+    };
   }
 
   yield next;
+};
+
+//添加getUserIdByQueryAndSession方法
+exports.addFunctionGetUserIdByQueryAndSession = function(app) {
+  app.context.getUserIdByQueryAndSession = function() {
+    let UserId = null;
+    if (Number.parseInt(this.query.userId)) {
+      UserId = Number.parseInt(this.query.userId);
+    } else {
+      if (this.session && this.session.user && this.session.user.id) {
+        UserId = this.session.user.id;
+      } else {
+        this.body = {
+          statusCode: 422,
+          message: '请登录后访问',
+        };
+      }
+    }
+
+    return UserId;
+  };
+
+  return function*(next) {
+    yield* next;
+  };
 };
