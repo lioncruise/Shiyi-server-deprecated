@@ -10,8 +10,8 @@ dailies.push({
   title: '1月1日 日报',
   description: '1月1日 日报',
   url: 'http://www.baidu.com',
-  AlbumId: 2,
-  UserId: 1,
+  AlbumId: 5,
+  UserId: 2,
 });
 dailies.push({
   title: '1月2日 日报',
