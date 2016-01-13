@@ -21,7 +21,7 @@ exports.getCreateFuction = function(modelName) {
       [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['followAlbum', 'AlbumId', 'User', 'followAlbumsCount', 'Album', 'fansCount'];
       break;
     case 'UserUserFollow':
-      [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['followUser', 'TargetUserId', 'User', 'followAlbumsCount', 'User', 'fansCount'];
+      [actionType, targetFieldName, addSubject, addSubjectAddFieldName, addObject, addObjectAddFieldName] = ['followUser', 'TargetUserId', 'User', 'followersCount', 'User', 'fansCount'];
       break;
   }
 
