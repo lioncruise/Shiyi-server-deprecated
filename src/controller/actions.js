@@ -29,6 +29,16 @@ router.get('/getActions', function*() {
       required: false,
       allowEmpty: false,
     },
+    firstActionId: {
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
+    firstActionCreatedTimestamp: {  // 这个参数应为Unix时间戳
+      type: 'int',
+      required: false,
+      allowEmpty: false,
+    },
   });
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
@@ -42,6 +52,18 @@ router.get('/getActions', function*() {
     const lastAction = yield models.Action.findById(Number.parseInt(this.query.lastActionId));
     if (lastAction && lastAction.createdAt > lastActionCreatedAt) {
       lastActionCreatedAt = lastAction.createdAt;
+    }
+  }
+
+  // 通过“最新创建时间”或者“最新一条的id”构造最后动态的时间
+  let firstActionCreatedAt = this.query.firstActionCreatedTimestamp ?
+                              new Date(Number.parseInt(this.query.firstActionCreatedTimestamp) * 1000)
+                              :
+                              new Date();
+  if (this.query.hasOwnProperty('firstActionId')) {
+    const firstAction = yield models.Action.findById(Number.parseInt(this.query.firstActionId));
+    if (firstAction && firstAction.createdAt < firstActionCreatedAt) {
+      firstActionCreatedAt = firstAction.createdAt;
     }
   }
 
@@ -79,6 +101,7 @@ router.get('/getActions', function*() {
     paranoid: true,
     where: {
       createdAt:{
+        $lt: firstActionCreatedAt,
         $gt: lastActionCreatedAt,
       },
       $or:[
