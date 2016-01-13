@@ -129,8 +129,8 @@ module.exports = [{
       method: 'put',
       url: '/update',
       data: {
-        phone: '13000000071',
         nickname: '小王',
+        oldPassword: utility.md5('13000000001'),
         password: utility.md5('1234567'),
         gender: 'F',
         birthday: '1990-10-11',

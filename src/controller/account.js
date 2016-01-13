@@ -247,7 +247,7 @@ router.get('/logout', function*() {
 });
 
 //更新个人信息
-//这个接口不能更新phone
+//这个接口可以更新phone
 router.put('/update', function*() {
   this.verifyParams({
     phone: {
