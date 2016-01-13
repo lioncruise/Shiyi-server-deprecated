@@ -122,8 +122,8 @@ router.post('/register', function*() {
   //新建用户后建立用户默认相册
   yield models.Album.create({
     UserId: user.id,
-    title: '默认相册',
-    description: '默认相册',
+    title: this.request.body.nickname + '的默认相册',
+    description: this.request.body.nickname + '的默认相册',
     isPublic: 'shared',
     allowComment: 'collaborators',
   });
