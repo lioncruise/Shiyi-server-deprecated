@@ -77,7 +77,7 @@ exports.show = function*() {
     model: models.Tag,
   },
   ];
-  const order = [];
+
   const limit = (this.query.limit && Number.parseInt(this.query.limit) <= 50) ? Number.parseInt(this.query.limit) : 50;
   const offset = this.query.offset ? Number.parseInt(this.query.offset) : 0;
 
@@ -123,11 +123,19 @@ exports.show = function*() {
     });
   }
 
+  let pictures = [];
   if (this.query.isWithPictures === 'true') {
-    include.push({
-      model: models.Picture,
+    pictures = yield models.Picture.findAll({
+      paranoid: true,
+      where: {
+        AlbumId: this.params.id,
+      },
+      order: [
+        ['createdAt', 'DESC'],
+      ],
+      limit,
+      offset,
     });
-    order.push([models.Picture, 'id', 'DESC']);
   }
 
   if (this.query.isWithUser === 'true') {
@@ -158,7 +166,6 @@ exports.show = function*() {
       id: this.params.id,
     },
     include,
-    order,
   });
 
   if (!album) {
@@ -172,7 +179,7 @@ exports.show = function*() {
   this.body = exports.setAlbumTags(album.toJSON());
 
   if (this.query.isWithPictures === 'true') {
-    this.body.Pictures = this.body.Pictures.slice(offset, offset + limit);
+    this.body.Pictures = pictures.map((elm) => elm.toJSON());
   }
 
   if (this.query.isWithMemories === 'true') {
