@@ -365,7 +365,7 @@ exports.update = function*() {
     return;
   }
 
-  const originIsPublic = String(album.isPublic);
+  const originIsPublic = album.isPublic;
 
   album = yield album.update(this.request.body);
 
@@ -374,8 +374,8 @@ exports.update = function*() {
   this.body = album.toJSON();
 
   //创建相关action
-  if (originIsPublic !== 'public' && album.isPublic === 'public') {
-    utils.models.createReletedAction({
+  if (originIsPublic !== 'public' && this.body.isPublic === 'public') {
+    yield utils.models.createReletedAction({
       type: 'openAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
