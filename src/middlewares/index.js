@@ -10,7 +10,7 @@ const urlsWithoutSession = [
   /^\/$/,
   /^\/test$/,
   /^\/getSeccode$/,
-  /^\/changePassword$/,
+  /^\/recoverPassword$/,
   /^\/register$/,
   /^\/login$/,
   /^\/getValue$/,
