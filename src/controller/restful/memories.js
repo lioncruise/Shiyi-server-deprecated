@@ -22,6 +22,11 @@ exports.show = function*() {
       required: false,
       allowEmpty: false,
     },
+    isWithUser: {
+      type: 'bool',
+      required: false,
+      allowEmpty: false,
+    },
   });
 
   const include = [];
@@ -49,6 +54,12 @@ exports.show = function*() {
         model: models.User,
       },
       ],
+    });
+  }
+
+  if (this.query.isWithUser === 'true') {
+    include.push({
+      model: models.User,
     });
   }
 

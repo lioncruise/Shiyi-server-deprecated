@@ -7,7 +7,7 @@ module.exports = [{
           '1.可加 isWithPictures=true 参数，在返回内容中添加 记忆中的图片 内容。',
           '2.可加 isWithComments=true 参数，在返回内容中添加 记忆评论 内容。（附带每条评论的用户信息）',
           '3.可加 isWithLikes=true 参数，在返回内容中添加 记忆点赞 内容。（附带每条点赞的用户信息）',
-          '4.可加 isWithFans=true 参数，在返回内容中添加 相册的关注者（关注相册的人）的信息 内容。',
+          '4.可加 isWithUser=true 参数，在返回内容中添加 记忆创建人 的信息。',
           '5.可添加offset和limit控制Memories、Pictures的返回，offset默认为0，limit最大为50。',
           '6.isWithMemories和isWithPictures不要同时添加，涉及到大量查表操作。',
           ],
@@ -18,6 +18,9 @@ module.exports = [{
     }, {
       method: 'get',
       url: '/memories/1?isWithPictures=true',
+    }, {
+      method: 'get',
+      url: '/memories/1?isWithUser=true',
     }, {
       method: 'get',
       url: '/memories/1?isWithComments=true',
