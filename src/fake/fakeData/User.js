@@ -12,14 +12,14 @@ const devices = ['ios', 'android'];
 for (let i = 1; i <= 20; i++) {
   const phone = `130000000${ i < 10 ? '0' + i : i}`;
   const gender = chance.character({ pool: 'FM' });
-  const device = devices[chance.integer({min: 0, max: 1})];
+  const device = devices[chance.integer({ min: 0, max: 1 })];
   users.push({
     phone,
     nickname: chance.name({ gender: gender === 'M' ? 'male' : 'female' }),
     password: utility.md5(phone),
     gender,
     birthday: moment(chance.birthday({ year: chance.year({ min: 1980, max: 2000 }) })).format('YYYY-MM-DD'),
-    hometown: hometowns[chance.integer({min: 0, max: 2})],
+    hometown: hometowns[chance.integer({ min: 0, max: 2 })],
     motto: chance.sentence({ words: 5 }),
     ip: chance.ip(),
     device,

@@ -15,10 +15,10 @@ server.listen(config.port);
 
 const host = `http://localhost:${config.port}`;
 
-const eachFile = function*({fileName, func, note, requests}) {
+const eachFile = function*({ fileName, func, note, requests }) {
   let fileString = `接口功能： ${func}\n\n备注：\n${note ? note.join('\n') : ''}\n\n`;
 
-  for (let {method, url, data, info} of requests) {
+  for (let { method, url, data, info } of requests) {
     const result = yield urllib.requestThunk(host + url, {
       method,
       data,

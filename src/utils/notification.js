@@ -20,7 +20,7 @@ const SingleMessage = require('../../lib/getui/message/SingleMessage');
 const AppMessage = require('../../lib/getui/message/AppMessage');
 const ListMessage = require('../../lib/getui/message/ListMessage');
 
-const {host:HOST, appId:APPID, appKey:APPKEY, masterSecret:MASTERSECRET, logo:LOGO } = config.getui;
+const { host:HOST, appId:APPID, appKey:APPKEY, masterSecret:MASTERSECRET, logo:LOGO } = config.getui;
 let gt = null;
 
 exports.notificationInit = function() {
@@ -87,7 +87,7 @@ const sendNotificationToAppCb = function(title, text, cb) {
 
 const sendNotificationToSingleCb = function(title, text, cid, cb) {
   let message = constructMessage(title, text, SingleMessage);
-  let target = new Target({appId: APPID, clientId: cid });
+  let target = new Target({ appId: APPID, clientId: cid });
   gt.connect(function() {
     gt.pushMessageToSingle(message, target, function(err, res) {
       if (err !== null && err.exception !== null && err.exception instanceof  RequestError) {
@@ -104,7 +104,7 @@ const sendNotificationToListCb = function(title, text, cidList, cb) {
   let taskGroupName = null;
   let message = constructMessage(title, text, ListMessage);
   let targetList = cidList.map(function(cid) {
-    return new Target({appId: APPID, clientId:cid });
+    return new Target({ appId: APPID, clientId:cid });
   });
 
   gt.getContentId(message, taskGroupName, function(err, res) {

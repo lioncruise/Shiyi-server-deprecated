@@ -8,7 +8,7 @@ function sortFun(a, b) {
   return (a.createdTimestamp === b.createdTimestamp ? (a.id - b.id) : (a.createdTimestamp - b.createdTimestamp));
 }
 
-exports.setAlbumTags = function(album = { Tags: []}) {
+exports.setAlbumTags = function(album = { Tags: [] }) {
   album.tags = album.Tags.map((tag) => tag.name).join(',');
   delete album.Tags;
   return album;
