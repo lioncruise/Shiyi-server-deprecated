@@ -6,7 +6,7 @@ module.exports = [{
   note: [
           '1.可以带着userId=2的参数，指定某一个特定的用户。',
           '2.每个user中包含字段isFollowEachOther，代表用户和发起人是不是互相关注的关系。',
-          '3.可以带着withCollaborateRelationToTargetAlbumId=1字段，返回的user中会添加isInTargetAlbum=true或false字段。代表用户是否是这个相册的维护者。',
+          '3.可以带着albumId=1字段，返回的user中会添加isInThisAlbum=true或false字段。代表用户是否是这个相册的维护者。',
           ],
   requests: [
     {
@@ -15,7 +15,7 @@ module.exports = [{
     },
     {
       method: 'get',
-      url: '/getFollowers?userId=1&withCollaborateRelationToTargetAlbumId=1',
+      url: '/getFollowers?userId=1&albumId=1',
     },
   ],
 }, {

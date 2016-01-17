@@ -7,7 +7,7 @@ const utils = require('../utils');
 const getGetUsersControllerFunction = function(modelName, type) {
   return function*() {
     this.verifyParams({
-      withCollaborateRelationToTargetAlbumId: {
+      albumId: {
         type: 'id',
         required: false,
         allowEmpty: false,
@@ -51,26 +51,28 @@ const getGetUsersControllerFunction = function(modelName, type) {
       return user;
     });
 
-    if (this.query.withCollaborateRelationToTargetAlbumId) {
+    if (this.query.albumId) {
       const collaboratesResult = yield models.AlbumUserCollaborate.findAll({
         where: {
-          AlbumId: this.query.withCollaborateRelationToTargetAlbumId,
+          AlbumId: this.query.albumId,
           UserId: targetUserIds,
         },
       });
 
       const collaboratorIds = collaboratesResult.map((elm) => elm.UserId);
       this.body.forEach(function(elm) {
-        elm.isInTargetAlbum = collaboratorIds.indexOf(elm.id) > -1;
+        elm.isInThisAlbum = collaboratorIds.indexOf(elm.id) > -1;
       });
     }
   };
 };
 
 //获取一个用户的关注者
+router.get('/getFollowersToUser', getGetUsersControllerFunction('UserUserFollow', 'followers'));
 router.get('/getFollowers', getGetUsersControllerFunction('UserUserFollow', 'followers'));
 
 //获取一个用户的粉丝
+router.get('/getFansToUser', getGetUsersControllerFunction('UserUserFollow', 'fans'));
 router.get('/getFans', getGetUsersControllerFunction('UserUserFollow', 'fans'));
 
 //获取用户和用户的关系
