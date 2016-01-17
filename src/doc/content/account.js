@@ -58,6 +58,21 @@ module.exports = [{
     },
   ],
 }, {
+  fileName: 'GET isExistingUser',
+  func: '按手机号查找用户是否存在',
+  note: [
+          ],
+  requests: [
+    {
+      method: 'get',
+      url: '/isExistingUser?phone=13000000002',
+    },
+    {
+      method: 'get',
+      url: '/isExistingUser?phone=15945990000',
+    },
+  ],
+}, {
   fileName: 'POST recoverPassword',
   func: '用户登录忘记密码时修改',
   note: [

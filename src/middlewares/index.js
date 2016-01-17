@@ -45,7 +45,7 @@ exports.addStatusCode = function() {
     yield next;
     debug('It is addStatusCode middleware');
     this.status = 200;
-    if (this.body) {
+    if (this.body !== null && this.body !== undefined) {
       if (this.body.message && this.body.message === 'Validation Failed') {
         //如Validation Failed，修改status为200，添加422状态码
         this.body.statusCode = 422;

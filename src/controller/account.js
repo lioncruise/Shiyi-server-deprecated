@@ -218,6 +218,21 @@ router.post('/login', function*() {
   redisToken.save(user.id, this.body.token);
 });
 
+//按手机号查找用户是否存在
+router.get('/isExistingUser', function*() {
+  this.verifyParams({
+    phone: modelUtils.phoneRegExp,
+  }, this.query);
+
+  const result = yield models.User.count({
+    where: {
+      phone: this.query.phone,
+    },
+  });
+
+  this.body = (result > 0);
+});
+
 //PC端扫码登录
 router.post('/pcLogin', function*() {
   const key = this.query.key;
