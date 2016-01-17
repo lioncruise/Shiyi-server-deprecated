@@ -121,6 +121,10 @@ router.get('/getActions', function*() {
     },
     include: [{
         model: models.Memory,
+        include: [{
+          model: models.Picture,
+        },
+        ],
       }, {
         model: models.Album,
       }, {
