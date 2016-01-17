@@ -6,6 +6,14 @@ const utils = require('../utils');
 
 const getGetUsersControllerFunction = function(modelName, type) {
   return function*() {
+    this.verifyParams({
+      withCollaborateRelationToTargetAlbumId: {
+        type: 'id',
+        required: false,
+        allowEmpty: false,
+      },
+    }, this.query);
+
     const UserId = this.getUserIdByQueryAndSession();
     if (!UserId) {
       return; //已在getUserIdByQueryAndSession方法中添加this.body返回
@@ -42,6 +50,20 @@ const getGetUsersControllerFunction = function(modelName, type) {
       user.isFollowEachOther = sourceUserIds.indexOf(user.id) > -1;
       return user;
     });
+
+    if (this.query.withCollaborateRelationToTargetAlbumId) {
+      const collaboratesResult = yield models.AlbumUserCollaborate.findAll({
+        where: {
+          AlbumId: this.query.withCollaborateRelationToTargetAlbumId,
+          UserId: targetUserIds,
+        },
+      });
+
+      const collaboratorIds = collaboratesResult.map((elm) => elm.UserId);
+      this.body.forEach(function(elm) {
+        elm.isInTargetAlbum = collaboratorIds.indexOf(elm.id) > -1;
+      });
+    }
   };
 };
 
