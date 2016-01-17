@@ -110,6 +110,9 @@ router.get('/getOwnAndRelatedAlbums', function*() {
       ],
     },
     include,
+    order: [
+      ['updatedAt', 'DESC'],
+    ],
   });
 
   this.body = albums.map((album) => album.toJSON());
