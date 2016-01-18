@@ -7,7 +7,7 @@ const path = require('path');
 const codes = [];
 
 for (let i = 1; i <= 1000; i++) {
-  const str = utility.md5('vip' + i);
+  const str = utility.md5('vip' + i).substring(0, 6);
   codes.push(str);
 }
 
