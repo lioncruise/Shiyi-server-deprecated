@@ -15,11 +15,8 @@ const fakeModelNames = [
 const fakeDataArray = [];
 
 for (let name of fakeModelNames) {
-  let data = require(`./fakeData/${name}.js`).data;
-
-  /* jshint ignore:start */
-  fakeDataArray.push(...(data.map((value) => [name, value])));
-  /* jshint ignore:end */
+  let data = require(`./fakeData/${name}.js`).data; // jshint ignore:line
+  fakeDataArray.push(...(data.map((value) => [name, value]))); // jshint ignore:line
 }
 
 exports.run = co.wrap(function*() {
