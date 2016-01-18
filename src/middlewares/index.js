@@ -20,6 +20,7 @@ const urlsWithoutSession = [
   /^\/verifyPhone$/,
   /^\/pcLogin$/,
   /^\/getUserIdByKey$/,
+  /^\/isExistingUser$/,
 
   // 公开信息权限
   /^\/albums\/\d+$/,
