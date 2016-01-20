@@ -41,10 +41,28 @@ const urlsWithoutSession = [
   /^\/getQRCode$/,
 ];
 
+const urlsNeedRawReturn = [
+  /^\/dailies\/\d+$/,
+];
+
+function isInUrls(str, urlPatternList) {
+  for (const reg of urlPatternList) {
+    if (str.match(reg)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 exports.addStatusCode = function() {
   return function*(next) {
     yield next;
     debug('It is addStatusCode middleware');
+    if (isInUrls(this.path, urlsNeedRawReturn)) {
+      return;
+    }
+
     this.status = 200;
     if (this.body !== null && this.body !== undefined) {
       if (this.body.message && this.body.message === 'Validation Failed') {
@@ -85,16 +103,6 @@ exports.showBody = function() {
   };
 };
 
-function isInUrlsWithoutSession(str) {
-  for (const reg of urlsWithoutSession) {
-    if (str.match(reg)) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
 //用户登录token验证
 exports.auth = function*(next) {
   debug('It is auth middleware');
@@ -117,7 +125,7 @@ exports.auth = function*(next) {
 
       // 验证登录唯一性
       if (!(yield redisToken.verify(this.session.user.id, token))) {
-        if (!isInUrlsWithoutSession(this.path)) {
+        if (!isInUrls(this.path, urlsWithoutSession)) {
           this.body = {
             statusCode: 401,
             message: '已在其他客户端登录，请重新登录',
@@ -126,7 +134,7 @@ exports.auth = function*(next) {
         }
       }
     } catch (e) {
-      if (!isInUrlsWithoutSession(this.path)) {
+      if (!isInUrls(this.path, urlsWithoutSession)) {
         this.body = {
           statusCode: 401,
           message: '请登录后访问',

@@ -17,6 +17,7 @@ dailies.push({
   title: '1月2日 日报',
   description: '1月2日 日报',
   url: 'http://www.baidu.com',
+  content: 'id=2日报内容',
 });
 dailies.push({
   title: '1月3日 日报',
