@@ -3,6 +3,13 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
+const fs = require('fs');
+
+const dailyTemplate = fs.readFileSync('./static/templates/daily.html');
+const notFoundTemplate = fs.readFileSync('./static/templates/404.html');
+/* jshint ignore:start */
+const dailyTemplateExecute = new Function('title', 'description', 'content', 'return `' + dailyTemplate + '`');
+const notFoundTemplateExecute = new Function('message', 'return `' + notFoundTemplate + '`');
 
 exports.show = function*() {
   this.verifyParams({
@@ -14,16 +21,13 @@ exports.show = function*() {
     },
   });
   if (!daily) {
-    // todo: 返回404的html页面
-    this.body = {
-      statusCode: 404,
-      message: '日报不存在',
-    };
+    this.body = notFoundTemplateExecute('日报不存在');
     return;
   }
-  // todo: 返回带title的html页面，使用模板。
-  this.body = daily.content;
+
+  this.body = dailyTemplateExecute(daily.title, daily.description, daily.content);
 };
+/* jshint ignore:end */
 
 exports.index = function*() {
   const dailies = yield models.Daily.findAll({

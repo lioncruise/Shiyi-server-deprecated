@@ -39,6 +39,7 @@ const urlsWithoutSession = [
   /^\/getFollowers$/,
   /^\/getPublicAlbums$/,
   /^\/getQRCode$/,
+  /^\/dailies\/\d+$/,
 ];
 
 const urlsNeedRawReturn = [
