@@ -49,10 +49,12 @@ if (config.debug) {
   app.use(logger());
 }
 
-app.use(ipFilter({
-  forbidden: '{ statusCode: 403, message: "Forbidden!" }',
-  filter: config.ipFilter,
-}));
+if (!config.debug) {
+  app.use(ipFilter({
+    forbidden: '{ statusCode: 403, message: "Forbidden!" }',
+    filter: config.ipFilter,
+  }));
+}
 
 //静态资源缓存
 app.use(staticCache({
