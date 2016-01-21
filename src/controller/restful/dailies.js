@@ -1,8 +1,13 @@
 'use strict';
 
 const models = require('../../db').models;
-const utils = require('../../utils');
+const ejs = require('ejs');
+const path = require('path');
+const fs = require('fs');
 const sequelize = require('sequelize');
+
+const notFoundPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/notFound.html'), 'utf-8');
+const dailyPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/daily.html'), 'utf-8');
 
 exports.show = function*() {
   this.verifyParams({
@@ -14,11 +19,11 @@ exports.show = function*() {
     },
   });
   if (!daily) {
-    this.body = utils.template('notFound', '日报不存在');
+    this.body = ejs.render(notFoundPage, { message: '日报不存在' });
     return;
   }
 
-  this.body = utils.template('daily', daily.title, daily.description, daily.content);
+  this.body = ejs.render(dailyPage, daily);
 };
 
 exports.index = function*() {
