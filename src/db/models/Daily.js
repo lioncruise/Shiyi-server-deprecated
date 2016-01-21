@@ -25,6 +25,11 @@ module.exports = function(sequelize, DataTypes) {
     url: {
       type: 'VARCHAR(185)',
     },
+    content: {
+      type: DataTypes.TEXT,
+      defaultValue: '',
+      allowNull: false,
+    },
     viewsCount: { //浏览量
       type: DataTypes.INTEGER,
       defaultValue: 0,

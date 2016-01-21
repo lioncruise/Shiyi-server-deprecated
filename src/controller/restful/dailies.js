@@ -1,11 +1,29 @@
 'use strict';
 
 const models = require('../../db').models;
-const utils = require('../../utils');
+const ejs = require('ejs');
+const path = require('path');
+const fs = require('fs');
 const sequelize = require('sequelize');
 
+const notFoundPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/notFound.html'), 'utf-8');
+const dailyPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/daily.html'), 'utf-8');
+
 exports.show = function*() {
-  //TODO: 渲染HTML页面返回
+  this.verifyParams({
+    id: 'id',
+  });
+  const daily = yield models.Daily.find({
+    where: {
+      id: this.params.id,
+    },
+  });
+  if (!daily) {
+    this.body = ejs.render(notFoundPage, { message: '日报不存在' });
+    return;
+  }
+
+  this.body = ejs.render(dailyPage, daily);
 };
 
 exports.index = function*() {
@@ -19,6 +37,7 @@ exports.index = function*() {
       model: models.Album,
     },
     ],
+    attributes: { exclude: ['content'] },
     limit: 5,
   });
 

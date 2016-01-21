@@ -15,3 +15,4 @@ require('./users');
 require('./rebuild');
 require('./search');
 require('./discover');
+require('./dailies');
