@@ -139,6 +139,7 @@ module.exports = [{
           '2.可以更改手机号。',
           '3.可以更新个推的推送CID。CID的更新请在登陆和检测到个推CID改变时更新。',
           '4.update用于更新个人信息和密码，当更新项包括password时，必须添加一个字段oldPassword，如果没有旧密码或者旧密码错误，都无法正常更新；如果不更新密码，则可以不带oldPassword字段。',
+          '5.增加backgroundStoreKey字段存储我页面背景图片的七牛key',
           ],
   requests: [
     {
@@ -154,6 +155,7 @@ module.exports = [{
         motto: 'Do cool things that matter.',
         avatarStoreKey: '123',
         getuiCid: '06fe917679a82622368d08af6f8f21d5',
+        backgroundStoreKey: '',
       },
     },
   ],
