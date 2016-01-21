@@ -40,6 +40,10 @@ const urlsWithoutSession = [
   /^\/getPublicAlbums$/,
   /^\/getQRCode$/,
   /^\/dailies\/\d+$/,
+
+  // monitor
+  /^\/sendDaily\?id=\d+$/,
+
 ];
 
 const urlsNeedRawReturn = [
