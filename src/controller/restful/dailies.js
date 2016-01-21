@@ -3,13 +3,6 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
-const fs = require('fs');
-
-const dailyTemplate = fs.readFileSync('./static/templates/daily.html');
-const notFoundTemplate = fs.readFileSync('./static/templates/404.html');
-/* jshint ignore:start */
-const dailyTemplateExecute = new Function('title', 'description', 'content', 'return `' + dailyTemplate + '`');
-const notFoundTemplateExecute = new Function('message', 'return `' + notFoundTemplate + '`');
 
 exports.show = function*() {
   this.verifyParams({
@@ -21,13 +14,12 @@ exports.show = function*() {
     },
   });
   if (!daily) {
-    this.body = notFoundTemplateExecute('日报不存在');
+    this.body = utils.template('notFound', '日报不存在');
     return;
   }
 
-  this.body = dailyTemplateExecute(daily.title, daily.description, daily.content);
+  this.body = utils.template('daily', daily.title, daily.description, daily.content);
 };
-/* jshint ignore:end */
 
 exports.index = function*() {
   const dailies = yield models.Daily.findAll({
