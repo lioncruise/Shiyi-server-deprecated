@@ -2,6 +2,7 @@
 
 const models = require('../../db').models;
 const utils = require('../../utils');
+const config = require('../../config');
 
 exports.show = function*() {
   this.verifyParams({
@@ -61,5 +62,27 @@ exports.create = function*() {
     UserId: this.session.user.id,
   }));
 
+  //收到私信推送
+  const targetUser = yield models.User.find({
+    where: {
+      id: this.request.body.TargetUserId,
+    },
+    attributes: ['id', 'getuiCid'],
+  });
+
+  if (!targetUser) {
+    this.body = {
+      statusCode: 404,
+      message: '目标用户不存在',
+    };
+  }
+
+  if (targetUser.getuiCid) {
+    yield utils.notification.sendNotificationToSingle(
+      config.getui.template.receiveMessage.title,
+      config.getui.template.receiveMessage.text,
+      targetUser.getuiCid
+    );
+  }
   this.body = message.toJSON();
 };

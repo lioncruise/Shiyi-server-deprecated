@@ -64,6 +64,10 @@ config.getui = {
       title: '有人关注了您', // title应为纯文本
       text: '<%= nikeName %> 关注了您', // 传入发起者user渲染
     },
+    receiveMessage: {
+      title: '您收到了一条新私信', // title应为纯文本
+      text: '', // 纯文本
+    }
   },
 };
 
