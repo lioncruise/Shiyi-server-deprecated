@@ -108,6 +108,10 @@ module.exports = function(sequelize, DataTypes) {
         return modelUtils.getUrlFunction(this.avatarStoreKey);
       },
 
+      backgroundDownloadUrl() {
+        return modelUtils.getUrlFunction(this.backgroundStoreKey);
+      },
+
       createdTimestamp: function() {
         return moment(this.createdAt).unix();
       },
