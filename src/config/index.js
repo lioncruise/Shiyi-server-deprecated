@@ -35,6 +35,8 @@ config.mob = {
 
 config.defaultPictureKey = 'default';
 
+config.defaultBackgroundPictureKey = 'defaultBackground';
+
 config.tokenKey = 'oihag';
 
 config.isUseRedis = false;
