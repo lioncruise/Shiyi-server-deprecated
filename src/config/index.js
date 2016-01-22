@@ -65,7 +65,19 @@ config.getui = {
       text: '<%= nikeName %> 关注了您', // 传入发起者user渲染
     },
     receiveMessage: {
-      title: '您收到了一条新私信', // title应为纯文本
+      title: '您收到了一条新私信', // 纯文本
+      text: '', // 纯文本
+    },
+    memoryComment: {
+      title: '您的记忆有新的评论', // 纯文本
+      text: '', // 纯文本
+    },
+    commentComment: {
+      title: '您有新的新评论', // 纯文本
+      text: '', // 纯文本
+    },
+    memorylike: {
+      title: '有人赞了您的相册', // 纯文本
       text: '', // 纯文本
     }
   },
