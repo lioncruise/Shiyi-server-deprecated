@@ -63,10 +63,10 @@ exports.create = function*() {
     },
     include: [
       { model: models.User },
-    ]
+    ],
   });
 
-  if(memory.User.getuiCid){
+  if (memory.User.getuiCid) {
     const template = config.getui.template.memorylike;
     yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
   }

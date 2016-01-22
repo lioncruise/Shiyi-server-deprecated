@@ -84,5 +84,6 @@ exports.create = function*() {
       targetUser.getuiCid
     );
   }
+
   this.body = message.toJSON();
 };

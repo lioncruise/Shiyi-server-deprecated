@@ -79,7 +79,7 @@ config.getui = {
     memorylike: {
       title: '有人赞了您的相册', // 纯文本
       text: '', // 纯文本
-    }
+    },
   },
 };
 

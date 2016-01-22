@@ -130,15 +130,13 @@ exports.getCreateFuction = function(modelName) {
 
     //创建推送 follow User
     if (modelName === 'UserUserFollow') {
-        if (addObjectInstance.getuiCid) {
-          utils.notification.sendNotificationToSingle(
-            config.getui.template.userUserFollow.title,
-            ejs.render(config.getui.template.userUserFollow.text, addSubjectInstance),
-            addObjectInstance.getuiCid);
-        }
+      if (addObjectInstance.getuiCid) {
+        utils.notification.sendNotificationToSingle(
+          config.getui.template.userUserFollow.title,
+          ejs.render(config.getui.template.userUserFollow.text, addSubjectInstance),
+          addObjectInstance.getuiCid);
+      }
     }
-
-
   };
 };
 

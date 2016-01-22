@@ -129,6 +129,7 @@ exports.create = function*() {
         ],
       });
       this.body.OrignalComment = originalComment.toJSON();
+
       // 添加推送，推送给被评论人
       if (originalComment.User.getuiCid) {
         const template = config.getui.template.commentComment;
@@ -144,14 +145,13 @@ exports.create = function*() {
     },
     include: [
       { model: models.User },
-    ]
+    ],
   });
 
-  if(memory.User.getuiCid){
+  if (memory.User.getuiCid) {
     const template = config.getui.template.memoryComment;
     yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
   }
-
 
 };
 
