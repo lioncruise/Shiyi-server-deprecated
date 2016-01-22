@@ -3,6 +3,7 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
+const config = require('../../config');
 
 exports.show = function*() {
   this.verifyParams({

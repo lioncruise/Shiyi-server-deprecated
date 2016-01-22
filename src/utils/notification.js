@@ -121,7 +121,6 @@ exports.sendNotificationToApp = function(title, text) {
 };
 
 exports.sendNotificationToSingle = function(title, text, cid) {
-  console.log(JSON.stringify({ title, text, cid }));
   return function(cb) {
     sendNotificationToSingleCb(title, text, cid, cb);
   };
