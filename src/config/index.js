@@ -59,6 +59,12 @@ config.getui = {
   masterSecret: 'bRsEp8N4XsAteAwUi0hmY6',
   isOffLine: true, // 是否推送离线的终端
   offlineExpireTime: 3600 * 12 * 1000, // 离线等待时间
+  template: {
+    userUserFollow: {
+      title: '有人关注了您', // title应为纯文本
+      text: '<%= nikeName %> 关注了您', // 传入发起者user渲染
+    },
+  },
 };
 
 config.AndroidNotification = {
