@@ -53,6 +53,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: config.defaultPictureKey,
     },
+    backgroundStoreKey: {
+      type: 'VARCHAR(185)',
+      allowNull: false,
+      defaultValue: config.defaultBackgroundPictureKey,
+    },
     followersCount: { //冗余数据，减少跨表联合查询
       type: DataTypes.INTEGER,
       defaultValue: 0,
@@ -101,6 +106,10 @@ module.exports = function(sequelize, DataTypes) {
     getterMethods: {
       avatarDownloadUrl() {
         return modelUtils.getUrlFunction(this.avatarStoreKey);
+      },
+
+      backgroundDownloadUrl() {
+        return modelUtils.getUrlFunction(this.backgroundStoreKey);
       },
 
       createdTimestamp: function() {
