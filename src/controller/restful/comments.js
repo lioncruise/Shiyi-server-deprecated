@@ -3,6 +3,7 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
+const config = require('../../config');
 
 exports.show = function*() {
   this.verifyParams({
@@ -129,8 +130,30 @@ exports.create = function*() {
         ],
       });
       this.body.OrignalComment = originalComment.toJSON();
+
+      // 添加推送，推送给被评论人
+      if (originalComment.User.getuiCid) {
+        const template = config.getui.template.commentComment;
+        yield utils.notification.sendNotificationToSingle(template.title, template.text, originalComment.User.getuiCid);
+      }
     }
   }
+
+  // 添加推送 评论 推送给记忆主人
+  const memory = yield models.Memory.find({
+    where: {
+      id: this.request.body.MemoryId,
+    },
+    include: [
+      { model: models.User },
+    ],
+  });
+
+  if (memory.User.getuiCid) {
+    const template = config.getui.template.memoryComment;
+    yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
+  }
+
 };
 
 exports.destroy = function*() {

@@ -15,8 +15,8 @@ describe('src/test/controllers/restful/albums.test.js', function() {
     it('should create new like to a picture OK', function(done) {
       const like = {
         type: 'LL',
-        MemoryId: '8',
-        AlbumId: '3',
+        MemoryId: '10',
+        AlbumId: '4',
       };
       request(server)
         .post('/likes')
@@ -29,8 +29,8 @@ describe('src/test/controllers/restful/albums.test.js', function() {
           }
 
           res.body.statusCode.should.be.equal(200);
-          res.body.data.MemoryId.should.be.equal('8');
-          res.body.data.AlbumId.should.be.equal('3');
+          res.body.data.MemoryId.should.be.equal('10');
+          res.body.data.AlbumId.should.be.equal('4');
           res.body.data.UserId.should.be.equal(1);
           done();
         });

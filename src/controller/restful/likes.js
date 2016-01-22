@@ -3,6 +3,7 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
+const config = require('../../config');
 
 exports.create = function*() {
   this.verifyParams({
@@ -53,7 +54,24 @@ exports.create = function*() {
     },
   });
 
+  // 添加推送 赞 推送给记忆主人
+  const memory = yield models.Memory.find({
+    where: {
+      id: this.request.body.MemoryId,
+    },
+    include: [{
+      model: models.User,
+    },
+    ],
+  });
+
+  if (memory && memory.User.id !== this.session.id && memory.User.getuiCid) {
+    const template = config.getui.template.memorylike;
+    yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
+  }
+
   this.body = like.toJSON();
+
 };
 
 exports.destroy = function*() {

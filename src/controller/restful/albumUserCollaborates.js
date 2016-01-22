@@ -4,6 +4,7 @@ const models = require('../../db').models;
 const utils = require('../../utils');
 const config = require('../../config');
 const sequelize = require('sequelize');
+const ejs = require('ejs');
 
 exports.getCreateFuction = function(modelName) {
   let actionType; //相关action的type
@@ -12,6 +13,8 @@ exports.getCreateFuction = function(modelName) {
   let addSubjectAddFieldName; //发起人需要更新的字段
   let addObject; //被影响人
   let addObjectAddFieldName; //被影响人需要更新的字段
+  let addObjectInstance;
+  let addSubjectInstance;
   switch (modelName)
   {
     case 'AlbumUserCollaborate':
@@ -94,7 +97,7 @@ exports.getCreateFuction = function(modelName) {
 
     //发起人相关字段更新
     if (addSubject) {
-      yield models[addSubject].update({
+      addSubjectInstance = yield models[addSubject].update({
         [addSubjectAddFieldName]: sequelize.literal(`${addSubjectAddFieldName} + 1`),
       }, {
         where: {
@@ -107,7 +110,7 @@ exports.getCreateFuction = function(modelName) {
 
     //被影响人相关字段更新
     if (addObject) {
-      yield models[addObject].update({
+      addObjectInstance = yield models[addObject].update({
         [addObjectAddFieldName]: sequelize.literal(`${addObjectAddFieldName} + ${countAddNum}`),
       }, {
         where: {
@@ -124,6 +127,16 @@ exports.getCreateFuction = function(modelName) {
         UserId: userId,
       });
     });
+
+    //创建推送 follow User
+    if (modelName === 'UserUserFollow') {
+      if (addObjectInstance.getuiCid) {
+        utils.notification.sendNotificationToSingle(
+          config.getui.template.userUserFollow.title,
+          ejs.render(config.getui.template.userUserFollow.text, addSubjectInstance),
+          addObjectInstance.getuiCid);
+      }
+    }
   };
 };
 
