@@ -27,8 +27,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     content: {
       type: DataTypes.TEXT,
-      defaultValue: '',
-      allowNull: false,
+      allowNull: true,
     },
     viewsCount: { //浏览量
       type: DataTypes.INTEGER,

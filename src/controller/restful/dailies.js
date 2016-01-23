@@ -13,13 +13,13 @@ exports.show = function*() {
   this.verifyParams({
     id: 'id',
   });
-  const daily = yield models.Daily.find({
-    where: {
-      id: this.params.id,
-    },
-  });
+
+  const daily = yield models.Daily.findById(this.params.id);
+
   if (!daily) {
-    this.body = ejs.render(notFoundPage, { message: '日报不存在' });
+    this.body = ejs.render(notFoundPage, {
+      message: '日报不存在',
+    });
     return;
   }
 
@@ -37,7 +37,9 @@ exports.index = function*() {
       model: models.Album,
     },
     ],
-    attributes: { exclude: ['content'] },
+    attributes: {
+      exclude: ['content'],
+    },
     limit: 5,
   });
 

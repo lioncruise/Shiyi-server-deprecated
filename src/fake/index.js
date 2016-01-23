@@ -14,12 +14,12 @@ const fakeModelNames = [
 
 const fakeDataArray = [];
 
+/* jshint ignore:start */
 for (let name of fakeModelNames) {
-  /* jshint ignore:start */
   let data = require(`./fakeData/${name}.js`).data;
   fakeDataArray.push(...(data.map((value) => [name, value])));
-  /* jshint ignore:end */
 }
+/* jshint ignore:end */
 
 exports.run = co.wrap(function*() {
   for (let [name, value] of fakeDataArray) {

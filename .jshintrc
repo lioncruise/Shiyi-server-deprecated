@@ -63,7 +63,7 @@
     "jasmine"       : false,    // Jasmine
     "jquery"        : false,    // jQuery
     "mocha"         : false,    // Mocha
-    "module"        : true,
+    "module"        : false,
     "mootools"      : false,    // MooTools
     "node"          : true,     // Node.js
     "nonstandard"   : false,    // Widely adopted globals (escape, unescape, etc)

@@ -16,19 +16,15 @@ router.get('/sendDaily', function*() {
 
   // todo 验证monitor身份
 
-  const daily = yield models.Daily.find({
-    where: {
-      id: this.query.id,
-    },
-  });
+  const daily = yield models.Daily.findById(this.query.id);
 
   if (!daily) {
     this.body = {
       statusCode: 404,
       message: '日报不存在',
     };
-  } else {
-    this.body = yield utils.notification.sendNotificationToApp(daily.title, daily.description);
+    return;
   }
 
+  this.body = yield utils.notification.sendNotificationToApp(daily.title, daily.description);
 });
