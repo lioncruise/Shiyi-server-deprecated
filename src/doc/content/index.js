@@ -15,6 +15,7 @@ let files = [
   require('./restful/reports'),
   require('./restful/feedbacks'),
   require('./restful/dailies'),
+  require('./restful/tags'),
 
   require('./account'),
   require('./actions'),
