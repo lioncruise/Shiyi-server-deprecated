@@ -23,6 +23,11 @@ exports.show = function*() {
     return;
   }
 
+  //更新浏览量
+  yield daily.update({
+    viewsCount: sequelize.literal('viewsCount + 1'),
+  });
+
   this.body = ejs.render(dailyPage, daily);
 };
 
