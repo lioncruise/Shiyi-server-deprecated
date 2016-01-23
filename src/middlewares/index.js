@@ -161,14 +161,14 @@ exports.auth = function*(next) {
 
 //添加getUserIdByQueryAndSession方法
 exports.addFunctionGetUserIdByQueryAndSession = function(app) {
-  app.context.getUserIdByQueryAndSession = function() {
+  app.context.getUserIdByQueryAndSession = function(isAddRespoenseBody) {
     let UserId = null;
     if (Number.parseInt(this.query.userId)) {
       UserId = Number.parseInt(this.query.userId);
     } else {
       if (this.session && this.session.user && this.session.user.id) {
         UserId = this.session.user.id;
-      } else {
+      } else if (isAddRespoenseBody) {
         this.body = {
           statusCode: 422,
           message: '请登录后访问',

@@ -24,7 +24,7 @@ router.get('/getQRCode', function*() {
 
 //获取自己创建的公开相册
 router.get('/getPublicAlbums', function*() {
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(true);
   if (!UserId) {
     return; //已在getUserIdByQueryAndSession方法中添加this.body返回
   }
@@ -42,7 +42,7 @@ router.get('/getPublicAlbums', function*() {
 
 //获取自己创建的相册
 router.get('/getOwnAlbums', function*() {
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(true);
   if (!UserId) {
     return; //已在getUserIdByQueryAndSession方法中添加this.body返回
   }
@@ -72,7 +72,7 @@ router.get('/getOwnAlbums', function*() {
 
 //获取首页展示的相册，自己创建和加入的相册
 router.get('/getOwnAndRelatedAlbums', function*() {
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(true);
   if (!UserId) {
     return; //已在getUserIdByQueryAndSession方法中添加this.body返回
   }
@@ -120,7 +120,7 @@ router.get('/getOwnAndRelatedAlbums', function*() {
 
 const getGetAlbumsControllerFunction =  function(modelName) {
   return function*() {
-    const UserId = this.getUserIdByQueryAndSession();
+    const UserId = this.getUserIdByQueryAndSession(true);
     if (!UserId) {
       return; //已在getUserIdByQueryAndSession方法中添加this.body返回
     }

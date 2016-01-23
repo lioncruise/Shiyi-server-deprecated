@@ -31,17 +31,17 @@ exports.show = function*() {
   this.body = user.toJSON();
 
   //添加用户与被查询用户之间关系
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(false);
   if (!UserId) {
-    return; //已在getUserIdByQueryAndSession方法中添加this.body返回
+    return; //对this.body无修改
   }
 
   const TargetUserId = this.params.id;
 
   const AFollowB = yield models.UserUserFollow.find({
     where: {
-      UserId: UserId,
-      TargetUserId: TargetUserId,
+      UserId,
+      TargetUserId,
     },
   });
   const BFollowA = yield models.UserUserFollow.find({

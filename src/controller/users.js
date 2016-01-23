@@ -14,7 +14,7 @@ const getGetUsersControllerFunction = function(modelName, type) {
       },
     }, this.query);
 
-    const UserId = this.getUserIdByQueryAndSession();
+    const UserId = this.getUserIdByQueryAndSession(true);
     if (!UserId) {
       return; //已在getUserIdByQueryAndSession方法中添加this.body返回
     }
@@ -86,7 +86,7 @@ router.get('/getUserUserRelation', function*() {
     targetUserId: 'id',
   }, this.query);
 
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(true);
   if (!UserId) {
     return; //已在getUserIdByQueryAndSession方法中添加this.body返回
   }
@@ -121,7 +121,7 @@ router.get('/getAlbumUserRelation', function*() {
     albumId: 'id',
   }, this.query);
 
-  const UserId = this.getUserIdByQueryAndSession();
+  const UserId = this.getUserIdByQueryAndSession(true);
   if (!UserId) {
     return; //已在getUserIdByQueryAndSession方法中添加this.body返回
   }
