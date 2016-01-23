@@ -24,6 +24,7 @@ const urlsWithoutSession = [
 
   // 公开信息权限
   /^\/albums\/\d+$/,
+  /^\/tags\/\d+$/,
   /^\/memories\/\d+$/,
   /^\/pictures\/\d+$/,
   /^\/users\/\d+$/,

@@ -119,6 +119,7 @@ function setAssociations() {
   models.Tag.belongsToMany(models.Album, {
     through: 'AlbumTag',
   });
+  models.AlbumTag.belongsTo(models.Tag);
 
   //相册与评论
   models.Comment.belongsTo(models.Album);

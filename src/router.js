@@ -14,6 +14,7 @@ const restfulControllerNames = [
   'users', 'albums', 'memories', 'pictures',
   'albumUserCollaborates', 'albumUserFollows', 'userUserFollows',
   'comments', 'likes', 'messages', 'reports', 'feedbacks', 'dailies',
+  'tags',
 ];
 
 for (const name of restfulControllerNames) {
