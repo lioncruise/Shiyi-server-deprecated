@@ -3,6 +3,7 @@
 const models = require('../../db').models;
 const utils = require('../../utils');
 const sequelize = require('sequelize');
+const modelUtils = require('../../db/modelUtils');
 
 // get /tags 按热度返回tags列表
 exports.index = function*() {
@@ -27,6 +28,9 @@ exports.index = function*() {
 
     delete tag.createdTimestamp;
     delete tag.updatedTimestamp;
+
+    //TODO: 修改tagCover
+    tag.tagCoverDownloadUrl = modelUtils.getUrlFunction('default');
 
     return tag;
   });
