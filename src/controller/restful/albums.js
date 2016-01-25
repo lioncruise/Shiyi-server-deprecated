@@ -152,6 +152,7 @@ exports.show = function*() {
   }
 
   //更新浏览量
+  //TODO: 不更新updateAt
   yield models.Album.update({
     viewsCount: sequelize.literal('viewsCount + 1'),
   }, {
@@ -298,17 +299,30 @@ exports.create = function*() {
     UserId: this.session.user.id,
   }));
 
-  yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
+  const tags = yield exports.getTagObjsArray(this.request.body.tags);
+
+  yield album.setTags(tags);
 
   this.body = album.toJSON();
   this.body.tags = this.request.body.tags;
 
-  //创建相关action
   if (album.isPublic === 'public') {
+    //创建相关action
     yield utils.models.createReletedAction({
       type: 'createAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
+    });
+
+    //更新tag的publicAlbumsCount
+    yield models.Tag.update({
+      publicAlbumsCount: sequelize.literal('publicAlbumsCount + 1'),
+    }, {
+      where: {
+        id: {
+          $in: tags.map(tag => tag.id),
+        },
+      },
     });
   }
 };
@@ -369,16 +383,29 @@ exports.update = function*() {
 
   album = yield album.update(this.request.body);
 
-  yield album.setTags(yield exports.getTagObjsArray(this.request.body.tags));
+  const tags = yield exports.getTagObjsArray(this.request.body.tags);
+
+  yield album.setTags(tags);
 
   this.body = album.toJSON();
 
-  //创建相关action
   if (originIsPublic !== 'public' && this.body.isPublic === 'public') {
+    //创建相关action
     yield utils.models.createReletedAction({
       type: 'openAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
+    });
+
+    //更新tag的publicAlbumsCount
+    yield models.Tag.update({
+      publicAlbumsCount: sequelize.literal('publicAlbumsCount + 1'),
+    }, {
+      where: {
+        id: {
+          $in: tags.map(tag => tag.id),
+        },
+      },
     });
   }
 };

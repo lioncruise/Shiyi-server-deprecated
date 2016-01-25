@@ -94,6 +94,22 @@ exports.deleteAlbum = function*(AlbumId) {
   yield exports.deleteData('Notification', {
     AlbumId,
   });
+
+  //修改冗余统计信息
+  const albumTags = yield models.AlbumTag.findAll({
+    where: {
+      AlbumId,
+    },
+  });
+  yield models.Tag.update({
+    publicAlbumsCount: sequelize.literal('publicAlbumsCount - 1'),
+  }, {
+    where: {
+      id: {
+        $in: Array.from(albumTags.map((elm) => elm.TagId)),
+      },
+    },
+  });
   yield exports.deleteData('AlbumTag', {
     AlbumId,
   });
