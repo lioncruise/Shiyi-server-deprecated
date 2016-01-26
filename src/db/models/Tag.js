@@ -10,7 +10,13 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     charset: 'utf8mb4',
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    },
+    {
+      fields: ['name'],
+    },
+    ],
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();

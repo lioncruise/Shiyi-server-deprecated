@@ -76,7 +76,14 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     charset: 'utf8mb4',
     paranoid: true,
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    }, {
+      fields: ['UserId'],
+    }, {
+      fields: ['title'], //如何让like语句使用到此索引
+    },
+    ],
     getterMethods: {
       coverDownloadUrl() {
         return modelUtils.getUrlFunction(this.coverStoreKey);

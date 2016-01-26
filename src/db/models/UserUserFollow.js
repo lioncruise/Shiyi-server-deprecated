@@ -6,7 +6,15 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('UserUserFollow', {
   }, {
-    indexes: [],
+    indexes: [{
+      unique: true,
+      fields: ['UserId', 'TargetUserId'],
+    }, {
+      fields: ['TargetUserId'],
+    }, {
+      fields: ['UserId'],
+    },
+    ],
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();

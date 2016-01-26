@@ -120,7 +120,17 @@ module.exports = function(sequelize, DataTypes) {
         return moment(this.updateAt).unix();
       },
     },
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    }, {
+      unique: true,
+      fields: ['phone'],
+    }, {
+      fields: ['nickname'],  //如何让like语句使用到此索引
+    }, {
+      fields: ['nickname'],  //如何让like语句使用到此索引
+    },
+    ],
     freezeTableName: true,
     tableName: 'users',
   });

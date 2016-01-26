@@ -38,7 +38,19 @@ module.exports = function(sequelize, DataTypes) {
         return moment(this.updateAt).unix();
       },
     },
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    },
+    {
+      fields: ['MemoryId'],
+    },
+    {
+      fields: ['AlbumId'],
+    },
+    {
+      fields: ['UserId'],
+    },
+    ],
     classMethods: {
       *getPictureCountByAlbumId(albumId) {
         return yield this.count({

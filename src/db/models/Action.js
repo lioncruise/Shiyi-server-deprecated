@@ -11,7 +11,24 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     paranoid: true,
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    }, {
+      fields: ['MemoryId'],
+    }, {
+      fields: ['AlbumId'],
+    }, {
+      fields: ['UserId'],
+    }, {
+      fields: ['TargetUserId'],
+    }, {
+      fields: [{ attribute: 'createdAt', order: 'DESC' }],
+    }, {
+      fields: ['UserId', 'AlbumId'],
+    }, {
+      fields: ['UserId', 'TargetUserId'],
+    },
+    ],
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();
