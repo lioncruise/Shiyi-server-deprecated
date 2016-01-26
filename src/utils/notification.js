@@ -20,6 +20,8 @@ const SingleMessage = require('../../lib/getui/message/SingleMessage');
 const AppMessage = require('../../lib/getui/message/AppMessage');
 const ListMessage = require('../../lib/getui/message/ListMessage');
 
+const debug = require('debug')('utils/notification');
+
 const { host:HOST, appId:APPID, appKey:APPKEY, masterSecret:MASTERSECRET, logo:LOGO } = config.getui;
 let gt = null;
 
@@ -93,7 +95,7 @@ const sendNotificationToSingleCb = function(title, text, cid, cb) {
       if (err !== null && err.exception !== null && err.exception instanceof  RequestError) {
         let requestId = err.exception.requestId;
         gt.pushMessageToSingle(message, target, requestId, cb);
-      }else {
+      } else {
         cb(err, res);
       }
     });
@@ -104,7 +106,7 @@ const sendNotificationToListCb = function(title, text, cidList, cb) {
   let taskGroupName = null;
   let message = constructMessage(title, text, ListMessage);
   let targetList = cidList.map(function(cid) {
-    return new Target({ appId: APPID, clientId:cid });
+    return new Target({ appId: APPID, clientId: cid });
   });
 
   gt.getContentId(message, taskGroupName, function(err, res) {
@@ -114,21 +116,48 @@ const sendNotificationToListCb = function(title, text, cidList, cb) {
   });
 };
 
+const openRealNotification =
+  (process.env.NODE_ENV === 'production' ||
+  process.env.NODE_ENV === 'production_test' ||
+  process.env.NODE_ENV === 'production_test_dev');
+
+function notificationSimulate(title, text, cb) {
+  debug(`模拟推送\n【${ title }】${ text }`);
+  cb(null, {
+    result: 'ok',
+    contentId: 'OSA-0124_oDhy37zi1M6pZ8huCnaPG8',
+    taskId: 'OSS-0124_fa882d81ee1bd3c13e7eaef156b251a3', // only return in single send
+    status: 'successed_offline', // only return in single send
+  });
+}
+
 exports.sendNotificationToApp = function(title, text) {
   return function(cb) {
-    sendNotificationToAppCb(title, text, cb);
+    if (openRealNotification) {
+      sendNotificationToAppCb(title, text, cb);
+    } else {
+      notificationSimulate(title, text, cb);
+    }
   };
 };
 
 exports.sendNotificationToSingle = function(title, text, cid) {
   return function(cb) {
-    sendNotificationToSingleCb(title, text, cid, cb);
+    if (openRealNotification) {
+      sendNotificationToSingleCb(title, text, cid, cb);
+    } else {
+      notificationSimulate(title, text, cb);
+    }
   };
 };
 
 exports.sendNotificationToList = function(title, text, cidList) {
   return function(cb) {
-    sendNotificationToListCb(title, text, cidList, cb);
+    if (openRealNotification) {
+      sendNotificationToListCb(title, text, cidList, cb);
+    } else {
+      notificationSimulate(title, text, cb);
+    }
   };
 };
 
