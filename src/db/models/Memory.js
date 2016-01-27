@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
       fields: ['id'],
     },
     {
-      fields: ['AlbumId'],
+      fields: ['AlbumId', { attribute: 'createdAt', order: 'DESC' }],
     },
     {
       fields: ['UserId'],

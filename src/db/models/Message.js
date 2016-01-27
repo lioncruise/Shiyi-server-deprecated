@@ -21,16 +21,10 @@ module.exports = function(sequelize, DataTypes) {
       fields: ['id'],
     },
     {
-      fields: ['UserId'],
-    },
-    {
       fields: ['TargetUserId'],
     },
     {
-      fields: ['UserId', 'TargetUserId'],
-    },
-    {
-      fields: ['createdAt'],
+      fields: ['UserId', 'TargetUserId', 'createdAt'],
     },
     ],
     getterMethods: {
