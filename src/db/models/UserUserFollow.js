@@ -11,8 +11,6 @@ module.exports = function(sequelize, DataTypes) {
       fields: ['UserId', 'TargetUserId'],
     }, {
       fields: ['TargetUserId'],
-    }, {
-      fields: ['UserId'],
     },
     ],
     getterMethods: {
