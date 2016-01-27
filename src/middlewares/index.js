@@ -43,7 +43,7 @@ const urlsWithoutSession = [
   /^\/dailies\/\d+$/,
 
   // monitor
-  /^\/sendDaily\?id=\d+$/,
+  /^\/sendDaily$/,
 
 ];
 
