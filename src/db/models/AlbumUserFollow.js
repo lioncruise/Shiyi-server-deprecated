@@ -10,8 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       fields: ['AlbumId', 'UserId'],
     }, {
-      fields: ['AlbumId'],
-    }, {
       fields: ['UserId'],
     },
     ],
