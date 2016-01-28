@@ -78,7 +78,7 @@ config.getui = {
       title: '您有新的新评论', // 纯文本
       text: '', // 纯文本
     },
-    memorylike: {
+    memoryLike: {
       title: '有人赞了您的相册', // 纯文本
       text: '', // 纯文本
     },

@@ -66,7 +66,7 @@ exports.create = function*() {
   });
 
   if (memory && memory.User.id !== this.session.id && memory.User.getuiCid) {
-    const template = config.getui.template.memorylike;
+    const template = config.getui.template.memoryLike;
     yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
   }
 
