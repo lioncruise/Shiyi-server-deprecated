@@ -22,7 +22,13 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     charset: 'utf8mb4',
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    },
+    {
+      fields: ['name'],
+    },
+    ],
     getterMethods: {
       tagCoverDownloadUrl() {
         return modelUtils.getUrlFunction(this.tagCoverStoreKey);

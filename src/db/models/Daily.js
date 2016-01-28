@@ -36,7 +36,16 @@ module.exports = function(sequelize, DataTypes) {
     },
   }, {
     charset: 'utf8mb4',
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    }, {
+      fields: [{ attribute: 'createdAt', order: 'DESC' }],
+    }, {
+      fields: ['UserId'],
+    }, {
+      fields: ['AlbumId'],
+    },
+    ],
     getterMethods: {
       coverDownloadUrl() {
         return modelUtils.getUrlFunction(this.coverStoreKey);

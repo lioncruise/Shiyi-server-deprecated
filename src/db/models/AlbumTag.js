@@ -12,7 +12,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
     },
   }, {
-    indexes: [],
+    indexes: [{
+      fields: ['AlbumId'],
+    }, {
+      fields: ['TagId'],
+    },
+    ],
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();
