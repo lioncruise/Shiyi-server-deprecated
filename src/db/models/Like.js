@@ -9,7 +9,19 @@ module.exports = function(sequelize, DataTypes) {
       type: 'VARCHAR(185)',
     },
   }, {
-    indexes: [],
+    indexes: [{
+      fields: ['id'],
+    },
+    {
+      fields: ['MemoryId'],
+    },
+    {
+      fields: ['AlbumId'],
+    },
+    {
+      fields: ['UserId'],
+    },
+    ],
     classMethods: {
       *getLikeCountByMemoryId(memoryId) {
         return yield this.count({

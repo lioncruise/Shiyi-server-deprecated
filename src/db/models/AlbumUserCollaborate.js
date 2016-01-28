@@ -6,7 +6,13 @@ const moment = require('moment');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('AlbumUserCollaborate', {
   }, {
-    indexes: [],
+    indexes: [{
+      unique: true,
+      fields: ['AlbumId', 'UserId'],
+    }, {
+      fields: ['UserId'],
+    },
+    ],
     getterMethods: {
       createdTimestamp: function() {
         return moment(this.createdAt).unix();
