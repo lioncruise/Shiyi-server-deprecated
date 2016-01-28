@@ -16,4 +16,5 @@ require('./rebuild');
 require('./search');
 require('./discover');
 require('./dailies');
+require('./memories');
 require('./contacts');

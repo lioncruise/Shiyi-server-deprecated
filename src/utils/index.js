@@ -9,6 +9,7 @@ const utility = require('utility');
 exports.notification = require('./notification');
 exports.models = require('./models');
 exports.redisToken = require('./redisToken');
+exports.template = require('./template');
 
 exports.cloneJson = function(obj) {
   return JSON.parse(JSON.stringify(obj));

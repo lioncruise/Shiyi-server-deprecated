@@ -3,11 +3,8 @@
 const models = require('../../db').models;
 const ejs = require('ejs');
 const path = require('path');
-const fs = require('fs');
+const utils = require('../../utils');
 const sequelize = require('sequelize');
-
-const notFoundPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/notFound.html'), 'utf-8');
-const dailyPage = fs.readFileSync(path.join(__dirname, '../../../static/templates/daily.html'), 'utf-8');
 
 exports.show = function*() {
   this.verifyParams({
@@ -17,7 +14,7 @@ exports.show = function*() {
   const daily = yield models.Daily.findById(this.params.id);
 
   if (!daily) {
-    this.body = ejs.render(notFoundPage, {
+    this.body = utils.template('notFound', {
       message: '日报不存在',
     });
     return;
@@ -28,7 +25,7 @@ exports.show = function*() {
     viewsCount: sequelize.literal('viewsCount + 1'),
   });
 
-  this.body = ejs.render(dailyPage, daily);
+  this.body = utils.template('daily', daily);
 };
 
 exports.index = function*() {

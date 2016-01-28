@@ -45,10 +45,20 @@ const urlsWithoutSession = [
   // monitor
   /^\/sendDaily$/,
 
+  // shared pages
+  /^\/userShareHtml/,
+  /^\/memoryShareHtml/,
+  /^\/albumShareHtml/,
+
 ];
 
 const urlsNeedRawReturn = [
   /^\/dailies\/\d+$/,
+
+  // shared pages
+  /^\/userShareHtml/,
+  /^\/memoryShareHtml/,
+  /^\/albumShareHtml/,
 ];
 
 function isInUrls(str, urlPatternList) {
