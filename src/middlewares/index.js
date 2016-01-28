@@ -49,6 +49,7 @@ const urlsWithoutSession = [
   /^\/userShareHtml/,
   /^\/memoryShareHtml/,
   /^\/albumShareHtml/,
+  /^\/appShareHtml/,
 
 ];
 
@@ -59,6 +60,7 @@ const urlsNeedRawReturn = [
   /^\/userShareHtml/,
   /^\/memoryShareHtml/,
   /^\/albumShareHtml/,
+  /^\/appShareHtml/,
 ];
 
 function isInUrls(str, urlPatternList) {

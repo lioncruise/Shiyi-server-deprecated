@@ -18,3 +18,4 @@ require('./discover');
 require('./dailies');
 require('./memories');
 require('./contacts');
+require('./pages');
