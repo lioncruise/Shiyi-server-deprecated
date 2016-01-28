@@ -19,11 +19,12 @@ router.get('/memoryShareHtml', function*() {
     where: {
       id: this.query.id,
     },
+    include: [models.Album],
   });
 
-  if (!memory) {
+  if (!memory || memory.Album.isPublic !== 'public') {
     this.body = utils.template('notFound', {
-      message: '分享的记忆不存在',
+      message: '分享的记忆不存在或记忆不在公开的相册中',
     });
     return;
   }

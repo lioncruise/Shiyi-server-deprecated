@@ -177,7 +177,7 @@ router.get('/albumShareHtml', function*() {
 
   if (!album || album.isPublic !== 'public') {
     this.body = utils.template('notFound', {
-      message: '记忆所在相册不是公开相册',
+      message: '分享的相册不存在或不是公开相册',
     });
     return;
   }
