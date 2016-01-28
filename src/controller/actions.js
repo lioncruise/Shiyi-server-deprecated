@@ -124,6 +124,25 @@ router.get('/getActions', function*() {
         include: [{
           model: models.Picture,
         },
+        {
+          model: models.Comment,
+          include: [{
+            model: models.User,
+          },
+          ],
+        },
+        {
+          model: models.Like,
+          include: [{
+            model: models.User,
+          },
+          ],
+        },
+
+        // 不在Memory中包含User，因为在外层已经包含User了
+        /*{
+          model: models.User,
+        },*/
         ],
       }, {
         model: models.Album,
