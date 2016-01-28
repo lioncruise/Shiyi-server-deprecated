@@ -59,13 +59,30 @@ const NotificationTemplateForMoreOptions = function(title, text, withIOS = false
 };
 
 const constructMessage = function(title, text, MessageClass) {
-  let template = new NotificationTemplate({  //设置推送消息类型，默认通知类消息
+  let template = new TransmissionTemplate({
     appId: APPID,
     appKey: APPKEY,
-    title: title,
-    text: text,
-    logo: LOGO,
+    transmissionType: 1,
+    transmissionContent: '【' + title + '】' + text,
   });
+
+  //iOS推送需要设置的setApnInfo字段
+  let payload = new APNPayload();
+  let alertMsg = new DictionaryAlertMsg();
+  alertMsg.body = text;
+  alertMsg.actionLocKey = '';
+  alertMsg.locKey = '';
+  alertMsg.locArgs = Array('');
+  alertMsg.launchImage = '';
+
+  //ios8.2以上版本支持
+  alertMsg.title = title;
+  alertMsg.titleLocKey = '';
+  alertMsg.titleLocArgs = Array('');
+
+  payload.alertMsg = alertMsg;
+  payload.badge = 5;
+  template.setApnInfo(payload);
   let messageConfig = {
     isOffline: config.getui.isOffLine,
     offlineExpireTime: config.getui.offlineExpireTime,
