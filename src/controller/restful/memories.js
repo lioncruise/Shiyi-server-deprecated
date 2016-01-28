@@ -136,6 +136,7 @@ exports.create = function*() {
 
   yield models.Album.update({
     memoriesCount: sequelize.literal('memoriesCount + 1'),
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
   }, {
     where:{
       id: album.id,

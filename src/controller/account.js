@@ -126,6 +126,7 @@ router.post('/register', function*() {
     description: this.request.body.nickname + '的默认相册',
     isPublic: 'shared',
     allowComment: 'collaborators',
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
   });
 });
 

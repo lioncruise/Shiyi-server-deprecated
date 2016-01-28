@@ -152,7 +152,6 @@ exports.show = function*() {
   }
 
   //更新浏览量
-  //TODO: 不更新updateAt
   yield models.Album.update({
     viewsCount: sequelize.literal('viewsCount + 1'),
   }, {
@@ -297,6 +296,7 @@ exports.create = function*() {
 
   const album = yield models.Album.create(Object.assign(this.request.body, {
     UserId: this.session.user.id,
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
   }));
 
   const tags = yield exports.getTagObjsArray(this.request.body.tags);
@@ -381,7 +381,9 @@ exports.update = function*() {
 
   const originIsPublic = album.isPublic;
 
-  album = yield album.update(this.request.body);
+  album = yield album.update(this.request.body, {
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
+  });
 
   const tags = yield exports.getTagObjsArray(this.request.body.tags);
 
