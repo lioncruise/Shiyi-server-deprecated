@@ -46,9 +46,9 @@ const urlsWithoutSession = [
   /^\/sendDaily$/,
 
   // shared pages
-  /^\/sharedUser/,
-  /^\/sharedMemory/,
-  /^\/sharedAlbum/,
+  /^\/userShareHtml/,
+  /^\/memoryShareHtml/,
+  /^\/albumShareHtml/,
 
 ];
 
@@ -56,9 +56,9 @@ const urlsNeedRawReturn = [
   /^\/dailies\/\d+$/,
 
   // shared pages
-  /^\/sharedUser/,
-  /^\/sharedMemory/,
-  /^\/sharedAlbum/,
+  /^\/userShareHtml/,
+  /^\/memoryShareHtml/,
+  /^\/albumShareHtml/,
 ];
 
 function isInUrls(str, urlPatternList) {

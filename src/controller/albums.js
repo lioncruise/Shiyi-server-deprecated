@@ -164,7 +164,7 @@ router.get('/getRelatedAlbums', getGetAlbumsControllerFunction('AlbumUserCollabo
 router.get('/getFollowAlbums', getGetAlbumsControllerFunction('AlbumUserFollow'));
 
 //分享相册的html页面
-router.get('/sharedAlbum', function*() {
+router.get('/albumShareHtml', function*() {
   this.verifyParams({
     id: {
       type: 'id',
@@ -175,10 +175,9 @@ router.get('/sharedAlbum', function*() {
 
   const album = yield models.Album.findById(this.query.id);
 
-  // todo 检查公开性
-  if (!album) {
+  if (!album || album.isPublic !== 'public') {
     this.body = utils.template('notFound', {
-      message: '分享的相册不存在',
+      message: '记忆所在相册不是公开相册',
     });
     return;
   }

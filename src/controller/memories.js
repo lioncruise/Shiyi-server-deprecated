@@ -5,7 +5,7 @@ const models = require('../db').models;
 const utils = require('../utils');
 
 //分享相册的html页面
-router.get('/sharedMemory', function*() {
+router.get('/memoryShareHtml', function*() {
   this.verifyParams({
     id: {
       type: 'id',
@@ -15,14 +15,29 @@ router.get('/sharedMemory', function*() {
   }, this.query);
 
   const memory = yield models.Memory.find({
-    where:{
+    paranoid: true,
+    where: {
       id: this.query.id,
     },
   });
-  // todo 公开验证
+
   if (!memory) {
     this.body = utils.template('notFound', {
       message: '分享的记忆不存在',
+    });
+    return;
+  }
+
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: memory.AlbumId,
+    },
+  });
+
+  if (!album || album.isPublic !== 'public') {
+    this.body = utils.template('notFound', {
+      message: '记忆所在相册不是公开相册',
     });
     return;
   }

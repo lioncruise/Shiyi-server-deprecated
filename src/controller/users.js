@@ -183,7 +183,7 @@ router.get('/getAlbumUserRelation', function*() {
 });
 
 //分享用户的html页面
-router.get('/sharedUser', function*() {
+router.get('/userShareHtml', function*() {
   this.verifyParams({
     id: {
       type: 'id',
