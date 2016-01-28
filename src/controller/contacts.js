@@ -8,32 +8,36 @@ const sequelize = require('sequelize');
 
 router.post('/getUsersByPhones', function*() {
   this.verifyParams({
-    names: {
+    namesString: {
       required: true,
-      type: 'array',
-      itemType: 'string',
+      type: 'string',
     },
-    phones: {
+    phonesString: {
       required: true,
-      type: 'array',
-      itemType: 'string',
+      type: 'string',
     },
   }, this.request.body);
 
-  const contacts = [];
-  const len = this.request.body.names.length < this.request.body.phones.length ? this.request.body.names.length : this.request.body.phones.length;
-  for (let i = 0; i < len; i++) {
-    contacts.push({
-      name: this.request.body.names[i],
-      phone: this.request.body.phones[i],
-    });
+  const names = this.request.body.namesString.split(',').filter(elm => elm !== '');
+  const phones = this.request.body.phonesString.split(',').filter(elm => elm !== '');
+
+  if (names.length !== phones.length) {
+    this.body = {
+      statusCode: '422',
+      message: '数据错误',
+    };
+    return;
   }
 
+  const contacts = [];
   const phoneNameMap = new Map();
-  const phones = contacts.map(function(contact) {
-    phoneNameMap.set(contact.phone, contact.name);
-    return contact.phone;
-  });
+  for (let i = 0; i < names.length; i++) {
+    contacts.push({
+      name: names[i],
+      phone: phones[i],
+    });
+    phoneNameMap.set(phones[i], names[i]);
+  }
 
   const users = yield models.User.findAll({
     paranoid: true,
@@ -82,9 +86,18 @@ router.post('/getUsersByPhones', function*() {
   const _this = this;
   idUserMap.forEach(function(user, id) {
     user.name = phoneNameMap.get(user.phone);
+    phoneNameMap.delete(user.phone);
 
-    // 3:互相关注 2:对方关注我 1:我关注对方 0:互不关注 //字符串类型
+    // 3:互相关注 2:对方关注我 1:我关注对方 0:互不关注 -1:未注册 //字符串类型
     user.relation = '' + user.relation;
     _this.body.push(user);
+  });
+
+  phoneNameMap.forEach(function(name, phone) {
+    _this.body.push({
+      name,
+      phone,
+      relation: '-1',
+    });
   });
 });
