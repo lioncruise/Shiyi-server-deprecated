@@ -54,11 +54,15 @@ router.post('/getUsersByPhones', function*() {
     idUserMap.set(user.id, user);
   });
 
+  const ids = users.map((user) => {
+    return user.id;
+  });
+
   const AFollowB = yield models.UserUserFollow.findAll({
     where: {
       UserId: this.session.user.id,
       TargetUserId: {
-        $in: phones,
+        $in: ids,
       },
     },
   });
@@ -71,7 +75,7 @@ router.post('/getUsersByPhones', function*() {
   const BFollowA = yield models.UserUserFollow.findAll({
     where: {
       UserId: {
-        $in: phones,
+        $in: ids,
       },
       TargetUserId: this.session.user.id,
     },
