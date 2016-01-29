@@ -127,6 +127,14 @@ router.get('/getActions', function*() {
         {
           model: models.Comment,
           include: [{
+            model: models.Comment,
+            as: 'OrignalComment',
+            include: [{
+              model: models.User,
+            },
+            ],
+          },
+          {
             model: models.User,
           },
           ],
