@@ -27,5 +27,6 @@ router.get('/sendDaily', function*() {
     };
     return;
   }
+
   this.body = yield utils.notification.sendNotificationToApp(template.title, ejs.render(template.text, daily));
 });
