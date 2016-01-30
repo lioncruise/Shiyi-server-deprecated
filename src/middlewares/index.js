@@ -44,6 +44,7 @@ const urlsWithoutSession = [
   /^\/getPublicAlbums$/,
   /^\/getQRCode$/,
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // monitor
   /^\/sendDaily$/,
@@ -58,6 +59,7 @@ const urlsWithoutSession = [
 
 const urlsNeedRawReturn = [
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // shared pages
   /^\/userShareHtml/,
