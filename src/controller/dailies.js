@@ -3,6 +3,8 @@
 const router = require('../router').router;
 const models = require('../db').models;
 const utils = require('../utils');
+const template = require('../config').getui.template.dailySend;
+const ejs = require('ejs');
 
 // monitor接口，推送日报信息，eg. /sendDaily?id=2
 router.get('/sendDaily', function*() {
@@ -25,6 +27,5 @@ router.get('/sendDaily', function*() {
     };
     return;
   }
-
-  this.body = yield utils.notification.sendNotificationToApp(daily.title, daily.description);
+  this.body = yield utils.notification.sendNotificationToApp(template.title, ejs.render(template.text, daily));
 });
