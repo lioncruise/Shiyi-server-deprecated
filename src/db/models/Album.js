@@ -73,6 +73,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    actualTimestamp: { // 真实更新时间，创建、修改、上传新记忆时更新
+      type: DataTypes.INTEGER.UNSIGNED,
+    },
   }, {
     charset: 'utf8mb4',
     paranoid: true,

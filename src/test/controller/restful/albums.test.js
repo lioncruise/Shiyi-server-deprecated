@@ -22,8 +22,6 @@ describe('src/test/controllers/restful/albums.test.js', function() {
             return done(err);
           }
 
-          console.log(res.body);
-
           res.body.statusCode.should.be.equal(200);
           res.body.data.id.should.be.equal(1);
           res.body.data.picturesCount.should.be.a.Number();

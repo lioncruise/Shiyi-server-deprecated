@@ -111,7 +111,7 @@ router.get('/getOwnAndRelatedAlbums', function*() {
     },
     include,
     order: [
-      ['updatedAt', 'DESC'],
+      ['actualTimestamp', 'DESC'],
     ],
   });
 
