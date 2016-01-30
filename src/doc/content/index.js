@@ -29,6 +29,7 @@ let files = [
   require('./users'),
   require('./search'),
   require('./discover'),
+  require('./contacts'),
 ];
 
 for (let file of files) {

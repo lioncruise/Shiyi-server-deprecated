@@ -131,8 +131,9 @@ exports.create = function*() {
       });
       this.body.OrignalComment = originalComment.toJSON();
 
-      // 添加推送，推送给被评论人
-      if (originalComment.User.getuiCid) {
+      // 添加推送，推送给被评论人 事件的产生方不接受推送
+      if (originalComment.User.getuiCid &&
+        Number.parseInt(originalComment.User.id) !== this.session.user.id) {
         const template = config.getui.template.commentComment;
         yield utils.notification.sendNotificationToSingle(template.title, template.text, originalComment.User.getuiCid);
       }
@@ -149,7 +150,9 @@ exports.create = function*() {
     ],
   });
 
-  if (memory.User.getuiCid) {
+  // 事件的产生方不接受推送
+  if (memory.User.getuiCid &&
+    Number.parseInt(memory.User.id) !== this.session.user.id) {
     const template = config.getui.template.memoryComment;
     yield utils.notification.sendNotificationToSingle(template.title, template.text, memory.User.getuiCid);
   }

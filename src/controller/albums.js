@@ -111,7 +111,7 @@ router.get('/getOwnAndRelatedAlbums', function*() {
     },
     include,
     order: [
-      ['updatedAt', 'DESC'],
+      ['actualTimestamp', 'DESC'],
     ],
   });
 
@@ -162,3 +162,35 @@ router.get('/getRelatedAlbums', getGetAlbumsControllerFunction('AlbumUserCollabo
 
 //获取自己关注的相册
 router.get('/getFollowAlbums', getGetAlbumsControllerFunction('AlbumUserFollow'));
+
+//分享相册的html页面
+router.get('/albumShareHtml', function*() {
+  this.verifyParams({
+    id: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+  }, this.query);
+
+  const album = yield models.Album.findById(this.query.id);
+
+  if (!album || album.isPublic !== 'public') {
+    this.body = utils.template('notFound', {
+      message: '分享的相册不存在或不是公开相册',
+    });
+    return;
+  }
+
+  const pictures = yield models.Picture.findAll({
+    paranoid: true,
+    where: {
+      AlbumId: this.query.id,
+    },
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    limit: 9,
+  });
+  this.body = utils.template('albumShare', { album, pictures });
+});

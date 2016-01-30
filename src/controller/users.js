@@ -181,3 +181,26 @@ router.get('/getAlbumUserRelation', function*() {
 
   this.body = '0'; //用户和相册无关系
 });
+
+//分享用户的html页面
+router.get('/userShareHtml', function*() {
+  this.verifyParams({
+    id: {
+      type: 'id',
+      required: true,
+      allowEmpty: false,
+    },
+  }, this.query);
+
+  const user = yield models.User.findById(this.query.id);
+
+  if (!user) {
+    this.body = utils.template('notFound', {
+      message: '分享的用户不存在',
+    });
+    return;
+  }
+
+  this.body = utils.template('userShare', { user });
+});
+
