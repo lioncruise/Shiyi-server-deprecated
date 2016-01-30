@@ -346,7 +346,7 @@ router.put('/update', function*() {
     });
   }
 
-  if (!flag) {
+  if (!flag || !user) {
     this.body = {
       statusCode: '422',
       message: '原密码错误或用户不存在',
