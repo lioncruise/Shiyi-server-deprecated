@@ -7,7 +7,7 @@ const config = require('../config');
 const redisToken = require('../utils').redisToken;
 const cacheManager = require('cache-manager');
 
-const memoryCache = cacheManager.caching({store: 'memory', max: 128, ttl: config.pageCache.ttl});
+const memoryCache = cacheManager.caching({ store: 'memory', max: 128, ttl: config.pageCache.ttl });
 
 const urlsWithoutSession = [
   /^\/$/,
@@ -66,15 +66,19 @@ const urlsNeedRawReturn = [
   /^\/appShareHtml/,
 ];
 
+// 需要缓存的GET页面（返回）。
+// 只缓存get请求，缓存页面通过带参数的 GET 的 URL 区分
 const urlsUseCache = [
   {
     reg: /^\/dailies\/\d+$/,
     ttl: 60 * 60, // 缓存时间1小时
-    method: 'GET',
   },
   {
     reg: /^\/userShareHtml/, //默认缓存时间config.pageCache.ttl
   },
+  { reg: /^\/memoryShareHtml/ },
+  { reg: /^\/albumShareHtml/ },
+  { reg: /^\/appShareHtml/ },
 ];
 
 function isInUrls(str, urlPatternList) {
@@ -222,12 +226,14 @@ exports.pageCache = function() {
             this.response.body = cacheResponse;
           } else {
             yield next;
-            memoryCache.set(this.request.url, this.response.body, {ttl: url.ttl ? url.ttl : config.pageCache.ttl });
+            memoryCache.set(this.request.url, this.response.body, { ttl: url.ttl ? url.ttl : config.pageCache.ttl });
           }
+
           return;
         }
       }
     }
+
     yield next;
   };
 };
