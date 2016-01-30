@@ -39,6 +39,12 @@ config.defaultBackgroundPictureKey = 'defaultBackground';
 
 config.tokenKey = 'oihag';
 
+config.isUsePageCache = true;
+
+config.pageCache = {
+  ttl: 60, //默认缓存时间
+};
+
 config.isUseRedis = false;
 
 config.redis = {

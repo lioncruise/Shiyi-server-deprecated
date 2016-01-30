@@ -73,6 +73,11 @@ if (process.env.NODE_ENV === 'production_test_dev') {
   app.use(middlewares.showBody());
 }
 
+//页面缓存
+if (config.isUsePageCache) {
+  app.use(middlewares.pageCache());
+}
+
 //如无错误发生，添加200状态码
 app.use(middlewares.addStatusCode());
 
