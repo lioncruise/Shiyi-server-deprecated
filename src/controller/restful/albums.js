@@ -410,6 +410,70 @@ exports.update = function*() {
       },
     });
   }
+
+  //从public变成shared关注者和维护者不变，但是shared相册不在发现和个人主页中显示
+  if (originIsPublic === 'public' && this.body.isPublic !== 'public') {
+    //更新tag的publicAlbumsCount
+    yield models.Tag.update({
+      publicAlbumsCount: sequelize.literal('publicAlbumsCount - 1'),
+    }, {
+      where: {
+        id: {
+          $in: tags.map(tag => tag.id),
+        },
+      },
+    });
+  }
+
+  //从公开相册或者共享相册变为私有相册，删除其维护者和关注者，及更新相关冗余数据
+  if (originIsPublic !== 'private' && this.body.isPublic === 'private') {
+    const userIds = (yield models.AlbumUserFollow.findAll({
+      where: {
+        AlbumId: this.params.id,
+      },
+    })).map(user => user.UserId);
+
+    //删除所有维护关系
+    yield models.AlbumUserCollaborate.destroy({
+      where: {
+        AlbumId: this.params.id,
+      },
+    });
+
+    //删除所有关注关系
+    yield models.AlbumUserFollow.destroy({
+      where: {
+        AlbumId: this.params.id,
+      },
+    });
+
+    //相关用户冗余字段更新
+    yield models.User.update({
+      followAlbumsCount: sequelize.literal('followAlbumsCount - 1'),
+    }, {
+      where: {
+        id: {
+          $in: userIds,
+        },
+      },
+    });
+
+    //相册的关注人数维护人数冗余数据清零
+    yield models.Album.update({
+      collaboratorsCount: 0,
+      fansCount: 0,
+    }, {
+      where: {
+        id: this.params.id,
+      },
+    });
+
+    //删除该公开相册有关动态
+    yield utils.models.deleteReletedAction({
+      AlbumId: this.params.id,
+    });
+  }
+
 };
 
 exports.destroy = function*() {
