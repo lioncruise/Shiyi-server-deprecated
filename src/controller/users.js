@@ -195,9 +195,7 @@ router.get('/userShareHtml', function*() {
   const user = yield models.User.findById(this.query.id);
 
   if (!user) {
-    this.body = utils.template('notFound', {
-      message: '分享的用户不存在',
-    });
+    this.redirect('/appShareHtml');
     return;
   }
 
