@@ -7,6 +7,13 @@ const config = require('../config');
 const sequelize = require('sequelize');
 
 router.get('/joinAlbum', function*() {
+  //未登录状态，跳转到app下载页面
+  if (!this.session || !this.session.user || !this.session.user.id) {
+    this.redirect('/appShareHtml');
+    return;
+  }
+
+  //登录状态，进行添加操作
   const AlbumId = parseInt(this.query.a);
   const secCode = this.query.c;
   if (!AlbumId || !secCode || secCode !== utils.getJoinAlbumSecCode(AlbumId)) {
@@ -27,15 +34,18 @@ router.get('/joinAlbum', function*() {
     },
   });
 
-  if (!album || !this.session || !this.session.user || !this.session.user.id) {
+  if (!album) {
     this.body = {
       statusCode: 404,
-      message: '权限错误，添加失败',
+      message: '相册不存在，添加失败',
     };
     return;
   }
 
-  this.body = album.toJSON();
+  this.body = {
+    statusCode: 200,
+    data: album.toJSON(),
+  };
 
   //自己无法加入到自己创建的相册中
   if (parseInt(this.session.user.id) === parseInt(album.UserId)) {

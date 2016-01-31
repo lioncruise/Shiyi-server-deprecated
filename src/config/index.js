@@ -39,6 +39,12 @@ config.defaultBackgroundPictureKey = 'defaultBackground';
 
 config.tokenKey = 'oihag';
 
+config.isUsePageCache = true;
+
+config.pageCache = {
+  ttl: 60, //默认缓存时间
+};
+
 config.isUseRedis = false;
 
 config.redis = {
@@ -61,17 +67,21 @@ config.getui = {
   masterSecret: 'bRsEp8N4XsAteAwUi0hmY6',
   isOffLine: true, // 是否推送离线的终端
   offlineExpireTime: 3600 * 12 * 1000, // 离线等待时间
-  template: {
+  template: { // 最后的推送消息会组合成 '【${title}】${text}' 字符串，通过穿透消息推送，可根据title进行判断类型
+    dailySend: {
+      title: '您有新的日报消息', // 日报推送，跳转到日报列表界面
+      text: '<%- title %>', // text是与本条日报相关的一些信息，不同日报消息不同，不能借此判断推送类型
+    },
     userUserFollow: {
-      title: '有人关注了您', // title应为纯文本
-      text: '<%= nikeName %> 关注了您', // 传入发起者user渲染
+      title: '有人关注了您', // 跳转到......页面
+      text: '<%- nikeName %> 关注了您', //
     },
     receiveMessage: {
-      title: '您收到了一条新私信', // 纯文本
+      title: '您收到了一条新私信', //
       text: '', // 纯文本
     },
     memoryComment: {
-      title: '您的记忆有新的评论', // 纯文本
+      title: '您的记忆有新的评论', //
       text: '', // 纯文本
     },
     commentComment: {
@@ -79,7 +89,7 @@ config.getui = {
       text: '', // 纯文本
     },
     memoryLike: {
-      title: '有人赞了您的相册', // 纯文本
+      title: '有人赞了您的相册', //
       text: '', // 纯文本
     },
   },

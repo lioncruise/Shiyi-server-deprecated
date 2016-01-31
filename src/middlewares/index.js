@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const debug = require('debug')('middlewares/index');
 const config = require('../config');
 const redisToken = require('../utils').redisToken;
+const cacheManager = require('cache-manager');
+
+const memoryCache = cacheManager.caching({ store: 'memory', max: 128, ttl: config.pageCache.ttl });
 
 const urlsWithoutSession = [
   /^\/$/,
@@ -41,6 +44,7 @@ const urlsWithoutSession = [
   /^\/getPublicAlbums$/,
   /^\/getQRCode$/,
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // monitor
   /^\/sendDaily$/,
@@ -55,6 +59,7 @@ const urlsWithoutSession = [
 
 const urlsNeedRawReturn = [
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // shared pages
   /^\/userShareHtml/,
@@ -63,8 +68,23 @@ const urlsNeedRawReturn = [
   /^\/appShareHtml/,
 ];
 
+// 需要缓存的GET页面（返回）。
+// 只缓存get请求，缓存页面通过带参数的 GET 的 URL 区分
+const urlsUseCache = [
+  {
+    reg: /^\/dailies\/\d+$/,
+    ttl: 60 * 60, // 缓存时间1小时
+  },
+  {
+    reg: /^\/userShareHtml/, //默认缓存时间config.pageCache.ttl
+  },
+  { reg: /^\/memoryShareHtml/ },
+  { reg: /^\/albumShareHtml/ },
+  { reg: /^\/appShareHtml/ },
+];
+
 function isInUrls(str, urlPatternList) {
-  for (const reg of urlPatternList) {
+  for (let reg of urlPatternList) {
     if (str.match(reg)) {
       return true;
     }
@@ -194,5 +214,28 @@ exports.addFunctionGetUserIdByQueryAndSession = function(app) {
 
   return function*(next) {
     yield* next;
+  };
+};
+
+//页面缓存
+exports.pageCache = function() {
+  return function*(next) {
+    if (this.request.method === 'GET') { // 只缓存get请求
+      for (let url of urlsUseCache) {
+        if (this.path.match(url.reg)) {
+          const cacheResponse = memoryCache.get(this.request.url);
+          if (cacheResponse) {
+            this.response.body = cacheResponse;
+          } else {
+            yield next;
+            memoryCache.set(this.request.url, this.response.body, { ttl: url.ttl ? url.ttl : config.pageCache.ttl });
+          }
+
+          return;
+        }
+      }
+    }
+
+    yield next;
   };
 };
