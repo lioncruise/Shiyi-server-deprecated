@@ -380,26 +380,21 @@ exports.update = function*() {
   }
 
   const originIsPublic = album.isPublic;
-
-  album = yield album.update(this.request.body, {
-    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
-  });
+  const update = this.request.body;
 
   const tags = yield exports.getTagObjsArray(this.request.body.tags);
-
   yield album.setTags(tags);
 
-  this.body = album.toJSON();
-
-  if (originIsPublic !== 'public' && this.body.isPublic === 'public') {
-    //创建相关action
+  // private/shared -> public
+  if (originIsPublic !== 'public' && this.request.body.isPublic === 'public') {
+    // 创建相关action
     yield utils.models.createReletedAction({
       type: 'openAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
     });
 
-    //更新tag的publicAlbumsCount
+    // 更新tag的publicAlbumsCount
     yield models.Tag.update({
       publicAlbumsCount: sequelize.literal('publicAlbumsCount + 1'),
     }, {
@@ -411,9 +406,11 @@ exports.update = function*() {
     });
   }
 
-  //从public变成shared关注者和维护者不变，但是shared相册不在发现和个人主页中显示
-  if (originIsPublic === 'public' && this.body.isPublic !== 'public') {
-    //更新tag的publicAlbumsCount
+  // public -> private/shared
+  if (originIsPublic === 'public' && this.request.body.isPublic !== 'public') {
+    // 更新tag的publicAlbumsCount
+    update.fansCount = 0;
+
     yield models.Tag.update({
       publicAlbumsCount: sequelize.literal('publicAlbumsCount - 1'),
     }, {
@@ -423,57 +420,47 @@ exports.update = function*() {
         },
       },
     });
-  }
 
-  //从公开相册或者共享相册变为私有相册，删除其维护者和关注者，及更新相关冗余数据
-  if (originIsPublic !== 'private' && this.body.isPublic === 'private') {
-    const userIds = (yield models.AlbumUserFollow.findAll({
+    // 删除关注关系
+    const fansIds = (yield models.AlbumUserFollow.findAll({
       where: {
         AlbumId: this.params.id,
       },
     })).map(user => user.UserId);
 
-    //删除所有维护关系
-    yield models.AlbumUserCollaborate.destroy({
-      where: {
-        AlbumId: this.params.id,
-      },
-    });
-
-    //删除所有关注关系
-    yield models.AlbumUserFollow.destroy({
-      where: {
-        AlbumId: this.params.id,
-      },
-    });
-
-    //相关用户冗余字段更新
     yield models.User.update({
       followAlbumsCount: sequelize.literal('followAlbumsCount - 1'),
     }, {
       where: {
         id: {
-          $in: userIds,
+          $in: fansIds,
         },
       },
     });
 
-    //相册的关注人数维护人数冗余数据清零
-    yield models.Album.update({
-      collaboratorsCount: 0,
-      fansCount: 0,
-    }, {
-      where: {
-        id: this.params.id,
-      },
-    });
+    if (this.request.body.isPublic === 'private') {
+      // 删除维护关系
+      update.collaboratorsCount = 0;
 
-    //删除该公开相册有关动态
+      yield models.AlbumUserCollaborate.destroy({
+        where: {
+          AlbumId: this.params.id,
+        },
+      });
+    }
+
+    // 删除该公开相册有关动态
     yield utils.models.deleteReletedAction({
       AlbumId: this.params.id,
     });
   }
 
+  // 更新相册
+  album = yield album.update(Object.assign(update, {
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
+  }));
+
+  this.body = album.toJSON();
 };
 
 exports.destroy = function*() {
