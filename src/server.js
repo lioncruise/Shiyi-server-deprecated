@@ -15,7 +15,7 @@ const formidable = require('koa-formidable');
 const ipFilter = require('koa-ip-filter');
 const ms = require('ms');
 const path = require('path');
-const http = require('http2');
+const http = require('http');
 const config = require('./config');
 const router = require('./router');
 const middlewares = require('./middlewares');
@@ -90,5 +90,11 @@ app.use(middlewares.addFunctionGetUserIdByQueryAndSession(app));
 //路由
 app.use(router.serverRouter);
 require('./controller/index.js');
+
+const option = {
+  plain: true,
+  key: config.key,
+  cert: config.cert,
+};
 
 module.exports = http.createServer(app.callback());

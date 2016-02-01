@@ -2,6 +2,7 @@
 
 const path = require('path');
 const copy = require('copy-to');
+const fs = require('fs');
 
 let config = {};
 
@@ -106,6 +107,8 @@ config.keys = ['shiyi', 'q(*^#"}}|ef'];
 config.debug = true;
 config.port = 8080;
 config.url = 'http://127.0.0.1:8080';
+config.key = fs.readFileSync(path.join(__dirname, '../../crts/api.itimepost.com/for Nginx/shiyi_nginx.key.pem'));
+config.cert = fs.readFileSync(path.join(__dirname, '../../crts/api.itimepost.com/for Nginx/shiyi_nginx.crt.pem'));
 
 config.ipFilter = ['*'];
 
