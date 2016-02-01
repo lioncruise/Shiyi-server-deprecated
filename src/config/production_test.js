@@ -21,6 +21,4 @@ module.exports = {
     port: 6379,
     password: 'f62bf74d09af44c2:ShiyiServer233',
   },
-  key: fs.readFileSync(path.join(__dirname, '../../crts/test.itimepost.com/for Nginx/shiyi_test_nginx.key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, '../../crts/test.itimepost.com/for Nginx/shiyi_test_nginx.crt.pem')),
 };

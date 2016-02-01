@@ -91,10 +91,4 @@ app.use(middlewares.addFunctionGetUserIdByQueryAndSession(app));
 app.use(router.serverRouter);
 require('./controller/index.js');
 
-const option = {
-  plain: true,
-  key: config.key,
-  cert: config.cert,
-};
-
 module.exports = http.createServer(app.callback());
