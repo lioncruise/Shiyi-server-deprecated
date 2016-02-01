@@ -380,26 +380,21 @@ exports.update = function*() {
   }
 
   const originIsPublic = album.isPublic;
-
-  album = yield album.update(this.request.body, {
-    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
-  });
+  const update = this.request.body;
 
   const tags = yield exports.getTagObjsArray(this.request.body.tags);
-
   yield album.setTags(tags);
 
-  this.body = album.toJSON();
-
-  if (originIsPublic !== 'public' && this.body.isPublic === 'public') {
-    //创建相关action
+  // private/shared -> public
+  if (originIsPublic !== 'public' && this.request.body.isPublic === 'public') {
+    // 创建相关action
     yield utils.models.createReletedAction({
       type: 'openAlbum',
       AlbumId: album.id,
       UserId: this.session.user.id,
     });
 
-    //更新tag的publicAlbumsCount
+    // 更新tag的publicAlbumsCount
     yield models.Tag.update({
       publicAlbumsCount: sequelize.literal('publicAlbumsCount + 1'),
     }, {
@@ -410,6 +405,62 @@ exports.update = function*() {
       },
     });
   }
+
+  // public -> private/shared
+  if (originIsPublic === 'public' && this.request.body.isPublic !== 'public') {
+    // 更新tag的publicAlbumsCount
+    update.fansCount = 0;
+
+    yield models.Tag.update({
+      publicAlbumsCount: sequelize.literal('publicAlbumsCount - 1'),
+    }, {
+      where: {
+        id: {
+          $in: tags.map(tag => tag.id),
+        },
+      },
+    });
+
+    // 删除关注关系
+    const fansIds = (yield models.AlbumUserFollow.findAll({
+      where: {
+        AlbumId: this.params.id,
+      },
+    })).map(user => user.UserId);
+
+    yield models.User.update({
+      followAlbumsCount: sequelize.literal('followAlbumsCount - 1'),
+    }, {
+      where: {
+        id: {
+          $in: fansIds,
+        },
+      },
+    });
+
+    if (this.request.body.isPublic === 'private') {
+      // 删除维护关系
+      update.collaboratorsCount = 0;
+
+      yield models.AlbumUserCollaborate.destroy({
+        where: {
+          AlbumId: this.params.id,
+        },
+      });
+    }
+
+    // 删除该公开相册有关动态
+    yield utils.models.deleteReletedAction({
+      AlbumId: this.params.id,
+    });
+  }
+
+  // 更新相册
+  album = yield album.update(Object.assign(update, {
+    actualTimestamp: Number.parseInt((new Date()).valueOf() / 1000),
+  }));
+
+  this.body = album.toJSON();
 };
 
 exports.destroy = function*() {
