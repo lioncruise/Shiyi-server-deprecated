@@ -15,6 +15,11 @@ exports.index = function*() {
     order: [
       ['publicAlbumsCount', 'DESC'],
     ],
+    where: {
+      publicAlbumsCount: {
+        $gt: 0,
+      },
+    },
   });
 
   this.body = tags;
