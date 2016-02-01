@@ -76,6 +76,10 @@ const urlsUseCache = [
     ttl: 60 * 60, // 缓存时间1小时
   },
   {
+    reg: /^\/tags$/,
+    ttl: 60 * 60, // 缓存时间1小时
+  },
+  {
     reg: /^\/userShareHtml/, //默认缓存时间config.pageCache.ttl
   },
   { reg: /^\/memoryShareHtml/ },
@@ -220,6 +224,7 @@ exports.addFunctionGetUserIdByQueryAndSession = function(app) {
 //页面缓存
 exports.pageCache = function() {
   return function*(next) {
+
     if (this.request.method === 'GET') { // 只缓存get请求
       for (let url of urlsUseCache) {
         if (this.path.match(url.reg)) {
