@@ -72,13 +72,13 @@ const constructMessage = function(title, text, MessageClass) {
   alertMsg.body = text;
   alertMsg.actionLocKey = '';
   alertMsg.locKey = '';
-  alertMsg.locArgs = Array('');
+  alertMsg.locArgs = new Array('');
   alertMsg.launchImage = '';
 
   //ios8.2以上版本支持
   alertMsg.title = title;
   alertMsg.titleLocKey = '';
-  alertMsg.titleLocArgs = Array('');
+  alertMsg.titleLocArgs = new Array('');
 
   payload.alertMsg = alertMsg;
   payload.badge = 5;

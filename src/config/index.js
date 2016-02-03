@@ -2,6 +2,7 @@
 
 const path = require('path');
 const copy = require('copy-to');
+const fs = require('fs');
 
 let config = {};
 

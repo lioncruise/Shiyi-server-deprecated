@@ -1,7 +1,7 @@
 'use strict';
 
 const server = require('../../../server');
-const http = require('http');
+const http = require('http2');
 const request = require('supertest');
 const mm = require('mm');
 const should = require('should');

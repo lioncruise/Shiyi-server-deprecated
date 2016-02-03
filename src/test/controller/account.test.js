@@ -1,13 +1,12 @@
 'use strict';
 
 const server = require('../../server');
-const http = require('http');
 const request = require('supertest');
 const mm = require('mm');
 const should = require('should');
 const utility = require('utility');
 
-describe('src/test/controllers/account.test.js', function() {
+describe.only('src/test/controllers/account.test.js', function() {
   before(server.listen.bind(server, 0));
   after(server.close.bind(server));
   afterEach(mm.restore);

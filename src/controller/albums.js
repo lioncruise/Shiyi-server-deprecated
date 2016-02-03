@@ -176,9 +176,7 @@ router.get('/albumShareHtml', function*() {
   const album = yield models.Album.findById(this.query.id);
 
   if (!album || album.isPublic !== 'public') {
-    this.body = yield utils.template('notFound', {
-      message: '分享的相册不存在或不是公开相册',
-    });
+    this.redirect('/appShareHtml');
     return;
   }
 

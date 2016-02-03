@@ -27,6 +27,7 @@ const urlsWithoutSession = [
 
   // 公开信息权限
   /^\/albums\/\d+$/,
+  /^\/tags$/,
   /^\/tags\/\d+$/,
   /^\/memories\/\d+$/,
   /^\/pictures\/\d+$/,
@@ -44,6 +45,7 @@ const urlsWithoutSession = [
   /^\/getPublicAlbums$/,
   /^\/getQRCode$/,
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // monitor
   /^\/sendDaily$/,
@@ -58,6 +60,7 @@ const urlsWithoutSession = [
 
 const urlsNeedRawReturn = [
   /^\/dailies\/\d+$/,
+  /^\/joinAlbum$/,
 
   // shared pages
   /^\/userShareHtml/,
@@ -71,6 +74,10 @@ const urlsNeedRawReturn = [
 const urlsUseCache = [
   {
     reg: /^\/dailies\/\d+$/,
+    ttl: 60 * 60, // 缓存时间1小时
+  },
+  {
+    reg: /^\/tags$/,
     ttl: 60 * 60, // 缓存时间1小时
   },
   {
@@ -218,6 +225,7 @@ exports.addFunctionGetUserIdByQueryAndSession = function(app) {
 //页面缓存
 exports.pageCache = function() {
   return function*(next) {
+
     if (this.request.method === 'GET') { // 只缓存get请求
       for (let url of urlsUseCache) {
         if (this.path.match(url.reg)) {
