@@ -23,7 +23,7 @@ router.get('/memoryShareHtml', function*() {
   });
 
   if (!memory || memory.Album.isPublic !== 'public') {
-    this.body = utils.template('notFound', {
+    this.body = yield utils.template('notFound', {
       message: '分享的记忆不存在或记忆不在公开的相册中',
     });
     return;
@@ -37,7 +37,7 @@ router.get('/memoryShareHtml', function*() {
   });
 
   if (!album || album.isPublic !== 'public') {
-    this.body = utils.template('notFound', {
+    this.body = yield utils.template('notFound', {
       message: '记忆所在相册不是公开相册',
     });
     return;
@@ -54,5 +54,5 @@ router.get('/memoryShareHtml', function*() {
     limit: 9,
   });
 
-  this.body = utils.template('memoryShare', { memory, pictures });
+  this.body = yield utils.template('memoryShare', { memory, pictures });
 });

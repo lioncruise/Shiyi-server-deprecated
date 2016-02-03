@@ -7,11 +7,11 @@ const fs = require('fs');
 const path = require('path');
 
 const templatePath = path.join(__dirname, '../../static/templates');
-const templateList = fs.readdirSync(templatePath);
+const templateIncludePath = path.join(templatePath + '/includes/someIncludeTpl.html');
 
-const template = {};
-for (let tpl of templateList) {
-  template[tpl.split('.')[0]] = fs.readFileSync(path.join(templatePath, tpl), 'utf-8');
-}
-
-module.exports = (templateName, data) => ejs.render(template[templateName], data);
+module.exports = function (templateName, data) {
+  return function (cb) {
+    data.filename = templateIncludePath;
+    return ejs.renderFile(path.join(templatePath, templateName + '.html'), data, cb);
+  }
+};
