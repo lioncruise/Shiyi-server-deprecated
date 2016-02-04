@@ -205,7 +205,7 @@ router.get('/userShareHtml', function*() {
     },
     limit: 10,
   });
-  const pictures = albums.map(function (album) {
+  const pictures = albums.map(function(album) {
     const picture = {};
     picture.thumbnailDownloadUrl = album.coverDownloadUrl;
     return picture;
