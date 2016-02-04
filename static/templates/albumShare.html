@@ -18,19 +18,7 @@
     </div>
   </div>
 </div>
-<section class="container" style="margin-top:12.02px;">
-  <div class="row">
-  <% for (var picture = 0; picture < pictures.length; picture++) { %>
-    <div class="col-xs-6 show-image-div">
-      <img src="<%- pictures[picture]['thumbnailDownloadUrl'] %>" class='show-image'>
-    </div>
-    <% if (picture % 2 && picture !== (pictures.length - 1)) { %>
-  </div>
-  <div class="row">
-    <% } %>
-  <% } %>
-  </div>
-</section>
+<% include includes/sharePicturesShow.html %>
 <div class="clearFloat"></div>
 
 <div class="note-down">
@@ -44,20 +32,5 @@
 
 <div class='blank50px'></div>
 <div class="clearFloat"></div>
-<script>
-  function getUrlParam(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]); return null; //返回参数值
-        }
-  $('#qr_container').qrcode({render:"canvas",height:200, width:200,correctLevel:0,text:
-    window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id')
-  });
-  $('#url').attr('href', window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
-
-  // 居中显示图片
-  $('.show-image').each(function () {
-     $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
-  });
-</script>
+<script language="JavaScript" src="/static/js/share.js" ></script>
 <% include includes/shareFooter.html %>
