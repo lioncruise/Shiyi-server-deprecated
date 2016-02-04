@@ -14,7 +14,6 @@ div {
     display: block;
 }
 #head {
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), #222), url("https://daks2k3a4ib2z.cloudfront.net/56b0ce3664ec94290dbfab74/56b0ce3664ec94290dbfab85_fe4a5cbf.jpg");
     background-position: 0px 0px, 38% 50%;
     background-size: auto, cover;
     background-repeat: repeat, no-repeat;
