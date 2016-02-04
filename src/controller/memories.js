@@ -27,18 +27,6 @@ router.get('/memoryShareHtml', function*() {
     return;
   }
 
-  const album = yield models.Album.find({
-    paranoid: true,
-    where: {
-      id: memory.AlbumId,
-    },
-  });
-
-  if (!album || album.isPublic !== 'public') {
-    this.redirect('/appShareHtml');
-    return;
-  }
-
   const pictures = yield models.Picture.findAll({
     paranoid: true,
     where: {
