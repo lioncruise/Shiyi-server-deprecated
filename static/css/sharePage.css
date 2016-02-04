@@ -94,6 +94,7 @@ div {
 }
 .show-image-div {
     padding: 0px !important;
+    max-width: 50%;
 }
 .clearFloat {
     clear: both;
