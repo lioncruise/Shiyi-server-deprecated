@@ -90,11 +90,13 @@ div {
     vertical-align: middle;
 }
 .show-image {
-    height: 200px;
+    height: 180px;
 }
 .show-image-div {
     padding: 0px !important;
     max-width: 50%;
+    overflow:hidden;
+    height: 180px;
 }
 .clearFloat {
     clear: both;

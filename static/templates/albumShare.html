@@ -56,10 +56,10 @@
 <div class='blank50px'></div>
 <div class="clearFloat"></div>
 
-<pre>
-    <%- JSON.stringify(album) %>
-    <div id="url"></div>
-</pre>
+<!--<pre>-->
+    <!--<%- JSON.stringify(album) %>-->
+    <!--<div id="url"></div>-->
+<!--</pre>-->
 <script>
   function getUrlParam(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -70,5 +70,10 @@
     window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id')
   });
   $('#url').text(window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
+
+  // 居中显示图片
+  $('.show-image').each(function () {
+     $(this).css('margin-left' , '-' + ($(this).width() - window.innerWidth / 2) / 2 + 'px');
+  });
 </script>
 <% include includes/shareFooter.html %>
