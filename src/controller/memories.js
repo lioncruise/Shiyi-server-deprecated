@@ -19,7 +19,7 @@ router.get('/memoryShareHtml', function*() {
     where: {
       id: this.query.id,
     },
-    include: [models.Album],
+    include: [models.Album, models.User],
   });
 
   if (!memory || memory.Album.isPublic !== 'public') {

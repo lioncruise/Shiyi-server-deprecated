@@ -7,8 +7,3 @@ $('#qr_container').qrcode({render:"canvas",height:200, width:200,correctLevel:0,
 window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id')
 });
 $('#url').attr('href', window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
-
-// 居中显示图片
-$('.show-image').each(function () {
-  $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
-});
