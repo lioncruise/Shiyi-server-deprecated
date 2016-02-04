@@ -1,28 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
-</head>
-<body>
-<h1>记忆分享页面 记忆id：<%= memory.id %></h1>
-<pre>
-    <div id="qr_container" style="margin:auto; position:relative;"></div>
-    <%- JSON.stringify(memory) %>
-    <div id="url"></div>
-</pre>
-<script>
-  function getUrlParam(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]); return null; //返回参数值
-        }
-  $('#qr_container').qrcode({render:"canvas",height:120, width:120,correctLevel:0,text:
-    window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id')
-  });
-  $('#url').text(window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
-</script>
-</body>
-</html>
+<% title = '记忆分享' %>
+<% include includes/shareHeader.html %>
+<!--记忆分享页面 相册id：<%= memory.id %>-->
+<!--<%- JSON.stringify(memory) %>-->
+<div id='head' style='background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), #222), url("<%- album.coverDownloadUrl %>");'>
+  <div class="head-foot-wrap">
+
+    <div class="head-foot head-left">
+      <div class="user-photo-wrap" style="background-image:url('<%- memory.User.avatarDownloadUrl %>');">
+      </div>
+      <span class="user-name note"><%- memory.User.nickname %></span>
+    </div>
+    <div class="head-foot head-right">
+      <div class="details">
+        <img class="stars note" src="static/images/stars.png">
+        <span class="note"><%- memory.likesCount %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<% include includes/sharePicturesShow.html %>
+<div class="clearFloat"></div>
+<div class="note-down">
+  点击下方二维码，查看记忆详情
+</div>
+<% include includes/shareRQcode.html %>
+<div class='blank50px'></div>
+<div class="clearFloat"></div>
+<% include includes/shareFooter.html %>

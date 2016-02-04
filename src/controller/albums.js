@@ -173,7 +173,13 @@ router.get('/albumShareHtml', function*() {
     },
   }, this.query);
 
-  const album = yield models.Album.findById(this.query.id);
+  const album = yield models.Album.find({
+    paranoid: true,
+    where: {
+      id: this.query.id,
+    },
+    include: [models.User],
+  });
 
   if (!album || album.isPublic !== 'public') {
     this.redirect('/appShareHtml');
@@ -188,7 +194,7 @@ router.get('/albumShareHtml', function*() {
     order: [
       ['createdAt', 'DESC'],
     ],
-    limit: 9,
+    limit: 10,
   });
-  this.body = utils.template('albumShare', { album, pictures });
+  this.body = yield utils.template('albumShare', { album, pictures });
 });

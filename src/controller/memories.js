@@ -19,22 +19,10 @@ router.get('/memoryShareHtml', function*() {
     where: {
       id: this.query.id,
     },
-    include: [models.Album],
+    include: [models.Album, models.User],
   });
 
   if (!memory || memory.Album.isPublic !== 'public') {
-    this.redirect('/appShareHtml');
-    return;
-  }
-
-  const album = yield models.Album.find({
-    paranoid: true,
-    where: {
-      id: memory.AlbumId,
-    },
-  });
-
-  if (!album || album.isPublic !== 'public') {
     this.redirect('/appShareHtml');
     return;
   }
@@ -50,5 +38,5 @@ router.get('/memoryShareHtml', function*() {
     limit: 9,
   });
 
-  this.body = utils.template('memoryShare', { memory, pictures });
+  this.body = yield utils.template('memoryShare', { memory, pictures });
 });

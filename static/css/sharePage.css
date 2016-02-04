@@ -1,0 +1,154 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    background: #f1f1f1;
+    font-size: 62.5%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding-bottom: 150px;
+}
+div {
+    display: block;
+}
+#head {
+    background-position: 0px 0px, 38% 50%;
+    background-size: auto, cover;
+    background-repeat: repeat, no-repeat;
+    min-height: 277px;
+    position: relative;
+
+}
+#avatar {
+    width: 36px;
+    height: 36px;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    -o-border-radius:50%;
+    border-radius:50%;
+}
+.head-foot-wrap {
+    width: 90%;
+    clear: both;
+    position: absolute;
+    bottom: 10px;
+    left: 5%;
+    color: #fff;
+}
+.user-name {
+    display: block;
+    float: left;
+    font-size: 1.4em;
+    margin-top: 3%;
+}
+.note {
+    display: inline-block;
+    vertical-align: middle;
+}
+.user-photo-wrap {
+    width: 16%;
+    display: block;
+    float: left;
+    background: #e4e4e4;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+    height: 0;
+    padding-bottom: 16%;
+    background-size: cover;
+}
+.head-left {
+    text-align: left;
+    margin-top: -1%;
+    font-size: .8rem;
+}
+.head-right {
+    text-align: right;
+}
+.head-foot {
+    width: 50%;
+    float: left;
+}
+.details-left {
+    margin-right: 10px;
+}
+.details {
+    display: inline;
+}
+.pics {
+    width: 14%;
+    margin: 3px;
+}
+.stars {
+    width: 14%;
+    margin-right: 3px;
+}
+.note {
+    display: inline-block;
+    vertical-align: middle;
+}
+.show-image {
+    height: 180px;
+}
+.show-image-div {
+    padding: 0px !important;
+    max-width: 50%;
+    overflow:hidden;
+    height: 180px;
+}
+.clearFloat {
+    clear: both;
+}
+.note-down {
+    width: 100%;
+    margin: 10% auto 0;
+    display: block;
+    text-align: center;
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+.logo {
+    border-radius:10px;
+    width: 75px;
+    height: 75px;
+}
+.blank50px {
+    height: 50px;
+    clear: both;
+}
+.qr-code {
+    height: 200px;
+    width: 200px;
+    margin-top: 20px;
+}
+.foot-bg, .clickLink {
+    display: block;
+    position: absolute;
+    bottom: 0;
+}
+.foot-bg {
+    width: 100%;
+    left: 0;
+}
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: none;
+    max-width: 640px;
+}
+.clickLink {
+    right: 5%;
+    width: 27%;
+}
+.clickBtn {
+    display: block;
+    width: 100%;
+    margin-bottom: 12.5%;
+}

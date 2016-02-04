@@ -1,0 +1,19 @@
+<section class="container" style="margin-top:12.02px;">
+  <div class="row">
+    <% for (var picture = 0; picture < pictures.length; picture++) { %>
+    <div class="col-xs-6 show-image-div">
+      <img src="<%- pictures[picture]['thumbnailDownloadUrl'] %>" class='show-image'>
+    </div>
+    <% if (picture % 2 && picture !== (pictures.length - 1)) { %>
+  </div>
+  <div class="row">
+    <% } %>
+    <% } %>
+  </div>
+</section>
+<script>
+  // 居中显示图片
+  $('.show-image').each(function () {
+    $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
+  });
+</script>

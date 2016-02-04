@@ -199,6 +199,18 @@ router.get('/userShareHtml', function*() {
     return;
   }
 
-  this.body = utils.template('userShare', { user });
+  const albums = yield models.Album.findAll({
+    where: {
+      UserId: this.query.id,
+    },
+    limit: 10,
+  });
+  const pictures = albums.map(function(album) {
+    const picture = {};
+    picture.thumbnailDownloadUrl = album.coverDownloadUrl;
+    return picture;
+  });
+
+  this.body = yield utils.template('userShare', { user, pictures });
 });
 
