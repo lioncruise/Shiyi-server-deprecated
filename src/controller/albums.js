@@ -188,7 +188,7 @@ router.get('/albumShareHtml', function*() {
     order: [
       ['createdAt', 'DESC'],
     ],
-    limit: 9,
+    limit: 10,
   });
   this.body = yield utils.template('albumShare', { album, pictures });
 });

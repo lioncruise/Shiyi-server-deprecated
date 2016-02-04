@@ -20,28 +20,15 @@
 </div>
 <section class="container" style="margin-top:12.02px;">
   <div class="row">
+  <% for (var picture = 0; picture < pictures.length; picture++) { %>
     <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image'>
+      <img src="<%- pictures[picture]['thumbnailDownloadUrl'] %>" class='show-image'>
     </div>
-    <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image'>
-    </div>
+    <% if (picture % 2 && picture !== (pictures.length - 1)) { %>
   </div>
   <div class="row">
-    <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image'>
-    </div>
-    <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image '>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image '>
-    </div>
-    <div class="col-xs-6 show-image-div">
-      <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1127823858,2338570439&fm=116&gp=0.jpg" class='show-image '>
-    </div>
+    <% } %>
+  <% } %>
   </div>
 </section>
 <div class="clearFloat"></div>
@@ -50,16 +37,13 @@
   点击下方二维码，关注该相册
 </div>
 <div class='center qr-code'>
-  <div id="qr_container" style="margin:auto; position:relative;"></div>
+  <a id="url" href="">
+    <div id="qr_container" style="margin:auto; position:relative;"></div>
+  </a>
 </div>
 
 <div class='blank50px'></div>
 <div class="clearFloat"></div>
-
-<!--<pre>-->
-    <!--<%- JSON.stringify(album) %>-->
-    <!--<div id="url"></div>-->
-<!--</pre>-->
 <script>
   function getUrlParam(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -69,11 +53,11 @@
   $('#qr_container').qrcode({render:"canvas",height:200, width:200,correctLevel:0,text:
     window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id')
   });
-  $('#url').text(window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
+  $('#url').attr('href', window.location.protocol + '//' + window.location.host + window.location.pathname + '?id=' + getUrlParam('id'));
 
   // 居中显示图片
   $('.show-image').each(function () {
-     $(this).css('margin-left' , '-' + ($(this).width() - window.innerWidth / 2) / 2 + 'px');
+     $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
   });
 </script>
 <% include includes/shareFooter.html %>
