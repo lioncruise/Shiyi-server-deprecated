@@ -1,9 +1,13 @@
 <% title = '相册分享' %>
 <% include includes/shareHeader.html %>
 <!--相册分享页面 相册id：<%= album.id %>-->
+<!--<%- JSON.stringify(album) %>-->
 <div id='head' style='background-image: linear-gradient(180deg, rgba(0, 0, 0, .57), #222), url("<%- album.coverDownloadUrl %>");'>
   <div class="head-foot-wrap">
+
     <div class="head-foot head-left">
+      <div class="user-photo-wrap" style="background-image:url('<%- album.User.avatarDownloadUrl %>');">
+      </div>
       <span class="user-name note"><%- album.title %></span>
     </div>
     <div class="head-foot head-right">
