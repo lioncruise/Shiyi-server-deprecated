@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
       type: 'VARCHAR(185)',
     },
     url: {
-      type: 'VARCHAR(185)',
+      type: DataTypes.TEXT,
     },
     content: {
       type: DataTypes.TEXT,
