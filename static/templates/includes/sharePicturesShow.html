@@ -15,7 +15,8 @@
   $(function() {
     // 居中显示图片
     $('.show-image').each(function () {
-      $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
+      var padding = - (180 - window.innerWidth / 2) / 2;
+      $(this).parent().css('padding-left' , padding + 'px');
     });
   });
 </script>
