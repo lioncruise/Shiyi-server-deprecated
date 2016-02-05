@@ -12,9 +12,10 @@
   </div>
 </section>
 <script>
-  // 居中显示图片
-  $('.show-image').each(function () {
-    var realShowWidth = $(this).width() / $(this).height() * 200;
-    $(this).css('margin-left' , (- (realShowWidth - window.innerWidth / 2) / 2) + 'px');
+  $(function() {
+    // 居中显示图片
+    $('.show-image').each(function () {
+      $(this).css('margin-left' , (- ($(this).width() - window.innerWidth / 2) / 2) + 'px');
+    });
   });
 </script>
