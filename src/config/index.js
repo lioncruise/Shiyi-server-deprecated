@@ -38,6 +38,10 @@ config.defaultPictureKey = 'default';
 
 config.defaultBackgroundPictureKey = 'defaultBackground';
 
+config.androidAppDownloadKey = 'app-android-shiyi.apk';
+
+config.iosAppDownloadUrl = 'https://itunes.apple.com/us/app/shi-yi-yi-zhang-tu-pian-yi/id1074173529?l=zh&ls=1&mt=8';
+
 config.tokenKey = 'oihag';
 
 config.isUsePageCache = true;
